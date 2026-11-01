@@ -231,7 +231,40 @@ function renderApplications(){
 }
 $('profile-form').addEventListener('submit',async e=>{e.preventDefault();if(!user)return;const button=e.currentTarget.querySelector('button[type="submit"]');button.disabled=true;let payload;try{payload=formPayload()}catch(err){fail(err);button.disabled=false;return}
  const {data,error}=await sb.from('student_admissions_profiles').upsert(payload,{onConflict:'user_id'}).select().single();button.disabled=false;if(error){fail(error);$('profile-message').textContent=error.message;return}profile=data;stats();renderNextActions();renderResearch();note('Profile saved');$('profile-message').textContent='Saved to your private account.'});
-$('application-form').addEventListener('submit',async e=>{e.preventDefault();const f=e.currentTarget,fd=new FormData(f);const name=String(fd.get('institution_name')||'').trim();if(!name)return;await addApplication(name,null,String(fd.get('application_round')||'undecided'),String(fd.get('application_deadline')||'')||null,String(fd.get('aid_deadline')||'')||null);f.reset()});
+let selectedCollege=null;
+const collegeSearch=$('college-search-input'),collegeResults=$('college-search-results'),applicationForm=$('application-form');
+function renderCollegeSearch(){
+ const query=collegeSearch.value.trim().toLocaleLowerCase();
+ collegeResults.replaceChildren();
+ applicationForm.hidden=true;selectedCollege=null;
+ if(!query){const p=document.createElement('p');p.textContent='Start typing a university name to find it in our database.';collegeResults.append(p);return}
+ const matches=opportunities.filter(x=>x.title.toLocaleLowerCase().includes(query)).slice(0,12);
+ if(matches.length){
+  const info=document.createElement('p');info.textContent=matches.length===12?'Showing the first 12 matches. Keep typing to narrow the results.':'Select a matching university:';collegeResults.append(info);
+  for(const o of matches){
+   const button=document.createElement('button');button.type='button';button.className='college-search-result';
+   const title=document.createElement('strong');title.textContent=o.title;const country=document.createElement('span');country.textContent=o.country;
+   button.append(title,country);
+   button.addEventListener('click',()=>chooseCollege(o));collegeResults.append(button);
+  }
+ }else{
+  const p=document.createElement('p');p.textContent='No university matching "'+collegeSearch.value.trim()+'" is in this directory.';collegeResults.append(p);
+  const manual=document.createElement('button');manual.type='button';manual.className='college-manual';manual.textContent='Add "'+collegeSearch.value.trim()+'" manually';
+  manual.addEventListener('click',()=>chooseCollege(null,collegeSearch.value.trim()));collegeResults.append(manual);
+ }
+}
+function chooseCollege(college,manualName=''){
+ selectedCollege=college;
+ applicationForm.elements.institution_name.value=college?.title||manualName;
+ applicationForm.elements.institution_name.readOnly=Boolean(college);
+ applicationForm.hidden=false;
+ collegeResults.replaceChildren();
+ const status=document.createElement('p');status.className='college-chosen';status.textContent=college?'Selected from Bdesh: '+college.title:'Manual entry: not in database';collegeResults.append(status);
+ applicationForm.elements.application_round.focus();
+}
+collegeSearch.addEventListener('input',renderCollegeSearch);
+$('cancel-college-selection').addEventListener('click',()=>{applicationForm.reset();renderCollegeSearch();collegeSearch.focus()});
+$('application-form').addEventListener('submit',async e=>{e.preventDefault();const f=e.currentTarget,fd=new FormData(f);const name=String(fd.get('institution_name')||'').trim();if(!name)return;await addApplication(name,selectedCollege?.id||null,String(fd.get('application_round')||'undecided'),String(fd.get('application_deadline')||'')||null,String(fd.get('aid_deadline')||'')||null);f.reset();collegeSearch.value='';renderCollegeSearch()});
 $('country-filter').addEventListener('change',renderResearch);$('selectivity-filter').addEventListener('change',renderResearch);$('funding-filter').addEventListener('change',renderResearch);
 $('signout').addEventListener('click',async()=>{await sb.auth.signOut();location.href='/'});
 async function initialize(session){
@@ -246,7 +279,7 @@ async function initialize(session){
  const errors=responses.filter(x=>x.error).map(x=>x.error.message);
  if(errors.length)note('Some data could not load: '+errors.join(' / '));else note('All changes save to your Bdesh account');
  profile=responses[0].data||null;academicStage=responses[1].data?.academic_stage||'11';readiness=new Map((responses[2].data||[]).map(x=>[x.milestone_id,x]));applications=responses[3].data||[];opportunities=responses[4].data||[];
- fillProfile();renderReadiness();renderResearch();renderApplications();stats();renderNextActions();setTab(location.hash.slice(1)||'prepare');
+ fillProfile();renderReadiness();renderResearch();renderCollegeSearch();renderApplications();stats();renderNextActions();setTab(location.hash.slice(1)||'prepare');
 }
 if(!sb){$('session-status').textContent='Account library unavailable';$('not-signed-in').hidden=false;showAuthError('Authentication library unavailable. Please reload.');return}
 sb.auth.getSession().then(({data,error})=>{if(error||!data?.session){$('session-status').textContent='Not signed in';$('not-signed-in').hidden=false;if(error)showAuthError(error.message);else if(location.hash.includes('error'))showAuthError('The sign-in redirect was rejected. Check Supabase redirect URL settings.');return}initialize(data.session).catch(fail)}).catch(fail);
