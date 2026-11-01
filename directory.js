@@ -1,7 +1,7 @@
 /* Bdesh public directory + user bookmarks, backed by Supabase RLS. */
 (() => {
 'use strict';
-const client=globalThis.supabase?.createClient('https://xeqixwmulwonvhifcmvn.supabase.co','sb_publishable_2Jp14PFt4_mLDT4cpqLfUw_d-tDSnwj');
+const client=globalThis.bdeshSupabase;
 const byId=id=>document.getElementById(id);
 const wrap=byId('opportunities'),search=byId('search'),status=byId('directory-status'),dash=byId('student-dashboard');
 if(!client||!wrap||!search)return;
@@ -59,6 +59,6 @@ document.addEventListener('bdesh:auth-change',event=>{user=event.detail.user||nu
 document.addEventListener('bdesh:task-change',dashboard);
 document.addEventListener('bdesh:reset',dashboard);
 byId('stage')?.addEventListener('change',dashboard);
-client.auth.getUser().then(({data})=>{if(data?.user){user={id:data.user.id,email:data.user.email||''};loadSaves()}else dashboard()}).catch(()=>{});
+client.auth.getSession().then(({data})=>{if(data?.session?.user){user={id:data.session.user.id,email:data.session.user.email||''};loadSaves()}else dashboard()}).catch(()=>{});
 begin();
 })();
