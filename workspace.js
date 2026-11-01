@@ -171,11 +171,11 @@ function renderResearch(){
  const wrap=$('research-list');wrap.replaceChildren();
  for(const o of visible){const fit=researchFit(o);const card=document.createElement('article');card.className='research-card';
  const country=document.createElement('div');country.className='eyebrow';country.textContent=o.country+' · '+band(o)+' · '+(route(o)==='merit'?'Scholarship / merit route':'Need-based funding route');
- const title=document.createElement('h3');title.textContent=o.title;const para=document.createElement('p');para.textContent=o.funding_notes||'Read funding information at the source.';
+ const title=document.createElement('h3');title.textContent=o.title;const para=document.createElement('p');para.textContent=o.funding_notes||'Read funding information at the source.';const verified=document.createElement('p');verified.className='research-verification';verified.textContent=o.verified_at?'Source reviewed: '+appDate(o.verified_at.slice(0,10))+' · Recheck for the current cycle':'Research lead · Funding policy not yet individually verified';
  const ul=document.createElement('ul');[...fit.reasons,...fit.warnings].forEach(t=>{const li=document.createElement('li');li.textContent=t;ul.append(li)});
  const actions=document.createElement('div');actions.className='cardactions';const a=document.createElement('a');a.href=o.official_url;a.target='_blank';a.rel='noopener noreferrer';a.textContent='Official website ↗';
  const btn=document.createElement('button');btn.type='button';btn.textContent='Add to application tracker';btn.addEventListener('click',()=>addApplication(o.title,o.id));
- actions.append(a,btn);card.append(country,title,para,ul,actions);wrap.append(card)}
+ actions.append(a,btn);card.append(country,title,para,verified,ul,actions);wrap.append(card)}
  if(!visible.length)wrap.textContent='No opportunities in that country yet. Our directory is being expanded.';
 }
 async function addApplication(name,opportunityId=null,round='undecided',deadline=null,aidDeadline=null){
@@ -307,7 +307,7 @@ async function initialize(session){
  sb.from('student_profiles').select('academic_stage').eq('user_id',user.id).maybeSingle(),
  sb.from('student_readiness').select('milestone_id,state,notes').eq('user_id',user.id),
  sb.from('student_applications').select('*').eq('user_id',user.id).order('created_at',{ascending:false}),
- sb.from('opportunities').select('id,title,country,official_url,funding_notes,eligibility_notes,deadline_notes').eq('published',true).eq('country','United States').order('title')]);
+ sb.from('opportunities').select('id,title,country,official_url,funding_notes,eligibility_notes,deadline_notes,verified_at').eq('published',true).eq('country','United States').order('title')]);
  const errors=responses.filter(x=>x.error).map(x=>x.error.message);
  if(errors.length)note('Some data could not load: '+errors.join(' / '));else note('All changes save to your Bdesh account');
  profile=responses[0].data||null;academicStage=responses[1].data?.academic_stage||'11';readiness=new Map((responses[2].data||[]).map(x=>[x.milestone_id,x]));applications=responses[3].data||[];opportunities=responses[4].data||[];
