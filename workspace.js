@@ -131,11 +131,17 @@ function renderResearch(){
  const all=document.createElement('option');all.value='';all.textContent='All countries';filter.append(all);
  [...new Set(opportunities.map(x=>x.country))].sort().forEach(c=>{const o=document.createElement('option');o.value=c;o.textContent=c;filter.append(o)});
  filter.value=current;
- const selected=filter.value,visible=opportunities.filter(o=>!selected||o.country===selected);
+ const selected=filter.value;
+ const selectivity=$('selectivity-filter')?.value||'',funding=$('funding-filter')?.value||'';
+ const band=o=>o.eligibility_notes?.match(/Selectivity context: (Exceptionally selective|Highly selective|Selective)/)?.[1]||'Unclassified';
+ const route=o=>/scholar|merit|woodruff|karsh|johnson|belk|ingram/i.test(o.funding_notes||'')?'merit':'need';
+ const order={'Selective':0,'Highly selective':1,'Exceptionally selective':2,'Unclassified':3};
+ const visible=opportunities.filter(o=>(!selected||o.country===selected)&&(!selectivity||band(o)===selectivity)&&(!funding||route(o)===funding)).sort((a,b)=>(order[band(a)]-order[band(b)])||a.title.localeCompare(b.title));
+ $('research-count').textContent=visible.length+' funding leads shown · '+opportunities.length+' listed · lower selectivity band first (not an admission probability)';
  const insight=$('matching-insight');insight.textContent=(profile?.countries?.length?'Based on your stated country preferences: '+profile.countries.join(', ')+'. ':'Add country preferences in your profile for more useful research prompts. ')+'These are not personalized admission-chance ratings. The directory is a small editorial starting list.';
  const wrap=$('research-list');wrap.replaceChildren();
  for(const o of visible){const fit=researchFit(o);const card=document.createElement('article');card.className='research-card';
- const country=document.createElement('div');country.className='eyebrow';country.textContent=o.country;
+ const country=document.createElement('div');country.className='eyebrow';country.textContent=o.country+' · '+band(o)+' · '+(route(o)==='merit'?'Scholarship / merit route':'Need-based funding route');
  const title=document.createElement('h3');title.textContent=o.title;const para=document.createElement('p');para.textContent=o.funding_notes||'Read funding information at the source.';
  const ul=document.createElement('ul');[...fit.reasons,...fit.warnings].forEach(t=>{const li=document.createElement('li');li.textContent=t;ul.append(li)});
  const actions=document.createElement('div');actions.className='cardactions';const a=document.createElement('a');a.href=o.official_url;a.target='_blank';a.rel='noopener noreferrer';a.textContent='Official website ↗';
@@ -169,7 +175,7 @@ function renderApplications(){
 $('profile-form').addEventListener('submit',async e=>{e.preventDefault();if(!user)return;const button=e.currentTarget.querySelector('button[type="submit"]');button.disabled=true;let payload;try{payload=formPayload()}catch(err){fail(err);button.disabled=false;return}
  const {data,error}=await sb.from('student_admissions_profiles').upsert(payload,{onConflict:'user_id'}).select().single();button.disabled=false;if(error){fail(error);$('profile-message').textContent=error.message;return}profile=data;stats();renderNextActions();renderResearch();note('Profile saved');$('profile-message').textContent='Saved to your private account.'});
 $('application-form').addEventListener('submit',async e=>{e.preventDefault();const f=e.currentTarget,fd=new FormData(f);const name=String(fd.get('institution_name')||'').trim();if(!name)return;await addApplication(name,null,String(fd.get('application_round')||'undecided'),String(fd.get('application_deadline')||'')||null,String(fd.get('aid_deadline')||'')||null);f.reset()});
-$('country-filter').addEventListener('change',renderResearch);
+$('country-filter').addEventListener('change',renderResearch);$('selectivity-filter').addEventListener('change',renderResearch);$('funding-filter').addEventListener('change',renderResearch);
 $('signout').addEventListener('click',async()=>{await sb.auth.signOut();location.href='/'});
 async function initialize(session){
  user=session.user;$('not-signed-in').hidden=true;$('workspace').hidden=false;$('signout').hidden=false;$('session-status').textContent=user.email||'Signed in';
