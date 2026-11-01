@@ -302,3 +302,34 @@ body .footer b{font-size:36px}
 #application-board-count{font-size:14px;font-weight:700;color:#4f6e59;align-self:center}
 .application-compact-summary{font-size:14px!important;line-height:1.5!important;font-weight:600;color:#52745b!important;margin-top:7px}
 @media(max-width:700px){.application-board-tools{padding:14px;gap:11px}.application-board-tools label{flex-basis:100%}}
+
+/* Keyboard and mobile accessibility pass across the admissions workspace. */
+html{scroll-padding-top:110px}
+#apply,#prepare,#discover{scroll-margin-top:100px}
+.application-help{font-size:15px;line-height:1.7;color:#58705e;margin:22px 0 5px}
+:where(.application-board-tools,.college-search,.deadline-filters,.followup-form) :is(input,select,button):focus-visible{outline:3px solid #bd824f;outline-offset:3px}
+:where(.application-toggle,.followup-add,.college-search-result,.college-manual,.deadline-entry button){min-height:44px}
+@media(max-width:920px){
+ .topbar{min-height:75px;height:auto;flex-wrap:wrap;padding-top:12px;padding-bottom:12px;gap:12px}
+ .topbar nav{display:flex;flex:1 0 100%;order:3;overflow-x:auto;scrollbar-width:thin;gap:16px;padding:7px 0}
+ .topbar nav a{white-space:nowrap;flex-shrink:0}
+ .headright{max-width:100%;margin-left:auto}
+ .deadline-center,.action-plan{min-width:0}
+}
+@media(max-width:650px){
+ .application-header{align-items:stretch!important}
+ .application-header>div:first-child{width:100%;flex-basis:100%}
+ #apply .application-header select{width:100%;min-height:48px}
+ .followup-controls select{flex:1 1 170px}
+ .followup-controls button{flex:0 0 auto}
+ .deadline-entry{overflow-wrap:anywhere}
+ .research-controls{display:grid;grid-template-columns:minmax(0,1fr);gap:12px}
+ .research-controls label,.research-controls select,.research-controls input{width:100%;min-width:0}
+ .metrics{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:390px){
+ .deadline-summary{grid-template-columns:1fr 1fr}
+ .deadline-summary>div:last-child{grid-column:1/-1}
+ .deadline-heading h2{font-size:32px}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto!important}}
