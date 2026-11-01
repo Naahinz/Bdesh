@@ -53,7 +53,7 @@ async function loadSaves(){
   render();
 }
 async function begin(){
-  const {data,error}=await client.from('opportunities').select('id,title,country,official_url,funding_notes,eligibility_notes').eq('published',true).order('title');
+  const {data,error}=await client.from('opportunities').select('id,title,country,official_url,funding_notes,eligibility_notes').eq('published',true).eq('country','United States').order('title');
   if(error){status.textContent='Directory database is unavailable; please try refreshing.';return}
   rows=data||[];initialized=true;render();
 }
