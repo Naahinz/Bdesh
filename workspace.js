@@ -56,6 +56,39 @@ function fillProfile(){
  form.elements.namedItem('awards').value=(p.awards||[]).join('\n');
  form.elements.namedItem('countries').value=(p.countries||[]).join(', ');
 }
+function renderNextActions(){
+ const target=$('next-actions');if(!target)return;
+ target.replaceChildren();
+ const items=[],today=new Date();today.setHours(0,0,0,0);
+ const ms=86400000;
+ if(!profile?.school_name||!profile?.intended_majors)items.push({priority:3,title:'Build your student profile',detail:'Add your school and academic interests so your planning stays organized.',link:'/profile.html',cta:'Open profile'});
+ const unfinished=milestones.filter(([id])=>!['done','not_applicable'].includes(readiness.get(id)?.state));
+ if(unfinished.length){const [id,title]=unfinished[0];items.push({priority:4,title:'Continue preparation: '+title,detail:'One unfinished milestone from your preparation tracker.',link:'#prepare',cta:'View milestone'});}
+ for(const app of applications){
+  for(const [field,label] of [['application_deadline','Admission'],['aid_deadline','Financial aid']]){
+   if(!app[field])continue;
+   const date=new Date(app[field]+'T00:00:00');
+   if(Number.isNaN(date.valueOf()))continue;
+   const days=Math.round((date-today)/ms);
+   if(days>=0&&days<=30&&app.status!=='decision_received'){
+    items.push({priority:days,title:label+' deadline: '+app.institution_name,detail:days===0?'Date entered as today':days===1?'Date entered as tomorrow':'In '+days+' days',link:'#apply',cta:'Review application'});
+   }
+  }
+  if(!app.application_deadline||!app.aid_deadline)items.push({priority:35,title:'Verify deadlines: '+app.institution_name,detail:'At least one admission or aid deadline is missing. Confirm directly with the university.',link:'#apply',cta:'Edit deadlines'});
+ }
+ if(!applications.length)items.push({priority:5,title:'Start your application board',detail:'Add a researched institution and record admission and financial aid deadlines separately.',link:'#discover',cta:'Discover universities'});
+ items.sort((a,b)=>a.priority-b.priority);
+ const selected=items.slice(0,5);
+ if(!selected.length){const p=document.createElement('p');p.textContent='You are up to date with the information saved here. Check university portals for new requests.';target.append(p);return}
+ selected.forEach((item,i)=>{
+  const row=document.createElement('article');row.className='next-action';
+  const num=document.createElement('span');num.className='next-action-number';num.textContent=String(i+1).padStart(2,'0');
+  const body=document.createElement('div');const h=document.createElement('h3');h.textContent=item.title;const p=document.createElement('p');p.textContent=item.detail;body.append(h,p);
+  const a=document.createElement('a');a.href=item.link;a.textContent=item.cta+' ↗';
+  if(item.link.startsWith('#')){a.dataset.tab=item.link.slice(1);a.addEventListener('click',event=>{event.preventDefault();setTab(a.dataset.tab);document.getElementById(a.dataset.tab)?.scrollIntoView({behavior:'smooth',block:'start'})})}
+  row.append(num,body,a);target.append(row);
+ });
+}
 function stats(){
  const done=[...readiness.values()].filter(x=>x.state==='done').length;
  $('stat-ready').textContent=done+' / '+milestones.length;
@@ -81,7 +114,7 @@ function renderReadiness(){
  [['todo','Not started'],['in_progress','In progress'],['done','Completed'],['not_applicable','Not relevant']].forEach(([v,t])=>{const o=document.createElement('option');o.value=v;o.textContent=t;select.append(o)});
  select.value=rec.state;select.addEventListener('change',async()=>{const state=select.value;select.disabled=true;const {error}=await sb.from('student_readiness').upsert({user_id:user.id,milestone_id:id,state,updated_at:new Date().toISOString()},{onConflict:'user_id,milestone_id'});select.disabled=false;if(error){fail(error);select.value=rec.state;return}readiness.set(id,{state});stats();note('Preparation saved')});
  article.append(content,select);holder.append(article);
- }stats();
+ }stats();renderNextActions();
 }
 function researchFit(o){
  const reasons=[],warnings=[];
@@ -115,10 +148,10 @@ async function addApplication(name,opportunityId=null,round='undecided',deadline
  note('Adding application…');
  const payload={user_id:user.id,institution_name:name,opportunity_id:opportunityId,application_round:round,application_deadline:deadline,aid_deadline:aidDeadline};
  const {data,error}=await sb.from('student_applications').insert(payload).select().single();
- if(error){fail(error);return}applications.unshift(data);renderApplications();stats();note('Application added');setTab('apply');
+ if(error){fail(error);return}applications.unshift(data);renderApplications();stats();renderNextActions();note('Application added');setTab('apply');
 }
 function appDate(v){return v?new Date(v+'T12:00:00').toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'}):'Not entered'}
-async function patchApplication(id,updates){const {data,error}=await sb.from('student_applications').update({...updates,updated_at:new Date().toISOString()}).eq('id',id).eq('user_id',user.id).select().single();if(error){fail(error);return false}applications=applications.map(a=>a.id===id?data:a);stats();note('Application saved');return true}
+async function patchApplication(id,updates){const {data,error}=await sb.from('student_applications').update({...updates,updated_at:new Date().toISOString()}).eq('id',id).eq('user_id',user.id).select().single();if(error){fail(error);return false}applications=applications.map(a=>a.id===id?data:a);stats();renderNextActions();note('Application saved');return true}
 function renderApplications(){
  const holder=$('application-list');holder.replaceChildren();
  if(!applications.length){const div=document.createElement('div');div.className='empty';div.textContent='No applications yet. Discover a university or add one above.';holder.append(div);return}
@@ -129,12 +162,12 @@ function renderApplications(){
  for(const [value,label] of [['researching','Researching'],['shortlisted','Shortlisted'],['preparing','Preparing'],['submitted','Submitted'],['decision_received','Decision received']]){const o=document.createElement('option');o.value=value;o.textContent=label;status.append(o)}status.value=a.status;status.addEventListener('change',async()=>{status.disabled=true;await patchApplication(a.id,{status:status.value});status.disabled=false});
  header.append(head,status);article.append(header);
  const grid=document.createElement('div');grid.className='mini-checklist';for(let i=0;i<taskKeys.length;i++){const key=taskKeys[i];const label=document.createElement('label');const cb=document.createElement('input');cb.type='checkbox';cb.checked=Boolean(a.checklist?.[key]);cb.addEventListener('change',async()=>{cb.disabled=true;const next={...(a.checklist||{}),[key]:cb.checked};const ok=await patchApplication(a.id,{checklist:next});if(!ok)cb.checked=!cb.checked;else a.checklist=next;cb.disabled=false});label.append(cb,document.createTextNode(taskLabels[i]));grid.append(label)}article.append(grid);
- const row=document.createElement('div');row.className='application-footer';const edit=document.createElement('button');edit.textContent='Edit deadlines';edit.addEventListener('click',()=>{const editor=article.querySelector('.date-editor');editor.hidden=!editor.hidden});const remove=document.createElement('button');remove.className='danger';remove.textContent='Remove';remove.addEventListener('click',async()=>{if(!confirm('Remove '+a.institution_name+' from your tracker?'))return;const {error}=await sb.from('student_applications').delete().eq('id',a.id).eq('user_id',user.id);if(error)return fail(error);applications=applications.filter(x=>x.id!==a.id);renderApplications();stats();note('Application removed')});row.append(edit,remove);article.append(row);
+ const row=document.createElement('div');row.className='application-footer';const edit=document.createElement('button');edit.textContent='Edit deadlines';edit.addEventListener('click',()=>{const editor=article.querySelector('.date-editor');editor.hidden=!editor.hidden});const remove=document.createElement('button');remove.className='danger';remove.textContent='Remove';remove.addEventListener('click',async()=>{if(!confirm('Remove '+a.institution_name+' from your tracker?'))return;const {error}=await sb.from('student_applications').delete().eq('id',a.id).eq('user_id',user.id);if(error)return fail(error);applications=applications.filter(x=>x.id!==a.id);renderApplications();stats();renderNextActions();note('Application removed')});row.append(edit,remove);article.append(row);
  const editor=document.createElement('form');editor.className='date-editor';editor.hidden=true;editor.innerHTML='<label>Admission deadline <input name="application_deadline" type="date"></label><label>Aid deadline <input name="aid_deadline" type="date"></label><button class="button" type="submit">Save deadlines</button>';editor.elements.application_deadline.value=a.application_deadline||'';editor.elements.aid_deadline.value=a.aid_deadline||'';editor.addEventListener('submit',async e=>{e.preventDefault();const ok=await patchApplication(a.id,{application_deadline:editor.elements.application_deadline.value||null,aid_deadline:editor.elements.aid_deadline.value||null});if(ok)renderApplications()});article.append(editor);holder.append(article)
  });
 }
 $('profile-form').addEventListener('submit',async e=>{e.preventDefault();if(!user)return;const button=e.currentTarget.querySelector('button[type="submit"]');button.disabled=true;let payload;try{payload=formPayload()}catch(err){fail(err);button.disabled=false;return}
- const {data,error}=await sb.from('student_admissions_profiles').upsert(payload,{onConflict:'user_id'}).select().single();button.disabled=false;if(error){fail(error);$('profile-message').textContent=error.message;return}profile=data;stats();renderResearch();note('Profile saved');$('profile-message').textContent='Saved to your private account.'});
+ const {data,error}=await sb.from('student_admissions_profiles').upsert(payload,{onConflict:'user_id'}).select().single();button.disabled=false;if(error){fail(error);$('profile-message').textContent=error.message;return}profile=data;stats();renderNextActions();renderResearch();note('Profile saved');$('profile-message').textContent='Saved to your private account.'});
 $('application-form').addEventListener('submit',async e=>{e.preventDefault();const f=e.currentTarget,fd=new FormData(f);const name=String(fd.get('institution_name')||'').trim();if(!name)return;await addApplication(name,null,String(fd.get('application_round')||'undecided'),String(fd.get('application_deadline')||'')||null,String(fd.get('aid_deadline')||'')||null);f.reset()});
 $('country-filter').addEventListener('change',renderResearch);
 $('signout').addEventListener('click',async()=>{await sb.auth.signOut();location.href='/'});
@@ -150,7 +183,7 @@ async function initialize(session){
  const errors=responses.filter(x=>x.error).map(x=>x.error.message);
  if(errors.length)note('Some data could not load: '+errors.join(' / '));else note('All changes save to your Bdesh account');
  profile=responses[0].data||null;academicStage=responses[1].data?.academic_stage||'11';readiness=new Map((responses[2].data||[]).map(x=>[x.milestone_id,x]));applications=responses[3].data||[];opportunities=responses[4].data||[];
- fillProfile();renderReadiness();renderResearch();renderApplications();stats();setTab(location.hash.slice(1)||'prepare');
+ fillProfile();renderReadiness();renderResearch();renderApplications();stats();renderNextActions();setTab(location.hash.slice(1)||'prepare');
 }
 if(!sb){$('session-status').textContent='Account library unavailable';$('not-signed-in').hidden=false;showAuthError('Authentication library unavailable. Please reload.');return}
 sb.auth.getSession().then(({data,error})=>{if(error||!data?.session){$('session-status').textContent='Not signed in';$('not-signed-in').hidden=false;if(error)showAuthError(error.message);else if(location.hash.includes('error'))showAuthError('The sign-in redirect was rejected. Check Supabase redirect URL settings.');return}initialize(data.session).catch(fail)}).catch(fail);
