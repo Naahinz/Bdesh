@@ -28,3 +28,11 @@ Until this is fixed, GitHub commits do **not** trigger deployment automatically.
 Undergraduate-only, NCTB-first, Bangla-first. Publish only scholarships whose details have been manually checked against official pages; store a last-verified date. Do not promise full rides or eligibility.
 
 Keep student profile data minimal. No passports, income proofs, or exact residential address in MVP.
+
+## Netlify deployment address
+
+The user supplied the Netlify site URL on November 1, 2026: `https://gobdesh.netlify.app`. Direct HTTP verification was not available to the assistant, so deployment of the latest commit has not been independently verified.
+
+In Supabase Dashboard → Authentication → URL Configuration, set the **Site URL** to `https://gobdesh.netlify.app` and add `https://gobdesh.netlify.app/**` to the permitted Redirect URLs. Test email confirmation and password recovery with an adult test account. Do not enable broad student registration until privacy controls are finished.
+
+Check Netlify Deploys to ensure the published deploy includes `auth.js`, `privacy.html`, and the latest `index.html` from `main`. If those files do not appear, trigger a redeploy of `main` via Netlify.
