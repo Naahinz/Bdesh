@@ -57,3 +57,48 @@ body .nav.shell{height:auto;min-height:75px;flex-wrap:wrap;padding-top:10px;padd
 body .nav.shell nav{display:flex;order:3;flex-basis:100%;overflow-x:auto;gap:18px;padding:8px 0;scrollbar-width:thin}
 body .nav.shell nav a{white-space:nowrap}
 }
+
+/* Bdesh 2 — visible editorial redesign. Hierarchy over ornamental UI. */
+:root{--editorial-bg:#f5f3e9;--editorial-paper:#fffdf6;--editorial-ink:#173d32;--editorial-accent:#ae744d;--editorial-rule:#cbd5c8}
+body{background:var(--editorial-bg);color:var(--editorial-ink)}
+body :is(.hero h1,.journey-heading h2,.section-head h2,.section-intro h2,.section-heading h2,.lesson-content h1,.sidebar-head h1,.side h1){font-family:'Playfair Display',Georgia,serif;letter-spacing:-.04em;line-height:1.12}
+body .hero h1{font-size:clamp(53px,6.3vw,96px);max-width:760px}
+body .hero-copy>p{font-size:clamp(18px,1.45vw,21px)!important;line-height:1.65!important;max-width:58ch}
+body .hero{padding-top:clamp(72px,8vw,120px);padding-bottom:clamp(70px,8vw,115px);gap:clamp(32px,5vw,90px)}
+body .hero-kicker{font-size:15px;letter-spacing:.025em}
+body :is(.journey-heading h2,.section-head h2){font-size:clamp(43px,4.4vw,65px)}
+body :is(.section-head p,.journey-heading>p){font-size:18px!important;line-height:1.65!important}
+body .journey-grid{gap:0;border-top:1px solid var(--editorial-rule);border-bottom:1px solid var(--editorial-rule)}
+body .journey-card{border:0;border-right:1px solid var(--editorial-rule);border-radius:0;box-shadow:none;background:transparent;padding:32px 25px 36px;min-height:345px}
+body .journey-card:last-child{border-right:0}
+body .journey-card:hover{background:#e9eee4}
+body .journey-card h3{font-size:clamp(25px,2vw,32px);line-height:1.24}
+body .journey-card p{font-size:16px!important;color:#4e6557!important}
+body .journey-num{font-size:15px}
+body .journey-num span{font-size:12px}
+body .section{padding-top:clamp(68px,7vw,108px);padding-bottom:clamp(68px,7vw,108px)}
+body .card,body .opportunity,body .auth-card{border-radius:2px;box-shadow:none;background:var(--editorial-paper)}
+body .opportunity{border-top:3px solid #62846c;padding:30px;min-height:270px}
+body .opportunity h3{font-size:clamp(25px,2vw,33px)}
+body .opportunity p{font-size:16px!important}
+body :is(.darkbtn,.primary-button,.button,.lightbtn){border-radius:3px;padding:14px 21px}
+body :is(.outline,.outline-button){border-radius:3px}
+body .eyebrow{font-size:12px!important;letter-spacing:.13em}
+body .topbar,body .site-header,body .top{background:#fffdf7}
+body .reader,body .content{background:transparent}
+body .lesson-content h1{font-size:clamp(43px,4.5vw,70px)}
+body .lesson-lead{font-size:clamp(19px,1.6vw,23px)!important;line-height:1.6!important}
+body .reading-section h2{font-size:clamp(25px,2.1vw,34px)}
+body .reading-section p{font-size:17px!important;line-height:1.8!important}
+body .curriculum{background:#e9eee5}
+body .lesson-link{padding-top:13px;padding-bottom:13px}
+body :is(.learn-first,.advice-strip,.insight){border-radius:2px;background:#e9eee5}
+body .learn-first p{font-size:16px!important}
+body .metrics>div{border-radius:2px}
+body .milestone{border-radius:2px}
+body :is(.formgrid input,.formgrid select,.field-grid input,.field-grid select,.paper-form input,.paper-form select,.paper-form textarea,.field-grid textarea){border-radius:3px;min-height:46px}
+body .profile-panel p{font-size:17px!important;line-height:1.75!important}
+body .sidebar-head h1{font-size:clamp(35px,3vw,50px)}
+body .section-intro h2{font-size:clamp(39px,4vw,61px)}
+@media(max-width:1050px){body .journey-grid{grid-template-columns:repeat(2,minmax(0,1fr))}body .journey-card:nth-child(2){border-right:0}body .journey-card:nth-child(-n+2){border-bottom:1px solid var(--editorial-rule)}}
+@media(max-width:650px){body .hero h1{font-size:clamp(47px,11vw,65px)}body .hero{padding-top:56px;padding-bottom:65px}body .journey-grid{grid-template-columns:1fr}body .journey-card{border-right:0!important;border-bottom:1px solid var(--editorial-rule);min-height:unset;padding:25px 12px}body .journey-card:last-child{border-bottom:0}body .section-head h2,body .journey-heading h2{font-size:clamp(37px,9vw,49px)}body .reading-section p{font-size:16px!important}}
