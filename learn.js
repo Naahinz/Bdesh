@@ -108,13 +108,13 @@ function render(){
  const takeaway=create('div','takeaway');takeaway.append(create('span','takeaway-label','THE IDEA TO REMEMBER'),create('p','',lesson.takeaway));wrap.append(takeaway);
  const check=lesson.quiz;$('check-question').textContent=check.q;const choices=$('check-options');choices.replaceChildren();$('check-feedback').textContent='';$('knowledge-check').hidden=false;
  check.options.forEach((option,i)=>{const button=create('button','check-option',option);button.type='button';button.onclick=()=>answer(i);choices.append(button)});
- $('mark-read').textContent=state.done.has(lesson.id)?'✓ Understood':'Mark as understood ✓';$('prev-lesson').disabled=current===0;$('next-lesson').textContent=current===lessons.length-1?'Go to my workspace ↗':'Next lesson →';renderNav();updateProgress();persist();
+ $('mark-read').textContent=state.done.has(lesson.id)?'✓ Understood':'Mark as understood ✓';$('prev-lesson').disabled=current===0;$('next-lesson').textContent=current===lessons.length-1?'Step 2: Build my profile ↗':'Next lesson →';renderNav();updateProgress();persist();
 }
 function answer(index){if(answered)return;const quiz=lessons[current].quiz,buttons=[...$('check-options').children],correct=index===quiz.correct;buttons.forEach((b,i)=>{b.disabled=true;if(i===quiz.correct)b.classList.add('correct');else if(i===index)b.classList.add('incorrect')});$('check-feedback').textContent=(correct?'Exactly. ':'Not quite. ')+quiz.why;answered=true;}
 async function setDone(){const id=lessons[current].id;state.done.add(id);updateProgress();persist();renderNav();$('mark-read').textContent='✓ Understood';
  if(cloudUser&&sb){const {error}=await sb.from('student_readiness').upsert({user_id:cloudUser.id,milestone_id:'lesson-'+id,state:'done',updated_at:new Date().toISOString()},{onConflict:'user_id,milestone_id'});if(error)console.warn('Bdesh lesson sync:',error.message)}}
 function go(i){current=Math.max(0,Math.min(lessons.length-1,i));render();window.scrollTo({top:0,behavior:'instant'});$('main-content').focus({preventScroll:true})}
-$('mark-read').addEventListener('click',setDone);$('prev-lesson').addEventListener('click',()=>go(current-1));$('next-lesson').addEventListener('click',()=>{if(current===lessons.length-1){location.href='/workspace.html#profile';return}go(current+1)});
+$('mark-read').addEventListener('click',setDone);$('prev-lesson').addEventListener('click',()=>go(current-1));$('next-lesson').addEventListener('click',()=>{if(current===lessons.length-1){setDone().finally(()=>{location.href='/profile.html#overview'});return}go(current+1)});
 async function cloudSync(){if(!sb)return;const {data,error}=await sb.auth.getSession();if(error||!data?.session?.user)return;cloudUser=data.session.user;
  const {data:rows, error:fetchError}=await sb.from('student_readiness').select('milestone_id,state').eq('user_id',cloudUser.id).like('milestone_id','lesson-%');
  if(fetchError)return;let changed=false;
