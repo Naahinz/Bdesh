@@ -123,3 +123,25 @@ body .section-intro h2{font-size:clamp(39px,4vw,61px)}
 .research-controls select{min-width:185px;padding:11px 12px;border:1px solid #c6d5c7;background:#fffdf8;color:#173d32;border-radius:3px;font-size:15px}
 .research-caution{margin:18px 0 8px;padding:15px 17px;border-left:3px solid #ab7953;background:#f0efe4;font-size:15px;line-height:1.65;color:#445e50}
 .research-count{font-size:14px;font-weight:700;color:#526e60;margin:15px 0}
+
+/* Homepage journey: one clear primary action, then sequenced next steps. */
+.homepage-reading{padding-top:70px;padding-bottom:80px}
+.reading-intro{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(270px,.65fr);gap:clamp(28px,6vw,105px);align-items:center;background:#e9eee5;border-top:3px solid #295c45;padding:clamp(28px,5vw,70px)}
+.reading-intro h2{font:500 clamp(38px,4.2vw,64px)/1.12 'Playfair Display',Georgia,serif;letter-spacing:-.04em;margin:17px 0 22px;text-wrap:balance}
+.reading-intro h2 em{color:#a77957}
+.reading-intro-copy>p{font-size:18px!important;line-height:1.72!important;max-width:59ch;color:#476253}
+.reading-cta{display:inline-flex!important;font-size:16px!important;min-height:52px!important;margin:18px 0 12px;padding:15px 25px!important}
+.reading-meta{display:block;color:#557263;font-size:13px;font-weight:600}
+.reading-intro-note{padding:28px 0 28px 32px;border-left:1px solid #bacfbe}
+.reading-intro-note>span{font-size:12px;letter-spacing:.12em;font-weight:700;color:#597968}
+.reading-intro-note p{border-bottom:1px solid #c4d2c4;padding:12px 0;font-size:15px!important;margin:0;line-height:1.5;color:#26493a}
+body .journey-grid{grid-template-columns:repeat(5,minmax(0,1fr))}
+body .journey-card{padding:26px 15px 30px;min-height:325px}
+body .journey-card h3{font-size:clamp(22px,1.65vw,29px)}
+body .journey-card p{font-size:15px!important}
+body .journey-symbol{display:none}
+body .hero .ctas .primary-cta{font-size:16px!important;padding:16px 26px;min-height:53px}
+body .hero-art{border-radius:2px}
+@media(max-width:1100px){body .journey-grid{grid-template-columns:repeat(3,minmax(0,1fr))}body .journey-card:nth-child(2){border-right:1px solid var(--editorial-rule)}body .journey-card:nth-child(3){border-right:0}body .journey-card:nth-child(-n+3){border-bottom:1px solid var(--editorial-rule)}body .journey-card:nth-child(4){border-right:1px solid var(--editorial-rule)}}
+@media(max-width:800px){.reading-intro{grid-template-columns:1fr}.reading-intro-note{border-left:0;border-top:1px solid #bacfbe;padding:22px 0 0}body .journey-grid{grid-template-columns:repeat(2,minmax(0,1fr))}body .journey-card{border-bottom:1px solid var(--editorial-rule)!important}body .journey-card:nth-child(odd){border-right:1px solid var(--editorial-rule)!important}body .journey-card:nth-child(even){border-right:0!important}body .journey-card:last-child{border-bottom:0!important}}
+@media(max-width:600px){.homepage-reading{padding-top:30px;padding-bottom:55px}.reading-intro{padding:26px 22px}.reading-intro h2{font-size:39px}.reading-intro-copy>p{font-size:16px!important}body .journey-grid{grid-template-columns:1fr}body .journey-card{border-right:0!important;min-height:auto}body .journey-card:nth-child(odd){border-right:0!important}body .hero .ctas .primary-cta{width:100%}}
