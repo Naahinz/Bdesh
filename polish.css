@@ -1,0 +1,33 @@
+/* Bdesh editorial readability pass — 2026-11. Shared non-destructive overrides.
+   Keep brand palette and existing app logic; improve reading comfort and hierarchy. */
+:root{--reading-ink:#263d34;--reading-muted:#526b5d;--reading-border:#ccd9cd}
+html{font-size:16px;-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility}
+body{font-size:16px;line-height:1.65;letter-spacing:0}
+p,li{overflow-wrap:break-word}
+button,input,select,textarea{font-size:inherit}
+button,a,input,select,textarea{touch-action:manipulation}
+:where(button,a,input,select,textarea):focus-visible{outline:3px solid #bd824f;outline-offset:3px}
+:where(input,select,textarea){min-height:42px}
+:where(input,select,textarea)::placeholder{color:#667a6c;opacity:1}
+:where(.eyebrow,.course-label,.kicker,.chapter-id,.lesson-eyebrow,.section-serial,.reading-time,.header-center,.top-middle){font-size:12px;line-height:1.5;letter-spacing:.075em}
+:where(.lesson-content,.reader,.content,.main,.hero-copy,.section){color:var(--reading-ink)}
+:where(.section-head p,.hero-copy>p,.journey-heading>p,.journey-card p,.learn-first p,.reading-section p,.lesson-lead,.section-heading p,.side p,.sidebar-head p,.profile-panel p,.milestone p,.opportunity p,.guide-bottom,.privacy-note,.advice-strip p){font-size:clamp(15px,1.1vw,17px);line-height:1.75;color:var(--reading-muted)}
+:where(.lesson-content p,.reader p){max-width:74ch}
+:where(.lesson-content h1,.hero h1,.section-head h2,.journey-heading h2,.section-intro h2,.section-heading h2){letter-spacing:-.025em}
+:where(.button,.primary-button,.outline-button,.darkbtn,.outline,.lightbtn,.workspace-link,.header-link,.section-link,.journey-bottom){font-size:14px;line-height:1.4;min-height:42px}
+:where(.lesson-link,.rail a,.profile-nav button,.nav a,.topbar nav a,.site-header a,.header-actions a){font-size:14px;line-height:1.5}
+:where(.field-grid label,.formgrid label,.paper-form label,.selector label,.research-controls label,.auth-card label){font-size:14px;line-height:1.5}
+:where(.field-grid input,.field-grid select,.field-grid textarea,.formgrid input,.formgrid select,.formgrid textarea,.paper-form input,.paper-form select,.paper-form textarea){font-size:16px;line-height:1.5;padding:12px 13px}
+:where(.reading-section-num,.journey-num,.lesson-number,.nav-n){font-size:12px}
+:where(.aside-note,.footer,.site-footer,.privacy,.auth-privacy,.auth-help,.disclaimer,.guide-bottom,.art-footnote){font-size:13px;line-height:1.65}
+:where(.check-option,.check-feedback,.check-top,.takeaway p,.example-row,.application-list,.milestone,.research-grid){font-size:15px;line-height:1.65}
+/* The original design uses identical rounded cards throughout. A restrained editorial
+   rhythm makes the page feel authored rather than generated. */
+:where(.journey-card,.milestone,.research-grid article,.opportunity,.card,.dashboard-card){box-shadow:none}
+:where(.journey-card,.milestone,.opportunity){transition:border-color .16s ease,background-color .16s ease}
+:where(.journey-card:hover,.milestone:hover,.opportunity:hover){border-color:#91ab96}
+:where(.lesson-content h1,.profile-panel h2,.hero h1){text-wrap:balance}
+@media(min-width:1100px){.lesson-shell{grid-template-columns:minmax(290px,340px) minmax(0,1fr)}.lesson-content{max-width:850px}.reader{min-width:0}}
+@media(max-width:900px){.top-middle,.header-center{display:none}.site-header,.topbar,.top{min-height:68px;height:auto}.hero-copy>p{font-size:16px}}
+@media(max-width:650px){html{font-size:16px}:where(.lesson-content h1,.hero h1){font-size:clamp(36px,9vw,48px);line-height:1.16}:where(.section-head h2,.journey-heading h2,.section-intro h2){font-size:clamp(30px,7vw,39px)}:where(.lesson-content,.reader,.content,.main){max-width:100%}:where(.reading-section p,.lesson-lead,.section-head p,.journey-card p,.learn-first p){font-size:16px;line-height:1.7}:where(.footer-right button,.primary-button,.outline-button){min-height:46px}:where(.eyebrow,.kicker,.course-label,.chapter-id){font-size:11px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important}}
