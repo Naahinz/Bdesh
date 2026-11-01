@@ -80,6 +80,8 @@ const lessons=[
 ['And remember','A full ride is competitive. Bdesh can organize your work and teach the process; it cannot guarantee admission, scholarships or outcomes.']
 ],takeaway:'Learn → build your profile → research → apply and track. You have a plan.',quiz:{q:'After finishing Start Here, what is the most useful next step?',options:['Apply to every famous university immediately.','Build an accurate student profile and readiness plan.','Assume you already qualify for a full ride.'],correct:1,why:'Exactly. Turn what you have learned into an honest, organized next-step plan.'}}
 ];
+const us=window.BDESH_US_COURSE;
+if(us){lessons[0]=us.welcome;lessons.splice(3,0,us.platform,us.holistic,us.sat);for(const lesson of lessons){if(!['welcome','platform','holistic','sat101'].includes(lesson.id))lesson.lead+=' This chapter explains U.S. undergraduate admissions; specific colleges set their own rules.';}}
 const $=id=>document.getElementById(id);
 const storageKey='bdesh-learning-v1',state=(()=>{
  try{const raw=JSON.parse(localStorage.getItem(storageKey)||'{}');return {done:new Set(Array.isArray(raw.done)?raw.done.filter(x=>lessons.some(l=>l.id===x)):[]),current:lessons.some(l=>l.id===raw.current)?raw.current:lessons[0].id}}catch{return {done:new Set(),current:lessons[0].id}}
