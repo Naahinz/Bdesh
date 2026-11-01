@@ -80,6 +80,25 @@ portfolio.activities.forEach((a,i)=>{lines.push('',i+1+'. '+(a.position||'')+' �
 function renderReview(){harvest();const wrap=$('profile-summary');wrap.replaceChildren();const cards=[['Academic snapshot',[(basic.school_name||'School not entered'),(basic.ssc_gpa!=null?'SSC GPA '+basic.ssc_gpa:'SSC results not entered'),(basic.sat_total?'SAT '+basic.sat_total:'SAT not entered'),(basic.intended_majors||'Academic interests not entered')]],['Activities',portfolio.activities.map((a,i)=>(i+1)+'. '+(a.position||'Activity')+' — '+(a.organization||'Organization')+' · '+(a.description||''))],['Honors',portfolio.honors.map(h=>h.title||'Untitled honor')],['Essay drafts',portfolio.essays.map(e=>(e.title||'Untitled')+' — '+(e.body||'').trim().split(/\s+/).filter(Boolean).length+' words')],['Brag sheet and goals',[(portfolio.brag_sheet||'No accomplishments recorded yet').slice(0,500),(portfolio.future_goals||'No future goals recorded yet').slice(0,300)]]];
 for(const [title,items] of cards){const card=el('article',{class:'review-card'});card.append(el('h3',{},title));const ul=el('ul');if(!items.length)items.push('Nothing entered yet');for(const text of items)ul.append(el('li',{},text));card.append(ul);wrap.append(card)}}
 $('copy-summary').addEventListener('click',async()=>{await persistPortfolio();await copyText(profileText())});
+$('print-profile').addEventListener('click',async()=>{
+ const button=$('print-profile');button.disabled=true;
+ try{
+  await persistPortfolio();
+  const lines=profileText().split('\\n');
+  let frame=document.getElementById('bdesh-print-frame');
+  if(frame)frame.remove();
+  frame=document.createElement('iframe');frame.id='bdesh-print-frame';frame.title='Private profile PDF preview';frame.setAttribute('aria-hidden','true');frame.style.cssText='position:fixed;left:-10000px;top:0;width:800px;height:1100px;border:0';document.body.append(frame);
+  const doc=frame.contentDocument;doc.open();doc.write('<!doctype html><html><head><meta charset="utf-8"><title>Bdesh private student profile</title><style>@page{size:A4;margin:19mm}body{font:11pt/1.5 Georgia,serif;color:#20392d}h1{font-size:25pt;margin:0 0 5mm;color:#23573b}h2{font:700 14pt Arial,sans-serif;border-bottom:1px solid #98b2a0;padding-bottom:2mm;margin:9mm 0 3mm;break-after:avoid}p{white-space:pre-wrap;overflow-wrap:anywhere;margin:0 0 2.5mm}small{font:9pt Arial,sans-serif;color:#536558}.entry{break-inside:avoid}header{border-bottom:2px solid #23573b;margin-bottom:8mm;padding-bottom:4mm}</style></head><body></body></html>');doc.close();
+  const body=doc.body;const header=doc.createElement('header');const h=doc.createElement('h1');h.textContent='bdesh.  |  Student profile';const small=doc.createElement('small');small.textContent='Private student-prepared notes. Not an official application or university submission.';header.append(h,small);body.append(header);
+  const headings=new Set(['EDUCATION','ACTIVITIES','HONORS','ESSAY DRAFTS','BRAG SHEET','FUTURE GOALS','ADDITIONAL NOTES']);
+  for(const [i,line] of lines.entries()){if(i<3||!line.trim())continue;const el=doc.createElement(headings.has(line)?'h2':'p');el.textContent=line;body.append(el)}
+  const footer=doc.createElement('p');footer.textContent='Generated locally from this student’s Bdesh profile. Review for accuracy before sharing.';footer.style.cssText='font-size:9pt;color:#5c6e61;margin-top:10mm';body.append(footer);
+  frame.contentWindow.focus();frame.contentWindow.print();
+  message('Choose “Save as PDF” as the print destination. Your profile was prepared locally.');
+ }catch(err){message('Could not prepare PDF: '+(err?.message||err),true)}
+ finally{button.disabled=false}
+});
+
 function progress(){const form=$('academics-form');const complete=[Boolean(val(form,'school_name')||val(form,'ssc_gpa')),Boolean(val(form,'academic_context')),portfolio.activities.some(a=>a.position||a.organization||a.description),portfolio.honors.some(h=>h.title),portfolio.essays.some(e=>e.body),Boolean(portfolio.brag_sheet||portfolio.future_goals)];const n=complete.filter(Boolean).length;$('completion-value').textContent=n+' / 6';$('completion-track').style.width=(n/6*100)+'%'}
 $('sign-out').addEventListener('click',async()=>{await sb.auth.signOut();location.href='/'});
 $('profile-google-login').addEventListener('click',async()=>{const btn=$('profile-google-login');btn.disabled=true;$('signin-error').textContent='';try{if(!sb)throw Error('Login library unavailable');const {error}=await sb.auth.signInWithOAuth({provider:'google',options:{redirectTo:location.origin+'/profile.html'}});if(error)throw error}catch(e){showError(e.message);btn.disabled=false}});
