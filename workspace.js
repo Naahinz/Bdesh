@@ -74,6 +74,13 @@ function renderNextActions(){
     items.push({priority:days,title:label+' deadline: '+app.institution_name,detail:days===0?'Date entered as today':days===1?'Date entered as tomorrow':'In '+days+' days',link:'#apply',cta:'Review application'});
    }
   }
+  const requirements=Array.isArray(app.checklist?.additional_requirements)?app.checklist.additional_requirements:[];
+  for(const req of requirements){
+   if(['submitted','received','waived'].includes(req.status)||!req.deadline)continue;
+   const due=new Date(req.deadline+'T00:00:00');if(Number.isNaN(due.valueOf()))continue;
+   const days=Math.round((due-today)/ms);
+   if(days>=0&&days<=30)items.push({priority:days,title:(req.name||'Additional document')+': '+app.institution_name,detail:days===0?'Document due today':days===1?'Document due tomorrow':'Additional document due in '+days+' days',link:'#apply',cta:'Update requirement'});
+  }
   if(!app.application_deadline||!app.aid_deadline)items.push({priority:35,title:'Verify deadlines: '+app.institution_name,detail:'At least one admission or aid deadline is missing. Confirm directly with the university.',link:'#apply',cta:'Edit deadlines'});
  }
  if(!applications.length)items.push({priority:5,title:'Start your application board',detail:'Add a researched institution and record admission and financial aid deadlines separately.',link:'#discover',cta:'Discover universities'});
