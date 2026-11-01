@@ -31,3 +31,14 @@ button,a,input,select,textarea{touch-action:manipulation}
 @media(max-width:900px){.top-middle,.header-center{display:none}.site-header,.topbar,.top{min-height:68px;height:auto}.hero-copy>p{font-size:16px}}
 @media(max-width:650px){html{font-size:16px}:where(.lesson-content h1,.hero h1){font-size:clamp(36px,9vw,48px);line-height:1.16}:where(.section-head h2,.journey-heading h2,.section-intro h2){font-size:clamp(30px,7vw,39px)}:where(.lesson-content,.reader,.content,.main){max-width:100%}:where(.reading-section p,.lesson-lead,.section-head p,.journey-card p,.learn-first p){font-size:16px;line-height:1.7}:where(.footer-right button,.primary-button,.outline-button){min-height:46px}:where(.eyebrow,.kicker,.course-label,.chapter-id){font-size:11px}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important}}
+
+/* Explicit specificity for legacy selectors that set 10–12px text. */
+body :is(.eyebrow,.kicker,.course-label,.chapter-id,.reading-time,.lesson-eyebrow,.header-center,.top-middle,.section-serial){font-size:12px!important;letter-spacing:.06em}
+body :is(.journey-card p,.learn-first p,.section-head p,.section-heading p,.reading-section p,.lesson-lead,.profile-panel p,.aside-note,.guide-bottom,.privacy-note,.disclaimer,.milestone p,.opportunity p,.hero-copy>p){font-size:16px!important;line-height:1.7!important}
+body :is(.nav a,.topbar nav a,.rail a,.header-actions a,.lesson-link,.workspace-link,.header-link,.journey-bottom,.section-link){font-size:14px!important}
+body :is(.darkbtn,.outline,.lightbtn,.button,.primary-button,.outline-button,.google-signin){font-size:14px!important;min-height:44px}
+body :is(.card label,.formgrid label,.field-grid label,.paper-form label,.auth-card label){font-size:14px!important}
+body :is(.formgrid input,.formgrid select,.field-grid input,.field-grid select,.paper-form input,.paper-form select,.paper-form textarea,.field-grid textarea){font-size:16px!important}
+body :is(.early,.auth-help,.auth-privacy,.footer,.privacy,.aside-note,.site-footer,.disclaimer){font-size:13px!important}
+body :is(.check-option,.check-feedback,.check-top,.copy-field){font-size:14px!important}
+@media(max-width:600px){body :is(.nav-actions .darkbtn,.nav-actions .outline){font-size:12px!important;padding:10px 12px}}
