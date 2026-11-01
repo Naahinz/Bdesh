@@ -84,7 +84,7 @@ $('print-profile').addEventListener('click',async()=>{
  const button=$('print-profile');button.disabled=true;
  try{
   await persistPortfolio();
-  const lines=profileText().split('\\n');
+  const lines=profileText().split('\n');
   let frame=document.getElementById('bdesh-print-frame');
   if(frame)frame.remove();
   frame=document.createElement('iframe');frame.id='bdesh-print-frame';frame.title='Private profile PDF preview';frame.setAttribute('aria-hidden','true');frame.style.cssText='position:fixed;left:-10000px;top:0;width:800px;height:1100px;border:0';document.body.append(frame);
