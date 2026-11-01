@@ -135,7 +135,7 @@ async function initialize(session){
  sb.from('student_profiles').select('academic_stage').eq('user_id',user.id).maybeSingle(),
  sb.from('student_readiness').select('milestone_id,state,notes').eq('user_id',user.id),
  sb.from('student_applications').select('*').eq('user_id',user.id).order('created_at',{ascending:false}),
- sb.from('opportunities').select('id,title,country,official_url,funding_notes,eligibility_notes,deadline_notes').eq('published',true).order('title')]);
+ sb.from('opportunities').select('id,title,country,official_url,funding_notes,eligibility_notes,deadline_notes').eq('published',true).eq('country','United States').order('title')]);
  const errors=responses.filter(x=>x.error).map(x=>x.error.message);
  if(errors.length)note('Some data could not load: '+errors.join(' / '));else note('All changes save to your Bdesh account');
  profile=responses[0].data||null;academicStage=responses[1].data?.academic_stage||'11';readiness=new Map((responses[2].data||[]).map(x=>[x.milestone_id,x]));applications=responses[3].data||[];opportunities=responses[4].data||[];
