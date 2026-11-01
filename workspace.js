@@ -179,7 +179,7 @@ function renderResearch(){
  if(!visible.length)wrap.textContent='No opportunities in that country yet. Our directory is being expanded.';
 }
 async function addApplication(name,opportunityId=null,round='undecided',deadline=null,aidDeadline=null){
- if(applications.some(x=>x.institution_name.toLowerCase()===name.toLowerCase())){note('This institution is already on your application board');setTab('apply');return}
+ if(applications.some(x=>(opportunityId&&x.opportunity_id===opportunityId)||x.institution_name.trim().toLowerCase()===name.trim().toLowerCase())){note('This institution is already on your application board');setTab('apply');return}
  note('Adding application…');
  const payload={user_id:user.id,institution_name:name,opportunity_id:opportunityId,application_round:round,application_deadline:deadline,aid_deadline:aidDeadline};
  const {data,error}=await sb.from('student_applications').insert(payload).select().single();
@@ -262,7 +262,7 @@ function renderCollegeSearch(){
  collegeResults.replaceChildren();
  applicationForm.hidden=true;selectedCollege=null;
  if(!query){const p=document.createElement('p');p.textContent='Start typing a university name to find it in our database.';collegeResults.append(p);return}
- const matches=opportunities.filter(x=>x.title.toLocaleLowerCase().includes(query)).slice(0,12);
+ const matches=opportunities.filter(x=>x.title.toLocaleLowerCase().includes(query)).sort((a,b)=>Number(!a.title.toLowerCase().startsWith(query))-Number(!b.title.toLowerCase().startsWith(query))||a.title.localeCompare(b.title)).slice(0,12);
  if(matches.length){
   const info=document.createElement('p');info.textContent=matches.length===12?'Showing the first 12 matches. Keep typing to narrow the results.':'Select a matching university:';collegeResults.append(info);
   for(const o of matches){
