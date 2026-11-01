@@ -283,3 +283,12 @@ body .footer b{font-size:36px}
 .deadline-entry button:hover{background:#e2ede2}
 .deadline-empty{padding:18px 4px;color:#637769;font-size:15px}
 @media(max-width:700px){.deadline-heading{display:block}.deadline-link{display:inline-block;margin-top:15px}.deadline-entry{grid-template-columns:minmax(0,1fr) auto;gap:9px}.deadline-entry button{grid-column:1/-1;justify-self:start}.deadline-summary>div{padding:13px}.deadline-summary span{font-size:12px}}
+
+/* Student data access and college portal links. */
+.workspace-account-tools{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.export-workspace{font-size:14px;font-weight:700;background:transparent;border:1px solid #b2c4b3;color:#275840;border-radius:3px;min-height:42px;padding:9px 13px;cursor:pointer}
+.export-workspace:hover{background:#e4ede2}
+.followup-portal{display:inline-block;font-size:14px;font-weight:700;color:#286847;text-decoration:underline;margin-top:7px}
+.followup-form label:nth-of-type(3){grid-column:auto}
+.followup-form label:nth-of-type(4){grid-column:1/-1}
+@media(max-width:700px){.followup-form label:nth-of-type(4){grid-column:auto}}
