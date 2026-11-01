@@ -64,7 +64,7 @@ function renderDeadlineCenter(){
  for(const app of applications){
   const submitted=['submitted','decision_received'].includes(app.status);
   if(!submitted&&app.application_deadline)entries.push({name:'Application deadline',college:app.institution_name,date:app.application_deadline,appId:app.id});
-  if(app.aid_deadline)entries.push({name:'Financial aid deadline',college:app.institution_name,date:app.aid_deadline,appId:app.id});
+  if(app.aid_deadline&&!app.checklist?.aid_submitted)entries.push({name:'Financial aid deadline',college:app.institution_name,date:app.aid_deadline,appId:app.id});
   const requirements=Array.isArray(app.checklist?.additional_requirements)?app.checklist.additional_requirements:[];
   for(const r of requirements){if(r.deadline&&!['submitted','received','accepted','waived'].includes(r.status))entries.push({name:r.name||'Additional requirement',college:app.institution_name,date:r.deadline,appId:app.id})}
  }
@@ -209,13 +209,13 @@ function renderFollowupTracker(application,article){
  existing.forEach((req,i)=>{
   const item=document.createElement('div');item.className='followup-item';
   const body=document.createElement('div');const h=document.createElement('strong');h.textContent=req.name||'Requirement';
-  const meta=document.createElement('p');meta.textContent=(req.deadline?'Due '+appDate(req.deadline):'No deadline entered')+(req.submitted_at?' · Sent '+appDate(req.submitted_at):'')+(req.note?' · '+req.note:'');body.append(h,meta);
+  const meta=document.createElement('p');meta.textContent=(req.deadline?'Due '+appDate(req.deadline):'No deadline entered')+(req.submitted_at?' · Sent '+appDate(req.submitted_at):'')+(req.note?' · '+req.note:'');body.append(h,meta);if(req.portal_url){try{const url=new URL(req.portal_url);if(['https:','http:'].includes(url.protocol)){const a=document.createElement('a');a.href=url.href;a.target='_blank';a.rel='noopener noreferrer';a.textContent='Open college portal ↗';a.className='followup-portal';body.append(a)}}catch{}}
   const controls=document.createElement('div');controls.className='followup-controls';
   const status=document.createElement('select');status.setAttribute('aria-label','Status of '+req.name);
   [['not_started','Not started'],['in_progress','In progress'],['submitted','Submitted'],['received','Confirmed received'],['accepted','Accepted / complete'],['needs_correction','Needs correction'],['waived','Waived / not required']].forEach(([v,t])=>{const o=document.createElement('option');o.value=v;o.textContent=t;status.append(o)});
   status.value=req.status||'not_started';
   status.addEventListener('change',async()=>{status.disabled=true;const next=existing.map((x,j)=>j===i?{...x,status:status.value,submitted_at:status.value==='submitted'&&!x.submitted_at?new Date().toISOString().slice(0,10):x.submitted_at}:x);if(!await save(next))status.disabled=false});
-  const edit=document.createElement('button');edit.type='button';edit.textContent='Edit';edit.addEventListener('click',()=>{form.hidden=false;name.value=req.name;deadline.value=req.deadline||'';note.value=req.note||'';form.dataset.editIndex=String(i);name.focus()});
+  const edit=document.createElement('button');edit.type='button';edit.textContent='Edit';edit.addEventListener('click',()=>{form.hidden=false;name.value=req.name;deadline.value=req.deadline||'';note.value=req.note||'';portal.value=req.portal_url||'';form.dataset.editIndex=String(i);name.focus()});
   const remove=document.createElement('button');remove.type='button';remove.className='danger';remove.textContent='Remove';remove.addEventListener('click',async()=>{if(!confirm('Remove this requirement from your tracker?'))return;await save(existing.filter((_,j)=>j!==i))});
   controls.append(status,edit,remove);item.append(body,controls);items.append(item);
  });
@@ -223,13 +223,14 @@ function renderFollowupTracker(application,article){
  const form=document.createElement('form');form.className='followup-form';form.hidden=true;
  const nameLabel=document.createElement('label');nameLabel.textContent='Requirement';const name=document.createElement('input');name.required=true;name.maxLength=120;name.setAttribute('list','requirement-suggestions');name.placeholder='e.g. ISFAA or video portfolio';const suggestions=document.createElement('datalist');suggestions.id='requirement-suggestions-'+application.id;name.setAttribute('list',suggestions.id);requirementSuggestions.forEach(x=>{const o=document.createElement('option');o.value=x;suggestions.append(o)});nameLabel.append(name,suggestions);
  const deadlineLabel=document.createElement('label');deadlineLabel.textContent='Submission deadline';const deadline=document.createElement('input');deadline.type='date';deadlineLabel.append(deadline);
+ const portalLabel=document.createElement('label');portalLabel.textContent='College portal URL (optional)';const portal=document.createElement('input');portal.type='url';portal.placeholder='https://admissions.example.edu/portal';portal.maxLength=500;portalLabel.append(portal);
  const noteLabel=document.createElement('label');noteLabel.textContent='Portal / submission notes (optional)';const note=document.createElement('input');note.maxLength=350;note.placeholder='Where to submit, required format, or confirmation';noteLabel.append(note);
  const submit=document.createElement('button');submit.className='button';submit.type='submit';submit.textContent='Save requirement';
  const cancel=document.createElement('button');cancel.type='button';cancel.textContent='Cancel';cancel.addEventListener('click',()=>{form.hidden=true;form.reset();delete form.dataset.editIndex});
- form.append(nameLabel,deadlineLabel,noteLabel,submit,cancel);
+ form.append(nameLabel,deadlineLabel,portalLabel,noteLabel,submit,cancel);
  form.addEventListener('submit',async e=>{e.preventDefault();const value=name.value.trim();if(!value)return;submit.disabled=true;
   const index=form.dataset.editIndex===undefined?-1:Number(form.dataset.editIndex);
-  const item={name:value,deadline:deadline.value||null,note:note.value.trim(),status:index>=0?(existing[index]?.status||'not_started'):'not_started',submitted_at:index>=0?(existing[index]?.submitted_at||null):null};
+  const item={name:value,deadline:deadline.value||null,note:note.value.trim(),portal_url:portal.value.trim(),status:index>=0?(existing[index]?.status||'not_started'):'not_started',submitted_at:index>=0?(existing[index]?.submitted_at||null):null};
   const next=index>=0?existing.map((x,j)=>j===index?item:x):[...existing,item];
   if(!await save(next))submit.disabled=false;
  });
