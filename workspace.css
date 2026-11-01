@@ -15,3 +15,10 @@ a{color:inherit;text-decoration:none}button,input,select,textarea{font:inherit}b
 @media(max-width:760px){.topbar{position:static;flex-wrap:wrap;height:auto;padding:15px 18px}.topbar nav{width:100%;justify-content:space-between;order:3;overflow:auto;gap:14px}.topbar nav a{font-size:10px}.headright{margin-left:auto}.layout{display:block}.side{border-right:0;border-bottom:1px solid var(--line);padding:25px 20px}.side h1{font-size:30px;margin:9px 0}.side>p{margin:0}.rail{display:none}.privacy-note{margin-top:12px}.back{margin-top:12px}.main{padding:25px 18px 60px}.intro{display:block}.sync{margin-top:13px}.metrics{margin:20px 0 30px}.metrics>div{padding:13px}.metrics strong{font-size:23px}.milestone{display:block;padding:17px}.milestone select{margin-top:13px;width:100%}.formgrid,.mini-checklist{grid-template-columns:1fr}.profile-form,.add-app{padding:17px}.application-header{display:block}.application-header select{margin-top:15px}.section-heading h2{font-size:27px}}
 
 .priority-label{display:inline-block;margin-left:12px;color:#377b58;background:#e8f2e6;border-radius:4px;padding:2px 7px;font-size:9px;letter-spacing:1px;vertical-align:middle;font-family:'DM Sans',sans-serif;font-weight:700}
+
+/* The four connected stages are always visible within the workspace. */
+.workspace-steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;margin-bottom:38px;padding:8px;background:#e9eee5;border:1px solid #dbe3d8;border-radius:10px}
+.workspace-steps a{font-size:11px;display:flex;align-items:center;gap:9px;padding:14px 10px;border-radius:6px;font-weight:700;color:#658071;white-space:nowrap;justify-content:center;transition:background .15s}
+.workspace-steps a span{font-size:10px;color:#a78061}.workspace-steps a.active{background:#fffefa;color:#174333;box-shadow:0 2px 8px #143d3412}.workspace-steps a:hover{background:#fffefa}
+@media(max-width:980px){.workspace-steps a{font-size:10px;gap:5px;padding:11px 5px}}
+@media(max-width:760px){.workspace-steps{grid-template-columns:repeat(2,minmax(0,1fr));margin-bottom:24px}.workspace-steps a{font-size:11px}}
