@@ -3,13 +3,15 @@
 'use strict';
 const apiURL='https://xeqixwmulwonvhifcmvn.supabase.co';
 const publicKey="sb_publishable_2Jp14PFt4_mLDT4cpqLfUw_d-tDSnwj";
-const client=globalThis.supabase?.createClient(apiURL,publicKey,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});
+const client=globalThis.supabase?.createClient(apiURL,publicKey,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true,storageKey:'bdesh-auth-v1'}});
+if(client) globalThis.bdeshSupabase=client;
 const el=id=>document.getElementById(id);
 const panel=el('auth-panel'), form=el('auth-form'), msg=el('auth-message'), toggle=el('account-toggle');
 if(!client){toggle.textContent='Account service unavailable';toggle.addEventListener('click',()=>{panel.hidden=false;msg.textContent='The account library did not load. Please refresh the page and try again.'});return}
-let mode='signin', user=null, loading=false, suppress=false;
+let mode='signin', user=null, loading=false, suppress=false, syncUserId=null;
+toggle.textContent='Checking session…';toggle.disabled=true;
 const notify=(text,error=false)=>{msg.textContent=text;msg.classList.toggle('error',error)};
-const open=()=>{panel.hidden=false;el('auth-email').focus();};
+const open=()=>{panel.hidden=false;el('google-signin').focus();};
 const close=()=>{panel.hidden=true;notify('')};
 toggle.addEventListener('click',async()=>{if(user){const {error}=await client.auth.signOut();if(error)notify(error.message,true);else{user=null;toggle.textContent='Beta sign in';document.dispatchEvent(new CustomEvent('bdesh:auth-change',{detail:{user:null}}));open();notify('Signed out.')}return;}open()});
 el('auth-close').addEventListener('click',close);
@@ -25,7 +27,7 @@ async function saveProfile(){if(!user||suppress)return;let v=el('intake').value,
 if(n===2030) n=2030;
 const {error}=await client.from('student_profiles').upsert({user_id:user.id,academic_stage:el('stage').value,nctb_group:stages[el('group').value]||'undecided',target_intake:n,preferred_language:document.documentElement.lang==='bn'?'bn':'en',updated_at:new Date().toISOString()},{onConflict:'user_id'});if(error)notify('Could not save profile: '+error.message,true)}
 async function saveTask(task_id,is_complete){if(!user||suppress)return;const {error}=await client.from('student_progress').upsert({user_id:user.id,task_id,is_complete,updated_at:new Date().toISOString()},{onConflict:'user_id,task_id'});if(error)notify('Could not save progress: '+error.message,true)}
-async function synchronize(currentUser){if(!currentUser)return;user=currentUser;toggle.textContent='Sign out ('+(user.email||'account')+')';const [{data:profile,error:pErr},{data:progress,error:tErr}]=await Promise.all([client.from('student_profiles').select('*').eq('user_id',user.id).maybeSingle(),client.from('student_progress').select('task_id,is_complete').eq('user_id',user.id)]);if(pErr||tErr){notify('Unable to load your saved data. '+(pErr||tErr).message,true);return}
+async function synchronize(currentUser){if(!currentUser)return;if(syncUserId===currentUser.id)return;syncUserId=currentUser.id;user=currentUser;toggle.textContent='Sign out ('+(user.email||'account')+')';const [{data:profile,error:pErr},{data:progress,error:tErr}]=await Promise.all([client.from('student_profiles').select('*').eq('user_id',user.id).maybeSingle(),client.from('student_progress').select('task_id,is_complete').eq('user_id',user.id)]);if(pErr||tErr){syncUserId=null;notify('Unable to load your saved data. '+(pErr||tErr).message,true);return}
 suppress=true;
 if(profile){localStorage.setItem('bdesh-stage',profile.academic_stage);el('stage').value=profile.academic_stage;if(profile.nctb_group){el('group').value=names[profile.nctb_group]||'Not selected yet';localStorage.setItem('bdesh-group',el('group').value)}if(profile.target_intake){const value=String(profile.target_intake);if([...el('intake').options].some(o=>o.value===value)){el('intake').value=value;localStorage.setItem('bdesh-intake',value)}}}
 if(progress?.length){for(const t of progress){const key='bdesh-'+t.task_id;localStorage.setItem(key,t.is_complete?'1':'0')}}
@@ -34,6 +36,24 @@ el('stage').dispatchEvent(new Event('change'));suppress=false; if(!profile)await
 document.addEventListener('bdesh:task-change',e=>saveTask(e.detail.task_id,e.detail.is_complete));
 document.addEventListener('bdesh:profile-change',saveProfile);
 document.addEventListener('bdesh:reset',async e=>{if(!user||suppress)return;const tasks=Array.from({length:4},(_,i)=>({user_id:user.id,task_id:e.detail.stage+'-'+i,is_complete:false}));const {error}=await client.from('student_progress').upsert(tasks,{onConflict:'user_id,task_id'});if(error)notify(error.message,true)});
-client.auth.onAuthStateChange((event,session)=>{if(event==='SIGNED_OUT'){user=null;toggle.textContent='Beta sign in';document.dispatchEvent(new CustomEvent('bdesh:auth-change',{detail:{user:null}}))}if(event==='PASSWORD_RECOVERY'){open();setMode('newpassword');}});
-client.auth.getUser().then(({data,error})=>{if(!error&&data?.user)synchronize(data.user)}).catch(()=>{});
+function signedOut(){user=null;syncUserId=null;toggle.disabled=false;toggle.textContent='Beta sign in';document.dispatchEvent(new CustomEvent('bdesh:auth-change',{detail:{user:null}}))}
+client.auth.onAuthStateChange((event,session)=>{
+  if(event==='SIGNED_OUT'){signedOut();return}
+  if(event==='PASSWORD_RECOVERY'){open();setMode('newpassword')}
+  if(event==='INITIAL_SESSION'||event==='SIGNED_IN'||event==='TOKEN_REFRESHED'){
+    toggle.disabled=false;
+    if(session?.user){
+      toggle.textContent='Sign out ('+(session.user.email||'account')+')';
+      // Deferred so async profile fetches never block Supabase auth event handling.
+      Promise.resolve().then(()=>synchronize(session.user).catch(e=>notify('Could not restore account data: '+e.message,true)));
+    }else if(event==='INITIAL_SESSION')signedOut();
+  }
+});
+// getSession loads a saved session locally, avoiding unnecessary getUser network calls on refresh.
+client.auth.getSession().then(({data,error})=>{
+  if(error){notify('Could not restore your session: '+error.message,true);signedOut();return}
+  toggle.disabled=false;
+  if(data?.session?.user){toggle.textContent='Sign out ('+(data.session.user.email||'account')+')';synchronize(data.session.user).catch(e=>notify(e.message,true))}
+  else if(!user)signedOut();
+}).catch(e=>{notify('Could not check session: '+e.message,true);signedOut()});
 })();
