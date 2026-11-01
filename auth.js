@@ -12,11 +12,14 @@ let mode='signin', user=null, loading=false, suppress=false, syncUserId=null;
 toggle.textContent='Checking session…';toggle.disabled=true;
 const notify=(text,error=false)=>{msg.textContent=text;msg.classList.toggle('error',error)};
 const open=()=>{panel.hidden=false;el('google-signin').focus();};
+const requestedNext=new URLSearchParams(location.search).get('next');
+const returnPath=requestedNext==='/workspace.html'||requestedNext==='/workspace.html#profile'?'/workspace.html':null;
+const goToWorkspace=()=>{if(returnPath&&location.pathname!=='/workspace.html')location.assign(returnPath)};
 if(new URLSearchParams(location.search).get('signin')==='1')open();
 const close=()=>{panel.hidden=true;notify('')};
 toggle.addEventListener('click',async()=>{if(user){const {error}=await client.auth.signOut();if(error)notify(error.message,true);else{user=null;toggle.textContent='Beta sign in';document.dispatchEvent(new CustomEvent('bdesh:auth-change',{detail:{user:null}}));open();notify('Signed out.')}return;}open()});
 el('auth-close').addEventListener('click',close);
-el('google-signin').addEventListener('click',async()=>{const button=el('google-signin');button.disabled=true;notify('Redirecting to Google…');try{const {error}=await client.auth.signInWithOAuth({provider:'google',options:{redirectTo:location.origin+location.pathname}});if(error)throw error}catch(e){notify('Google sign-in is not ready: '+(e?.message||'Please try again.'),true);button.disabled=false}});
+el('google-signin').addEventListener('click',async()=>{const button=el('google-signin');button.disabled=true;notify('Redirecting to Google…');try{const {error}=await client.auth.signInWithOAuth({provider:'google',options:{redirectTo:location.origin+(returnPath||location.pathname)}});if(error)throw error}catch(e){notify('Google sign-in is not ready: '+(e?.message||'Please try again.'),true);button.disabled=false}});
 function setMode(v){mode=v;el('auth-title').textContent=v==='signup'?'Create your Bdesh account':v==='recover'?'Reset your password':v==='newpassword'?'Set a new password':'Sign in to Bdesh';el('auth-submit').textContent=v==='signup'?'Create account':v==='recover'?'Send reset email':v==='newpassword'?'Update password':'Sign in';el('consent-line').hidden=v!=='signup';el('auth-password').required=v!=='recover';el('auth-password').style.display=v==='recover'?'none':'';el('auth-switch').textContent=v==='signup'?'Already have an account? Sign in':'Create an account';notify('')};
 el('auth-switch').addEventListener('click',()=>setMode(mode==='signup'?'signin':'signup'));
 el('auth-reset').addEventListener('click',()=>setMode('recover'));
@@ -33,6 +36,7 @@ suppress=true;
 if(profile){localStorage.setItem('bdesh-stage',profile.academic_stage);el('stage').value=profile.academic_stage;if(profile.nctb_group){el('group').value=names[profile.nctb_group]||'Not selected yet';localStorage.setItem('bdesh-group',el('group').value)}if(profile.target_intake){const value=String(profile.target_intake);if([...el('intake').options].some(o=>o.value===value)){el('intake').value=value;localStorage.setItem('bdesh-intake',value)}}}
 if(progress?.length){for(const t of progress){const key='bdesh-'+t.task_id;localStorage.setItem(key,t.is_complete?'1':'0')}}
 el('stage').dispatchEvent(new Event('change'));suppress=false; if(!profile)await saveProfile();document.dispatchEvent(new CustomEvent('bdesh:auth-change',{detail:{user:{id:user.id,email:user.email||''}}}));if(!progress?.length){const tasks=[];for(const stage of ['9','11','12','gap'])for(let i=0;i<4;i++){const key=stage+'-'+i;if(localStorage.getItem('bdesh-'+key)==='1')tasks.push({user_id:user.id,task_id:key,is_complete:true})}if(tasks.length){const {error}=await client.from('student_progress').upsert(tasks,{onConflict:'user_id,task_id'});if(error)notify('Some local progress could not be synced: '+error.message,true)}}
+if(returnPath)goToWorkspace();
 }
 document.addEventListener('bdesh:task-change',e=>saveTask(e.detail.task_id,e.detail.is_complete));
 document.addEventListener('bdesh:profile-change',saveProfile);
