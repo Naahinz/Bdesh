@@ -294,3 +294,11 @@ body .footer b{font-size:36px}
 @media(max-width:700px){.followup-form label:nth-of-type(4){grid-column:auto}}
 
 .research-verification{font-size:13px!important;color:#916539!important;font-weight:700;margin:9px 0 12px;line-height:1.5}
+
+/* Compact and searchable college application board. */
+.application-board-tools{display:flex;align-items:end;gap:16px;flex-wrap:wrap;margin:28px 0 17px;padding:18px;background:#edf1e8;border:1px solid #d0ded0}
+.application-board-tools label{display:grid;gap:7px;font-size:14px;font-weight:700;flex:1 1 190px}
+.application-board-tools input,.application-board-tools select{width:100%;min-height:46px;background:#fffefa;color:#214832;border:1px solid #aabfae;border-radius:3px;padding:10px 12px;font-size:16px}
+#application-board-count{font-size:14px;font-weight:700;color:#4f6e59;align-self:center}
+.application-compact-summary{font-size:14px!important;line-height:1.5!important;font-weight:600;color:#52745b!important;margin-top:7px}
+@media(max-width:700px){.application-board-tools{padding:14px;gap:11px}.application-board-tools label{flex-basis:100%}}
