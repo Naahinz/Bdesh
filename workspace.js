@@ -191,8 +191,10 @@ function patchApplication(id,updates){
  const previous=applicationSaveQueues.get(id)||Promise.resolve();
  const run=previous.catch(()=>{}).then(async()=>{
   const current=applications.find(a=>a.id===id);
-  const payload={...updates,updated_at:new Date().toISOString()};
-  if(updates.checklist&&current)payload.checklist={...(current.checklist||{}),...updates.checklist};
+  const {checklistPatch,...otherUpdates}=updates;
+  const payload={...otherUpdates,updated_at:new Date().toISOString()};
+  if(checklistPatch)payload.checklist={...(current?.checklist||{}),...checklistPatch};
+  else if(updates.checklist&&current)payload.checklist={...(current.checklist||{}),...updates.checklist};
   note('Saving application…');
   const {data,error}=await sb.from('student_applications').update(payload).eq('id',id).eq('user_id',user.id).select().single();
   if(error){fail(error);return false}
@@ -218,7 +220,7 @@ function renderFollowupTracker(application,article){
  const items=document.createElement('div');items.className='followup-items';wrap.append(items);
  async function save(next){
   const checklist={...(application.checklist||{}),additional_requirements:next};
-  const ok=await patchApplication(application.id,{checklist});
+  const ok=await patchApplication(application.id,{checklistPatch:{additional_requirements:next}});
   if(ok){application.checklist=checklist;renderApplications()}
   return ok;
  }
@@ -275,7 +277,7 @@ function renderApplications(){
  const status=document.createElement('select');status.setAttribute('aria-label','Application status for '+a.institution_name);
  for(const [value,label] of [['researching','Researching'],['shortlisted','Shortlisted'],['preparing','Preparing'],['submitted','Submitted'],['decision_received','Decision received']]){const o=document.createElement('option');o.value=value;o.textContent=label;status.append(o)}status.value=a.status;status.addEventListener('change',async()=>{const previous=a.status;status.disabled=true;const saved=await patchApplication(a.id,{status:status.value});if(!saved)status.value=previous;status.disabled=false});
  const toggle=document.createElement('button');toggle.type='button';toggle.className='application-toggle';toggle.setAttribute('aria-expanded',String(expandedApplications.has(a.id)));toggle.textContent=expandedApplications.has(a.id)?'Hide details −':'Show details +';toggle.addEventListener('click',()=>{if(expandedApplications.has(a.id))expandedApplications.delete(a.id);else expandedApplications.add(a.id);toggle.setAttribute('aria-expanded',String(expandedApplications.has(a.id)));toggle.textContent=expandedApplications.has(a.id)?'Hide details −':'Show details +';details.hidden=!expandedApplications.has(a.id)});header.append(head,status,toggle);article.append(header);const details=document.createElement('div');details.className='application-details';details.hidden=!expandedApplications.has(a.id);article.append(details);
- const grid=document.createElement('div');grid.className='mini-checklist';for(let i=0;i<taskKeys.length;i++){const key=taskKeys[i];const label=document.createElement('label');const cb=document.createElement('input');cb.type='checkbox';cb.checked=Boolean(a.checklist?.[key]);cb.addEventListener('change',async()=>{cb.disabled=true;const next={...(a.checklist||{}),[key]:cb.checked};const ok=await patchApplication(a.id,{checklist:next});if(!ok)cb.checked=!cb.checked;else a.checklist=next;cb.disabled=false});label.append(cb,document.createTextNode(taskLabels[i]));grid.append(label)}details.append(grid);
+ const grid=document.createElement('div');grid.className='mini-checklist';for(let i=0;i<taskKeys.length;i++){const key=taskKeys[i];const label=document.createElement('label');const cb=document.createElement('input');cb.type='checkbox';cb.checked=Boolean(a.checklist?.[key]);cb.addEventListener('change',async()=>{cb.disabled=true;const next={...(a.checklist||{}),[key]:cb.checked};const ok=await patchApplication(a.id,{checklistPatch:{[key]:cb.checked}});if(!ok)cb.checked=!cb.checked;else a.checklist=next;cb.disabled=false});label.append(cb,document.createTextNode(taskLabels[i]));grid.append(label)}details.append(grid);
  const row=document.createElement('div');row.className='application-footer';const edit=document.createElement('button');edit.textContent='Edit deadlines';edit.addEventListener('click',()=>{const editor=article.querySelector('.date-editor');editor.hidden=!editor.hidden});const remove=document.createElement('button');remove.className='danger';remove.textContent='Remove';remove.addEventListener('click',async()=>{if(!confirm('Remove '+a.institution_name+' from your tracker?'))return;const {error}=await sb.from('student_applications').delete().eq('id',a.id).eq('user_id',user.id);if(error)return fail(error);applications=applications.filter(x=>x.id!==a.id);renderApplications();stats();renderNextActions();renderDeadlineCenter();note('Application removed')});row.append(edit,remove);details.append(row);
  const editor=document.createElement('form');editor.className='date-editor';editor.hidden=true;editor.innerHTML='<label>Admission deadline <input name="application_deadline" type="date"></label><label>Aid deadline <input name="aid_deadline" type="date"></label><button class="button" type="submit">Save deadlines</button>';editor.elements.application_deadline.value=a.application_deadline||'';editor.elements.aid_deadline.value=a.aid_deadline||'';editor.addEventListener('submit',async e=>{e.preventDefault();const ok=await patchApplication(a.id,{application_deadline:editor.elements.application_deadline.value||null,aid_deadline:editor.elements.aid_deadline.value||null});if(ok)renderApplications()});details.append(editor);renderFollowupTracker(a,details);holder.append(article)
  });
