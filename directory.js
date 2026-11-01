@@ -6,6 +6,7 @@ const byId=id=>document.getElementById(id);
 const wrap=byId('opportunities'),search=byId('search'),status=byId('directory-status'),dash=byId('student-dashboard');
 if(!client||!wrap||!search)return;
 let rows=[],saved=new Set(),user=null,initialized=false;
+const savedOnly=byId('saved-only'),savedCount=byId('saved-count');
 function dashboard(){
   dash.hidden=!user;
   if(!user)return;
@@ -19,7 +20,9 @@ function dashboard(){
 function node(tag,cls,value){const n=document.createElement(tag);if(cls)n.className=cls;if(value)n.textContent=value;return n}
 function render(){
   const q=search.value.toLowerCase().trim();
-  const visible=rows.filter(r=>[r.title,r.country,r.funding_notes,r.eligibility_notes].join(' ').toLowerCase().includes(q));
+  const visible=rows.filter(r=>(!savedOnly?.checked||saved.has(r.id))&&[r.title,r.country,r.funding_notes,r.eligibility_notes].join(' ').toLowerCase().includes(q));
+  savedOnly.disabled=!user;
+  savedCount.textContent=user?saved.size+' saved':'';
   wrap.replaceChildren();
   for(const r of visible){
     const card=node('article','opportunity');
@@ -30,7 +33,7 @@ function render(){
     bookmark.type='button';bookmark.setAttribute('aria-pressed',String(saved.has(r.id)));bookmark.addEventListener('click',()=>toggleSave(r.id));
     card.append(bookmark);wrap.append(card);
   }
-  if(!visible.length)wrap.append(node('p','footnote','No matching opportunities. Try another country or university.'));
+  if(!visible.length)wrap.append(node('p','footnote',savedOnly.checked?'No saved opportunities match your search. Uncheck the saved filter to browse all.':'No matching opportunities. Try another country or university.'));
   status.textContent=rows.length+' official research starting points. Funding and deadlines must be checked on each institution’s website.';
   dashboard();
 }
@@ -43,7 +46,7 @@ async function toggleSave(id){
   if(currentlySaved)saved.delete(id);else saved.add(id);render();
 }
 async function loadSaves(){
-  saved.clear();if(!user){render();return}
+  saved.clear();if(!user){savedOnly.checked=false;render();return}
   const {data,error}=await client.from('saved_opportunities').select('opportunity_id').eq('user_id',user.id);
   if(error){status.textContent='Saved opportunities are temporarily unavailable.';return}
   for(const entry of data||[])saved.add(entry.opportunity_id);
@@ -55,6 +58,7 @@ async function begin(){
   rows=data||[];initialized=true;render();
 }
 search.addEventListener('input',()=>{if(initialized)render()});
+savedOnly?.addEventListener('change',()=>{if(initialized)render()});
 document.addEventListener('bdesh:auth-change',event=>{user=event.detail.user||null;loadSaves()});
 document.addEventListener('bdesh:task-change',dashboard);
 document.addEventListener('bdesh:reset',dashboard);
