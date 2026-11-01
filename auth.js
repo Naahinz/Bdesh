@@ -13,6 +13,7 @@ const open=()=>{panel.hidden=false;el('auth-email').focus();};
 const close=()=>{panel.hidden=true;notify('')};
 toggle.addEventListener('click',async()=>{if(user){const {error}=await client.auth.signOut();if(error)notify(error.message,true);else{user=null;toggle.textContent='Beta sign in';open();notify('Signed out.')}return;}open()});
 el('auth-close').addEventListener('click',close);
+el('google-signin').addEventListener('click',async()=>{const button=el('google-signin');button.disabled=true;notify('Redirecting to Google…');try{const {error}=await client.auth.signInWithOAuth({provider:'google',options:{redirectTo:location.origin+location.pathname}});if(error)throw error}catch(e){notify('Google sign-in is not ready: '+(e?.message||'Please try again.'),true);button.disabled=false}});
 function setMode(v){mode=v;el('auth-title').textContent=v==='signup'?'Create your Bdesh account':v==='recover'?'Reset your password':v==='newpassword'?'Set a new password':'Sign in to Bdesh';el('auth-submit').textContent=v==='signup'?'Create account':v==='recover'?'Send reset email':v==='newpassword'?'Update password':'Sign in';el('consent-line').hidden=v!=='signup';el('auth-password').required=v!=='recover';el('auth-password').style.display=v==='recover'?'none':'';el('auth-switch').textContent=v==='signup'?'Already have an account? Sign in':'Create an account';notify('')};
 el('auth-switch').addEventListener('click',()=>setMode(mode==='signup'?'signin':'signup'));
 el('auth-reset').addEventListener('click',()=>setMode('recover'));
