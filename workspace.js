@@ -64,7 +64,7 @@ function renderDeadlineCenter(){
  for(const app of applications){
   const submitted=['submitted','decision_received'].includes(app.status);
   if(!submitted&&app.application_deadline)entries.push({name:'Application deadline',college:app.institution_name,date:app.application_deadline,appId:app.id});
-  if(app.aid_deadline&&!app.checklist?.aid_submitted)entries.push({name:'Financial aid deadline',college:app.institution_name,date:app.aid_deadline,appId:app.id});
+  if(app.aid_deadline&&!app.checklist?.financial_aid)entries.push({name:'Financial aid deadline',college:app.institution_name,date:app.aid_deadline,appId:app.id});
   const requirements=Array.isArray(app.checklist?.additional_requirements)?app.checklist.additional_requirements:[];
   for(const r of requirements){if(r.deadline&&!['submitted','received','accepted','waived'].includes(r.status))entries.push({name:r.name||'Additional requirement',college:app.institution_name,date:r.deadline,appId:app.id})}
  }
