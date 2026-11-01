@@ -102,3 +102,17 @@ body .sidebar-head h1{font-size:clamp(35px,3vw,50px)}
 body .section-intro h2{font-size:clamp(39px,4vw,61px)}
 @media(max-width:1050px){body .journey-grid{grid-template-columns:repeat(2,minmax(0,1fr))}body .journey-card:nth-child(2){border-right:0}body .journey-card:nth-child(-n+2){border-bottom:1px solid var(--editorial-rule)}}
 @media(max-width:650px){body .hero h1{font-size:clamp(47px,11vw,65px)}body .hero{padding-top:56px;padding-bottom:65px}body .journey-grid{grid-template-columns:1fr}body .journey-card{border-right:0!important;border-bottom:1px solid var(--editorial-rule);min-height:unset;padding:25px 12px}body .journey-card:last-child{border-bottom:0}body .section-head h2,body .journey-heading h2{font-size:clamp(37px,9vw,49px)}body .reading-section p{font-size:16px!important}}
+
+/* Personal next-actions dashboard — deliberately calm, editorial and scannable. */
+.action-plan{margin:32px 0 45px;border-top:2px solid #244a3b;padding-top:23px}
+.action-plan-heading{display:flex;justify-content:space-between;gap:25px;align-items:end;margin-bottom:22px}
+.action-plan-heading h2{font:500 clamp(29px,3vw,43px)/1.16 'Playfair Display',Georgia,serif;letter-spacing:-.035em;margin:9px 0}
+.action-plan-heading p{font-size:15px;line-height:1.65;color:#536d5d;max-width:62ch;margin:0}
+.action-plan-link{font-size:14px;font-weight:700;text-decoration:underline;white-space:nowrap}
+.next-actions{border-top:1px solid #cbd6c8}
+.next-action{display:grid;grid-template-columns:40px minmax(0,1fr) auto;gap:16px;align-items:center;border-bottom:1px solid #cbd6c8;padding:20px 7px}
+.next-action-number{font:500 20px 'Playfair Display',Georgia,serif;color:#af8058}
+.next-action h3{font-size:18px;font-weight:650;margin:0 0 5px;line-height:1.35}
+.next-action p{font-size:15px!important;line-height:1.6;margin:0;color:#5d7061}
+.next-action a{font-size:14px;font-weight:700;border-bottom:1px solid currentColor;white-space:nowrap}
+@media(max-width:680px){.action-plan-heading{display:block}.action-plan-link{display:inline-block;margin-top:14px}.next-action{grid-template-columns:30px minmax(0,1fr);gap:8px 12px}.next-action a{grid-column:2;justify-self:start;margin-top:5px}.next-action h3{font-size:17px}}
