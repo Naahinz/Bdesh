@@ -112,7 +112,7 @@ function renderReadiness(){
  const content=document.createElement('div');const h=document.createElement('h3');h.textContent=title;if(priority.includes(id)){const marker=document.createElement('span');marker.className='priority-label';marker.textContent='FOCUS NOW';h.append(marker)}const p=document.createElement('p');p.textContent=description;content.append(h,p);
  const select=document.createElement('select');select.setAttribute('aria-label','Status for '+title);
  [['todo','Not started'],['in_progress','In progress'],['done','Completed'],['not_applicable','Not relevant']].forEach(([v,t])=>{const o=document.createElement('option');o.value=v;o.textContent=t;select.append(o)});
- select.value=rec.state;select.addEventListener('change',async()=>{const state=select.value;select.disabled=true;const {error}=await sb.from('student_readiness').upsert({user_id:user.id,milestone_id:id,state,updated_at:new Date().toISOString()},{onConflict:'user_id,milestone_id'});select.disabled=false;if(error){fail(error);select.value=rec.state;return}readiness.set(id,{state});stats();note('Preparation saved')});
+ select.value=rec.state;select.addEventListener('change',async()=>{const state=select.value;select.disabled=true;const {error}=await sb.from('student_readiness').upsert({user_id:user.id,milestone_id:id,state,updated_at:new Date().toISOString()},{onConflict:'user_id,milestone_id'});select.disabled=false;if(error){fail(error);select.value=rec.state;return}readiness.set(id,{state});stats();renderNextActions();note('Preparation saved')});
  article.append(content,select);holder.append(article);
  }stats();renderNextActions();
 }
