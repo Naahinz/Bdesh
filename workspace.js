@@ -179,11 +179,11 @@ function renderResearch(){
  if(!visible.length)wrap.textContent='No opportunities in that country yet. Our directory is being expanded.';
 }
 async function addApplication(name,opportunityId=null,round='undecided',deadline=null,aidDeadline=null){
- if(applications.some(x=>(opportunityId&&x.opportunity_id===opportunityId)||x.institution_name.trim().toLowerCase()===name.trim().toLowerCase())){note('This institution is already on your application board');setTab('apply');return}
+ if(applications.some(x=>(opportunityId&&x.opportunity_id===opportunityId)||x.institution_name.trim().toLowerCase()===name.trim().toLowerCase())){note('This institution is already on your application board');setTab('apply');return false}
  note('Adding application…');
  const payload={user_id:user.id,institution_name:name,opportunity_id:opportunityId,application_round:round,application_deadline:deadline,aid_deadline:aidDeadline};
  const {data,error}=await sb.from('student_applications').insert(payload).select().single();
- if(error){fail(error);return}applications.unshift(data);renderApplications();stats();renderNextActions();renderDeadlineCenter();note('Application added');setTab('apply');
+ if(error){fail(error);return false}applications.unshift(data);renderApplications();stats();renderNextActions();renderDeadlineCenter();note('Application added');setTab('apply');return true;
 }
 function appDate(v){return v?new Date(v+'T12:00:00').toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'}):'Not entered'}
 async function patchApplication(id,updates){const {data,error}=await sb.from('student_applications').update({...updates,updated_at:new Date().toISOString()}).eq('id',id).eq('user_id',user.id).select().single();if(error){fail(error);return false}applications=applications.map(a=>a.id===id?data:a);stats();renderNextActions();renderDeadlineCenter();note('Application saved');return true}
@@ -299,7 +299,7 @@ function chooseCollege(college,manualName=''){
 }
 collegeSearch.addEventListener('input',renderCollegeSearch);
 $('cancel-college-selection').addEventListener('click',()=>{applicationForm.reset();renderCollegeSearch();collegeSearch.focus()});
-$('application-form').addEventListener('submit',async e=>{e.preventDefault();const f=e.currentTarget,fd=new FormData(f);const name=String(fd.get('institution_name')||'').trim();if(!name)return;await addApplication(name,selectedCollege?.id||null,String(fd.get('application_round')||'undecided'),String(fd.get('application_deadline')||'')||null,String(fd.get('aid_deadline')||'')||null);f.reset();collegeSearch.value='';renderCollegeSearch()});
+$('application-form').addEventListener('submit',async e=>{e.preventDefault();const f=e.currentTarget,fd=new FormData(f);const name=String(fd.get('institution_name')||'').trim();if(!name)return;const button=f.querySelector('button[type=submit]');button.disabled=true;const saved=await addApplication(name,selectedCollege?.id||null,String(fd.get('application_round')||'undecided'),String(fd.get('application_deadline')||'')||null,String(fd.get('aid_deadline')||'')||null);button.disabled=false;if(saved){f.reset();collegeSearch.value='';renderCollegeSearch()}});
 $('research-search').addEventListener('input',renderResearch);$('country-filter').addEventListener('change',renderResearch);$('application-board-search').addEventListener('input',renderApplications);$('application-board-filter').addEventListener('change',renderApplications);$('selectivity-filter').addEventListener('change',renderResearch);$('funding-filter').addEventListener('change',renderResearch);
 $('export-workspace').addEventListener('click',()=>{
  if(!user)return;
