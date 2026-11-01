@@ -39,7 +39,7 @@ const taskKeys=['application','essays','recommendations','transcripts','scores',
 const taskLabels=['Application form','Essays / supplements','Recommendations','Transcripts & school documents','Test-score policy / reporting','Financial aid documents','Submission confirmation'];
 let user=null,profile=null,academicStage='11',readiness=new Map(),applications=[],opportunities=[],busy=false;
 function note(t){$('sync-status').textContent=t}
-function fail(error){note('Could not save: '+(error?.message||String(error)));console.error('Bdesh:',error)}
+function fail(error){note('Save failed — your last change may not have been stored. '+(error?.message||String(error)));console.error('Bdesh:',error)}
 function setTab(tab){if(!sections.includes(tab))tab='prepare';for(const s of sections){const el=$(s);el.hidden=s!==tab}document.querySelectorAll('[data-tab]').forEach(a=>a.classList.toggle('active',a.dataset.tab===tab));location.hash=tab}
 document.querySelectorAll('[data-tab]').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();setTab(a.dataset.tab)}));
 window.addEventListener('hashchange',()=>setTab(location.hash.slice(1)));
