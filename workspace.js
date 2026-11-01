@@ -290,6 +290,14 @@ collegeSearch.addEventListener('input',renderCollegeSearch);
 $('cancel-college-selection').addEventListener('click',()=>{applicationForm.reset();renderCollegeSearch();collegeSearch.focus()});
 $('application-form').addEventListener('submit',async e=>{e.preventDefault();const f=e.currentTarget,fd=new FormData(f);const name=String(fd.get('institution_name')||'').trim();if(!name)return;await addApplication(name,selectedCollege?.id||null,String(fd.get('application_round')||'undecided'),String(fd.get('application_deadline')||'')||null,String(fd.get('aid_deadline')||'')||null);f.reset();collegeSearch.value='';renderCollegeSearch()});
 $('country-filter').addEventListener('change',renderResearch);$('selectivity-filter').addEventListener('change',renderResearch);$('funding-filter').addEventListener('change',renderResearch);
+$('export-workspace').addEventListener('click',()=>{
+ if(!user)return;
+ const exportData={exported_at:new Date().toISOString(),source:'Bdesh',scope:'Admissions workspace records',student_profile:profile,preparation:[...readiness.entries()].map(([milestone_id,details])=>({milestone_id,...details})),applications};
+ const blob=new Blob([JSON.stringify(exportData,null,2)],{type:'application/json'});
+ const url=URL.createObjectURL(blob);
+ const a=document.createElement('a');a.href=url;a.download='bdesh-admissions-backup-'+new Date().toISOString().slice(0,10)+'.json';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
+ note('Your admissions workspace backup was downloaded. Keep it somewhere private.');
+});
 $('signout').addEventListener('click',async()=>{await sb.auth.signOut();location.href='/'});
 async function initialize(session){
  user=session.user;$('not-signed-in').hidden=true;$('workspace').hidden=false;$('signout').hidden=false;$('session-status').textContent=user.email||'Signed in';
