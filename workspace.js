@@ -158,6 +158,56 @@ async function addApplication(name,opportunityId=null,round='undecided',deadline
 }
 function appDate(v){return v?new Date(v+'T12:00:00').toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'}):'Not entered'}
 async function patchApplication(id,updates){const {data,error}=await sb.from('student_applications').update({...updates,updated_at:new Date().toISOString()}).eq('id',id).eq('user_id',user.id).select().single();if(error){fail(error);return false}applications=applications.map(a=>a.id===id?data:a);stats();renderNextActions();note('Application saved');return true}
+// Post-submission requirements are stored inside each application checklist JSON,
+// preserving per-user RLS and avoiding new public tables.
+const requirementSuggestions=['CSS Profile','ISFAA','University-specific financial aid form','Financial documents','Video portfolio','Supplemental essay','Interview','Official test scores','Final transcript','Other'];
+function renderFollowupTracker(application,article){
+ const wrap=document.createElement('section');wrap.className='followup-tracker';
+ const heading=document.createElement('div');heading.className='followup-heading';
+ const title=document.createElement('h4');title.textContent='Additional documents & portal requests';
+ const existing=Array.isArray(application.checklist?.additional_requirements)?application.checklist.additional_requirements:[];
+ const done=existing.filter(x=>x.status==='received'||x.status==='submitted').length;
+ const count=document.createElement('span');count.textContent=done+' / '+existing.length+' submitted or received';
+ heading.append(title,count);wrap.append(heading);
+ const info=document.createElement('p');info.className='followup-info';info.textContent='Add only requirements confirmed by this college. These statuses are your records, not confirmation from its admissions office.';wrap.append(info);
+ const items=document.createElement('div');items.className='followup-items';wrap.append(items);
+ async function save(next){
+  const checklist={...(application.checklist||{}),additional_requirements:next};
+  const ok=await patchApplication(application.id,{checklist});
+  if(ok){application.checklist=checklist;renderApplications()}
+  return ok;
+ }
+ existing.forEach((req,i)=>{
+  const item=document.createElement('div');item.className='followup-item';
+  const body=document.createElement('div');const h=document.createElement('strong');h.textContent=req.name||'Requirement';
+  const meta=document.createElement('p');meta.textContent=req.deadline?'Due '+appDate(req.deadline):'No deadline entered';body.append(h,meta);
+  const controls=document.createElement('div');controls.className='followup-controls';
+  const status=document.createElement('select');status.setAttribute('aria-label','Status of '+req.name);
+  [['not_started','Not started'],['in_progress','In progress'],['submitted','Submitted'],['received','Confirmed received'],['waived','Waived / not required']].forEach(([v,t])=>{const o=document.createElement('option');o.value=v;o.textContent=t;status.append(o)});
+  status.value=req.status||'not_started';
+  status.addEventListener('change',async()=>{status.disabled=true;const next=existing.map((x,j)=>j===i?{...x,status:status.value}:x);if(!await save(next))status.disabled=false});
+  const edit=document.createElement('button');edit.type='button';edit.textContent='Edit';edit.addEventListener('click',()=>{form.hidden=false;name.value=req.name;deadline.value=req.deadline||'';note.value=req.note||'';form.dataset.editIndex=String(i);name.focus()});
+  const remove=document.createElement('button');remove.type='button';remove.className='danger';remove.textContent='Remove';remove.addEventListener('click',async()=>{if(!confirm('Remove this requirement from your tracker?'))return;await save(existing.filter((_,j)=>j!==i))});
+  controls.append(status,edit,remove);item.append(body,controls);items.append(item);
+ });
+ if(!existing.length){const p=document.createElement('p');p.className='followup-empty';p.textContent='No additional requests recorded yet. Add a CSS Profile, ISFAA, supplemental essay, video portfolio, or another college-specific item.';items.append(p)}
+ const form=document.createElement('form');form.className='followup-form';form.hidden=true;
+ const nameLabel=document.createElement('label');nameLabel.textContent='Requirement';const name=document.createElement('input');name.required=true;name.maxLength=120;name.setAttribute('list','requirement-suggestions');name.placeholder='e.g. ISFAA or video portfolio';const suggestions=document.createElement('datalist');suggestions.id='requirement-suggestions-'+application.id;name.setAttribute('list',suggestions.id);requirementSuggestions.forEach(x=>{const o=document.createElement('option');o.value=x;suggestions.append(o)});nameLabel.append(name,suggestions);
+ const deadlineLabel=document.createElement('label');deadlineLabel.textContent='Submission deadline';const deadline=document.createElement('input');deadline.type='date';deadlineLabel.append(deadline);
+ const noteLabel=document.createElement('label');noteLabel.textContent='Portal / submission notes (optional)';const note=document.createElement('input');note.maxLength=350;note.placeholder='Where to submit, required format, or confirmation';noteLabel.append(note);
+ const submit=document.createElement('button');submit.className='button';submit.type='submit';submit.textContent='Save requirement';
+ const cancel=document.createElement('button');cancel.type='button';cancel.textContent='Cancel';cancel.addEventListener('click',()=>{form.hidden=true;form.reset();delete form.dataset.editIndex});
+ form.append(nameLabel,deadlineLabel,noteLabel,submit,cancel);
+ form.addEventListener('submit',async e=>{e.preventDefault();const value=name.value.trim();if(!value)return;submit.disabled=true;
+  const index=form.dataset.editIndex===undefined?-1:Number(form.dataset.editIndex);
+  const item={name:value,deadline:deadline.value||null,note:note.value.trim(),status:index>=0?(existing[index]?.status||'not_started'):'not_started'};
+  const next=index>=0?existing.map((x,j)=>j===index?item:x):[...existing,item];
+  if(!await save(next))submit.disabled=false;
+ });
+ const add=document.createElement('button');add.type='button';add.className='followup-add';add.textContent='+ Add document or requirement';add.addEventListener('click',()=>{form.hidden=false;form.reset();delete form.dataset.editIndex;name.focus()});
+ wrap.append(add,form);
+ article.append(wrap);
+}
 function renderApplications(){
  const holder=$('application-list');holder.replaceChildren();
  if(!applications.length){const div=document.createElement('div');div.className='empty';div.textContent='No applications yet. Discover a university or add one above.';holder.append(div);return}
@@ -169,7 +219,7 @@ function renderApplications(){
  header.append(head,status);article.append(header);
  const grid=document.createElement('div');grid.className='mini-checklist';for(let i=0;i<taskKeys.length;i++){const key=taskKeys[i];const label=document.createElement('label');const cb=document.createElement('input');cb.type='checkbox';cb.checked=Boolean(a.checklist?.[key]);cb.addEventListener('change',async()=>{cb.disabled=true;const next={...(a.checklist||{}),[key]:cb.checked};const ok=await patchApplication(a.id,{checklist:next});if(!ok)cb.checked=!cb.checked;else a.checklist=next;cb.disabled=false});label.append(cb,document.createTextNode(taskLabels[i]));grid.append(label)}article.append(grid);
  const row=document.createElement('div');row.className='application-footer';const edit=document.createElement('button');edit.textContent='Edit deadlines';edit.addEventListener('click',()=>{const editor=article.querySelector('.date-editor');editor.hidden=!editor.hidden});const remove=document.createElement('button');remove.className='danger';remove.textContent='Remove';remove.addEventListener('click',async()=>{if(!confirm('Remove '+a.institution_name+' from your tracker?'))return;const {error}=await sb.from('student_applications').delete().eq('id',a.id).eq('user_id',user.id);if(error)return fail(error);applications=applications.filter(x=>x.id!==a.id);renderApplications();stats();renderNextActions();note('Application removed')});row.append(edit,remove);article.append(row);
- const editor=document.createElement('form');editor.className='date-editor';editor.hidden=true;editor.innerHTML='<label>Admission deadline <input name="application_deadline" type="date"></label><label>Aid deadline <input name="aid_deadline" type="date"></label><button class="button" type="submit">Save deadlines</button>';editor.elements.application_deadline.value=a.application_deadline||'';editor.elements.aid_deadline.value=a.aid_deadline||'';editor.addEventListener('submit',async e=>{e.preventDefault();const ok=await patchApplication(a.id,{application_deadline:editor.elements.application_deadline.value||null,aid_deadline:editor.elements.aid_deadline.value||null});if(ok)renderApplications()});article.append(editor);holder.append(article)
+ const editor=document.createElement('form');editor.className='date-editor';editor.hidden=true;editor.innerHTML='<label>Admission deadline <input name="application_deadline" type="date"></label><label>Aid deadline <input name="aid_deadline" type="date"></label><button class="button" type="submit">Save deadlines</button>';editor.elements.application_deadline.value=a.application_deadline||'';editor.elements.aid_deadline.value=a.aid_deadline||'';editor.addEventListener('submit',async e=>{e.preventDefault();const ok=await patchApplication(a.id,{application_deadline:editor.elements.application_deadline.value||null,aid_deadline:editor.elements.aid_deadline.value||null});if(ok)renderApplications()});article.append(editor);renderFollowupTracker(a,article);holder.append(article)
  });
 }
 $('profile-form').addEventListener('submit',async e=>{e.preventDefault();if(!user)return;const button=e.currentTarget.querySelector('button[type="submit"]');button.disabled=true;let payload;try{payload=formPayload()}catch(err){fail(err);button.disabled=false;return}
