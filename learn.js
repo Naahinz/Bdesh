@@ -114,7 +114,7 @@ function answer(index){if(answered)return;const quiz=lessons[current].quiz,butto
 async function setDone(){const id=lessons[current].id;state.done.add(id);updateProgress();persist();renderNav();$('mark-read').textContent='✓ Understood';
  if(cloudUser&&sb){const {error}=await sb.from('student_readiness').upsert({user_id:cloudUser.id,milestone_id:'lesson-'+id,state:'done',updated_at:new Date().toISOString()},{onConflict:'user_id,milestone_id'});if(error)console.warn('Bdesh lesson sync:',error.message)}}
 function go(i){current=Math.max(0,Math.min(lessons.length-1,i));render();window.scrollTo({top:0,behavior:'instant'});$('main-content').focus({preventScroll:true})}
-$('mark-read').addEventListener('click',setDone);$('prev-lesson').addEventListener('click',()=>go(current-1));$('next-lesson').addEventListener('click',()=>{if(current===lessons.length-1){setDone().finally(()=>{location.href='/profile.html#overview'});return}go(current+1)});
+$('mark-read').addEventListener('click',setDone);$('prev-lesson').addEventListener('click',()=>go(current-1));$('next-lesson').addEventListener('click',()=>{if(current===lessons.length-1){setDone();location.assign('/profile.html#overview');return}go(current+1)});
 async function cloudSync(){if(!sb)return;const {data,error}=await sb.auth.getSession();if(error||!data?.session?.user)return;cloudUser=data.session.user;
  const {data:rows, error:fetchError}=await sb.from('student_readiness').select('milestone_id,state').eq('user_id',cloudUser.id).like('milestone_id','lesson-%');
  if(fetchError)return;let changed=false;
