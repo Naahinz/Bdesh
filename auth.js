@@ -12,6 +12,7 @@ let mode='signin', user=null, loading=false, suppress=false, syncUserId=null;
 toggle.textContent='Checking session…';toggle.disabled=true;
 const notify=(text,error=false)=>{msg.textContent=text;msg.classList.toggle('error',error)};
 const open=()=>{panel.hidden=false;el('google-signin').focus();};
+if(new URLSearchParams(location.search).get('signin')==='1')open();
 const close=()=>{panel.hidden=true;notify('')};
 toggle.addEventListener('click',async()=>{if(user){const {error}=await client.auth.signOut();if(error)notify(error.message,true);else{user=null;toggle.textContent='Beta sign in';document.dispatchEvent(new CustomEvent('bdesh:auth-change',{detail:{user:null}}));open();notify('Signed out.')}return;}open()});
 el('auth-close').addEventListener('click',close);
