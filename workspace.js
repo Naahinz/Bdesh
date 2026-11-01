@@ -3,6 +3,7 @@
 'use strict';
 const URL='https://xeqixwmulwonvhifcmvn.supabase.co',KEY='sb_publishable_2Jp14PFt4_mLDT4cpqLfUw_d-tDSnwj';
 const sb=window.supabase?.createClient(URL,KEY,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});
+const $=id=>document.getElementById(id);
 const authError=$('workspace-auth-error');
 function showAuthError(message){authError.textContent=message;authError.hidden=false;$('session-status').textContent='Sign-in issue'}
 $('workspace-google-signin').addEventListener('click',async()=>{
@@ -13,7 +14,7 @@ $('workspace-google-signin').addEventListener('click',async()=>{
   if(error)throw error;
  }catch(error){showAuthError(error.message||'Could not start Google sign-in');button.disabled=false;button.textContent='Continue with Google ↗'}
 });
-const $=id=>document.getElementById(id),esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const sections=['prepare','profile','discover','apply'];
 const milestones=[
 ['foundation','Academic foundation','Maintain strong SSC/HSC coursework and obtain accurate transcripts. GPA requirements differ; no fixed GPA guarantees a full ride.'],
