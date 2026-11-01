@@ -120,7 +120,7 @@ function renderApplications(){
 $('profile-form').addEventListener('submit',async e=>{e.preventDefault();if(!user)return;const button=e.currentTarget.querySelector('button[type="submit"]');button.disabled=true;let payload;try{payload=formPayload()}catch(err){fail(err);button.disabled=false;return}
  const {data,error}=await sb.from('student_admissions_profiles').upsert(payload,{onConflict:'user_id'}).select().single();button.disabled=false;if(error){fail(error);$('profile-message').textContent=error.message;return}profile=data;stats();renderResearch();note('Profile saved');$('profile-message').textContent='Saved to your private account.'});
 $('application-form').addEventListener('submit',async e=>{e.preventDefault();const f=e.currentTarget,fd=new FormData(f);const name=String(fd.get('institution_name')||'').trim();if(!name)return;await addApplication(name,null,String(fd.get('application_round')||'undecided'),String(fd.get('application_deadline')||'')||null,String(fd.get('aid_deadline')||'')||null);f.reset()});
-$('country-filter').addEventListener('change',renderResearch);$('funding-filter').addEventListener('change',()=>{$('matching-insight').classList.toggle('emphasis',$('funding-filter').checked);renderResearch()});
+$('country-filter').addEventListener('change',renderResearch);
 $('signout').addEventListener('click',async()=>{await sb.auth.signOut();location.href='/'});
 async function initialize(session){
  user=session.user;$('not-signed-in').hidden=true;$('workspace').hidden=false;$('signout').hidden=false;$('session-status').textContent=user.email||'Signed in';
