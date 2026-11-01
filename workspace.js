@@ -66,7 +66,7 @@ function renderDeadlineCenter(){
   if(!submitted&&app.application_deadline)entries.push({name:'Application deadline',college:app.institution_name,date:app.application_deadline,appId:app.id});
   if(app.aid_deadline)entries.push({name:'Financial aid deadline',college:app.institution_name,date:app.aid_deadline,appId:app.id});
   const requirements=Array.isArray(app.checklist?.additional_requirements)?app.checklist.additional_requirements:[];
-  for(const r of requirements){if(r.deadline&&!['submitted','received','waived'].includes(r.status))entries.push({name:r.name||'Additional requirement',college:app.institution_name,date:r.deadline,appId:app.id})}
+  for(const r of requirements){if(r.deadline&&!['submitted','received','accepted','waived'].includes(r.status))entries.push({name:r.name||'Additional requirement',college:app.institution_name,date:r.deadline,appId:app.id})}
  }
  const valid=entries.map(e=>({...e,days:daysUntil(e.date)})).filter(e=>e.days!==null);
  $('deadline-overdue').textContent=String(valid.filter(e=>e.days<0).length);
@@ -98,7 +98,7 @@ function renderNextActions(){
   }
   const requirements=Array.isArray(app.checklist?.additional_requirements)?app.checklist.additional_requirements:[];
   for(const req of requirements){
-   if(['submitted','received','waived'].includes(req.status)||!req.deadline)continue;
+   if(['submitted','received','accepted','waived'].includes(req.status)||!req.deadline)continue;
    const due=new Date(req.deadline+'T00:00:00');if(Number.isNaN(due.valueOf()))continue;
    const days=Math.round((due-today)/ms);
    if(days>=0&&days<=30)items.push({priority:days,title:(req.name||'Additional document')+': '+app.institution_name,detail:days===0?'Document due today':days===1?'Document due tomorrow':'Additional document due in '+days+' days',link:'#apply',cta:'Update requirement'});
@@ -195,8 +195,8 @@ function renderFollowupTracker(application,article){
  const heading=document.createElement('div');heading.className='followup-heading';
  const title=document.createElement('h4');title.textContent='Additional documents & portal requests';
  const existing=Array.isArray(application.checklist?.additional_requirements)?application.checklist.additional_requirements:[];
- const done=existing.filter(x=>x.status==='received'||x.status==='submitted').length;
- const count=document.createElement('span');count.textContent=done+' / '+existing.length+' submitted or received';
+ const done=existing.filter(x=>['submitted','received','accepted','waived'].includes(x.status)).length;
+ const count=document.createElement('span');count.textContent=done+' / '+existing.length+' sent, received or resolved';
  heading.append(title,count);wrap.append(heading);
  const info=document.createElement('p');info.className='followup-info';info.textContent='Add only requirements confirmed by this college. These statuses are your records, not confirmation from its admissions office.';wrap.append(info);
  const items=document.createElement('div');items.className='followup-items';wrap.append(items);
@@ -209,12 +209,12 @@ function renderFollowupTracker(application,article){
  existing.forEach((req,i)=>{
   const item=document.createElement('div');item.className='followup-item';
   const body=document.createElement('div');const h=document.createElement('strong');h.textContent=req.name||'Requirement';
-  const meta=document.createElement('p');meta.textContent=req.deadline?'Due '+appDate(req.deadline):'No deadline entered';body.append(h,meta);
+  const meta=document.createElement('p');meta.textContent=(req.deadline?'Due '+appDate(req.deadline):'No deadline entered')+(req.submitted_at?' · Sent '+appDate(req.submitted_at):'')+(req.note?' · '+req.note:'');body.append(h,meta);
   const controls=document.createElement('div');controls.className='followup-controls';
   const status=document.createElement('select');status.setAttribute('aria-label','Status of '+req.name);
-  [['not_started','Not started'],['in_progress','In progress'],['submitted','Submitted'],['received','Confirmed received'],['waived','Waived / not required']].forEach(([v,t])=>{const o=document.createElement('option');o.value=v;o.textContent=t;status.append(o)});
+  [['not_started','Not started'],['in_progress','In progress'],['submitted','Submitted'],['received','Confirmed received'],['accepted','Accepted / complete'],['needs_correction','Needs correction'],['waived','Waived / not required']].forEach(([v,t])=>{const o=document.createElement('option');o.value=v;o.textContent=t;status.append(o)});
   status.value=req.status||'not_started';
-  status.addEventListener('change',async()=>{status.disabled=true;const next=existing.map((x,j)=>j===i?{...x,status:status.value}:x);if(!await save(next))status.disabled=false});
+  status.addEventListener('change',async()=>{status.disabled=true;const next=existing.map((x,j)=>j===i?{...x,status:status.value,submitted_at:status.value==='submitted'&&!x.submitted_at?new Date().toISOString().slice(0,10):x.submitted_at}:x);if(!await save(next))status.disabled=false});
   const edit=document.createElement('button');edit.type='button';edit.textContent='Edit';edit.addEventListener('click',()=>{form.hidden=false;name.value=req.name;deadline.value=req.deadline||'';note.value=req.note||'';form.dataset.editIndex=String(i);name.focus()});
   const remove=document.createElement('button');remove.type='button';remove.className='danger';remove.textContent='Remove';remove.addEventListener('click',async()=>{if(!confirm('Remove this requirement from your tracker?'))return;await save(existing.filter((_,j)=>j!==i))});
   controls.append(status,edit,remove);item.append(body,controls);items.append(item);
@@ -229,7 +229,7 @@ function renderFollowupTracker(application,article){
  form.append(nameLabel,deadlineLabel,noteLabel,submit,cancel);
  form.addEventListener('submit',async e=>{e.preventDefault();const value=name.value.trim();if(!value)return;submit.disabled=true;
   const index=form.dataset.editIndex===undefined?-1:Number(form.dataset.editIndex);
-  const item={name:value,deadline:deadline.value||null,note:note.value.trim(),status:index>=0?(existing[index]?.status||'not_started'):'not_started'};
+  const item={name:value,deadline:deadline.value||null,note:note.value.trim(),status:index>=0?(existing[index]?.status||'not_started'):'not_started',submitted_at:index>=0?(existing[index]?.submitted_at||null):null};
   const next=index>=0?existing.map((x,j)=>j===index?item:x):[...existing,item];
   if(!await save(next))submit.disabled=false;
  });
