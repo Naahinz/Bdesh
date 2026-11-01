@@ -56,6 +56,28 @@ function fillProfile(){
  form.elements.namedItem('awards').value=(p.awards||[]).join('\n');
  form.elements.namedItem('countries').value=(p.countries||[]).join(', ');
 }
+function renderDeadlineCenter(){
+ const list=$('deadline-list');if(!list)return;list.replaceChildren();
+ const today=new Date();today.setHours(0,0,0,0);
+ const daysUntil=value=>{if(!/^\\d{4}-\\d{2}-\\d{2}$/.test(value||''))return null;const d=new Date(value+'T00:00:00');return Number.isNaN(d.getTime())?null:Math.round((d-today)/86400000)};
+ const entries=[];
+ for(const app of applications){
+  const submitted=['submitted','decision_received'].includes(app.status);
+  if(!submitted&&app.application_deadline)entries.push({name:'Application deadline',college:app.institution_name,date:app.application_deadline,appId:app.id});
+  if(app.aid_deadline)entries.push({name:'Financial aid deadline',college:app.institution_name,date:app.aid_deadline,appId:app.id});
+  const requirements=Array.isArray(app.checklist?.additional_requirements)?app.checklist.additional_requirements:[];
+  for(const r of requirements){if(r.deadline&&!['submitted','received','waived'].includes(r.status))entries.push({name:r.name||'Additional requirement',college:app.institution_name,date:r.deadline,appId:app.id})}
+ }
+ const valid=entries.map(e=>({...e,days:daysUntil(e.date)})).filter(e=>e.days!==null);
+ $('deadline-overdue').textContent=String(valid.filter(e=>e.days<0).length);
+ $('deadline-week').textContent=String(valid.filter(e=>e.days>=0&&e.days<=7).length);
+ $('deadline-month').textContent=String(valid.filter(e=>e.days>=0&&e.days<=30).length);
+ const filter=$('deadline-filter').value;
+ const visible=valid.filter(e=>filter==='overdue'?e.days<0:filter==='week'?e.days>=0&&e.days<=7:filter==='month'?e.days>=0&&e.days<=30:true).sort((a,b)=>a.days-b.days).slice(0,60);
+ if(!visible.length){const empty=document.createElement('p');empty.className='deadline-empty';empty.textContent='No deadlines match this view. Add or update dates in your applications.';list.append(empty);return}
+ for(const e of visible){const row=document.createElement('article');row.className='deadline-entry';const content=document.createElement('div');const label=document.createElement('strong');label.textContent=e.college+' — '+e.name;const sub=document.createElement('span');sub.textContent=appDate(e.date);content.append(label,sub);const due=document.createElement('span');due.className='deadline-due'+(e.days<0?' is-overdue':'');due.textContent=e.days<0?Math.abs(e.days)+' days overdue':e.days===0?'Due today':e.days===1?'Due tomorrow':e.days+' days left';const open=document.createElement('button');open.type='button';open.textContent='Open college ↗';open.addEventListener('click',()=>{expandedApplications.add(e.appId);setTab('apply');renderApplications();document.querySelectorAll('.application-card').forEach(card=>{if(card.dataset.applicationId===String(e.appId))card.scrollIntoView({behavior:'smooth',block:'start'})})});row.append(content,due,open);list.append(row)}
+}
+$('deadline-filter').addEventListener('change',renderDeadlineCenter);
 function renderNextActions(){
  const target=$('next-actions');if(!target)return;
  target.replaceChildren();
@@ -161,10 +183,10 @@ async function addApplication(name,opportunityId=null,round='undecided',deadline
  note('Adding application…');
  const payload={user_id:user.id,institution_name:name,opportunity_id:opportunityId,application_round:round,application_deadline:deadline,aid_deadline:aidDeadline};
  const {data,error}=await sb.from('student_applications').insert(payload).select().single();
- if(error){fail(error);return}applications.unshift(data);renderApplications();stats();renderNextActions();note('Application added');setTab('apply');
+ if(error){fail(error);return}applications.unshift(data);renderApplications();stats();renderNextActions();renderDeadlineCenter();note('Application added');setTab('apply');
 }
 function appDate(v){return v?new Date(v+'T12:00:00').toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'}):'Not entered'}
-async function patchApplication(id,updates){const {data,error}=await sb.from('student_applications').update({...updates,updated_at:new Date().toISOString()}).eq('id',id).eq('user_id',user.id).select().single();if(error){fail(error);return false}applications=applications.map(a=>a.id===id?data:a);stats();renderNextActions();note('Application saved');return true}
+async function patchApplication(id,updates){const {data,error}=await sb.from('student_applications').update({...updates,updated_at:new Date().toISOString()}).eq('id',id).eq('user_id',user.id).select().single();if(error){fail(error);return false}applications=applications.map(a=>a.id===id?data:a);stats();renderNextActions();renderDeadlineCenter();note('Application saved');return true}
 // Post-submission requirements are stored inside each application checklist JSON,
 // preserving per-user RLS and avoiding new public tables.
 const requirementSuggestions=['CSS Profile','ISFAA','University-specific financial aid form','Financial documents','Video portfolio','Supplemental essay','Interview','Official test scores','Final transcript','Other'];
@@ -220,13 +242,13 @@ function renderApplications(){
  const holder=$('application-list');holder.replaceChildren();
  if(!applications.length){const div=document.createElement('div');div.className='empty';div.textContent='No applications yet. Discover a university or add one above.';holder.append(div);return}
  applications.slice().sort((a,b)=>(a.application_deadline||'9999').localeCompare(b.application_deadline||'9999')).forEach(a=>{
- const article=document.createElement('article');article.className='application-card';const header=document.createElement('div');header.className='application-header';
+ const article=document.createElement('article');article.className='application-card';article.dataset.applicationId=String(a.id);const header=document.createElement('div');header.className='application-header';
  const head=document.createElement('div');const title=document.createElement('h3');title.textContent=a.institution_name;const dates=document.createElement('p');dates.textContent='Admission: '+appDate(a.application_deadline)+' · Aid: '+appDate(a.aid_deadline)+' · '+a.application_round;head.append(title,dates);
  const status=document.createElement('select');status.setAttribute('aria-label','Application status for '+a.institution_name);
  for(const [value,label] of [['researching','Researching'],['shortlisted','Shortlisted'],['preparing','Preparing'],['submitted','Submitted'],['decision_received','Decision received']]){const o=document.createElement('option');o.value=value;o.textContent=label;status.append(o)}status.value=a.status;status.addEventListener('change',async()=>{status.disabled=true;await patchApplication(a.id,{status:status.value});status.disabled=false});
  const toggle=document.createElement('button');toggle.type='button';toggle.className='application-toggle';toggle.setAttribute('aria-expanded',String(expandedApplications.has(a.id)));toggle.textContent=expandedApplications.has(a.id)?'Hide details −':'Show details +';toggle.addEventListener('click',()=>{if(expandedApplications.has(a.id))expandedApplications.delete(a.id);else expandedApplications.add(a.id);toggle.setAttribute('aria-expanded',String(expandedApplications.has(a.id)));toggle.textContent=expandedApplications.has(a.id)?'Hide details −':'Show details +';details.hidden=!expandedApplications.has(a.id)});header.append(head,status,toggle);article.append(header);const details=document.createElement('div');details.className='application-details';details.hidden=!expandedApplications.has(a.id);article.append(details);
  const grid=document.createElement('div');grid.className='mini-checklist';for(let i=0;i<taskKeys.length;i++){const key=taskKeys[i];const label=document.createElement('label');const cb=document.createElement('input');cb.type='checkbox';cb.checked=Boolean(a.checklist?.[key]);cb.addEventListener('change',async()=>{cb.disabled=true;const next={...(a.checklist||{}),[key]:cb.checked};const ok=await patchApplication(a.id,{checklist:next});if(!ok)cb.checked=!cb.checked;else a.checklist=next;cb.disabled=false});label.append(cb,document.createTextNode(taskLabels[i]));grid.append(label)}details.append(grid);
- const row=document.createElement('div');row.className='application-footer';const edit=document.createElement('button');edit.textContent='Edit deadlines';edit.addEventListener('click',()=>{const editor=article.querySelector('.date-editor');editor.hidden=!editor.hidden});const remove=document.createElement('button');remove.className='danger';remove.textContent='Remove';remove.addEventListener('click',async()=>{if(!confirm('Remove '+a.institution_name+' from your tracker?'))return;const {error}=await sb.from('student_applications').delete().eq('id',a.id).eq('user_id',user.id);if(error)return fail(error);applications=applications.filter(x=>x.id!==a.id);renderApplications();stats();renderNextActions();note('Application removed')});row.append(edit,remove);details.append(row);
+ const row=document.createElement('div');row.className='application-footer';const edit=document.createElement('button');edit.textContent='Edit deadlines';edit.addEventListener('click',()=>{const editor=article.querySelector('.date-editor');editor.hidden=!editor.hidden});const remove=document.createElement('button');remove.className='danger';remove.textContent='Remove';remove.addEventListener('click',async()=>{if(!confirm('Remove '+a.institution_name+' from your tracker?'))return;const {error}=await sb.from('student_applications').delete().eq('id',a.id).eq('user_id',user.id);if(error)return fail(error);applications=applications.filter(x=>x.id!==a.id);renderApplications();stats();renderNextActions();renderDeadlineCenter();note('Application removed')});row.append(edit,remove);details.append(row);
  const editor=document.createElement('form');editor.className='date-editor';editor.hidden=true;editor.innerHTML='<label>Admission deadline <input name="application_deadline" type="date"></label><label>Aid deadline <input name="aid_deadline" type="date"></label><button class="button" type="submit">Save deadlines</button>';editor.elements.application_deadline.value=a.application_deadline||'';editor.elements.aid_deadline.value=a.aid_deadline||'';editor.addEventListener('submit',async e=>{e.preventDefault();const ok=await patchApplication(a.id,{application_deadline:editor.elements.application_deadline.value||null,aid_deadline:editor.elements.aid_deadline.value||null});if(ok)renderApplications()});details.append(editor);renderFollowupTracker(a,details);holder.append(article)
  });
 }
@@ -280,7 +302,7 @@ async function initialize(session){
  const errors=responses.filter(x=>x.error).map(x=>x.error.message);
  if(errors.length)note('Some data could not load: '+errors.join(' / '));else note('All changes save to your Bdesh account');
  profile=responses[0].data||null;academicStage=responses[1].data?.academic_stage||'11';readiness=new Map((responses[2].data||[]).map(x=>[x.milestone_id,x]));applications=responses[3].data||[];opportunities=responses[4].data||[];
- fillProfile();renderReadiness();renderResearch();renderCollegeSearch();renderApplications();stats();renderNextActions();setTab(location.hash.slice(1)||'prepare');
+ fillProfile();renderReadiness();renderResearch();renderCollegeSearch();renderApplications();stats();renderNextActions();renderDeadlineCenter();setTab(location.hash.slice(1)||'prepare');
 }
 if(!sb){$('session-status').textContent='Account library unavailable';$('not-signed-in').hidden=false;showAuthError('Authentication library unavailable. Please reload.');return}
 sb.auth.getSession().then(({data,error})=>{if(error||!data?.session){$('session-status').textContent='Not signed in';$('not-signed-in').hidden=false;if(error)showAuthError(error.message);else if(location.hash.includes('error'))showAuthError('The sign-in redirect was rejected. Check Supabase redirect URL settings.');return}initialize(data.session).catch(fail)}).catch(fail);
