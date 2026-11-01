@@ -42,3 +42,18 @@ body :is(.formgrid input,.formgrid select,.field-grid input,.field-grid select,.
 body :is(.early,.auth-help,.auth-privacy,.footer,.privacy,.aside-note,.site-footer,.disclaimer){font-size:13px!important}
 body :is(.check-option,.check-feedback,.check-top,.copy-field){font-size:14px!important}
 @media(max-width:600px){body :is(.nav-actions .darkbtn,.nav-actions .outline){font-size:12px!important;padding:10px 12px}}
+
+/* Keyboard users can bypass repeating navigation without affecting the visual layout. */
+.skip-link{position:fixed;z-index:9999;left:16px;top:12px;padding:12px 18px;border:2px solid #173e35;border-radius:3px;background:#fffefa;color:#173e35;font-weight:700;font-size:15px;transform:translateY(-180%);transition:transform .15s ease}
+.skip-link:focus{transform:translateY(0)}
+/* Keep nav usable on narrow screens instead of hiding every primary destination. */
+@media(min-width:601px) and (max-width:880px){
+body .nav.shell{height:auto;min-height:82px;flex-wrap:wrap;padding-top:12px;padding-bottom:12px}
+body .nav.shell nav{display:flex;flex:1 0 100%;order:3;overflow-x:auto;gap:20px;padding:8px 0;scrollbar-width:thin}
+body .nav.shell nav a{white-space:nowrap}
+}
+@media(max-width:600px){
+body .nav.shell{height:auto;min-height:75px;flex-wrap:wrap;padding-top:10px;padding-bottom:9px}
+body .nav.shell nav{display:flex;order:3;flex-basis:100%;overflow-x:auto;gap:18px;padding:8px 0;scrollbar-width:thin}
+body .nav.shell nav a{white-space:nowrap}
+}
