@@ -4,7 +4,7 @@
 const URL='https://xeqixwmulwonvhifcmvn.supabase.co',KEY='sb_publishable_2Jp14PFt4_mLDT4cpqLfUw_d-tDSnwj';
 const $=id=>document.getElementById(id),sb=window.supabase?.createClient(URL,KEY,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});
 const sections=['overview','academics','activities','honors','writing','brag','review'];
-let user=null,basic={},portfolio={},active='overview',saving=false,queued=false,saveTimer=null,hydrating=false;
+let user=null,basic={},portfolio={},active='',saving=false,queued=false,saveTimer=null,hydrating=false;
 const blank=()=>({activities:[],honors:[],essays:[],academic_context:'',brag_sheet:'',future_goals:'',additional_notes:''});
 function message(text,bad=false){const el=$('save-status');el.textContent=text;el.style.color=bad?'#b0564c':'#397753'}
 function showError(text){$('signin-error').textContent=text;$('account-name').textContent='Sign in required'}
