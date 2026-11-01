@@ -59,7 +59,7 @@ function fillProfile(){
 function renderDeadlineCenter(){
  const list=$('deadline-list');if(!list)return;list.replaceChildren();
  const today=new Date();today.setHours(0,0,0,0);
- const daysUntil=value=>{if(!/^\\d{4}-\\d{2}-\\d{2}$/.test(value||''))return null;const d=new Date(value+'T00:00:00');return Number.isNaN(d.getTime())?null:Math.round((d-today)/86400000)};
+ const daysUntil=value=>{if(!/^\d{4}-\d{2}-\d{2}$/.test(value||''))return null;const d=new Date(value+'T00:00:00');return Number.isNaN(d.getTime())?null:Math.round((d-today)/86400000)};
  const entries=[];
  for(const app of applications){
   const submitted=['submitted','decision_received'].includes(app.status);
