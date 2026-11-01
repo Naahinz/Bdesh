@@ -213,3 +213,20 @@ body .footer b{font-size:36px}
 .followup-form input{min-width:0;width:100%;padding:11px;background:#fffefa;border:1px solid #bbccbe;border-radius:3px;font-size:16px}
 .followup-form button{justify-self:start;min-height:42px}
 @media(max-width:700px){.followup-item{grid-template-columns:1fr}.followup-controls{justify-content:flex-start}.followup-form{grid-template-columns:1fr}.followup-form label:nth-of-type(3){grid-column:auto}}
+
+/* Database-first college selection in the application board. */
+.college-search{margin:22px 0;padding:22px;background:#edf1e9;border:1px solid #cbd9cc;border-radius:3px}
+.college-search>label{display:block;font-weight:700;font-size:16px;margin-bottom:9px}
+.college-search>input{display:block;width:100%;padding:14px 15px;border:1px solid #9eb5a2;border-radius:3px;background:#fffdf7;font-size:17px;min-height:52px}
+.college-search>p{margin:9px 0 14px;color:#526b5b;font-size:14px;line-height:1.6}
+.college-search-results{display:grid;gap:7px}
+.college-search-results>p{font-size:14px;margin:6px 0;color:#526b5b}
+.college-search-result{display:flex;justify-content:space-between;align-items:center;gap:14px;text-align:left;background:#fffef8;border:1px solid #d0dccd;border-radius:3px;padding:13px 16px;cursor:pointer;color:#214c37;min-height:52px}
+.college-search-result:hover,.college-search-result:focus-visible{background:#e2ebe0;border-color:#71977a}
+.college-search-result strong{font-size:16px;font-weight:700}
+.college-search-result span{font-size:13px;color:#637866}
+.college-manual{width:max-content;max-width:100%;background:#285d43;color:white;font-size:15px;padding:12px 17px;border:0;border-radius:3px;cursor:pointer}
+.college-chosen{font-weight:700!important;color:#22553e!important}
+#cancel-college-selection{padding:10px 14px;border:1px solid #a6baa9;border-radius:3px;background:transparent;font-size:14px;cursor:pointer;margin-left:10px}
+#application-form[hidden]{display:none!important}
+@media(max-width:620px){.college-search{padding:16px}.college-search-result{align-items:flex-start;flex-direction:column;gap:2px}#cancel-college-selection{margin-left:0;margin-top:8px}}
