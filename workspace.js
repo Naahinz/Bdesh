@@ -161,11 +161,11 @@ function renderResearch(){
  [...new Set(opportunities.map(x=>x.country))].sort().forEach(c=>{const o=document.createElement('option');o.value=c;o.textContent=c;filter.append(o)});
  filter.value=current;
  const selected=filter.value;
- const selectivity=$('selectivity-filter')?.value||'',funding=$('funding-filter')?.value||'';
+ const selectivity=$('selectivity-filter')?.value||'',funding=$('funding-filter')?.value||'',searchTerm=$('research-search')?.value.trim().toLowerCase()||'';
  const band=o=>o.eligibility_notes?.match(/Selectivity context: (Exceptionally selective|Highly selective|Selective)/)?.[1]||'Unclassified';
  const route=o=>/scholar|merit|woodruff|karsh|johnson|belk|ingram/i.test(o.funding_notes||'')?'merit':'need';
  const order={'Selective':0,'Highly selective':1,'Exceptionally selective':2,'Unclassified':3};
- const visible=opportunities.filter(o=>(!selected||o.country===selected)&&(!selectivity||band(o)===selectivity)&&(!funding||route(o)===funding)).sort((a,b)=>(order[band(a)]-order[band(b)])||a.title.localeCompare(b.title));
+ const visible=opportunities.filter(o=>(!selected||o.country===selected)&&(!selectivity||band(o)===selectivity)&&(!funding||route(o)===funding)&&(!searchTerm||o.title.toLowerCase().includes(searchTerm))).sort((a,b)=>(order[band(a)]-order[band(b)])||a.title.localeCompare(b.title));
  $('research-count').textContent=visible.length+' funding leads shown · '+opportunities.length+' listed · lower selectivity band first (not an admission probability)';
  const insight=$('matching-insight');insight.textContent=(profile?.countries?.length?'Based on your stated country preferences: '+profile.countries.join(', ')+'. ':'Add country preferences in your profile for more useful research prompts. ')+'These are not personalized admission-chance ratings. The directory is a small editorial starting list.';
  const wrap=$('research-list');wrap.replaceChildren();
@@ -289,7 +289,7 @@ function chooseCollege(college,manualName=''){
 collegeSearch.addEventListener('input',renderCollegeSearch);
 $('cancel-college-selection').addEventListener('click',()=>{applicationForm.reset();renderCollegeSearch();collegeSearch.focus()});
 $('application-form').addEventListener('submit',async e=>{e.preventDefault();const f=e.currentTarget,fd=new FormData(f);const name=String(fd.get('institution_name')||'').trim();if(!name)return;await addApplication(name,selectedCollege?.id||null,String(fd.get('application_round')||'undecided'),String(fd.get('application_deadline')||'')||null,String(fd.get('aid_deadline')||'')||null);f.reset();collegeSearch.value='';renderCollegeSearch()});
-$('country-filter').addEventListener('change',renderResearch);$('selectivity-filter').addEventListener('change',renderResearch);$('funding-filter').addEventListener('change',renderResearch);
+$('research-search').addEventListener('input',renderResearch);$('country-filter').addEventListener('change',renderResearch);$('selectivity-filter').addEventListener('change',renderResearch);$('funding-filter').addEventListener('change',renderResearch);
 $('export-workspace').addEventListener('click',()=>{
  if(!user)return;
  const exportData={exported_at:new Date().toISOString(),source:'Bdesh',scope:'Admissions workspace records',student_profile:profile,preparation:[...readiness.entries()].map(([milestone_id,details])=>({milestone_id,...details})),applications};
