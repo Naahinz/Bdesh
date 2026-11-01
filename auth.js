@@ -3,7 +3,7 @@
 'use strict';
 const apiURL='https://xeqixwmulwonvhifcmvn.supabase.co';
 const publicKey="sb_publishable_2Jp14PFt4_mLDT4cpqLfUw_d-tDSnwj";
-const client=globalThis.supabase?.createClient(apiURL,publicKey,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true,storageKey:'bdesh-auth-v1'}});
+const client=globalThis.supabase?.createClient(apiURL,publicKey,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});
 if(client) globalThis.bdeshSupabase=client;
 const el=id=>document.getElementById(id);
 const panel=el('auth-panel'), form=el('auth-form'), msg=el('auth-message'), toggle=el('account-toggle');
