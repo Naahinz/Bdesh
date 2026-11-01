@@ -10,4 +10,18 @@ function redraw(){const p=plans[stage.value],list=$('task-list');$('task-title')
 function progress(){let done=$('task-list').querySelectorAll('input:checked').length;$('step-count').textContent=done+' / 4';$('track-fill').style.width=done*25+'%'}
 stage.addEventListener('change',()=>{localStorage.setItem('bdesh-stage',stage.value);redraw();document.dispatchEvent(new CustomEvent('bdesh:profile-change'))});$('reset').addEventListener('click',()=>{for(let i=0;i<4;i++)localStorage.removeItem('bdesh-'+stage.value+'-'+i);redraw();document.dispatchEvent(new CustomEvent('bdesh:reset',{detail:{stage:stage.value}}))});
 function show(q=''){const wrap=$('opportunities');wrap.replaceChildren();sources.filter(x=>x.join(' ').toLowerCase().includes(q.toLowerCase())).forEach(([name,country,description,url])=>{let card=document.createElement('article');card.className='opportunity';const location=document.createElement('span');location.className='country';location.textContent=country.toUpperCase();const title=document.createElement('h3');title.textContent=name;const p=document.createElement('p');p.textContent=description;const a=document.createElement('a');a.href=url;a.target='_blank';a.rel='noopener noreferrer';a.textContent='Visit official website ↗';card.append(location,title,p,a);wrap.append(card)});if(!wrap.children.length)wrap.textContent='Nothing matched your search.'}$('search').addEventListener('input',e=>show(e.target.value));show();redraw();
-let bangla=false;const copy={eyebrow:['FOR EVERY STUDENT WHO DARES TO ASK','যে শিক্ষার্থী স্বপ্ন দেখতে সাহস করে'],headline:['The world is bigger than your classroom.','তোমার ক্লাসরুমের বাইরেও এক বিশাল পৃথিবী।'],hero:['Big dreams shouldn\'t require a big bank balance. A free, student-led guide to undergraduate scholarships abroad, built first for students following Bangladesh\'s NCTB curriculum.','বড় স্বপ্ন দেখতে বড় অঙ্কের টাকা থাকা জরুরি নয়। বাংলাদেশের এনসিটিবি শিক্ষার্থীদের জন্য বিদেশে স্নাতক পড়াশোনা ও বৃত্তির তথ্য নিয়ে এই বিনামূল্যের উদ্যোগ।'],roadmapButton:['Find my next step ↗','আমার পরবর্তী ধাপ ↗'],browseButton:['Browse opportunities ↗','সুযোগগুলো দেখুন ↗'],promise:['No consultancy fees. No admission guarantees. Just clearer information.','কোনো কনসালটেন্সি ফি নয়, ভর্তির নিশ্চয়তাও নয়—শুধু সহজ ভাষায় তথ্য।']};$('language').addEventListener('click',()=>{bangla=!bangla;for(const [key,values] of Object.entries(copy))document.querySelector('[data-i18n="'+key+'"]').textContent=values[bangla?1:0];document.documentElement.lang=bangla?'bn':'en'});
+let bangla=false;
+const copy={
+  eyebrow:['YOUR UNDERGRADUATE JOURNEY, MADE CLEARER','বিদেশে স্নাতক পড়ার যাত্রা এবার আরও সহজ'],
+  headline:['Big dreams need a clear plan.','বড় স্বপ্নের জন্য চাই পরিষ্কার পরিকল্পনা।'],
+  hero:['From understanding what a full ride takes to submitting your final application—Bdesh helps Bangladeshi students learn, build their profiles, discover universities and track every step in one free workspace.','ফুল রাইড পাওয়ার প্রস্তুতি থেকে শেষ আবেদন পর্যন্ত—Bdesh তোমাকে শিখতে, নিজের প্রোফাইল গড়তে, বিশ্ববিদ্যালয় খুঁজতে এবং প্রতিটি ধাপ ট্র্যাক করতে সাহায্য করে।'],
+  promise:['Free for students. No consultancy fees. No admission guarantees.','শিক্ষার্থীদের জন্য বিনামূল্যে। কোনো কনসালটেন্সি ফি বা ভর্তির নিশ্চয়তা নেই।']
+};
+$('language').addEventListener('click',()=>{
+  bangla=!bangla;
+  for(const [key,values] of Object.entries(copy)){
+    const target=document.querySelector('[data-i18n="'+key+'"]');
+    if(target)target.textContent=values[bangla?1:0];
+  }
+  document.documentElement.lang=bangla?'bn':'en';
+});
