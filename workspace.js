@@ -239,12 +239,23 @@ function renderFollowupTracker(application,article){
  article.append(wrap);
 }
 const expandedApplications=new Set();
+function applicationNeedsAttention(a){
+ const now=new Date();now.setHours(0,0,0,0);
+ const overdue=d=>d&&new Date(d+'T00:00:00')<now;
+ const tasks=Array.isArray(a.checklist?.additional_requirements)?a.checklist.additional_requirements:[];
+ return tasks.some(r=>r.status==='needs_correction'||(r.deadline&&!['submitted','received','accepted','waived'].includes(r.status)&&overdue(r.deadline)))||(!['submitted','decision_received'].includes(a.status)&&overdue(a.application_deadline))||(!a.checklist?.financial_aid&&overdue(a.aid_deadline));
+}
 function renderApplications(){
  const holder=$('application-list');holder.replaceChildren();
  if(!applications.length){const div=document.createElement('div');div.className='empty';div.textContent='No applications yet. Discover a university or add one above.';holder.append(div);return}
- applications.slice().sort((a,b)=>(a.application_deadline||'9999').localeCompare(b.application_deadline||'9999')).forEach(a=>{
+ const boardSearch=$('application-board-search')?.value.trim().toLowerCase()||'';
+ const boardFilter=$('application-board-filter')?.value||'all';
+ const shown=applications.filter(a=>(!boardSearch||a.institution_name.toLowerCase().includes(boardSearch))&&(boardFilter==='all'||(boardFilter==='attention'?applicationNeedsAttention(a):a.status===boardFilter)));
+ $('application-board-count').textContent=shown.length+' of '+applications.length+' universities';
+ if(!shown.length){const empty=document.createElement('p');empty.className='empty';empty.textContent='No applications match your filters.';holder.append(empty)}
+ shown.slice().sort((a,b)=>(a.application_deadline||'9999').localeCompare(b.application_deadline||'9999')).forEach(a=>{
  const article=document.createElement('article');article.className='application-card';article.dataset.applicationId=String(a.id);const header=document.createElement('div');header.className='application-header';
- const head=document.createElement('div');const title=document.createElement('h3');title.textContent=a.institution_name;const dates=document.createElement('p');dates.textContent='Admission: '+appDate(a.application_deadline)+' · Aid: '+appDate(a.aid_deadline)+' · '+a.application_round;head.append(title,dates);
+ const head=document.createElement('div');const title=document.createElement('h3');title.textContent=a.institution_name;const dates=document.createElement('p');dates.textContent='Admission: '+appDate(a.application_deadline)+' · Aid: '+appDate(a.aid_deadline)+' · '+a.application_round;head.append(title,dates);const tasks=Array.isArray(a.checklist?.additional_requirements)?a.checklist.additional_requirements:[];const finished=taskKeys.filter(k=>Boolean(a.checklist?.[k])).length;const pending=tasks.filter(r=>!['submitted','received','accepted','waived'].includes(r.status)).length;const summary=document.createElement('p');summary.className='application-compact-summary';summary.textContent=finished+' / '+taskKeys.length+' checklist tasks · '+pending+' additional requirements pending'+(applicationNeedsAttention(a)?' · Needs attention':'');head.append(summary);
  const status=document.createElement('select');status.setAttribute('aria-label','Application status for '+a.institution_name);
  for(const [value,label] of [['researching','Researching'],['shortlisted','Shortlisted'],['preparing','Preparing'],['submitted','Submitted'],['decision_received','Decision received']]){const o=document.createElement('option');o.value=value;o.textContent=label;status.append(o)}status.value=a.status;status.addEventListener('change',async()=>{const previous=a.status;status.disabled=true;const saved=await patchApplication(a.id,{status:status.value});if(!saved)status.value=previous;status.disabled=false});
  const toggle=document.createElement('button');toggle.type='button';toggle.className='application-toggle';toggle.setAttribute('aria-expanded',String(expandedApplications.has(a.id)));toggle.textContent=expandedApplications.has(a.id)?'Hide details −':'Show details +';toggle.addEventListener('click',()=>{if(expandedApplications.has(a.id))expandedApplications.delete(a.id);else expandedApplications.add(a.id);toggle.setAttribute('aria-expanded',String(expandedApplications.has(a.id)));toggle.textContent=expandedApplications.has(a.id)?'Hide details −':'Show details +';details.hidden=!expandedApplications.has(a.id)});header.append(head,status,toggle);article.append(header);const details=document.createElement('div');details.className='application-details';details.hidden=!expandedApplications.has(a.id);article.append(details);
@@ -289,7 +300,7 @@ function chooseCollege(college,manualName=''){
 collegeSearch.addEventListener('input',renderCollegeSearch);
 $('cancel-college-selection').addEventListener('click',()=>{applicationForm.reset();renderCollegeSearch();collegeSearch.focus()});
 $('application-form').addEventListener('submit',async e=>{e.preventDefault();const f=e.currentTarget,fd=new FormData(f);const name=String(fd.get('institution_name')||'').trim();if(!name)return;await addApplication(name,selectedCollege?.id||null,String(fd.get('application_round')||'undecided'),String(fd.get('application_deadline')||'')||null,String(fd.get('aid_deadline')||'')||null);f.reset();collegeSearch.value='';renderCollegeSearch()});
-$('research-search').addEventListener('input',renderResearch);$('country-filter').addEventListener('change',renderResearch);$('selectivity-filter').addEventListener('change',renderResearch);$('funding-filter').addEventListener('change',renderResearch);
+$('research-search').addEventListener('input',renderResearch);$('country-filter').addEventListener('change',renderResearch);$('application-board-search').addEventListener('input',renderApplications);$('application-board-filter').addEventListener('change',renderApplications);$('selectivity-filter').addEventListener('change',renderResearch);$('funding-filter').addEventListener('change',renderResearch);
 $('export-workspace').addEventListener('click',()=>{
  if(!user)return;
  const exportData={exported_at:new Date().toISOString(),source:'Bdesh',scope:'Admissions workspace records',student_profile:profile,preparation:[...readiness.entries()].map(([milestone_id,details])=>({milestone_id,...details})),applications};
