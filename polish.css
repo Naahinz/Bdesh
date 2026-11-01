@@ -230,3 +230,21 @@ body .footer b{font-size:36px}
 #cancel-college-selection{padding:10px 14px;border:1px solid #a6baa9;border-radius:3px;background:transparent;font-size:14px;cursor:pointer;margin-left:10px}
 #application-form[hidden]{display:none!important}
 @media(max-width:620px){.college-search{padding:16px}.college-search-result{align-items:flex-start;flex-direction:column;gap:2px}#cancel-college-selection{margin-left:0;margin-top:8px}}
+
+/* Application board readability — enlarged labels, controls and checkboxes. */
+#apply .application-card h3{font-size:clamp(29px,2.5vw,38px)!important;line-height:1.2}
+#apply .application-header p{font-size:16px!important;line-height:1.6}
+#apply .application-header select{font-size:16px!important;min-height:48px;padding:10px 15px}
+#apply .mini-checklist{gap:20px 32px;margin:20px 0}
+#apply .mini-checklist label{display:flex;align-items:center;gap:14px;font-size:18px!important;line-height:1.5;min-height:45px;cursor:pointer}
+#apply .mini-checklist input[type=checkbox]{appearance:auto;flex:0 0 24px;width:24px;height:24px;min-width:24px;min-height:24px;margin:0;accent-color:#2e7655;cursor:pointer}
+#apply .application-footer button{font-size:16px!important;min-height:42px}
+#apply .followup-heading h4{font-size:clamp(26px,2.5vw,36px)!important}
+#apply .followup-heading span{font-size:16px!important}
+#apply .followup-info,#apply .followup-empty{font-size:16px!important;line-height:1.7}
+#apply .followup-item strong{font-size:18px!important}
+#apply .followup-item p{font-size:15px!important}
+#apply .followup-controls select,#apply .followup-controls button,#apply .followup-add{font-size:15px!important;min-height:46px;padding:11px 13px}
+#apply .followup-form label{font-size:16px!important}
+#apply .followup-form input{font-size:16px!important;min-height:48px}
+@media(max-width:700px){#apply .mini-checklist label{font-size:17px!important}#apply .mini-checklist input[type=checkbox]{width:25px;height:25px;flex-basis:25px}}
