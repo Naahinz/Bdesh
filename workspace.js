@@ -26,7 +26,7 @@ const milestones=[
 ];
 const taskKeys=['application','essays','recommendations','transcripts','scores','financial_aid','submission'];
 const taskLabels=['Application form','Essays / supplements','Recommendations','Transcripts & school documents','Test-score policy / reporting','Financial aid documents','Submission confirmation'];
-let user=null,profile=null,readiness=new Map(),applications=[],opportunities=[],busy=false;
+let user=null,profile=null,academicStage='11',readiness=new Map(),applications=[],opportunities=[],busy=false;
 function note(t){$('sync-status').textContent=t}
 function fail(error){note('Could not save: '+(error?.message||String(error)));console.error('Bdesh:',error)}
 function setTab(tab){if(!sections.includes(tab))tab='prepare';for(const s of sections){const el=$(s);el.hidden=s!==tab}document.querySelectorAll('[data-tab]').forEach(a=>a.classList.toggle('active',a.dataset.tab===tab));location.hash=tab}
@@ -57,10 +57,15 @@ function stats(){
 }
 function renderReadiness(){
  const holder=$('milestone-list');holder.replaceChildren();
- for(const [id,title,description] of milestones){
+ const early=['foundation','route','funding','major','english','activity'];
+ const middle=['foundation','route','funding','major','english','testing','activity','awards','records'];
+ const final=['funding','records','shortlist','aid','deadlines','writing','recommendations','supplements','submission'];
+ const priority=(academicStage==='9'||academicStage==='10')?early:(academicStage==='11')?middle:final;
+ const sorted=[...milestones].sort((a,b)=>(priority.includes(b[0])?1:0)-(priority.includes(a[0])?1:0));
+ for(const [id,title,description] of sorted){
  const rec=readiness.get(id)||{state:'todo'};
  const article=document.createElement('article');article.className='milestone';
- const content=document.createElement('div');const h=document.createElement('h3');h.textContent=title;const p=document.createElement('p');p.textContent=description;content.append(h,p);
+ const content=document.createElement('div');const h=document.createElement('h3');h.textContent=title;if(priority.includes(id)){const marker=document.createElement('span');marker.className='priority-label';marker.textContent='FOCUS NOW';h.append(marker)}const p=document.createElement('p');p.textContent=description;content.append(h,p);
  const select=document.createElement('select');select.setAttribute('aria-label','Status for '+title);
  [['todo','Not started'],['in_progress','In progress'],['done','Completed'],['not_applicable','Not relevant']].forEach(([v,t])=>{const o=document.createElement('option');o.value=v;o.textContent=t;select.append(o)});
  select.value=rec.state;select.addEventListener('change',async()=>{const state=select.value;select.disabled=true;const {error}=await sb.from('student_readiness').upsert({user_id:user.id,milestone_id:id,state,updated_at:new Date().toISOString()},{onConflict:'user_id,milestone_id'});select.disabled=false;if(error){fail(error);select.value=rec.state;return}readiness.set(id,{state});stats();note('Preparation saved')});
@@ -127,12 +132,13 @@ async function initialize(session){
  note('Loading your workspace…');
  const responses=await Promise.all([
  sb.from('student_admissions_profiles').select('*').eq('user_id',user.id).maybeSingle(),
+ sb.from('student_profiles').select('academic_stage').eq('user_id',user.id).maybeSingle(),
  sb.from('student_readiness').select('milestone_id,state,notes').eq('user_id',user.id),
  sb.from('student_applications').select('*').eq('user_id',user.id).order('created_at',{ascending:false}),
  sb.from('opportunities').select('id,title,country,official_url,funding_notes,eligibility_notes,deadline_notes').eq('published',true).order('title')]);
  const errors=responses.filter(x=>x.error).map(x=>x.error.message);
  if(errors.length)note('Some data could not load: '+errors.join(' / '));else note('All changes save to your Bdesh account');
- profile=responses[0].data||null;readiness=new Map((responses[1].data||[]).map(x=>[x.milestone_id,x]));applications=responses[2].data||[];opportunities=responses[3].data||[];
+ profile=responses[0].data||null;academicStage=responses[1].data?.academic_stage||'11';readiness=new Map((responses[2].data||[]).map(x=>[x.milestone_id,x]));applications=responses[3].data||[];opportunities=responses[4].data||[];
  fillProfile();renderReadiness();renderResearch();renderApplications();stats();setTab(location.hash.slice(1)||'prepare');
 }
 if(!sb){$('session-status').textContent='Account library unavailable';$('not-signed-in').hidden=false;return}
