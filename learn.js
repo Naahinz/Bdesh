@@ -82,6 +82,7 @@ const lessons=[
 ];
 const us=window.BDESH_US_COURSE;
 if(us){lessons[0]=us.welcome;lessons.splice(3,0,us.platform,us.holistic,us.sat);for(const lesson of lessons){if(!['welcome','platform','holistic','sat101'].includes(lesson.id))lesson.lead+=' This chapter explains U.S. undergraduate admissions; specific colleges set their own rules.';}}
+if(window.BDESH_US_DETAILS){for(const lesson of lessons){const details=window.BDESH_US_DETAILS[lesson.id];if(details)lesson.sections.push(...details);}}
 const $=id=>document.getElementById(id);
 const storageKey='bdesh-learning-v1',state=(()=>{
  try{const raw=JSON.parse(localStorage.getItem(storageKey)||'{}');return {done:new Set(Array.isArray(raw.done)?raw.done.filter(x=>lessons.some(l=>l.id===x)):[]),current:lessons.some(l=>l.id===raw.current)?raw.current:lessons[0].id}}catch{return {done:new Set(),current:lessons[0].id}}
