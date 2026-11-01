@@ -3,6 +3,16 @@
 'use strict';
 const URL='https://xeqixwmulwonvhifcmvn.supabase.co',KEY='sb_publishable_2Jp14PFt4_mLDT4cpqLfUw_d-tDSnwj';
 const sb=window.supabase?.createClient(URL,KEY,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});
+const authError=$('workspace-auth-error');
+function showAuthError(message){authError.textContent=message;authError.hidden=false;$('session-status').textContent='Sign-in issue'}
+$('workspace-google-signin').addEventListener('click',async()=>{
+ const button=$('workspace-google-signin');button.disabled=true;button.textContent='Opening Google…';authError.hidden=true;
+ try{
+  if(!sb)throw new Error('Authentication library did not load. Refresh this page.');
+  const {error}=await sb.auth.signInWithOAuth({provider:'google',options:{redirectTo:location.origin+'/workspace.html'}});
+  if(error)throw error;
+ }catch(error){showAuthError(error.message||'Could not start Google sign-in');button.disabled=false;button.textContent='Continue with Google ↗'}
+});
 const $=id=>document.getElementById(id),esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const sections=['prepare','profile','discover','apply'];
 const milestones=[
@@ -141,6 +151,6 @@ async function initialize(session){
  profile=responses[0].data||null;academicStage=responses[1].data?.academic_stage||'11';readiness=new Map((responses[2].data||[]).map(x=>[x.milestone_id,x]));applications=responses[3].data||[];opportunities=responses[4].data||[];
  fillProfile();renderReadiness();renderResearch();renderApplications();stats();setTab(location.hash.slice(1)||'prepare');
 }
-if(!sb){$('session-status').textContent='Account library unavailable';$('not-signed-in').hidden=false;return}
-sb.auth.getSession().then(({data,error})=>{if(error||!data?.session){$('session-status').textContent='Not signed in';$('not-signed-in').hidden=false;return}initialize(data.session).catch(fail)}).catch(fail);
+if(!sb){$('session-status').textContent='Account library unavailable';$('not-signed-in').hidden=false;showAuthError('Authentication library unavailable. Please reload.');return}
+sb.auth.getSession().then(({data,error})=>{if(error||!data?.session){$('session-status').textContent='Not signed in';$('not-signed-in').hidden=false;if(error)showAuthError(error.message);else if(location.hash.includes('error'))showAuthError('The sign-in redirect was rejected. Check Supabase redirect URL settings.');return}initialize(data.session).catch(fail)}).catch(fail);
 })();
