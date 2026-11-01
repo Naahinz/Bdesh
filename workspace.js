@@ -186,7 +186,23 @@ async function addApplication(name,opportunityId=null,round='undecided',deadline
  if(error){fail(error);return false}applications.unshift(data);renderApplications();stats();renderNextActions();renderDeadlineCenter();note('Application added');setTab('apply');return true;
 }
 function appDate(v){return v?new Date(v+'T12:00:00').toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'}):'Not entered'}
-async function patchApplication(id,updates){const {data,error}=await sb.from('student_applications').update({...updates,updated_at:new Date().toISOString()}).eq('id',id).eq('user_id',user.id).select().single();if(error){fail(error);return false}applications=applications.map(a=>a.id===id?data:a);stats();renderNextActions();renderDeadlineCenter();note('Application saved');return true}
+const applicationSaveQueues=new Map();
+function patchApplication(id,updates){
+ const previous=applicationSaveQueues.get(id)||Promise.resolve();
+ const run=previous.catch(()=>{}).then(async()=>{
+  const current=applications.find(a=>a.id===id);
+  const payload={...updates,updated_at:new Date().toISOString()};
+  if(updates.checklist&&current)payload.checklist={...(current.checklist||{}),...updates.checklist};
+  note('Saving application…');
+  const {data,error}=await sb.from('student_applications').update(payload).eq('id',id).eq('user_id',user.id).select().single();
+  if(error){fail(error);return false}
+  applications=applications.map(a=>a.id===id?data:a);
+  stats();renderNextActions();renderDeadlineCenter();note('Application saved');return true;
+ });
+ applicationSaveQueues.set(id,run);
+ run.finally(()=>{if(applicationSaveQueues.get(id)===run)applicationSaveQueues.delete(id)});
+ return run;
+}
 // Post-submission requirements are stored inside each application checklist JSON,
 // preserving per-user RLS and avoiding new public tables.
 const requirementSuggestions=['CSS Profile','ISFAA','University-specific financial aid form','Financial documents','Video portfolio','Supplemental essay','Interview','Official test scores','Final transcript','Other'];
