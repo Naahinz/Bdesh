@@ -1,0 +1,38 @@
+/* Bdesh beta accounts. The key below is a public Supabase publishable key, not a secret. */
+(() => {
+'use strict';
+const apiURL='https://xeqixwmulwonvhifcmvn.supabase.co';
+const publicKey="sb_publishable_2Jp14PFt4_mLDT4cpqLfUw_d-tDSnwj";
+const client=globalThis.supabase?.createClient(apiURL,publicKey,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});
+const el=id=>document.getElementById(id);
+const panel=el('auth-panel'), form=el('auth-form'), msg=el('auth-message'), toggle=el('account-toggle');
+if(!client){toggle.textContent='Sign in unavailable';toggle.disabled=true;return}
+let mode='signin', user=null, loading=false, suppress=false;
+const notify=(text,error=false)=>{msg.textContent=text;msg.classList.toggle('error',error)};
+const open=()=>{panel.hidden=false;el('auth-email').focus();};
+const close=()=>{panel.hidden=true;notify('')};
+toggle.addEventListener('click',async()=>{if(user){const {error}=await client.auth.signOut();if(error)notify(error.message,true);else{user=null;toggle.textContent='Beta sign in';open();notify('Signed out.')}return;}open()});
+el('auth-close').addEventListener('click',close);
+function setMode(v){mode=v;el('auth-title').textContent=v==='signup'?'Create your Bdesh account':v==='recover'?'Reset your password':'Sign in to Bdesh';el('auth-submit').textContent=v==='signup'?'Create account':v==='recover'?'Send reset email':'Sign in';el('consent-line').hidden=v!=='signup';el('auth-password').required=v!=='recover';el('auth-password').parentElement.querySelector('#auth-password').style.display=v==='recover'?'none':'';el('auth-switch').textContent=v==='signup'?'Already have an account? Sign in':'Create an account (18+)';notify('')};
+el('auth-switch').addEventListener('click',()=>setMode(mode==='signup'?'signin':'signup'));
+el('auth-reset').addEventListener('click',()=>setMode('recover'));
+form.addEventListener('submit',async event=>{event.preventDefault();if(loading)return;const email=el('auth-email').value.trim(),password=el('auth-password').value;loading=true;el('auth-submit').disabled=true;try{if(mode==='signup'){if(!el('auth-adult').checked){notify('Registration is limited to adults 18 and older during the beta.',true);return}const {data,error}=await client.auth.signUp({email,password,options:{emailRedirectTo:location.origin+location.pathname}});if(error)throw error;notify(data.session?'Account created. Your checklist can now sync.':'Check your email to confirm your account, then return to sign in.');if(data.session)await synchronize(data.session.user);return}if(mode==='recover'){const {error}=await client.auth.resetPasswordForEmail(email,{redirectTo:location.origin+location.pathname});if(error)throw error;notify('If an account exists, a password-reset email has been sent.');return}const {data,error}=await client.auth.signInWithPassword({email,password});if(error)throw error;await synchronize(data.user);notify('Signed in. Your progress is saved securely.')}catch(e){notify(e?.message||'Something went wrong. Try again.',true)}finally{loading=false;el('auth-submit').disabled=false}});
+const stages={Science:'science','Business Studies':'business',Humanities:'humanities','Not selected yet':'undecided'};
+const names={science:'Science',business:'Business Studies',humanities:'Humanities',undecided:'Not selected yet'};
+const intakes={'2027':2027,'2028':2028,'2029':2029};
+async function saveProfile(){if(!user||suppress)return;let v=el('intake').value, n=intakes[v]||parseInt(v,10)||null;
+if(n===2030) n=2030;
+const {error}=await client.from('student_profiles').upsert({user_id:user.id,academic_stage:el('stage').value,nctb_group:stages[el('group').value]||'undecided',target_intake:n,preferred_language:document.documentElement.lang==='bn'?'bn':'en',updated_at:new Date().toISOString()},{onConflict:'user_id'});if(error)notify('Could not save profile: '+error.message,true)}
+async function saveTask(task_id,is_complete){if(!user||suppress)return;const {error}=await client.from('student_progress').upsert({user_id:user.id,task_id,is_complete,updated_at:new Date().toISOString()},{onConflict:'user_id,task_id'});if(error)notify('Could not save progress: '+error.message,true)}
+async function synchronize(currentUser){if(!currentUser)return;user=currentUser;toggle.textContent='Sign out ('+(user.email||'account')+')';const [{data:profile,error:pErr},{data:progress,error:tErr}]=await Promise.all([client.from('student_profiles').select('*').eq('user_id',user.id).maybeSingle(),client.from('student_progress').select('task_id,is_complete').eq('user_id',user.id)]);if(pErr||tErr){notify('Unable to load your saved data. '+(pErr||tErr).message,true);return}
+suppress=true;
+if(profile){localStorage.setItem('bdesh-stage',profile.academic_stage);el('stage').value=profile.academic_stage;if(profile.nctb_group){el('group').value=names[profile.nctb_group]||'Not selected yet';localStorage.setItem('bdesh-group',el('group').value)}if(profile.target_intake){const value=String(profile.target_intake);if([...el('intake').options].some(o=>o.value===value)){el('intake').value=value;localStorage.setItem('bdesh-intake',value)}}}
+if(progress?.length){for(const t of progress){const key='bdesh-'+t.task_id;localStorage.setItem(key,t.is_complete?'1':'0')}}
+el('stage').dispatchEvent(new Event('change'));suppress=false; if(!profile)await saveProfile();if(!progress?.length){const tasks=[];for(const stage of ['9','11','12','gap'])for(let i=0;i<4;i++){const key=stage+'-'+i;if(localStorage.getItem('bdesh-'+key)==='1')tasks.push({user_id:user.id,task_id:key,is_complete:true})}if(tasks.length){const {error}=await client.from('student_progress').upsert(tasks,{onConflict:'user_id,task_id'});if(error)notify('Some local progress could not be synced: '+error.message,true)}}
+}
+document.addEventListener('bdesh:task-change',e=>saveTask(e.detail.task_id,e.detail.is_complete));
+document.addEventListener('bdesh:profile-change',saveProfile);
+document.addEventListener('bdesh:reset',async e=>{if(!user||suppress)return;const tasks=Array.from({length:4},(_,i)=>({user_id:user.id,task_id:e.detail.stage+'-'+i,is_complete:false}));const {error}=await client.from('student_progress').upsert(tasks,{onConflict:'user_id,task_id'});if(error)notify(error.message,true)});
+client.auth.onAuthStateChange((event,session)=>{if(event==='SIGNED_OUT'){user=null;toggle.textContent='Beta sign in'}if(event==='PASSWORD_RECOVERY'){open();setMode('newpassword');el('auth-title').textContent='Choose a new password';el('auth-submit').textContent='Update password';}});
+client.auth.getUser().then(({data,error})=>{if(!error&&data?.user)synchronize(data.user)}).catch(()=>{});
+})();
