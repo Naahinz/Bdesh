@@ -30,5 +30,7 @@ async function refresh(user){
  note.textContent='Stages started, based on activity saved to your account. Open the workspace for detailed progress.';
 }
 document.addEventListener('bdesh:auth-change',e=>refresh(e.detail.user).catch(()=>{note.textContent='Your local reading activity is shown. Cloud status is temporarily unavailable.'}));
+// Restore an existing signed-in session even if the auth event fired earlier.
+setTimeout(()=>{const sb=window.bdeshSupabase;sb?.auth.getSession().then(({data})=>{if(data?.session?.user)refresh(data.session.user)}).catch(()=>{})},0);
 window.addEventListener('storage',()=>{try{const d=JSON.parse(localStorage.getItem('bdesh-learning-v1')||'{}');stages[0] ||= Array.isArray(d.done)&&d.done.length>0;draw()}catch{}});
 })();
