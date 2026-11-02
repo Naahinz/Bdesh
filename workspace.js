@@ -163,7 +163,7 @@ function renderResearch(){
  const selected=filter.value;
  const selectivity=$('selectivity-filter')?.value||'',funding=$('funding-filter')?.value||'',searchTerm=$('research-search')?.value.trim().toLowerCase()||'';
  const band=o=>o.eligibility_notes?.match(/Selectivity context: (Exceptionally selective|Highly selective|Selective)/)?.[1]||'Unclassified';
- const route=o=>/scholar|merit|woodruff|karsh|johnson|belk|ingram/i.test(o.funding_notes||'')?'merit':'need';
+ const route=o=>{const n=(o.funding_notes||'').toLowerCase();if(n.includes('not merit')||n.includes('no merit')||n.includes('does not offer merit'))return 'need';return /merit|woodruff|karsh|johnson|belk|ingram/.test(n)?'merit':'need'};
  const order={'Selective':0,'Highly selective':1,'Exceptionally selective':2,'Unclassified':3};
  const visible=opportunities.filter(o=>(!selected||o.country===selected)&&(!selectivity||band(o)===selectivity)&&(!funding||route(o)===funding)&&(!searchTerm||o.title.toLowerCase().includes(searchTerm))).sort((a,b)=>(order[band(a)]-order[band(b)])||a.title.localeCompare(b.title));
  $('research-count').textContent=visible.length+' funding leads shown · '+opportunities.length+' listed · lower selectivity band first (not an admission probability)';
@@ -175,7 +175,19 @@ function renderResearch(){
  const ul=document.createElement('ul');[...fit.reasons,...fit.warnings].forEach(t=>{const li=document.createElement('li');li.textContent=t;ul.append(li)});
  const actions=document.createElement('div');actions.className='cardactions';const a=document.createElement('a');a.href=o.official_url;a.target='_blank';a.rel='noopener noreferrer';a.textContent='Official website ↗';
  const btn=document.createElement('button');btn.type='button';btn.textContent='Add to application tracker';btn.addEventListener('click',()=>addApplication(o.title,o.id));
- actions.append(a,btn);card.append(country,title,para,verified,ul,actions);wrap.append(card)}
+ actions.append(a,btn);
+ const detail=document.createElement('details');detail.className='research-evidence';
+ const detailSummary=document.createElement('summary');detailSummary.textContent=o.verified_at?'Eligibility, deadlines & official sources':'What to verify before applying';
+ detail.append(detailSummary);
+ if(o.verified_at){
+  for(const [heading,value] of [['Admissions and testing',o.eligibility_notes],['Admission and financial aid deadlines',o.deadline_notes]]){
+   if(!value)continue;const h=document.createElement('h4');h.textContent=heading;const p=document.createElement('p');p.textContent=value;detail.append(h,p)
+  }
+  const urls=[...new Set((o.source_notes||'').split(' ').map(t=>t.replace(/[|,;]/g,'')).filter(t=>t.startsWith('https://')))];
+  if(urls.length){const h=document.createElement('h4');h.textContent='Official pages checked';const sourceList=document.createElement('ul');
+   urls.forEach((u,i)=>{try{const url=new URL(u);if(url.protocol!=='https:')return;const li=document.createElement('li');const link=document.createElement('a');link.href=url.href;link.target='_blank';link.rel='noopener noreferrer';link.textContent=url.hostname+' · Source '+(i+1);li.append(link);sourceList.append(li)}catch{}});detail.append(h,sourceList)}
+ }else{const p=document.createElement('p');p.textContent='Funding, testing rules and deadlines have not been checked individually for this institution. Confirm them on the college’s official admissions and financial aid pages.';detail.append(p)}
+ card.append(country,title,para,verified,ul,detail,actions);wrap.append(card)}
  if(!visible.length)wrap.textContent='No opportunities in that country yet. Our directory is being expanded.';
 }
 async function addApplication(name,opportunityId=null,round='undecided',deadline=null,aidDeadline=null){
@@ -336,7 +348,7 @@ async function initialize(session){
  sb.from('student_profiles').select('academic_stage').eq('user_id',user.id).maybeSingle(),
  sb.from('student_readiness').select('milestone_id,state,notes').eq('user_id',user.id),
  sb.from('student_applications').select('*').eq('user_id',user.id).order('created_at',{ascending:false}),
- sb.from('opportunities').select('id,title,country,official_url,funding_notes,eligibility_notes,deadline_notes,verified_at').eq('published',true).eq('country','United States').order('title')]);
+ sb.from('opportunities').select('id,title,country,official_url,funding_notes,eligibility_notes,deadline_notes,verified_at,source_notes,source_checked_at').eq('published',true).eq('country','United States').order('title')]);
  const errors=responses.filter(x=>x.error).map(x=>x.error.message);
  if(errors.length)note('Some data could not load: '+errors.join(' / '));else note('All changes save to your Bdesh account');
  profile=responses[0].data||null;academicStage=responses[1].data?.academic_stage||'11';readiness=new Map((responses[2].data||[]).map(x=>[x.milestone_id,x]));applications=responses[3].data||[];opportunities=responses[4].data||[];
