@@ -52,5 +52,12 @@ Do not infer automatic full-ride eligibility from 'meets full demonstrated need'
 - [x] Added JavaScript AJAX email routing to **eftekhernahin@gmail.com** through `formsubmit.co`; does not require visitors to open their own email clients.
 - [x] Added client validation, async progress, explicit success/failure/activation messages, honeypot field, and fallback mailto link.
 - [x] Updated privacy notice to disclose use of the external form-to-email provider.
-- [ ] **Manual requirement:** Recipient must open the activation email at `eftekhernahin@gmail.com` after the first form submission and click the activation link. Until then, email delivery is **not verified/activated**. Submit a test and confirm arrival after activation.
+- [x] **User-confirmed feedback test (2026-11-03):** User reported that the feedback form and delivery work. FormSubmit activation and end-to-end mail flow are considered checked by the recipient, but not independently verified by the backend connector.
 - [ ] Verify rendered search cards and feedback form on desktop and mobile. Repository source checks are not substitutes for live browser testing.
+
+## 2026-11-03 follow-up: international admissions verification
+- Verified and source-dated six additional US directory entries: Macalester, Reed, University of Richmond, University of Chicago, Grinnell, Wellesley.
+- Partially reviewed Northwestern with `verified_at = NULL` because published university admission and financial aid pages show inconsistent 2027 financial-aid deadlines.
+- As of this review, expected **17 verified of 51 published US entries**, with **4 partial reviews** (Amherst, Dartmouth, Northwestern, Swarthmore), remaining 30 not checked.
+- Key findings: Macalester requires free 2027–28 ISAFA or CSS plus separate financial declaration; Reed permits hardship ISFAA and is test-blind; Richmond requires an international financial-responsibility certificate and CSS; UChicago uses its own aid worksheet and does not use CSS/IDOC; Grinnell accepts a portal ISAFA but not emailed/PDF forms; Wellesley asks international students for CSS only if prompted by staff.
+- Source dates, test policies, aid coverage, round-specific deadlines and caution notes are stored with each corresponding opportunity record. No applicant/student data was changed.
