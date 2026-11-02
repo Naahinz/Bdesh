@@ -41,3 +41,45 @@ h1,h2{font-weight:700!important}em{font-style:normal!important;color:#4d806b}
 @media(max-width:900px){.hero{margin:16px 12px 40px!important;min-height:580px}.hero-copy{max-width:100%!important}.hero::after{right:-9%;opacity:.3}}
 @media(max-width:600px){.hero{margin:10px 9px 34px!important;min-height:610px;padding:20px!important;border-radius:24px}.hero-copy{padding:21px!important}.hero h1{font-size:clamp(40px,10vw,58px)!important}.hero::after{width:185px;height:185px;top:-40px}.home-flow-head{padding:24px!important}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+/* Bdesh visual system v3 — restrained glass, editorial typography and human-scale controls. */
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap');
+:root{--ink:#203a32;--muted:#63796f;--surface:#f6f8f3;--line:rgba(35,75,57,.17);--glass:rgba(255,255,255,.74);--sage:#dce8da;--forest:#204f3e;--serif:'Newsreader',Georgia,serif;--sans:'Plus Jakarta Sans','DM Sans',sans-serif}
+body{font-family:var(--sans)!important;font-size:15.5px;line-height:1.65;letter-spacing:-.009em}
+h1,h2,h3,h4,.brand,.logo,.wordmark{font-family:var(--sans)!important;letter-spacing:-.049em!important}
+p,li,label,small{font-family:var(--sans)}
+.eyebrow,.kicker,.course-label,.chapter-id,.reading-time,.journey-tag{font-size:11px!important;letter-spacing:.14em!important;font-weight:700!important;color:#638173}
+:where(.top,.site-header,.topbar,.nav){border-bottom:1px solid var(--line)!important;box-shadow:none!important}
+:where(.top,.site-header,.topbar,.nav) a{letter-spacing:-.015em}
+:where(.side,.sidebar,.curriculum){background:linear-gradient(160deg,rgba(252,253,249,.8),rgba(227,236,227,.68))!important;border-right:1px solid var(--line)!important}
+:where(.side h1,.sidebar-head h1,.curriculum h2){font-size:clamp(27px,3vw,42px)!important;line-height:1.12!important}
+:where(.side p,.sidebar-head p,.curriculum p){font-size:14.5px!important;line-height:1.75!important;color:#596f64}
+:where(.main,.reader,.profile-main){background:transparent!important}
+:where(.learn-first,.intro,.action-plan,.deadline-center,.research-card,.application-card,.college-search,.auth-card,.review-card,.profile-panel,.entry-card,.knowledge-check,.reading-top,.aside-progress){background:var(--glass)!important;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.82)!important;box-shadow:0 8px 30px rgba(29,64,47,.045)!important;border-radius:19px!important}
+:where(.action-plan,.deadline-center,.application-card,.research-card){box-shadow:0 12px 34px rgba(25,65,45,.055)!important}
+:where(.research-card,.application-card,.review-card,.entry-card):hover{box-shadow:0 14px 35px rgba(29,62,45,.085)!important}
+:where(.section-heading h2,.section-intro h2,.intro h2,.learn-first h2,.reader h1){font-weight:700!important;letter-spacing:-.055em!important;color:#173e31!important}
+:where(.section-heading p,.section-intro p,.intro p,.learn-first p){color:var(--muted)!important;line-height:1.75!important}
+:where(.metrics>div,.deadline-summary>div,.workspace-steps a){background:rgba(241,246,240,.8)!important;border:1px solid rgba(79,121,89,.14)!important;border-radius:15px!important;box-shadow:none!important}
+:where(.metrics strong,.deadline-summary strong){font-variant-numeric:tabular-nums;font-family:var(--sans)!important;font-weight:700!important;letter-spacing:-.04em!important}
+:where(.darkbtn,.primary-button,.button,.primary-cta,.google-signin){font-family:var(--sans)!important;box-shadow:none!important;border-radius:11px!important;font-size:14px!important;font-weight:700!important;letter-spacing:-.025em!important}
+:where(.darkbtn,.primary-button,.button,.primary-cta,.google-signin):hover{box-shadow:0 8px 20px rgba(26,65,45,.12)!important;transform:translateY(-1px)!important}
+:where(.outline-button,.application-toggle,.followup-add,.export-workspace,.deadline-entry button){border-radius:11px!important;font-family:var(--sans)!important;box-shadow:none!important;font-weight:650!important}
+:where(input:not([type=checkbox]),textarea,select){min-height:44px;border-radius:10px!important;border:1px solid rgba(57,101,76,.27)!important;background:rgba(255,255,255,.9)!important;color:#18392d!important;box-shadow:none!important}
+:where(input,textarea,select)::placeholder{color:#8a9b90;opacity:1}
+:where(.rail a,.workspace-steps a,.sidebar nav button,.curriculum nav button){box-shadow:none!important;font-weight:600!important;transition:background .15s,border-color .15s}
+:where(.rail a,.workspace-steps a,.sidebar nav button,.curriculum nav button):hover{background:rgba(223,236,223,.7)!important}
+:where(.rail a.active,.workspace-steps a.active,.sidebar nav button.active,.curriculum nav button.active){background:#dce9dc!important;color:#1e4d39!important}
+.hero{border:1px solid rgba(255,255,255,.67)!important;box-shadow:0 18px 50px rgba(23,52,39,.14)!important}
+.hero-copy{border:1px solid rgba(255,255,255,.22)!important;box-shadow:none!important}
+.hero h1{font-family:var(--sans)!important}
+.hero .eyebrow{color:#eff6e9!important}
+.home-flow-head{background:rgba(252,254,250,.66)!important;border:1px solid rgba(255,255,255,.9)!important;border-radius:23px!important;box-shadow:0 11px 35px rgba(28,68,45,.06)!important}
+.journey-detail{border-radius:19px!important;box-shadow:0 8px 28px rgba(29,66,48,.05)!important}
+.journey-node{font-family:var(--sans)!important;font-weight:700!important}
+.journey-step h3{font-weight:700!important}
+:where(.hero-caption,.hero-note,.home-flow-head p){font-size:14px!important}
+:where(.signin-icon,.line-icon){font-family:var(--sans)!important}
+:where(a,button,input,textarea,select):focus-visible{outline:2px solid #8caa97!important;outline-offset:3px!important}
+@media(max-width:700px){body{font-size:15px}.hero{min-height:0!important}.hero-copy{backdrop-filter:blur(8px)}.section-heading h2{font-size:clamp(30px,7vw,42px)!important}}
+@media(prefers-reduced-transparency:reduce){:where(.hero-copy,.research-card,.application-card,.profile-panel,.journey-detail){backdrop-filter:none!important;background:#f8faf5!important}.hero-copy{background:#25493e!important}}
