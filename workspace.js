@@ -296,7 +296,7 @@ function renderApplications(){
  });
 }
 $('profile-form').addEventListener('submit',async e=>{e.preventDefault();if(!user)return;const button=e.currentTarget.querySelector('button[type="submit"]');button.disabled=true;let payload;try{payload=formPayload()}catch(err){fail(err);button.disabled=false;return}
- const {data,error}=await sb.from('student_admissions_profiles').upsert(payload,{onConflict:'user_id'}).select().single();button.disabled=false;if(error){fail(error);$('profile-message').textContent=error.message;return}profile=data;stats();renderNextActions();renderResearch();note('Profile saved');$('profile-message').textContent='Saved to your private account.'});
+ const {data,error}=await sb.from('student_admissions_profiles').upsert(payload,{onConflict:'user_id'}).select().single();button.disabled=false;if(error){fail(error);$('profile-message').textContent=error.message;return}profile=data;stats();renderNextActions();renderResearch();note('Profile saved');window.bdeshTrack?.('bdesh_profile_saved');$('profile-message').textContent='Saved to your private account.'});
 let selectedCollege=null;
 const collegeSearch=$('college-search-input'),collegeResults=$('college-search-results'),applicationForm=$('application-form');
 function renderCollegeSearch(){
