@@ -177,9 +177,10 @@ function renderResearch(){
  const btn=document.createElement('button');btn.type='button';btn.textContent='Add to application tracker';btn.addEventListener('click',()=>addApplication(o.title,o.id));
  actions.append(a,btn);
  const detail=document.createElement('details');detail.className='research-evidence';
- const detailSummary=document.createElement('summary');detailSummary.textContent=o.verified_at?'Eligibility, deadlines & official sources':'What to verify before applying';
+ const detailSummary=document.createElement('summary');detailSummary.textContent=o.verified_at?'Eligibility, deadlines & official sources':o.source_checked_at?'Partially reviewed — unresolved items & sources':'What to verify before applying';
  detail.append(detailSummary);
- if(o.verified_at){
+ if(!o.verified_at && o.source_checked_at){const caution=document.createElement('p');caution.textContent='Partial source review only. At least one requirement or deadline remains unconfirmed. Verify with the institution before acting.';detail.append(caution)}
+ if(o.verified_at || o.source_checked_at){
   for(const [heading,value] of [['Admissions and testing',o.eligibility_notes],['Admission and financial aid deadlines',o.deadline_notes]]){
    if(!value)continue;const h=document.createElement('h4');h.textContent=heading;const p=document.createElement('p');p.textContent=value;detail.append(h,p)
   }
