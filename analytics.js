@@ -3,7 +3,7 @@
 const config=window.BDESH_ANALYTICS||{};
 const key=String(config.projectKey||'');
 const host=String(config.apiHost||'');
-const configured=/^phc_[A-Za-z0-9]+$/.test(key)&&/^https:\/\/(?:us|eu)\.i\.posthog\.com$/.test(host);
+const configured=/^phc_[A-Za-z0-9_-]+$/.test(key)&&/^https:\/\/(?:us|eu)\.i\.posthog\.com$/.test(host);
 const storageKey='bdesh_analytics_consent_v1';
 const validEvents=new Set(['bdesh_page_viewed','bdesh_section_viewed','bdesh_lesson_viewed','bdesh_lesson_completed','bdesh_application_added','bdesh_profile_saved']);
 const validSections=new Set(['prepare','discover','apply','overview','academics','activities','honors','writing','brag','review']);
@@ -77,6 +77,12 @@ function panel(){
  section.append(text,buttons);
  document.body.append(section);
 }
+// A choice made in another Bdesh tab takes effect immediately in this tab.
+window.addEventListener('storage',event=>{
+ if(event.key===storageKey&&event.newValue!=='yes'){
+  active=false;queue=[];window.posthog?.opt_out_capturing?.();
+ }else if(event.key===storageKey&&event.newValue==='yes')boot();
+});
 if(configured&&consent()==='yes')boot();
 window.addEventListener('hashchange',()=>{
  const section=location.hash.replace(/^#/,'');
