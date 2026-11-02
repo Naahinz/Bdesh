@@ -44,6 +44,14 @@ function boot(){
   mask_all_text:true,
   mask_all_element_attributes:true,
   capture_performance:false,
+  // Do not allow any SDK-added page URL or referrer into PostHog.
+  before_send:(event)=>{
+   if(!validEvents.has(event?.event))return null;
+   for(const prop of ['$current_url','$referrer','$initial_referrer','$initial_current_url','$pathname','$host','$url','$referring_domain']){
+    if(event.properties)delete event.properties[prop];
+   }
+   return event;
+  },
   disable_external_dependency_loading:true,
   defaults:'2026-08-30'
  });
