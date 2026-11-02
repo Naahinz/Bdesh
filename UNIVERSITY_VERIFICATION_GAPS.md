@@ -64,3 +64,11 @@ Sent from Nahin's connected Gmail account (`nahineftekher@gmail.com`). Replies r
 | Swarthmore | `finaid@swarthmore.edu` | `1a19e04e3097390f` | Sent, awaiting reply |
 
 **Next handling:** When the universities respond, compare each answer to its record and official link; change the institution's `deadline_notes`, `source_notes`, `source_checked_at`, and `verified_at` only after resolving the conflicting facts. No replies have been processed yet. The 2027 Türkiye Scholarships announcement is a separate future publication, not an email sent to a university.
+
+## Inbox status check — 3 November 2026
+
+- **Five automated acknowledgments received:** Amherst, Carleton, Columbia, Oberlin, Swarthmore. These are not individual determinations on the outstanding admission/aid questions.
+- **No delivery-failure messages found** in the Gmail search for these 11 inquiries at this check. A negative search does not definitively guarantee all recipients received the messages.
+- **Swarthmore's automated reply contains a useful substantive clarification:** international students do not submit financial-aid applications until AFTER receiving an admissions decision; admitted international students are provided a free CSS Profile fee-waiver code. Because the reply cites information for 2026–27 applicants and does not give an authoritative Fall 2027 post-admission aid deadline, the Swarthmore database entry remains partially reviewed. Message ID: `1a19e04fbb89548e`.
+- The other four acknowledgments note typical response windows: Amherst and Carleton approximately 2–3 business days, Columbia approximately 2–3 business days, Oberlin approximately 24–48 hours for processing. These are provider-reported norms, not guaranteed answer dates.
+- **Remaining:** wait for substantive replies; when received, document each college's exact statement and update its source notes and review status only after resolving the open issue.
