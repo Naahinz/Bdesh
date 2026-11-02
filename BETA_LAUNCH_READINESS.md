@@ -1,5 +1,12 @@
 # CURRENT STATUS — 3 NOVEMBER 2026
 
+## Current auth decision — 3 November 2026
+- **Google OAuth ONLY** in Bdesh's public beta login. The homepage's email/password form is removed, and the old `?email-test=1` UI switch no longer exposes signup.
+- Password login, new email registration and password reset are not offered by the Bdesh frontend during this period. Existing Google-linked accounts and student data are preserved.
+- Gmail SMTP error and domain-based sender setup are deferred until Bdesh owns a suitable sending domain; do not enable public email registration before SMTP and confirmation tests.
+- Google OAuth, sign-out, returning sessions, and local/cloud student progress synchronization are preserved. Static HTML/JS checks passed; live Cloudflare rendering was not independently verified.
+
+
 **All 53 database records source-reviewed: 41 fully verified · 12 partially reviewed · 0 unchecked. US directory: 51/51 source-reviewed · 40 verified · 11 partially reviewed.** The remaining confirmations are listed in [UNIVERSITY_VERIFICATION_GAPS.md](UNIVERSITY_VERIFICATION_GAPS.md). Older counts further down this document are historical progress snapshots, not the current database totals. Records may become outdated in later admissions cycles; reverify annually.
 
 # Bdesh beta launch readiness — 3 November 2026
