@@ -355,3 +355,29 @@ body .lesson-link.active{background:rgba(69,120,88,.68)!important;color:#fff!imp
  body .lesson-content .reading-section p{font-size:15px!important}
  body .journey-illustration{gap:8px;padding:15px!important}
 }
+
+/* v9 source-token normalization — legacy page components use these variables.
+   Defining them once makes all unthemed cards dark instead of white-on-white. */
+:root{
+  --paper:#174235;--cream:#0b291f;--warm:#0b291f;--soft:#174235;--mint:#1b4c3a;
+  --ink:#f0f8ef;--text:#d9eadc;--secondary:#c1d9c6;--muted:#b8d1be;
+  --line:rgba(185,226,195,.22);--accent:#b8debd;--green:#9bcba7;
+  --reading-ink:#f0f8ef;--reading-muted:#bdd7c4;--reading-border:rgba(186,229,198,.2);
+}
+body .milestone,body .paper-form,body .entry-card,body .entry-head,body .entry-empty,
+body .reading-intro,body .takeaway,body .journey-illustration,body .application-example,
+body .example-top,body .example-row,body .form-subheading,body .priority-label,
+body .workspace-steps,body .section-hint,body .overview-illustration,body .illustration-top{
+  color:#edf7eb!important;
+}
+body .reading-section{min-width:0}
+body .reading-section-num{position:static!important}
+body .reader .journey-illustration{background:rgba(22,68,50,.87)!important;color:#eaf6eb!important}
+body .reader .journey-illustration>span{color:#eaf6eb!important}
+body .reader .journey-illustration>i{color:#c3e8cc!important}
+body .milestone .priority-label{color:#e0f9e1!important}
+body .milestone h3{color:#f7fcf5!important}
+body .milestone p{color:#c4ddcc!important}
+body .lesson-link:not(.active){color:#c4deca!important}
+body .reading-section h2{color:#f1fbef!important}
+body .reading-section p{color:#c8ddca!important}
