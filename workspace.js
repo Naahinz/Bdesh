@@ -196,7 +196,7 @@ async function addApplication(name,opportunityId=null,round='undecided',deadline
  note('Adding application…');
  const payload={user_id:user.id,institution_name:name,opportunity_id:opportunityId,application_round:round,application_deadline:deadline,aid_deadline:aidDeadline};
  const {data,error}=await sb.from('student_applications').insert(payload).select().single();
- if(error){fail(error);return false}applications.unshift(data);renderApplications();stats();renderNextActions();renderDeadlineCenter();note('Application added');setTab('apply');return true;
+ if(error){fail(error);return false}applications.unshift(data);renderApplications();stats();renderNextActions();renderDeadlineCenter();note('Application added');window.bdeshTrack?.('bdesh_application_added');setTab('apply');return true;
 }
 function appDate(v){return v?new Date(v+'T12:00:00').toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'}):'Not entered'}
 const applicationSaveQueues=new Map();
