@@ -1,3 +1,7 @@
+# CURRENT STATUS — 3 NOVEMBER 2026
+
+**US directory: 51/51 source-reviewed · 40 fully verified · 11 partially reviewed · 0 unchecked.** The remaining confirmations are listed in [UNIVERSITY_VERIFICATION_GAPS.md](UNIVERSITY_VERIFICATION_GAPS.md). Older counts further down this document are historical progress snapshots, not the current database totals. Records may become outdated in later admissions cycles; reverify annually.
+
 # Bdesh beta launch readiness — 3 November 2026
 
 ## Completed in this pass
@@ -13,7 +17,8 @@
 - [x] Repaired university research filter false positives from 'no merit' and exposed reviewed sources and deadlines to students.
 
 ## Remaining before unqualified public launch
-- [ ] Individually verify the remaining **30 US college research leads** (21 verified, four partially reviewed and 26 not yet reviewed among 51 published US colleges) and any non-US entries, before removing beta labels.
+- [x] Source-review **all 51 published US university records** (40 verified, 11 partially reviewed, 0 untouched as of 2026-11-03). Do not mark the 11 partial records fully verified until universities resolve the questions in `UNIVERSITY_VERIFICATION_GAPS.md`.
+- [ ] Obtain written/current official confirmation for the **11 partially reviewed universities** and update their verification timestamps after resolving the outstanding material question.
 - [ ] Complete real two-account browser isolation and editor authorization testing. Simulated Supabase role tests on 2026-11-03 returned 0 cross-account private rows, prevented non-editor college updates, and showed 0 unpublished records to anonymous visitors.
 - [ ] Check Supabase Auth warning: leaked-password protection disabled. If enabling email/password accounts in the future, prioritize hardening.
 - [ ] Independently verify Cloudflare Pages deployment of privacy, terms, feedback and updated college cards; the public browser fetch was inaccessible to the automated checker.
@@ -87,3 +92,12 @@ Do not infer automatic full-ride eligibility from 'meets full demonstrated need'
 2. Other need-based funding colleges: Carleton, Bates, Franklin & Marshall, Trinity College (Connecticut), Kenyon, Lafayette.
 3. Merit-competitive/coverage-sensitive options: Denison, Lehigh, Gettysburg, Connecticut College, Washington University in St. Louis, Soka University of America, Oberlin, St. Olaf, Sewanee.
 4. Reconcile the 6 partially reviewed colleges' unclear admission/aid deadlines directly from current first-year applicant pages or by contacting admissions as necessary. Do not mark them verified without resolving ambiguity.
+
+## Source-review completion — 3 November 2026
+- Entire 51-record published United States college list now carries review evidence and a 2026-11-03 source-checked date. No US record remains untouched.
+- 40 college records have `verified_at=2026-11-03`. 11 records have `source_checked_at=2026-11-03` with `verified_at=NULL` because exact college-owned requirements or current-cycle deadlines are unavailable or contradictory.
+- Fully checked this last batch: Johns Hopkins, Rice, Haverford, Smith, Mount Holyoke, Bates, Franklin & Marshall, Kenyon, Lafayette, Trinity College (Connecticut), Denison, Lehigh, St. Olaf, Washington University in St. Louis, Connecticut College and Soka University of America.
+- Partial sources this batch: Oberlin, Gettysburg, Sewanee, Columbia and Carleton; university-specific questions preserved with official URLs in `UNIVERSITY_VERIFICATION_GAPS.md`.
+- Updated the university directory UI to distinguish full verification vs partially reviewed records with explicit high-contrast status text and warning sections; `workspace.html` references new `workspace.js?v=source-review4` and `glass-repair.css?v=4`.
+- Coverage is **research status, not a blanket recommendation or admissions/aid guarantee**. A university can be fully source-verified and still be unaffordable for a low-income international applicant; direct cost of attendance can exclude major indirect expenses.
+- No student account data or application statuses were changed during this batch. Production visual rendering has not been independently inspected by the assistant; the user previously confirmed working desktop and mobile functionality.
