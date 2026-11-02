@@ -1,3 +1,5 @@
+> **Authentication update (3 NOVEMBER 2026):** Google OAuth is the only Bdesh frontend sign-in method for now. All email/password and `email-test` test controls have been removed. The SMTP and password-signup instructions below are future work, not currently available controls. PostHog and the protected admin dashboard remain separate from the login choice.
+
 # Bdesh — Admin Analytics & Transactional Email Launch
 
 Last updated: 3 November 2026. Static site on Cloudflare Pages, PostgreSQL/Auth on Supabase.
