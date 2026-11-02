@@ -37,7 +37,7 @@ An administrator can use a supported third-party SMTP account with a sender that
 Use a **real, non-project-team email address** that is not already registered, with explicit consent from its owner:
 
 1. Verify custom SMTP test email succeeds and the sender is not blocked.
-2. Open Bdesh homepage and use the email signup flow (after test flag is enabled; see below).
+2. Open **https://bdesh.pages.dev/?email-test=1&signin=1** to activate only the UI smoke-test switch, then select **Create an account**. This parameter does not bypass Supabase confirmation or rate limits.
 3. Check that the expected confirmation email arrives and links back to `https://bdesh.pages.dev/`.
 4. Confirm and then sign in with email/password. Ensure a new student sees an empty private profile, not someone else's data.
 5. Sign out and sign back in.
@@ -57,3 +57,9 @@ A verified email address is essential for password resets, account recovery, and
 - Confirm production Site URL and redirect allowlist in Supabase.
 - Run end-to-end registration and recovery tests with a non-team mailbox.
 - Then enable public email signup flag in the site.
+
+## Smoke-test behavior as committed
+- Public homepage: Google sign-in and existing email-password sign-in are offered, but **new email signup and reset-email sending are gated** until SMTP is verified.
+- Test-only UI path: `https://bdesh.pages.dev/?email-test=1&signin=1` displays the otherwise-gated signup and password reset controls. This is **not a security control**; any visitor could add the query parameter, and Supabase remains the authoritative account/confirmation gate. Do not use this before configuring SMTP or to skirt rate limits.
+- If a signup fails with `email_address_not_authorized` or `over_email_send_rate_limit`, it indicates delivery is still falling back to Supabase's limited default mail service. Review SMTP settings, mail-provider verification, and project rate limits; never turn off email confirmation as a workaround.
+- On a successful two-account smoke test, update `emailRegistrationReady` to `true` and revise homepage copy, then remove the temporary test-mode switch in a follow-up hardening pass.
