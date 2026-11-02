@@ -104,3 +104,59 @@ body .research-evidence h4{font-size:13px;color:#ecfaed;margin:15px 0 7px;line-h
 body .research-evidence p,body .research-evidence li{font-size:13px;line-height:1.65;color:#c7e0cc;overflow-wrap:anywhere}
 body .research-evidence ul{padding-left:18px;margin:8px 0 0}
 body .research-evidence a{color:#c6f5d2;text-decoration:underline;text-underline-offset:3px;overflow-wrap:anywhere}
+
+/* Full-width, differentiated university lookup card. */
+body #apply .college-search.college-lookup-card{
+ width:100%!important;max-width:none!important;min-width:0!important;
+ display:block!important;margin:30px 0 30px!important;
+ padding:clamp(24px,3.5vw,44px)!important;
+ background:radial-gradient(ellipse at 94% 6%,rgba(135,192,144,.22),transparent 42%),linear-gradient(123deg,rgba(31,88,63,.92),rgba(9,49,37,.97))!important;
+ border:1px solid rgba(197,237,205,.43)!important;border-radius:24px!important;
+ box-shadow:inset 0 1px 0 rgba(255,255,255,.15),0 18px 42px rgba(0,17,11,.2)!important;
+ backdrop-filter:blur(24px)!important;-webkit-backdrop-filter:blur(24px)!important;
+}
+body #apply .college-lookup-head{display:flex;gap:22px;align-items:center;justify-content:space-between;margin:0 0 28px;min-width:0}
+body #apply .college-lookup-head>div:first-child{flex:1 1 auto;min-width:0}
+body #apply .college-lookup-eyebrow{display:block;color:#b4d8bd!important;font-size:11px!important;font-weight:800!important;letter-spacing:.14em;line-height:1.5}
+body #apply .college-lookup-head h3{font-size:clamp(28px,3vw,42px)!important;color:#f3fbf2!important;line-height:1.15!important;letter-spacing:-.055em!important;margin:10px 0 13px!important}
+body #apply .college-lookup-head p{font-size:15px!important;color:#c9e1d0!important;line-height:1.65!important;margin:0!important;max-width:650px}
+body #apply .college-lookup-indicator{flex:0 0 70px;width:70px;height:70px;position:relative;border-radius:50%;border:1px solid rgba(211,245,216,.46);background:rgba(164,208,156,.13);box-shadow:inset 0 0 18px rgba(204,241,194,.1)}
+body #apply .college-lookup-indicator::before{content:'';position:absolute;left:19px;top:17px;width:24px;height:24px;border:3px solid #d4eed8;border-radius:50%}
+body #apply .college-lookup-indicator::after{content:'';position:absolute;left:43px;top:42px;width:17px;height:3px;background:#d4eed8;transform:rotate(48deg);transform-origin:left center;border-radius:2px}
+body #apply .college-lookup-card .college-search-label{display:block;font-size:14px!important;font-weight:800!important;color:#e8f6e9!important;margin:0 0 10px!important}
+body #apply .college-lookup-card .college-search-field{width:100%;position:relative;min-width:0}
+body #apply .college-lookup-card #college-search-input{
+ display:block!important;width:100%!important;max-width:none!important;min-width:0!important;
+ height:auto;min-height:68px!important;
+ padding:18px 22px!important;margin:0!important;
+ background:rgba(7,35,26,.78)!important;color:#fbfffa!important;
+ border:1px solid rgba(203,240,207,.58)!important;border-radius:15px!important;
+ box-shadow:inset 0 2px 8px rgba(0,12,8,.15)!important;
+ font-family:'Plus Jakarta Sans','DM Sans',sans-serif!important;
+ font-size:clamp(16px,1.5vw,19px)!important;font-weight:550!important;
+ line-height:1.4!important;
+}
+body #apply .college-lookup-card #college-search-input::placeholder{color:#b5cdbb!important;opacity:1!important}
+body #apply .college-lookup-card #college-search-input:focus{border-color:#e1f4ce!important;outline:3px solid rgba(198,230,170,.33)!important;outline-offset:2px!important}
+body #apply .college-lookup-card #college-search-hint{font-size:13px!important;line-height:1.65!important;color:#bad8c3!important;margin:13px 0 20px!important}
+body #apply .college-lookup-card .college-search-results{display:grid;grid-template-columns:minmax(0,1fr);gap:11px;width:100%;min-width:0}
+body #apply .college-lookup-card .college-search-results>p{color:#d6e9db!important;font-size:14px!important}
+body #apply .college-lookup-card .college-search-result{
+ display:flex!important;justify-content:space-between!important;align-items:center!important;
+ width:100%!important;min-height:58px;padding:16px 18px!important;gap:15px!important;
+ background:rgba(29,81,57,.64)!important;border:1px solid rgba(170,217,180,.32)!important;border-radius:12px!important;
+ color:#f1faf0!important;text-align:left!important;
+}
+body #apply .college-lookup-card .college-search-result:hover,
+body #apply .college-lookup-card .college-search-result:focus-visible{background:rgba(61,118,77,.68)!important;border-color:#b4d8ad!important}
+body #apply .college-lookup-card .college-search-result strong{color:#f1faf0!important;line-height:1.35}
+body #apply .college-lookup-card .college-search-result span{color:#c1ddc7!important}
+body #apply .college-lookup-card .college-manual{background:#dcefdc!important;color:#143c2b!important;border-color:#d6e9d5!important;padding:14px 19px!important;border-radius:11px!important}
+body #apply .college-lookup-card .college-chosen{color:#d7f5dd!important}
+@media(max-width:620px){
+ body #apply .college-search.college-lookup-card{padding:23px 19px!important;margin:21px 0 24px!important;border-radius:18px!important}
+ body #apply .college-lookup-indicator{display:none}
+ body #apply .college-lookup-head{margin-bottom:23px}
+ body #apply .college-lookup-card #college-search-input{min-height:58px!important;padding:16px 17px!important}
+ body #apply .college-lookup-card .college-search-result{align-items:flex-start!important;flex-direction:column!important;gap:5px!important}
+}
