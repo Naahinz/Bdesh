@@ -95,3 +95,12 @@ body .application-card :is(button,input,textarea,select),body .profile-panel :is
  body #profile-app .illustration-lines>div{flex-wrap:wrap}
  body #profile-app .illustration-lines small{margin-left:0!important;text-align:left!important}
 }
+
+/* University source evidence: readable without expanding every research card. */
+body .research-evidence{margin:8px 0 0;padding:14px 16px;border:1px solid rgba(181,224,193,.27);background:rgba(11,49,36,.58);border-radius:11px;max-width:100%;min-width:0}
+body .research-evidence summary{cursor:pointer;color:#e0f3e3;font-size:13px;font-weight:750;line-height:1.5}
+body .research-evidence[open] summary{padding-bottom:12px;border-bottom:1px solid rgba(173,222,187,.24);margin-bottom:12px}
+body .research-evidence h4{font-size:13px;color:#ecfaed;margin:15px 0 7px;line-height:1.45}
+body .research-evidence p,body .research-evidence li{font-size:13px;line-height:1.65;color:#c7e0cc;overflow-wrap:anywhere}
+body .research-evidence ul{padding-left:18px;margin:8px 0 0}
+body .research-evidence a{color:#c6f5d2;text-decoration:underline;text-underline-offset:3px;overflow-wrap:anywhere}
