@@ -89,6 +89,10 @@ Deno.serve(async (req: Request) => {
       .from("opportunities").select("*", { count: "exact", head: true })
       .eq("published", true).not("verified_at", "is", null);
     if (verifiedError) throw verifiedError;
+    const { count: completedLessons, error: lessonsError } = await admin
+      .from("student_readiness").select("*", { count: "exact", head: true })
+      .eq("state", "done").like("milestone_id", "lesson-%");
+    if (lessonsError) throw lessonsError;
     const signupSeries = [];
     for (let i = 13; i >= 0; i--) {
       const day = new Date(now - i * 86400000).toISOString().slice(0,10);
@@ -104,7 +108,8 @@ Deno.serve(async (req: Request) => {
         tracked_applications: applications,
         admissions_profiles: profiles,
         profile_portfolios: portfolios,
-        completed_learning_tasks: completedTasks,
+        completed_learning_tasks: completedLessons ?? 0,
+        completed_preparation_tasks: completedTasks,
         published_opportunities: publishedColleges,
         verified_opportunities: fullyVerified ?? 0,
         unverified_opportunities: unverifiedColleges,
