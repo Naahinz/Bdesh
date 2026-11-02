@@ -70,3 +70,20 @@ Do not infer automatic full-ride eligibility from 'meets full demonstrated need'
 - **Northwestern remains a partially reviewed record** (admissions vs aid pages give conflicting aid deadlines); do not silently infer the required submission date. Other partial reviews: Amherst, Dartmouth and Swarthmore.
 - The feedback form's end-to-end submission and inbox receipt were **confirmed by the user** after one-time activation; no additional manual activation is pending.
 - Current directory target totals: **21 verified / 4 partial / 26 unchecked** of 51 published US opportunities.
+
+## 2026-11-03: Priority review of 26 previously untouched US records
+- Source-reviewed 5 additional colleges: **Vanderbilt, Washington and Lee, Davidson** (fully verified), and **Duke, Emory** (partially reviewed; international aid filing details require current-cycle reconciliation).
+- Updated current official admission dates, testing policies, international need-aware/need-blind policies, scholarship eligibility, international CSS alternatives, fee waivers, and grant limitations in Supabase.
+- Davidson: Belk scholarship nomination deadline November 1 has passed; official admission staff may nominate a candidate from the admission pool. International students with under USD 5,000 family contribution may qualify for Davidson's portal-based alternative to CSS; others must use CSS.
+- Washington and Lee: need-blind for international students and meets full demonstrated need without loans. International grant supplement is required; eligible CSS fee-waiver recipients have alternate timing. Johnson scholarship supplement deadline December 1, 2026.
+- Vanderbilt: international need-aware and competitive; international CSS **or ISFAA**, signature merit application December 1, 2026. Many named awards are full tuition, NOT automatically full cost of attendance.
+- Emory: scholars require Nov 15 completed admission application for EDII/RD; official general aid deadlines and special international February 10 table need final reconciliation, so keep partially reviewed.
+- Duke: official financial aid page still contains previous academic-year 2026-27 CSS wording although admissions lists fall 2027. Keep partially reviewed pending current-year aid confirmation.
+- **Corrected dual funding-route filtering** in workspace so universities offering both merit and need-based options match both search filters. Negated statements such as 'no merit scholarships' are excluded from false matches. Tested representative need-only, merit-only, and dual-route phrases.
+- Confirmed directory total after this batch: **24 fully verified, 6 partially reviewed, 21 untouched**, out of 51 published US colleges.
+
+### Next review queue
+1. High-stakes major institutional aid: Columbia, Rice, Johns Hopkins, Haverford, Smith, Mount Holyoke.
+2. Other need-based funding colleges: Carleton, Bates, Franklin & Marshall, Trinity College (Connecticut), Kenyon, Lafayette.
+3. Merit-competitive/coverage-sensitive options: Denison, Lehigh, Gettysburg, Connecticut College, Washington University in St. Louis, Soka University of America, Oberlin, St. Olaf, Sewanee.
+4. Reconcile the 6 partially reviewed colleges' unclear admission/aid deadlines directly from current first-year applicant pages or by contacting admissions as necessary. Do not mark them verified without resolving ambiguity.
