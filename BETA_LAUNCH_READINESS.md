@@ -44,3 +44,13 @@ Do not infer automatic full-ride eligibility from 'meets full demonstrated need'
 - Live browser checker could not open the Cloudflare Pages domain, so visual deployment verification still requires a user browser session.
 - **Security warning:** Supabase advisor reports leaked-password protection disabled. Email/password signup is currently hidden on homepage; if reenabled, update setting in Supabase Auth.
 - **Important deadline exceptions:** Brown does not accept ISFAA as CSS substitute; Bowdoin and Williams request aid paperwork from international students after admission; Berea international deadline is November 30 and accepted students face a deposit; Pomona and Swarthmore are international need-aware; Wesleyan permits ISFAA if CSS fees are unaffordable; Dartmouth testing has multiple accepted options for international students.
+
+## 2026-11-03: feedback delivery and college search redesign
+- [x] Enlarged Applications university lookup into its own distinct full-width glass panel; all database-first search functionality preserved.
+- [x] Redesigned Discover university search to span the full card, with compact filters on the next row.
+- [x] Replaced feedback mailto-only experience with a full feedback form (topic, optional reply email, required text).
+- [x] Added JavaScript AJAX email routing to **eftekhernahin@gmail.com** through `formsubmit.co`; does not require visitors to open their own email clients.
+- [x] Added client validation, async progress, explicit success/failure/activation messages, honeypot field, and fallback mailto link.
+- [x] Updated privacy notice to disclose use of the external form-to-email provider.
+- [ ] **Manual requirement:** Recipient must open the activation email at `eftekhernahin@gmail.com` after the first form submission and click the activation link. Until then, email delivery is **not verified/activated**. Submit a test and confirm arrival after activation.
+- [ ] Verify rendered search cards and feedback form on desktop and mobile. Repository source checks are not substitutes for live browser testing.
