@@ -381,3 +381,9 @@ body .milestone p{color:#c4ddcc!important}
 body .lesson-link:not(.active){color:#c4deca!important}
 body .reading-section h2{color:#f1fbef!important}
 body .reading-section p{color:#c8ddca!important}
+
+/* Public-beta footer navigation. */
+.trust-links{display:flex;align-items:center;justify-content:center;gap:19px;flex-wrap:wrap;padding:25px 20px!important;margin-top:30px;background:rgba(5,32,23,.68)!important;border-top:1px solid rgba(173,215,185,.24)!important;color:#c9e1ce!important;font-size:13px!important;line-height:1.55}
+.trust-links a{color:#d5eddb!important;font-weight:700;text-underline-offset:4px}
+.trust-links a:hover{color:white!important}
+.trust-links span{color:#b4cfbb!important}
