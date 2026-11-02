@@ -107,3 +107,15 @@ Do not infer automatic full-ride eligibility from 'meets full demonstrated need'
 - Türkiye Scholarships (Türkiye): source-reviewed standard recurring Jan 10–Feb 20 government undergraduate application calendar, age-under-21 and 70% academic eligibility criteria, and full-time award benefits including tuition, residence, stipend and insurance. Its **specific 2027 announcement is not yet published** in the dated official news found; entry remains partially reviewed pending the official announcement. The main scheme differs from the separately repayable IsDB joint programme.
 - Final coverage of the complete opportunities table: **53 source-reviewed, 41 fully verified, 12 partial, zero untouched**. Public US directory: **51 total, 40 verified, 11 partial**. The two non-US entries are currently outside the site’s US-only discovery filter but are also documented for future expansion.
 - Outstanding official clarification questions for 11 US universities: [UNIVERSITY_VERIFICATION_GAPS.md](UNIVERSITY_VERIFICATION_GAPS.md). Additional calendar-specific unresolved question: **2027 Türkiye Scholarships official call publication**.
+
+## 2026-11-03: email/password account creation debugging
+- [x] Confirmed Supabase's built-in Auth email delivery is intentionally restricted to organization-team addresses and two messages/hour; not suitable for new student email/password accounts or password recovery.
+- [x] Checked Supabase Auth logs; current successful sessions were recorded, but the recent log window did not independently demonstrate delivery of new signup emails. No external test signup was created.
+- [x] Made homepage existing email/password **sign-in** visible again while retaining Google OAuth.
+- [x] Repaired password-recovery form validation so a link-based password update does not demand the email field again; raise new password signup/recovery minimum to 12 characters while retaining existing login compatibility.
+- [x] Kept **new email registration and outgoing-email password resets disabled** until a custom SMTP sender has been configured and tested; avoid soliciting signups that cannot confirm their email.
+- [x] Added plain-language SMTP limitation to account UI, fixed input contrast, and versioned CSS/JS references to bypass caches.
+- [x] Wrote secure step-by-step Supabase/Resend setup and acceptance-test plan in [EMAIL_AUTH_SETUP.md](EMAIL_AUTH_SETUP.md); do not share API keys or SMTP credentials through chat or GitHub.
+- [ ] Manual dependency: project owner must connect an authenticated SMTP sender (verified domain provider or temporary dedicated Gmail SMTP with app password) in Supabase Auth settings, confirm Site URL + redirect allowlist, keep email confirmation ON, and test signup/reset with an independent mailbox.
+- [ ] When complete and tested, set `emailRegistrationReady=true` in `auth.js`, update homepage introductory copy, and run live second-account confirmation/security checks before publicizing registration.
+- [ ] Address Supabase security advisor warning: **Leaked Password Protection Disabled** prior to opening password signup to students.
