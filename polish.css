@@ -170,7 +170,7 @@ body .hero-copy>p{max-width:67ch}
 .journey-arrow{color:#6d9278;display:flex;align-items:center;justify-content:center;flex:1;min-height:72px;font-size:37px;font-weight:300;line-height:1;position:relative}
 .journey-arrow:before{content:"";position:absolute;top:0;bottom:4px;border-left:1px solid #b8ccbc;z-index:0}
 .journey-arrow{isolation:isolate}
-.journey-arrow:after{content:"";background:#f5f3e9;position:absolute;width:35px;height:43px;top:50%;transform:translateY(-50%);z-index:-1}
+.journey-arrow:after{content:none;display:none}
 .journey-step.journey-started .journey-node{border-color:#2b7653;background:#e1eee1}
 .journey-detail{padding:8px 0 55px;border-bottom:1px solid #d1dbce;margin-bottom:30px}
 .journey-step:last-child .journey-detail{border:0}
