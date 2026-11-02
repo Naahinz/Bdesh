@@ -227,3 +227,34 @@ body footer{background:rgba(6,30,23,.8)!important;color:#c1d7c9!important;border
 @media(max-width:900px){body .home-flow-head{flex-wrap:wrap}body .journey-progress{width:100%;flex:1 1 260px}body .hero{min-height:0}}
 @media(max-width:700px){body .application-card .mini-checklist{grid-template-columns:1fr}body .research-grid,body .review-summary{grid-template-columns:1fr}body .journey-detail{padding:20px!important}body .home-flow-head{gap:18px}body .lesson-content{padding:20px!important}}
 @media(prefers-reduced-transparency:reduce){body :is(.application-card,.research-card,.journey-detail,.lesson-content,.editor-form){backdrop-filter:none!important;background:#194333!important}}
+
+/* v7 precision fixes — insets and consistent dark callouts */
+body .home-flow-head{padding:clamp(26px,3.5vw,52px)!important}
+body .home-flow-head>div:first-child{padding:0 16px 0 0!important}
+body .journey-detail{padding:clamp(28px,3vw,45px)!important}
+body .journey-detail :is(h3,p,.journey-tag,.journey-foot){max-width:100%;margin-left:0!important;margin-right:0!important}
+body .journey-detail :is(.darkbtn,.journey-link){align-self:flex-start;max-width:100%}
+body .action-plan,body .deadline-center{padding:clamp(25px,3vw,42px)!important}
+body .action-plan .next-action{padding:20px 24px!important;margin-top:12px!important}
+body .deadline-entry{padding:18px 20px!important}
+body .deadline-summary>div{padding:20px!important}
+body .reading-top{padding:14px 20px!important}
+body .lesson-content{padding:clamp(30px,4vw,56px)!important}
+body .lesson-content>*,body .lesson-content :is(h1,h2,h3,p,ul,ol){max-width:100%}
+body .lesson-content :is(.takeaway,.lesson-takeaway,.callout,.idea,.key-idea,.tip,.lesson-note,.highlight,.summary-box,.lesson-flow,.lesson-steps,.guide-card,blockquote){background:rgba(31,83,63,.82)!important;border:1px solid rgba(184,225,198,.29)!important;border-radius:14px!important;color:#e8f4e8!important;padding:22px 25px!important}
+body .lesson-content :is(.takeaway,.lesson-takeaway,.callout,.idea,.key-idea,.tip,.lesson-note,.highlight,.summary-box,.lesson-flow,.lesson-steps,.guide-card,blockquote) :is(p,span,strong,h2,h3,li){color:#e8f4e8!important}
+body .lesson-content [style*="background"],body .reader [style*="background"]{color:#e8f4e8}
+body .lesson-content .section-number{margin-right:14px}
+body .knowledge-check{padding:28px!important}
+body .check-options button{padding:16px 22px!important}
+body .research-card{padding:28px!important}
+body .research-card :is(p,h3,ul){margin-left:0!important}
+body .application-card{padding:clamp(25px,3vw,38px)!important}
+body .application-card .application-details{padding-top:22px!important}
+body .followup-tracker{padding:24px!important}
+body .followup-item{padding:17px 20px!important}
+body .review-card,body .entry-card{padding:25px!important}
+body .editor-form,body .editor-history{padding:25px!important}
+body .hero-copy{padding:clamp(26px,3vw,46px)!important}
+body :is(.lesson-content,.knowledge-check,.application-card,.research-card,.review-card,.journey-detail,.home-flow-head,.deadline-center,.action-plan) :is(p,li){line-height:1.7}
+@media(max-width:700px){body .home-flow-head,body .journey-detail,body .action-plan,body .deadline-center,body .lesson-content{padding:22px!important}body .home-flow-head>div:first-child{padding:0!important}}
