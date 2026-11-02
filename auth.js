@@ -5,27 +5,13 @@ const apiURL='https://xeqixwmulwonvhifcmvn.supabase.co';
 const publicKey="sb_publishable_2Jp14PFt4_mLDT4cpqLfUw_d-tDSnwj";
 const client=globalThis.supabase?.createClient(apiURL,publicKey,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});
 if(client) globalThis.bdeshSupabase=client;
-// Flip this only after a dedicated SMTP provider is configured and a non-team
-// signup, confirmation and password-reset cycle has been successfully tested.
-const emailRegistrationReady=false;
-// This URL parameter is a UI-only smoke-test switch, not a security boundary.
-// Supabase still enforces the actual authentication and email-confirmation rules.
-const emailRegistrationTestMode=new URLSearchParams(location.search).get('email-test')==='1';
-const emailRegistrationEnabled=emailRegistrationReady||emailRegistrationTestMode;
+// This beta uses Google OAuth exclusively; no browser-side email registration or password flows.
 const el=id=>document.getElementById(id);
-const panel=el('auth-panel'), form=el('auth-form'), msg=el('auth-message'), toggle=el('account-toggle');
+const panel=el('auth-panel'), msg=el('auth-message'), toggle=el('account-toggle');
 if(!client){toggle.textContent='Account service unavailable';toggle.addEventListener('click',()=>{panel.hidden=false;msg.textContent='The account library did not load. Please refresh the page and try again.'});return}
-let mode='signin', user=null, loading=false, suppress=false, syncUserId=null;
+let user=null, suppress=false, syncUserId=null;
 toggle.textContent='Checking session…';toggle.disabled=true;
 const notify=(text,error=false)=>{msg.textContent=text;msg.classList.toggle('error',error)};
-// Password login for existing accounts works without outgoing email. New email
-// signups and password resets are kept behind the SMTP readiness gate.
-el('auth-form').hidden=false;
-el('auth-switch-actions').hidden=!emailRegistrationEnabled;
-el('auth-email-status').hidden=emailRegistrationEnabled;
-if(emailRegistrationTestMode&&!emailRegistrationReady){
-  el('auth-help').textContent='Email registration test mode. Create an account only after the custom SMTP sender has been configured. Confirmation by email is still required.';
-}
 const open=()=>{panel.hidden=false;el('google-signin').focus();};
 const requestedNext=new URLSearchParams(location.search).get('next');
 const returnPath=requestedNext==='/workspace.html'||requestedNext==='/workspace.html#profile'?'/workspace.html':null;
@@ -35,33 +21,6 @@ const close=()=>{panel.hidden=true;notify('')};
 toggle.addEventListener('click',async()=>{if(user){const {error}=await client.auth.signOut();if(error)notify(error.message,true);else{user=null;toggle.textContent='Beta sign in';document.dispatchEvent(new CustomEvent('bdesh:auth-change',{detail:{user:null}}));open();notify('Signed out.')}return;}open()});
 el('auth-close').addEventListener('click',close);
 el('google-signin').addEventListener('click',async()=>{const button=el('google-signin');button.disabled=true;notify('Redirecting to Google…');try{const {error}=await client.auth.signInWithOAuth({provider:'google',options:{redirectTo:location.origin+(returnPath||location.pathname)}});if(error)throw error}catch(e){notify('Google sign-in is not ready: '+(e?.message||'Please try again.'),true);button.disabled=false}});
-function setMode(v){
- if(!emailRegistrationEnabled && (v==='signup'||v==='recover')){
-   notify('Email registration and password recovery require the dedicated confirmation-email provider. Continue with Google, or sign in using an existing email account.',true);
-   return;
- }
- mode=v;
- el('auth-title').textContent=v==='signup'?'Create your Bdesh account':v==='recover'?'Reset your password':v==='newpassword'?'Set a new password':'Sign in to Bdesh';
- el('auth-submit').textContent=v==='signup'?'Create account':v==='recover'?'Send reset email':v==='newpassword'?'Update password':'Sign in';
- el('consent-line').hidden=v!=='signup';
- const password=el('auth-password'),email=el('auth-email');
- password.required=v!=='recover';
- password.style.display=v==='recover'?'none':'';
- password.minLength=v==='signup'||v==='newpassword'?12:8;
- password.autocomplete=v==='signup'||v==='newpassword'?'new-password':'current-password';
- email.required=v!=='newpassword';
- email.closest('label')?.removeAttribute('hidden');
- email.style.display=v==='newpassword'?'none':'';
- const emailLabel=document.querySelector('label[for="auth-email"]');
- if(emailLabel)emailLabel.hidden=v==='newpassword';
- el('auth-switch').textContent=v==='signup'?'Already have an account? Sign in':'Create an account';
- el('auth-reset').hidden=v!=='signin';
- el('auth-switch-actions').hidden=!emailRegistrationEnabled||v==='newpassword';
- notify('');
-}
-el('auth-switch').addEventListener('click',()=>setMode(mode==='signup'?'signin':'signup'));
-el('auth-reset').addEventListener('click',()=>setMode('recover'));
-form.addEventListener('submit',async event=>{event.preventDefault();if(loading)return;const email=el('auth-email').value.trim(),password=el('auth-password').value;loading=true;el('auth-submit').disabled=true;notify('Connecting…');try{if(mode==='newpassword'){const {error}=await client.auth.updateUser({password});if(error)throw error;setMode('signin');notify('Your password has been updated. You can now sign in.');return}if(mode==='signup'){if(!el('auth-consent').checked){notify('Please read and accept the privacy notice and obtain any required guardian permission.',true);return}if(!emailRegistrationEnabled)throw new Error('New email account creation is paused until the confirmation-email service is configured. Continue with Google for now.');const {data,error}=await client.auth.signUp({email,password,options:{emailRedirectTo:location.origin+location.pathname}});if(error)throw error;notify(data.session?'Account created. Your checklist can now sync.':'Check your email to confirm your account, then return to sign in.');if(data.session)await synchronize(data.session.user);return}if(mode==='recover'){const {error}=await client.auth.resetPasswordForEmail(email,{redirectTo:location.origin+location.pathname});if(error)throw error;notify('If an account exists, a password-reset email has been sent.');return}const {data,error}=await client.auth.signInWithPassword({email,password});if(error)throw error;await synchronize(data.user);notify('Signed in. Your progress is saved securely.')}catch(e){const code=String(e?.code||'');const message=String(e?.message||'');if(code==='over_email_send_rate_limit'||/email rate limit exceeded/i.test(message)){notify('Bdesh has reached the email confirmation limit of its current Supabase test email service. Please try again later. We are setting up a dedicated email provider to support registration.',true)}else if(code==='email_address_not_authorized'){notify('Verification email could not be sent because Bdesh needs a dedicated SMTP provider. Continue with Google for now.',true)}else if(code==='email_not_confirmed'||/email not confirmed/i.test(message)){notify('This account has not confirmed its email address. Please check the confirmation message and spam folder, or contact Bdesh support.',true)}else if(code==='invalid_credentials'||/invalid login credentials/i.test(message)){notify('Email or password was not recognized. Check your details and try again.',true)}else notify(message||'Something went wrong. Try again.',true)}finally{loading=false;el('auth-submit').disabled=false}});
 const stages={Science:'science','Business Studies':'business',Humanities:'humanities','Not selected yet':'undecided'};
 const names={science:'Science',business:'Business Studies',humanities:'Humanities',undecided:'Not selected yet'};
 const intakes={'2027':2027,'2028':2028,'2029':2029};
@@ -82,7 +41,7 @@ document.addEventListener('bdesh:reset',async e=>{if(!user||suppress)return;cons
 function signedOut(){user=null;syncUserId=null;toggle.disabled=false;toggle.textContent='Beta sign in';document.dispatchEvent(new CustomEvent('bdesh:auth-change',{detail:{user:null}}))}
 client.auth.onAuthStateChange((event,session)=>{
   if(event==='SIGNED_OUT'){signedOut();return}
-  if(event==='PASSWORD_RECOVERY'){open();setMode('newpassword')}
+  if(event==='PASSWORD_RECOVERY'){open();notify('Email-password recovery is paused during the Google-only beta. Please sign in with Google instead.',true)}
   if(event==='INITIAL_SESSION'||event==='SIGNED_IN'||event==='TOKEN_REFRESHED'){
     toggle.disabled=false;
     if(session?.user){
