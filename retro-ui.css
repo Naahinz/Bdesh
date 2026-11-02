@@ -130,3 +130,26 @@ body{background:radial-gradient(ellipse 65% 36% at 92% 1%,rgba(234,185,137,.32),
 }
 @media(max-width:430px){:where(.metrics,.deadline-summary){grid-template-columns:1fr 1fr} :where(.deadline-entry button){grid-column:1/-1;justify-self:start}}
 @media(prefers-reduced-transparency:reduce){:where(.journey-detail,.application-card,.research-card,.review-card,.sidebar,.curriculum,.side,.editor-form){backdrop-filter:none!important;background:#f8faf6!important}}
+
+/* Specificity-safe card and content alignment fixes. */
+body .research-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,285px),1fr));align-items:stretch;gap:20px}
+body .research-grid .research-card{display:flex;flex-direction:column;min-width:0;height:100%;padding:clamp(18px,2.2vw,30px)}
+body .research-card h3,body .research-card h2{line-height:1.24;margin-bottom:8px}
+body .research-card p{line-height:1.65}
+body .research-card .research-actions{margin-top:auto;padding-top:16px}
+body .application-list{display:grid;grid-template-columns:minmax(0,1fr);gap:19px}
+body .application-card{width:100%;min-width:0;max-width:100%}
+body .application-card .application-header{display:flex;align-items:flex-start;justify-content:space-between;gap:15px;flex-wrap:wrap}
+body .application-card .application-header>div:first-child{flex:1 1 260px;min-width:0}
+body .application-card .mini-checklist{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px 22px}
+body .application-card .mini-checklist label{display:flex;align-items:center;gap:12px;min-width:0;font-size:17px;line-height:1.45}
+body .application-card .application-details{min-width:0}
+body .application-card .followup-heading{display:flex;flex-wrap:wrap;gap:12px;align-items:baseline}
+body .review-summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:18px}
+body .review-summary .review-card{min-width:0;height:100%;padding:22px}
+body .journey-detail{min-width:0}
+body .journey-detail h3{line-height:1.17;margin-bottom:12px}
+body .journey-detail p{line-height:1.7}
+body .editor-layout{min-width:0}
+body .editor-layout .editor-form{min-width:0}
+@media(max-width:760px){body .application-card .mini-checklist{grid-template-columns:1fr}body .research-grid,body .review-summary{grid-template-columns:minmax(0,1fr)}}
