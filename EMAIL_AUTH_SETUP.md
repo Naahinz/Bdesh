@@ -1,3 +1,5 @@
+> **CURRENT DECISION (3 NOVEMBER 2026): GOOGLE SIGN-IN ONLY.** Bdesh has removed the password form and temporary `?email-test=1` signup controls. The detailed SMTP and signup steps below are **deferred reference material**, not an active testing procedure. Reimplement the signup UI only after a domain and transactional sender are configured, then test with a non-team account before opening registrations.
+
 # Bdesh email/password registration — verified launch checklist
 
 ## SELECTED TEMPORARY SMTP SENDER — Gmail (`eftekhernahin@gmail.com`)
