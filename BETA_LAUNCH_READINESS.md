@@ -125,3 +125,21 @@ Do not infer automatic full-ride eligibility from 'meets full demonstrated need'
 - Exact Gmail SMTP fields and owner-only steps added to [EMAIL_AUTH_SETUP.md](EMAIL_AUTH_SETUP.md): `smtp.gmail.com` port `465` (or `587` TLS), `eftekhernahin@gmail.com` as sender/username, **Google App Password** as private password. Google 2-Step Verification and eligible app-password access required.
 - **Not yet configured** in Supabase: existing connector cannot write Supabase Auth SMTP settings or create Google app passwords, and secrets must not be committed/shared. Public signup is still gated.
 - Owner needs to enter app password **privately into Supabase dashboard**, then test a non-team email registration and password reset through `?email-test=1&signin=1`. Only then flip `emailRegistrationReady=true` and update text/caches.
+
+## November 3, 2026 — admin analytics and transactional email upgrade
+- [x] Kept original Supabase Auth and database, with no user migration.
+- [x] Created **`/admin.html`**, `admin.js`, `admin.css`, and linked the private dashboard from `editor.html`.
+- [x] Deployed the Supabase `admin-metrics` Edge Function (version 3, ACTIVE, `verify_jwt=true`). Server verifies the signed-in Supabase user and requires `app_metadata.bdesh_analytics_admin===true`, then returns aggregate counts (no names, emails, essays, bank details or private admissions records).
+- [x] Granted that **distinct** analytics-admin permission to **only `nahineftekher@gmail.com`**. Verified aggregate Auth metadata shows one analytics admin. The SMTP sender `eftekhernahin@gmail.com` is NOT an admin.
+- [x] Admin metrics: total Auth accounts, confirmed email accounts, 7-day signed-in users, 30-day new accounts, 14-day signups, student application count, completed lesson milestones, profile/portfolio counts, and published/verified university counts.
+- [x] Added `analytics-config.js` (empty public PostHog project token), opt-in `analytics.js`, and consent banner styles. No tracking occurs until token is configured AND visitor opts in. Page/lesson/profile/application milestone events contain no student-entered values or email/IDs.
+- [x] Explicitly turned off PostHog session replay, automatic pageviews, form/click autocapture, and personal profiles; stripped URL/referrer event properties. Added privacy disclosure and a revoke-consent control in the privacy notice.
+- [x] Added `ANALYTICS_AND_EMAIL_SETUP.md`, documenting one-time PostHog token, correct region, and Resend/SMTP domain-verification steps; user can also see the linked UI guide.
+- [x] Ran static JS parsing and cross-file linkage checks on 16 files (0 errors); reviewed security advisors, which still report leaked-password protection disabled.
+- [ ] Connect **PostHog public project key** and correct EU/US region in `analytics-config.js`, then test an opted-in event against live PostHog ingestion.
+- [ ] Replace the failing Gmail SMTP (`535 5.7.8`) with a **verified owned-domain sender** through Resend or another transactional provider. No API secrets in GitHub or chat. Keep Supabase email confirmation enabled.
+- [ ] Admin owner should visit `/admin.html` to complete browser rendering and privileged-access smoke testing; also test with second nonadmin account to confirm 403.
+- [ ] After verified SMTP and independent signup/reset tests, enable `emailRegistrationReady=true`, remove temporary signup test switch and publish public registration.
+- [ ] Decide how many analytics users can opt in and configure privacy/retention controls within PostHog account settings.
+
+**Important:** This upgrade is deployed as repo commits and an ACTIVE Supabase function, but Cloudflare production deployment and PostHog/SMTP live operation still require external account testing. The PostHog plugin being installed does not itself create a PostHog project token in the website.
