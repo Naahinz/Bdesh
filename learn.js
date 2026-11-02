@@ -99,6 +99,7 @@ function renderNav(){
 function render(){
  const lesson=lessons[current],wrap=$('lesson-content');wrap.replaceChildren();answered=false;
  $('chapter-id').textContent='CHAPTER '+String(current+1).padStart(2,'0')+' OF '+lessons.length;$('reading-time').textContent=lesson.time+' MIN READ';
+ window.bdeshTrack?.('bdesh_lesson_viewed',{chapter_index:current+1});
  const small=create('div','lesson-eyebrow','THE BDESH FIELD GUIDE / '+String(current+1).padStart(2,'0'));
  const title=create('h1','',lesson.title),lead=create('p','lesson-lead',lesson.lead);
  wrap.append(small,title,lead);
@@ -112,7 +113,8 @@ function render(){
 }
 function answer(index){if(answered)return;const quiz=lessons[current].quiz,buttons=[...$('check-options').children],correct=index===quiz.correct;buttons.forEach((b,i)=>{b.disabled=true;if(i===quiz.correct)b.classList.add('correct');else if(i===index)b.classList.add('incorrect')});$('check-feedback').textContent=(correct?'Exactly. ':'Not quite. ')+quiz.why;answered=true;}
 async function setDone(){const id=lessons[current].id;state.done.add(id);updateProgress();persist();renderNav();$('mark-read').textContent='✓ Understood';
- if(cloudUser&&sb){const {error}=await sb.from('student_readiness').upsert({user_id:cloudUser.id,milestone_id:'lesson-'+id,state:'done',updated_at:new Date().toISOString()},{onConflict:'user_id,milestone_id'});if(error){console.warn('Bdesh lesson sync:',error.message);throw error}}}
+ if(cloudUser&&sb){const {error}=await sb.from('student_readiness').upsert({user_id:cloudUser.id,milestone_id:'lesson-'+id,state:'done',updated_at:new Date().toISOString()},{onConflict:'user_id,milestone_id'});if(error){console.warn('Bdesh lesson sync:',error.message);throw error}}
+ window.bdeshTrack?.('bdesh_lesson_completed',{chapter_index:current+1});}
 function go(i){current=Math.max(0,Math.min(lessons.length-1,i));render();window.scrollTo({top:0,behavior:'instant'});$('main-content').focus({preventScroll:true})}
 // The final lesson is the handoff to Step 2. Wait for cloud progress to save
 // before navigating, otherwise the browser may cancel the pending request.
