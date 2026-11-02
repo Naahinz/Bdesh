@@ -1,6 +1,6 @@
 # CURRENT STATUS — 3 NOVEMBER 2026
 
-**US directory: 51/51 source-reviewed · 40 fully verified · 11 partially reviewed · 0 unchecked.** The remaining confirmations are listed in [UNIVERSITY_VERIFICATION_GAPS.md](UNIVERSITY_VERIFICATION_GAPS.md). Older counts further down this document are historical progress snapshots, not the current database totals. Records may become outdated in later admissions cycles; reverify annually.
+**All 53 database records source-reviewed: 41 fully verified · 12 partially reviewed · 0 unchecked. US directory: 51/51 source-reviewed · 40 verified · 11 partially reviewed.** The remaining confirmations are listed in [UNIVERSITY_VERIFICATION_GAPS.md](UNIVERSITY_VERIFICATION_GAPS.md). Older counts further down this document are historical progress snapshots, not the current database totals. Records may become outdated in later admissions cycles; reverify annually.
 
 # Bdesh beta launch readiness — 3 November 2026
 
@@ -101,3 +101,9 @@ Do not infer automatic full-ride eligibility from 'meets full demonstrated need'
 - Updated the university directory UI to distinguish full verification vs partially reviewed records with explicit high-contrast status text and warning sections; `workspace.html` references new `workspace.js?v=source-review4` and `glass-repair.css?v=4`.
 - Coverage is **research status, not a blanket recommendation or admissions/aid guarantee**. A university can be fully source-verified and still be unaffordable for a low-income international applicant; direct cost of attendance can exclude major indirect expenses.
 - No student account data or application statuses were changed during this batch. Production visual rendering has not been independently inspected by the assistant; the user previously confirmed working desktop and mobile functionality.
+
+## Non-US review, November 3, 2026
+- University of Hong Kong (Hong Kong): source-verified 2027 international first-round deadline Nov 25, 2026 noon Hong Kong time, and 2027–28 published non-local STEM/non-STEM tuition. Entrance scholarships are competitive and not guaranteed to cover all living costs; student-specific programme and award details must be checked. Entry marked verified.
+- Türkiye Scholarships (Türkiye): source-reviewed standard recurring Jan 10–Feb 20 government undergraduate application calendar, age-under-21 and 70% academic eligibility criteria, and full-time award benefits including tuition, residence, stipend and insurance. Its **specific 2027 announcement is not yet published** in the dated official news found; entry remains partially reviewed pending the official announcement. The main scheme differs from the separately repayable IsDB joint programme.
+- Final coverage of the complete opportunities table: **53 source-reviewed, 41 fully verified, 12 partial, zero untouched**. Public US directory: **51 total, 40 verified, 11 partial**. The two non-US entries are currently outside the site’s US-only discovery filter but are also documented for future expansion.
+- Outstanding official clarification questions for 11 US universities: [UNIVERSITY_VERIFICATION_GAPS.md](UNIVERSITY_VERIFICATION_GAPS.md). Additional calendar-specific unresolved question: **2027 Türkiye Scholarships official call publication**.
