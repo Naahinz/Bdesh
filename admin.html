@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><meta name="description" content="Private Bdesh administration metrics."><title>Analytics desk — Bdesh</title><link rel="stylesheet" href="/admin.css?v=1"></head>
+<body><header class="topbar"><a class="wordmark" href="/">bdesh<span>.</span></a><nav aria-label="Administration"><a href="/editor.html">College editor</a><a href="/workspace.html">Student workspace</a><a href="/">Home</a></nav></header>
+<main id="admin-main"><div class="eyebrow">PRIVATE OPERATIONS / ANALYTICS</div><div class="headline"><div><h1>Know what's moving.</h1><p>Aggregate student activity and directory health, without displaying personal applications, emails or essays.</p></div><button type="button" id="refresh-metrics" disabled>Refresh metrics</button></div>
+<p id="admin-status" role="status" aria-live="polite">Checking administrator access…</p>
+<div id="admin-content" hidden>
+<section class="metrics" aria-label="Bdesh statistics">
+<article><span>Registered accounts</span><strong id="metric-accounts">—</strong><small>All-time</small></article>
+<article><span>Signed in recently</span><strong id="metric-active">—</strong><small>Past seven days</small></article>
+<article><span>New registrations</span><strong id="metric-new">—</strong><small>Past 30 days</small></article>
+<article><span>Confirmed email accounts</span><strong id="metric-confirmed">—</strong><small>Verified Auth email</small></article>
+<article><span>Application entries</span><strong id="metric-apps">—</strong><small>Total student-tracked entries</small></article>
+<article><span>Application profiles</span><strong id="metric-profiles">—</strong><small>Students with admissions profiles</small></article>
+<article><span>Student portfolios</span><strong id="metric-portfolios">—</strong><small>Saved portfolio records</small></article>
+<article><span>Learning milestones</span><strong id="metric-tasks">—</strong><small>Completed stored tasks</small></article>
+</section>
+<section class="panels"><div class="panel"><div class="panel-head"><div><div class="eyebrow">ACCOUNT ACTIVITY</div><h2>New signups</h2><p>Last 14 calendar days · Supabase Auth</p></div></div><div id="signup-chart" role="img" aria-label="Daily new account counts over 14 days" class="chart"></div></div>
+<div class="panel"><div class="eyebrow">DIRECTORY QUALITY</div><h2>Verified universities</h2><div class="health"><strong id="metric-verified">—</strong><span id="metric-directory-total">of — published entries</span></div><div class="meter"><span id="directory-meter"></span></div><p class="hint">Source review is different from admission probability or guaranteed affordability.</p><div class="panel-links"><a href="/editor.html">Open college editor</a><a href="/UNIVERSITY_VERIFICATION_GAPS.md">Review outstanding questions</a></div></div></section>
+<section class="panel product"><div><div class="eyebrow">PRODUCT ANALYTICS</div><h2>PostHog insights</h2><p>When the PostHog project token is connected, consented visitors can send anonymous events for lesson progression, profile milestones and application-tracker interactions. View funnels and trends in PostHog.</p></div><a href="https://us.posthog.com" target="_blank" rel="noopener noreferrer">Open PostHog ↗</a></section>
+<p class="foot">Counts are refreshed on demand; not live streaming. Metrics are aggregated server-side, and user identities never appear here. <span id="metrics-updated"></span></p>
+</div>
+</main><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js" defer></script><script src="/admin.js?v=1" defer></script></body></html>
