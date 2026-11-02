@@ -44,3 +44,23 @@ Prospective international applicant
 ## Non-US verification pending future announcement
 
 **Türkiye Scholarships (2027 undergraduate call):** Official government programme guidelines describe a recurring **January 10–February 20** application period, but the official government news pages currently show a dated **2026** undergraduate announcement, not a separate **2027** announcement. Bdesh records the typical application window without claiming it is a finalized 2027 deadline. Once the official 2027 call is posted, check exact dates, country/field eligibility and current stipend amount before marking verified. Official pages: https://www.turkiyeburslari.gov.tr/calendar and https://www.turkiyeburslari.gov.tr/announcements/turkiye-scholarships-2026-applications-121.
+
+## Outreach dispatched — 3 November 2026
+
+Sent from Nahin's connected Gmail account (`nahineftekher@gmail.com`). Replies remain pending. **Sending a question does not resolve the outstanding requirement or change the record's `verified_at` field.**
+
+| University | Address used | Gmail sent message ID | Status |
+|---|---|---|---|
+| Amherst | `finaid@amherst.edu` | `1a19e0412ec11bc4` | Sent, awaiting reply |
+| Dartmouth | `reply@dartmouth.edu` | `1a19e041aaf48341` | Sent, awaiting reply |
+| Duke | `undergrad-admissions@duke.edu` | `1a19e042353aee0f` | Sent, awaiting reply |
+| Emory | `finaid@emory.edu` | `1a19e04295afef8b` | Sent, awaiting reply |
+| Gettysburg | `intladmiss@gettysburg.edu` | `1a19e0446834f99a` | Sent, awaiting reply |
+| Northwestern | `nuinternational@northwestern.edu` | `1a19e044e9bd5b53` | Sent, awaiting reply |
+| Sewanee | `international@sewanee.edu` | `1a19e0455ad41624` | Sent, awaiting reply |
+| Carleton College (Minnesota) | `financialaid@carleton.edu` | `1a19e04cc4557065` | Sent, awaiting reply |
+| Columbia College/Engineering | `ugrad-finaid@columbia.edu` | `1a19e04d34f46444` | Sent, awaiting reply |
+| Oberlin | `financial.aid@oberlin.edu` | `1a19e04db11b5cee` | Sent, awaiting reply |
+| Swarthmore | `finaid@swarthmore.edu` | `1a19e04e3097390f` | Sent, awaiting reply |
+
+**Next handling:** When the universities respond, compare each answer to its record and official link; change the institution's `deadline_notes`, `source_notes`, `source_checked_at`, and `verified_at` only after resolving the conflicting facts. No replies have been processed yet. The 2027 Türkiye Scholarships announcement is a separate future publication, not an email sent to a university.
