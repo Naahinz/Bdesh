@@ -119,3 +119,9 @@ Do not infer automatic full-ride eligibility from 'meets full demonstrated need'
 - [ ] Manual dependency: project owner must connect an authenticated SMTP sender (verified domain provider or temporary dedicated Gmail SMTP with app password) in Supabase Auth settings, confirm Site URL + redirect allowlist, keep email confirmation ON, and test signup/reset with an independent mailbox.
 - [ ] When complete and tested, set `emailRegistrationReady=true` in `auth.js`, update homepage introductory copy, and run live second-account confirmation/security checks before publicizing registration.
 - [ ] Address Supabase security advisor warning: **Leaked Password Protection Disabled** prior to opening password signup to students.
+
+## Temporary email verification sender selected (2026-11-03)
+- Project owner selected **`eftekhernahin@gmail.com`** for temporary Google SMTP delivery of signup confirmations and password-reset emails.
+- Exact Gmail SMTP fields and owner-only steps added to [EMAIL_AUTH_SETUP.md](EMAIL_AUTH_SETUP.md): `smtp.gmail.com` port `465` (or `587` TLS), `eftekhernahin@gmail.com` as sender/username, **Google App Password** as private password. Google 2-Step Verification and eligible app-password access required.
+- **Not yet configured** in Supabase: existing connector cannot write Supabase Auth SMTP settings or create Google app passwords, and secrets must not be committed/shared. Public signup is still gated.
+- Owner needs to enter app password **privately into Supabase dashboard**, then test a non-team email registration and password reset through `?email-test=1&signin=1`. Only then flip `emailRegistrationReady=true` and update text/caches.
