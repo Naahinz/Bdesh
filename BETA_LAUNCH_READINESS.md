@@ -13,7 +13,7 @@
 - [x] Repaired university research filter false positives from 'no merit' and exposed reviewed sources and deadlines to students.
 
 ## Remaining before unqualified public launch
-- [ ] Individually verify the remaining **40 US college research leads** (11 verified of 51; three of those 40 partially reviewed) and any non-US entries, before removing beta labels.
+- [ ] Individually verify the remaining **30 US college research leads** (21 verified, four partially reviewed and 26 not yet reviewed among 51 published US colleges) and any non-US entries, before removing beta labels.
 - [ ] Complete real two-account browser isolation and editor authorization testing. Simulated Supabase role tests on 2026-11-03 returned 0 cross-account private rows, prevented non-editor college updates, and showed 0 unpublished records to anonymous visitors.
 - [ ] Check Supabase Auth warning: leaked-password protection disabled. If enabling email/password accounts in the future, prioritize hardening.
 - [ ] Independently verify Cloudflare Pages deployment of privacy, terms, feedback and updated college cards; the public browser fetch was inaccessible to the automated checker.
@@ -61,3 +61,12 @@ Do not infer automatic full-ride eligibility from 'meets full demonstrated need'
 - As of this review, expected **17 verified of 51 published US entries**, with **4 partial reviews** (Amherst, Dartmouth, Northwestern, Swarthmore), remaining 30 not checked.
 - Key findings: Macalester requires free 2027–28 ISAFA or CSS plus separate financial declaration; Reed permits hardship ISFAA and is test-blind; Richmond requires an international financial-responsibility certificate and CSS; UChicago uses its own aid worksheet and does not use CSS/IDOC; Grinnell accepts a portal ISAFA but not emailed/PDF forms; Wellesley asks international students for CSS only if prompted by staff.
 - Source dates, test policies, aid coverage, round-specific deadlines and caution notes are stored with each corresponding opportunity record. No applicant/student data was changed.
+
+## 2026-11-03 subsequent verification batch
+- Added full official-source reviews and current-cycle funding/deadline notes for: **Cornell University, University of Pennsylvania, Hamilton College, Colby College**, in addition to Macalester, Reed, Richmond, UChicago, Grinnell and Wellesley in the previous batch.
+- Cornell and Penn require SAT/ACT for fall 2027 applicants, and both use need-aware international admissions (with different dates and support terms).
+- Cornell's international CSS aid application due dates are Nov 1 / Jan 2, earlier than its domestic aid priority dates; Penn's international aid priority dates are Nov 6 / Feb 5 for aid offers alongside admission.
+- Hamilton requires a financial certification of every international applicant and separate aid paperwork from aid applicants; Colby offers hardship CSS fee waivers for international students.
+- **Northwestern remains a partially reviewed record** (admissions vs aid pages give conflicting aid deadlines); do not silently infer the required submission date. Other partial reviews: Amherst, Dartmouth and Swarthmore.
+- The feedback form's end-to-end submission and inbox receipt were **confirmed by the user** after one-time activation; no additional manual activation is pending.
+- Current directory target totals: **21 verified / 4 partial / 26 unchecked** of 51 published US opportunities.
