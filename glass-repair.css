@@ -187,3 +187,24 @@ body .research-card .research-verification{display:block;margin:13px 0 5px!impor
 body .research-card .research-verification[data-review-state="verified"]{background:rgba(45,112,68,.4)!important;color:#daf6df!important;border:1px solid rgba(141,216,154,.36)!important}
 body .research-card .research-verification[data-review-state="partial"]{background:rgba(119,78,32,.42)!important;color:#ffdea3!important;border:1px solid rgba(238,181,98,.43)!important}
 body .research-card .research-verification[data-review-state="unreviewed"]{background:rgba(91,92,97,.28)!important;color:#e0e4e1!important;border:1px solid rgba(192,198,195,.35)!important}
+
+/* Email authentication: legible existing-account login and clear SMTP setup notice. */
+body .auth-card .auth-email-status{
+ margin:15px 0 0!important;padding:13px 15px!important;border-radius:12px!important;
+ background:rgba(110,77,27,.29)!important;border:1px solid rgba(223,186,103,.39)!important;
+ color:#f2e6c6!important;font-size:13px!important;line-height:1.65!important;
+}
+body .auth-card .auth-divider{color:#c8ddce!important;font-size:13px!important;margin:17px 0 9px!important}
+body .auth-card #auth-form{max-width:100%;min-width:0}
+body .auth-card #auth-form input[type="email"],body .auth-card #auth-form input[type="password"]{
+ width:100%!important;min-height:48px!important;border-radius:10px!important;
+ border:1px solid rgba(194,228,198,.43)!important;
+ background:rgba(8,39,29,.82)!important;color:#f4fbf3!important;
+ font-size:16px!important;line-height:1.4!important;padding:12px 15px!important;
+}
+body .auth-card #auth-form input::placeholder{color:#accbb5!important;opacity:1}
+body .auth-card #auth-form label{color:#e4f2e7!important;font-size:13px!important}
+body .auth-card .auth-message{color:#d6f0df!important;font-size:13px!important}
+body .auth-card .auth-message.error{color:#ffd1b6!important}
+body .auth-card .auth-switch[hidden],body .auth-card .auth-email-status[hidden],body .auth-card #auth-form[hidden],body .auth-card .consent-line[hidden],body .auth-card label[hidden]{display:none!important}
+body .auth-card #auth-form input:focus-visible{outline:3px solid #b9e3c2!important;outline-offset:2px!important}
