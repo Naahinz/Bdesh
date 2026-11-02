@@ -6,8 +6,7 @@
 import { createClient } from "npm:@supabase/supabase-js@2.75.0";
 
 const projectUrl = Deno.env.get("SUPABASE_URL") ?? "";
-const secrets = Deno.env.get("SUPABASE_SECRET_KEYS");
-const secretKey = secrets ? JSON.parse(secrets).default : Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
+const secretKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
 const allowedOrigin = "https://bdesh.pages.dev";
 
 function response(req: Request, payload: unknown, status = 200) {
@@ -71,7 +70,7 @@ Deno.serve(async (req: Request) => {
 
     const count = async (table: string, filters?: [string, unknown]) => {
       let query = admin.from(table).select("*", { count: "exact", head: true });
-      if (filters) query = query.eq(filters[0], filters[1]);
+      if (filters) query = filters[1] === null ? query.is(filters[0], null) : query.eq(filters[0], filters[1]);
       const { count, error } = await query;
       if (error) throw error;
       return count ?? 0;
