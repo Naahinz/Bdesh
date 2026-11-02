@@ -160,3 +160,24 @@ body #apply .college-lookup-card .college-chosen{color:#d7f5dd!important}
  body #apply .college-lookup-card #college-search-input{min-height:58px!important;padding:16px 17px!important}
  body #apply .college-lookup-card .college-search-result{align-items:flex-start!important;flex-direction:column!important;gap:5px!important}
 }
+
+/* Discover screen: search gets its own wide row above the narrow research filters. */
+body #discover .research-controls{
+ display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;
+ width:100%!important;max-width:none!important;gap:18px 16px!important;
+ padding:clamp(23px,3vw,35px)!important;margin:26px 0 22px!important;
+ background:radial-gradient(ellipse at 95% 0,rgba(145,193,145,.2),transparent 52%),linear-gradient(125deg,rgba(29,84,61,.91),rgba(10,47,36,.93))!important;
+ border:1px solid rgba(188,229,196,.39)!important;border-radius:22px!important;
+ box-shadow:0 17px 42px rgba(0,12,8,.17)!important;
+}
+body #discover .research-controls>label{display:flex!important;flex-direction:column!important;align-items:stretch!important;gap:10px!important;min-width:0;font-size:14px!important;font-weight:750!important;color:#dceedd!important}
+body #discover .research-controls>label:first-child{grid-column:1/-1!important;font-size:16px!important;gap:12px!important}
+body #discover .research-controls input#research-search{
+ display:block!important;width:100%!important;max-width:none!important;min-width:0!important;
+ padding:17px 20px!important;min-height:66px!important;font-size:clamp(17px,1.4vw,20px)!important;
+ background:rgba(6,35,26,.79)!important;color:#f4fcf4!important;border:1px solid rgba(206,236,209,.55)!important;
+ border-radius:14px!important;
+}
+body #discover .research-controls #research-search::placeholder{color:#b2cbbb!important;opacity:1!important}
+body #discover .research-controls select{width:100%!important;min-height:50px!important;padding:11px 15px!important;border-radius:11px!important;background:rgba(9,43,32,.78)!important;color:#f0faf0!important;font-size:14px!important;border:1px solid rgba(189,228,195,.36)!important}
+@media(max-width:740px){body #discover .research-controls{grid-template-columns:minmax(0,1fr)!important;gap:14px!important;padding:21px 18px!important}body #discover .research-controls input#research-search{min-height:58px!important}}
