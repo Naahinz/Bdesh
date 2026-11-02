@@ -1,5 +1,51 @@
 # Bdesh email/password registration — verified launch checklist
 
+## SELECTED TEMPORARY SMTP SENDER — Gmail (`eftekhernahin@gmail.com`)
+
+**Selected by project owner on 3 November 2026. Configuration requires owner-only dashboard access and has NOT yet been completed or tested.** This is a temporary, lower-volume sender, not a recommended long-term public transactional-email service. Use the official Bdesh site `https://bdesh.pages.dev` for login redirects, and keep Google OAuth sign-in enabled.
+
+### Step A: Create a Google app password (owner-only)
+
+1. Sign in to the Google account `eftekhernahin@gmail.com`. Confirm the mailbox is accessible and has **2-Step Verification** enabled at https://myaccount.google.com/security.
+2. Open https://myaccount.google.com/apppasswords while signed into **that exact account**. If the App Passwords option is unavailable, check that this Google account permits app passwords (Advanced Protection, work/school policy or security-key-only 2SV can block this option).
+3. Name the app password `Bdesh Supabase SMTP` and create it. It is a special 16-character password distinct from the normal Google password. Enter it **only in Supabase's SMTP password field**. Never paste the app password into ChatGPT, Github, a screenshot, or client-side JavaScript. If exposed, revoke it immediately from Google App Passwords.
+
+### Step B: Enter these exact fields in Supabase
+
+Open https://supabase.com/dashboard/project/xeqixwmulwonvhifcmvn/auth/providers or the dashboard's **Authentication → SMTP Settings** / **Authentication → Email → SMTP** area (Supabase dashboard labels may differ). Enable **Custom SMTP** and save:
+
+| Supabase SMTP setting | Value |
+|---|---|
+| Sender email address | `eftekhernahin@gmail.com` |
+| Sender name | `Bdesh` |
+| SMTP host | `smtp.gmail.com` |
+| SMTP port | `465` (implicit SSL/TLS preferred); use `587` with STARTTLS if necessary |
+| SMTP username | `eftekhernahin@gmail.com` |
+| SMTP password | **Google app password from Step A** (secret, never the regular Gmail password) |
+
+**Do not** use `smtp-relay.gmail.com`; that is a different Google Workspace relay product requiring different policy configuration. Keep **Confirm email** ON and **Allow email signup** ON under the Email Auth provider settings. In **Authentication → URL Configuration**, set Site URL to `https://bdesh.pages.dev`, and allow redirect to `https://bdesh.pages.dev/` (plus only other trusted paths actually needed). Avoid localhost and Cloudflare preview URLs for production users.
+
+### Step C: Test before public activation
+
+1. Save SMTP settings in Supabase. Do not send credentials to the assistant.
+2. From a **new, non-project-team email mailbox**, visit https://bdesh.pages.dev/?email-test=1&signin=1, choose **Create an account**, and enter a new 12+ character password. The test switch only reveals the frontend form; it does not bypass Supabase's email verification.
+3. Confirm that the email arrives from `eftekhernahin@gmail.com` and its link returns to Bdesh. Check spam as well as inbox.
+4. Complete confirmation, sign in, and confirm that another student's data does not appear in the new account.
+5. From the same test flow, use **Forgot password?** and verify the reset email arrives, opens the website, and changes the password.
+6. Re-check Google sign-in, then enable public signup in `auth.js` (`emailRegistrationReady=true`) only after the full smoke test and password-security checks pass.
+
+### Security and deliverability notes
+
+- Google discourages app passwords for services that support modern OAuth. This is a temporary workaround when Supabase requires SMTP credentials, and app passwords bypass Google's 2-Step Verification for that integration. Limit access to the dedicated app password and revoke it when moving to a transactional email provider.
+- Google can rate-limit or block bulk/automated sending. Keep Supabase SMTP rate limits conservative and use CAPTCHA for signup before a wider public beta; monitor deliverability and bounce rates. Plan migration to a verified-domain sender (Resend/Postmark/etc.).
+- The connected Gmail account `nahineftekher@gmail.com` used for university correspondence is **different** from the chosen SMTP sender `eftekhernahin@gmail.com`. Do not substitute one for the other.
+- The current Supabase security advisor reports **leaked-password protection disabled**; enable it when available before public email signup.
+
+Official references: https://supabase.com/docs/guides/auth/auth-smtp · https://supabase.com/kb/troubleshooting/using-google-smtp-with-supabase-custom-smtp-ZZzU4Y · https://support.google.com/mail/answer/185833 · https://support.google.com/mail/answer/7104828
+
+---
+
+
 **Status 3 November 2026:** Google sign-in works. Password sign-in for **existing email/password users** is exposed again on the homepage. New email account creation and password-reset requests remain intentionally gated while Supabase has no production-ready mail sender. The browser code is prepared; the mail infrastructure is the blocker, not a missing HTML signup form.
 
 ## Why the built-in Supabase mailer cannot support student signups
