@@ -40,3 +40,7 @@ Prospective international applicant
 3. For contradictory pages, explicitly describe which one the university confirmed applies to Fall 2027 (not just the earlier date).
 4. A prospective applicant’s personalized admission portal may override generic information; never silently auto-fill student deadlines.
 5. Bdesh must not pretend these records are verified before the confirmations arrive.
+
+## Non-US verification pending future announcement
+
+**Türkiye Scholarships (2027 undergraduate call):** Official government programme guidelines describe a recurring **January 10–February 20** application period, but the official government news pages currently show a dated **2026** undergraduate announcement, not a separate **2027** announcement. Bdesh records the typical application window without claiming it is a finalized 2027 deadline. Once the official 2027 call is posted, check exact dates, country/field eligibility and current stipend amount before marking verified. Official pages: https://www.turkiyeburslari.gov.tr/calendar and https://www.turkiyeburslari.gov.tr/announcements/turkiye-scholarships-2026-applications-121.
