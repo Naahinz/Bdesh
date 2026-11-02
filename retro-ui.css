@@ -258,3 +258,16 @@ body .editor-form,body .editor-history{padding:25px!important}
 body .hero-copy{padding:clamp(26px,3vw,46px)!important}
 body :is(.lesson-content,.knowledge-check,.application-card,.research-card,.review-card,.journey-detail,.home-flow-head,.deadline-center,.action-plan) :is(p,li){line-height:1.7}
 @media(max-width:700px){body .home-flow-head,body .journey-detail,body .action-plan,body .deadline-center,body .lesson-content{padding:22px!important}body .home-flow-head>div:first-child{padding:0!important}}
+
+/* Real learning component selectors: correct pale-on-pale takeaway and flow. */
+body .lesson-content .takeaway,body .lesson-content .example,body .lesson-content .example-row,body .lesson-content .application-flow{background:rgba(20,65,49,.88)!important;color:#f0f8ed!important;border:1px solid rgba(172,219,186,.24)!important;border-radius:13px!important}
+body .lesson-content .takeaway{padding:28px 30px!important;margin:35px 0!important}
+body .lesson-content .takeaway :is(p,span,strong){color:#f0f8ed!important;opacity:1!important}
+body .lesson-content .takeaway-label{color:#c4e5cd!important;font-size:12px!important;letter-spacing:.12em}
+body .lesson-content .example-row{padding:15px 20px!important;margin-top:8px!important}
+body .lesson-content .example-row :is(span,b,em){color:#e9f5e9!important}
+body .lesson-content .reading-section{padding:28px 0!important;min-width:0}
+body .lesson-content .reading-section h2{margin-bottom:14px!important}
+body .lesson-content .reading-section p{margin:0!important}
+body .lesson-content .reading-section-num{margin-right:18px!important}
+body .lesson-content .application-flow :is(span,b,em,p){color:#e8f4e9!important}
