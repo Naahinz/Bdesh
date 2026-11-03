@@ -44,8 +44,54 @@ async function load(){
   const payload=await response.json().catch(()=>({}));
   if(!response.ok){area.hidden=true;setStatus(response.status===403?'This account is not authorized to view administration metrics.':payload.error||'Statistics are unavailable.',true);return}
   render(payload);
+  await loadInbox();
  }catch(e){area.hidden=true;setStatus('Could not load admin metrics. Check the network or try again.',true)}
  finally{btn.disabled=false}
 }
+
+async function loadInbox(){
+ const output=$('feedback-inbox-list'),note=$('feedback-inbox-status');
+ if(!output||!note)return;
+ note.textContent='Loading saved feedback…';
+ output.replaceChildren();
+ const {data,error}=await client.from('beta_feedback')
+  .select('id,category,message,reply_email,page_path,status,created_at,reviewed_at')
+  .order('created_at',{ascending:false}).limit(50);
+ if(error){note.textContent='Could not read the inbox: '+error.message;return}
+ note.textContent=(data?.length||0)+' recent feedback entries · private administrator view';
+ if(!data?.length){const empty=document.createElement('p');empty.textContent='No feedback has been submitted yet.';output.append(empty);return}
+ for(const item of data){
+  const article=document.createElement('article');
+  article.style.cssText='background:rgba(255,255,255,.74);border:1px solid rgba(173,188,200,.43);border-radius:15px;padding:18px;overflow-wrap:anywhere';
+  const title=document.createElement('h3');title.textContent=item.category;
+  const date=document.createElement('small');date.textContent=new Date(item.created_at).toLocaleString()+' · '+(item.page_path||'/feedback.html');
+  const message=document.createElement('p');message.textContent=item.message;message.style.cssText='white-space:pre-wrap;line-height:1.65';
+  article.append(title,date,message);
+  if(item.reply_email){
+   const contact=document.createElement('p');const a=document.createElement('a');
+   a.href='mailto:'+item.reply_email;a.textContent='Reply to '+item.reply_email;
+   a.rel='noopener noreferrer';contact.append(a);article.append(contact);
+  }
+  const row=document.createElement('div');row.style.cssText='display:flex;gap:10px;align-items:center;flex-wrap:wrap';
+  const label=document.createElement('label');label.textContent='Review status ';
+  const select=document.createElement('select');select.setAttribute('aria-label','Review status of '+item.category);
+  for(const [v,text] of [['new','New'],['reviewing','Reviewing'],['resolved','Resolved']]){
+   const option=document.createElement('option');option.value=v;option.textContent=text;select.append(option);
+  }
+  select.value=item.status;
+  const saved=document.createElement('small');saved.setAttribute('role','status');
+  select.addEventListener('change',async()=>{
+   const previous=item.status,next=select.value;select.disabled=true;saved.textContent='Saving…';
+   const {error:updateError}=await client.from('beta_feedback')
+    .update({status:next,reviewed_at:new Date().toISOString()})
+    .eq('id',item.id);
+   if(updateError){select.value=previous;saved.textContent='Update failed: '+updateError.message}
+   else{item.status=next;saved.textContent='Saved ✓'}
+   select.disabled=false;
+  });
+  label.append(select);row.append(label,saved);article.append(row);output.append(article);
+ }
+}
+$('refresh-feedback')?.addEventListener('click',()=>loadInbox());
 btn.addEventListener('click',load);load();
 })();
