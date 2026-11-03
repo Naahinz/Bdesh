@@ -73,7 +73,7 @@ html body :is(.outline-button,.journey-link,.application-toggle,.export-workspac
 
 }
 html body :is(.outline-button,.journey-link,.application-toggle,.export-workspace,
- .college-manual,.deadline-entry button):hover{color:#D94C10!important;
+ .college-manual,.deadline-entry button):hover{
 }
 html body :is(.outline-button,.journey-link,.application-toggle,.export-workspace,
  .college-manual,.deadline-entry button) :is(span,strong,b){}
