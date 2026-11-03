@@ -125,7 +125,7 @@ body :is(.rail a.active,.workspace-steps a.active,.sidebar nav button.active,.cu
 body .topbar nav a.active,body .topbar nav a[data-tab].active{color:#5d4830!important;border-bottom-color:#af8d62!important}
 body :is(.research-card,.application-card,.review-card,.milestone,.lesson-content) a:not(.button){color:#705333!important}
 body .research-card .research-verification[data-review-state="verified"]{
-  background:#e8f1e5!important;color:#335d42!important;border-color:#aac6b0!important;
+  background:#ede5d8!important;color:#594735!important;border-color:#c7b397!important;
 }
 body .research-card .research-verification[data-review-state="partial"]{
   background:#fff0d6!important;color:#795322!important;border-color:#e0c28d!important;
@@ -154,7 +154,7 @@ body #apply .college-lookup-card .college-search-result{
 }
 body #apply .college-lookup-card .college-search-result :is(strong,span){color:#443527!important}
 body #apply .college-lookup-card #college-search-hint{color:#6f6152!important}
-body .check-option.correct{background:#e2eddf!important;border-color:#92bb9a!important}
+body .check-option.correct{background:#eee4d5!important;border-color:#bba480!important}
 body .check-option.incorrect{background:#f6e5df!important;border-color:#dca99f!important}
 body :is(.insight,.followup-info,.followup-empty,.privacy-note,.editor-notice){color:#62584d!important}
 body :is(.priority-label,.deadline-due.is-overdue,.danger){color:#8b4b3e!important}
@@ -172,3 +172,155 @@ body :is(.milestone,.research-card,.journey-detail,.application-card,.profile-pa
     backdrop-filter:none!important;background:#fffaf3!important;
   }
 }
+
+
+/* Cream Editorial v2: remove all visible green leftovers from legacy layers.
+   Palette: ivory #fffdf8, cream #f8f4ec, sand #e9dfd0,
+   champagne #d6c2a5, taupe #927b61, espresso #382d23. */
+:root{
+  --glass-forest:#463628;--glass-ink:#382d23;--glass-muted:#77685b;
+  --glass-accent:#d6c2a5;--sage:#e9dfd0;--forest:#594735;
+  --green:#94795a;--forest-bg:#f8f4ec;--forest-deep:#eee5d8;
+  --forest-mid:#e7d9c8;--forest-glass:#fffaf3;--forest-panel:#fffaf3;
+  --forest-lime:#d6c2a5;--repair-bg:#fffaf3;--repair-card:#fffdf8;
+  --repair-border:#dfd2bf;--repair-text:#3a3026;--repair-muted:#77685a;
+  --repair-focus:#b79b73;--editorial-ink:#382d23;--editorial-accent:#a17c55;
+  --editorial-bg:#f8f4ec;--editorial-paper:#fffdf8;--surface:#fffaf3;
+  --warm:#f2e9dc;--soft:#eee4d5;
+}
+::selection{background:#dfcfb7!important;color:#352b23!important}
+:focus-visible{outline-color:#987a4f!important}
+body :is(input[type="checkbox"],input[type="radio"],input[type="range"]){accent-color:#927457!important}
+
+/* Homepage visuals, roadmap progress, and decorative art. */
+body .hero::before,body .hero::after{
+  background:radial-gradient(circle at 50% 50%,rgba(205,178,137,.25),transparent 70%)!important;
+  border-color:rgba(172,143,104,.16)!important;
+}
+body .home-flow .journey-ring{
+  background:conic-gradient(#a48761 var(--journey-percent,0%),#e6d9c7 0)!important;
+}
+body .home-flow .journey-ring-inner{background:#fffaf2!important;color:#463729!important}
+body .home-flow .journey-progress :is(strong,small,p){color:#504235!important}
+body .home-flow .journey-step.journey-started .journey-node{
+  background:#e8dac6!important;border-color:#ae906c!important;color:#49392a!important;
+}
+body .home-flow :is(.journey-rail,.journey-arrow){border-color:#c7b39b!important;color:#9b805f!important}
+body .home-flow .journey-detail a.darkbtn{background:#5a4734!important;color:#fffaf0!important;border-color:#5a4734!important}
+body .home-flow .journey-detail a.darkbtn:hover{background:#3e3023!important;color:#fffaf0!important}
+body .hero :is(.hero-caption,.hero-kicker,.hero-note,.eyebrow){color:#685546!important}
+
+/* Replace forest fill on high-priority panels, including profile-specific selectors. */
+body #profile-app .profile-panel,
+body #profile-app .paper-form,
+body #profile-app .entry-card,
+body .profile-panel,body .paper-form,body .entry-card,
+body .overview-illustration,body .profile-summary,body .profile-section,
+body .reading-top,body .reading-intro,body .reading-progress,
+body .journey-illustration,body .application-example{
+  background:#fffaf3!important;border-color:#dfd2c1!important;color:#3b3027!important;
+}
+body #profile-app :is(.illustration-top,.illustration-lines,.illustration-lines>div,.line-icon),
+body :is(.overview-illustration,.journey-illustration,.application-example,.example-top,.example-row){
+  background:#eee3d3!important;border-color:#d9c8b1!important;color:#554434!important;
+}
+body #profile-app :is(.illustration-top,.illustration-lines,.line-icon) :is(p,span,strong,small,i,b),
+body :is(.overview-illustration,.journey-illustration,.application-example,.example-top,.example-row) :is(p,span,strong,small,i,b){
+  color:#554434!important;
+}
+body .reading-intro{border-top-color:#b99e7a!important}
+body :is(.action-plan,.deadline-center){border-top-color:#b99c75!important;border-bottom-color:#dfd2c1!important}
+body :is(.priority-label,.college-chosen,.followup-portal,.lesson-link,.lesson-link.active){
+  color:#624d37!important;
+}
+body :is(.deadline-link,.action-plan-link,.followup-portal){border-bottom-color:#a78b66!important}
+body .lesson-content .reading-section{border-top-color:#e3d7c8!important}
+body .lesson-content :is(.reading-section-num,.chapter-id,.reading-time){color:#92714f!important}
+body .lesson-content :is(.check-option,.check-option.correct,.check-option.incorrect){
+  color:#413529!important;
+}
+body .lesson-content .check-option.correct{background:#e9dfd0!important;border-color:#bda27e!important}
+body .lesson-content .check-option.incorrect{background:#f3e2da!important;border-color:#cba18f!important}
+body .lesson-content .check-option :is(p,span,strong,b){color:#403429!important}
+body .lesson-content :is(.lesson-takeaway,.takeaway,.example,.example-row,.application-flow,.idea,.key-idea,.tip,.lesson-note,.highlight,.summary-box,.lesson-flow,.lesson-steps,.guide-card,blockquote){
+  background:#f3eadc!important;border-color:#e0d2be!important;color:#463a2d!important;
+}
+body .lesson-content :is(.lesson-takeaway,.takeaway,.example,.example-row,.application-flow,.idea,.key-idea,.tip,.lesson-note,.highlight,.summary-box,.lesson-flow,.lesson-steps,.guide-card,blockquote) :is(p,span,b,strong,em,li,h2,h3){
+  color:#514337!important;
+}
+
+/* Search and application surfaces, statuses, and links. */
+body #apply .college-search.college-lookup-card,
+body #apply .college-lookup-card .college-search-results,
+body #discover .research-controls,
+body .research-caution,
+body .research-evidence,body .research-evidence[open]{
+  background:#f5ebdd!important;border-color:#deceba!important;color:#4b3c2e!important;
+}
+body .research-caution{border-left-color:#b89972!important}
+body .research-caution :is(strong,span,p,li){color:#514235!important}
+body #apply .college-lookup-card .college-search-result,
+body #apply .college-lookup-card .college-search-result:hover,
+body #apply .college-lookup-card .college-search-result:focus-visible{
+  background:#fffbf4!important;border-color:#d6c4aa!important;color:#4b3a2c!important;
+}
+body #apply .college-lookup-card .college-search-result :is(strong,span){color:#4b3a2c!important}
+body #apply .college-lookup-card .college-manual{
+  background:#eee0cd!important;border-color:#cbb394!important;color:#493728!important;
+}
+body .research-card :is(.country,.research-verification){color:#6b5742!important}
+body .research-card .research-verification[data-review-state="verified"]{
+  background:#ebe2d6!important;color:#5b4937!important;border-color:#cbb89e!important;
+}
+body .research-card .research-verification[data-review-state="partial"]{
+  background:#f6e9d7!important;color:#72502e!important;border-color:#d9be96!important;
+}
+body .research-card .research-verification[data-review-state="unreviewed"]{
+  background:#eeebe5!important;color:#61584e!important;border-color:#d7cfc2!important;
+}
+body .research-card :is(.research-evidence,.research-evidence summary,.research-evidence h4,.research-evidence a){
+  color:#5b4835!important;
+}
+body .cardactions button,body .research-card .cardactions button{
+  background:#5a4734!important;border-color:#5a4734!important;color:#fffaf1!important;
+}
+body .cardactions button:hover{background:#413225!important}
+
+/* Remaining common dark-forest buttons and forms. */
+body :is(.followup-add,.application-toggle,.export-workspace,.google-signin,.primary-button,.primary-cta,.button,.darkbtn,button.primary-button){
+  background:#574634!important;border-color:#574634!important;color:#fffaf0!important;
+}
+body :is(.followup-add,.application-toggle,.export-workspace,.google-signin,.primary-button,.primary-cta,.button,.darkbtn,button.primary-button) :is(span,strong,b,small,i,em){
+  color:#fffaf0!important;
+}
+body :is(.followup-add,.application-toggle,.export-workspace,.google-signin,.primary-button,.primary-cta,.button,.darkbtn):hover{
+  background:#403225!important;border-color:#403225!important;color:#fffaf0!important;
+}
+body .hero .primary-cta,body .hero .primary-cta :is(span,strong,b){color:#fffaf0!important}
+body [role="button"]:not(.college-search-result){
+  background:#594836!important;color:#fffaf0!important;border-color:#594836!important;
+}
+body :is(.milestone select,.application-header select,.formgrid input,.formgrid select,.formgrid textarea,.followup-controls select,.followup-controls button){
+  background:#fffdf8!important;color:#423529!important;border-color:#d9cbb8!important;
+}
+body .milestone select option{background:#fffdf8!important;color:#423529!important}
+body :is(.workspace-steps a.active,.rail a.active,.lesson-link.active){
+  background:#e9dcc9!important;border-color:#c8b08f!important;color:#4d3b2b!important;
+}
+body :is(.topbar nav a,.topbar nav a.active,.sidebar nav button,.curriculum nav button){
+  color:#5e4a35!important;
+}
+
+/* Editorial color in consent UI; preserve existing opt-out behavior. */
+body .bdesh-analytics-consent{
+  background:#fffaf3!important;border:1px solid #d6c5ac!important;color:#443629!important;
+  box-shadow:0 18px 50px rgba(79,58,34,.13)!important;
+}
+body .bdesh-analytics-consent p{color:#514335!important}
+body .bdesh-analytics-consent button{
+  background:#f3e8d8!important;color:#4e3b2a!important;border-color:#ccb699!important;
+}
+body .bdesh-analytics-consent button:last-child{
+  background:#584634!important;color:#fffaf0!important;border-color:#584634!important;
+}
+body .bdesh-analytics-consent button:focus-visible{outline-color:#aa865d!important}
