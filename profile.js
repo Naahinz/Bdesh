@@ -6,7 +6,7 @@ const $=id=>document.getElementById(id),sb=window.supabase?.createClient(URL,KEY
 const sections=['overview','academics','activities','honors','writing','brag','review'];
 let user=null,basic={},portfolio={},active='',saving=false,queued=false,saveTimer=null,hydrating=false;
 const blank=()=>({activities:[],honors:[],essays:[],academic_context:'',brag_sheet:'',future_goals:'',additional_notes:''});
-function message(text,bad=false){const el=$('save-status');el.textContent=text;el.style.color=bad?'#b0564c':'#397753'}
+function message(text,bad=false){const el=$('save-status');el.textContent=text;el.style.color=bad?'#b0564c':'#c65a2e'}
 function showError(text){$('signin-error').textContent=text;$('account-name').textContent='Sign in required'}
 function el(tag,attrs={},text){const x=document.createElement(tag);for(const [k,v] of Object.entries(attrs)){if(k==='class')x.className=v;else if(k==='type')x.type=v;else x.setAttribute(k,String(v))}if(text!==undefined)x.textContent=String(text);return x}
 function val(form,name){return form.elements.namedItem(name)?.value??''}
@@ -88,11 +88,11 @@ $('print-profile').addEventListener('click',async()=>{
   let frame=document.getElementById('bdesh-print-frame');
   if(frame)frame.remove();
   frame=document.createElement('iframe');frame.id='bdesh-print-frame';frame.title='Private profile PDF preview';frame.setAttribute('aria-hidden','true');frame.style.cssText='position:fixed;left:-10000px;top:0;width:800px;height:1100px;border:0';document.body.append(frame);
-  const doc=frame.contentDocument;doc.open();doc.write('<!doctype html><html><head><meta charset="utf-8"><title>Bdesh private student profile</title><style>@page{size:A4;margin:19mm}body{font:11pt/1.5 Georgia,serif;color:#20392d}h1{font-size:25pt;margin:0 0 5mm;color:#23573b}h2{font:700 14pt Arial,sans-serif;border-bottom:1px solid #98b2a0;padding-bottom:2mm;margin:9mm 0 3mm;break-after:avoid}p{white-space:pre-wrap;overflow-wrap:anywhere;margin:0 0 2.5mm}small{font:9pt Arial,sans-serif;color:#536558}.entry{break-inside:avoid}header{border-bottom:2px solid #23573b;margin-bottom:8mm;padding-bottom:4mm}</style></head><body></body></html>');doc.close();
+  const doc=frame.contentDocument;doc.open();doc.write('<!doctype html><html><head><meta charset="utf-8"><title>Bdesh private student profile</title><style>@page{size:A4;margin:19mm}body{font:11pt/1.5 Georgia,serif;color:#625c58}h1{font-size:25pt;margin:0 0 5mm;color:#e66f38}h2{font:700 14pt Arial,sans-serif;border-bottom:1px solid #eed2c0;padding-bottom:2mm;margin:9mm 0 3mm;break-after:avoid}p{white-space:pre-wrap;overflow-wrap:anywhere;margin:0 0 2.5mm}small{font:9pt Arial,sans-serif;color:#756e69}.entry{break-inside:avoid}header{border-bottom:2px solid #e66f38;margin-bottom:8mm;padding-bottom:4mm}</style></head><body></body></html>');doc.close();
   const body=doc.body;const header=doc.createElement('header');const h=doc.createElement('h1');h.textContent='bdesh.  |  Student profile';const small=doc.createElement('small');small.textContent='Private student-prepared notes. Not an official application or university submission.';header.append(h,small);body.append(header);
   const headings=new Set(['EDUCATION','ACTIVITIES','HONORS','ESSAY DRAFTS','BRAG SHEET','FUTURE GOALS','ADDITIONAL NOTES']);
   for(const [i,line] of lines.entries()){if(i<3||!line.trim())continue;const el=doc.createElement(headings.has(line)?'h2':'p');el.textContent=line;body.append(el)}
-  const footer=doc.createElement('p');footer.textContent='Generated locally from this student’s Bdesh profile. Review for accuracy before sharing.';footer.style.cssText='font-size:9pt;color:#5c6e61;margin-top:10mm';body.append(footer);
+  const footer=doc.createElement('p');footer.textContent='Generated locally from this student’s Bdesh profile. Review for accuracy before sharing.';footer.style.cssText='font-size:9pt;color:#756e69;margin-top:10mm';body.append(footer);
   frame.contentWindow.focus();frame.contentWindow.print();
   message('Choose “Save as PDF” as the print destination. Your profile was prepared locally.');
  }catch(err){message('Could not prepare PDF: '+(err?.message||err),true)}
