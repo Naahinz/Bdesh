@@ -1,18 +1,18 @@
 /* Bdesh glass usability repair — 2026-11.
    Loaded after retro-ui.css. Focused corrections for actual visible components.
    Deliberately independent of the old light-theme token names. */
-:root{--repair-bg:rgba(255,244,235,.88);--repair-card:rgba(230,164,119,.88);--repair-border:rgba(231,216,202,.30);--repair-text:#696460;--repair-muted:#696460;--repair-focus:#f4e8df}
+:root{--repair-bg:rgba(255,244,235,.88);--repair-card:rgba(230,164,119,.88);--repair-border:rgba(231,216,202,.30);--repair-text:#6A737A;--repair-muted:#6A737A;--repair-focus:#f4e8df}
 body .journey-arrow::after,
 body .journey-arrow:after{content:none!important;display:none!important;background:transparent!important;width:0!important;height:0!important}
-body .journey-arrow{background:none!important;color:#696460!important;isolation:auto!important}
+body .journey-arrow{background:none!important;color:#6A737A!important;isolation:auto!important}
 body .journey-arrow::before{border-left-color:rgba(231,216,202,.45)!important}
 body .journey-rail{background:transparent!important}
-body .journey-detail a.journey-link{display:inline-flex!important;align-items:center;align-self:flex-start;width:auto;min-height:42px;color:#696460!important;border-bottom:1px solid #e7d8ca!important;text-decoration:none;font-weight:700;line-height:1.4;margin-top:15px}
+body .journey-detail a.journey-link{display:inline-flex!important;align-items:center;align-self:flex-start;width:auto;min-height:42px;color:#6A737A!important;border-bottom:1px solid #e7d8ca!important;text-decoration:none;font-weight:700;line-height:1.4;margin-top:15px}
 body .journey-detail a.journey-link:hover{color:#fff!important;border-bottom-color:#fff!important}
-body .journey-detail .journey-foot{color:#696460!important}
+body .journey-detail .journey-foot{color:#6A737A!important}
 
 /* Correct cards whose content was touching the frosted outline. */
-body .main .intro{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:24px;padding:26px clamp(22px,3vw,36px)!important;min-width:0;background:linear-gradient(120deg,#fffaf5,#fff5ed)!important;border:1px solid var(--repair-border)!important;border-radius:19px!important;box-shadow:0 13px 35px rgba(128,108,94,.15)!important}
+body .main .intro{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:24px;padding:26px clamp(22px,3vw,36px)!important;min-width:0;background:linear-gradient(120deg,#fffaf5,#fff5ed)!important;border:1px solid var(--repair-border)!important;border-radius:19px!important;box-shadow:0 13px 35px rgba(140,151,159,.15)!important}
 body .main .intro>div:first-child{flex:1 1 390px;min-width:0}
 body .main .intro h2{margin:9px 0 12px!important;line-height:1.22!important;overflow-wrap:anywhere}
 body .main .intro p{margin:0!important;line-height:1.65!important;color:var(--repair-muted)!important}
@@ -27,10 +27,10 @@ body #profile-app .sidebar-head{padding:20px 21px!important;border:1px solid rgb
 body #profile-app .sidebar-head :is(h1,p,.eyebrow){margin-left:0!important}
 body #profile-app .illustration-lines>div{border-bottom:1px solid rgba(231,216,202,.18)!important;gap:18px;min-width:0}
 body #profile-app .illustration-lines>div>*{min-width:0}
-body #profile-app .illustration-lines>div small{color:#696460!important;line-height:1.5}
-body #profile-app .line-icon{background:#fff0e5!important;color:#696460!important;border:1px solid rgba(231,216,202,.28)!important;border-radius:9px;min-width:40px;text-align:center;flex:none}
-body #profile-app .illustration-top{background:#fff0e5!important;color:#696460!important}
-body #profile-app .illustration-top span{color:#696460!important}
+body #profile-app .illustration-lines>div small{color:#6A737A!important;line-height:1.5}
+body #profile-app .line-icon{background:#fff0e5!important;color:#6A737A!important;border:1px solid rgba(231,216,202,.28)!important;border-radius:9px;min-width:40px;text-align:center;flex:none}
+body #profile-app .illustration-top{background:#fff0e5!important;color:#6A737A!important}
+body #profile-app .illustration-top span{color:#6A737A!important}
 body #profile-app .advice-strip,body #profile-app .section-hint,body .research-caution,body #matching-insight{
  background:linear-gradient(115deg,#fffaf5,#ffefe4)!important;
  border:1px solid var(--repair-border)!important;
@@ -47,7 +47,7 @@ body #matching-insight :is(strong,span,p){color:var(--repair-text)!important;opa
 body #matching-insight{font-size:14px!important;line-height:1.65!important;margin:14px 0 24px!important}
 body .research-caution{font-size:14px!important;line-height:1.7!important}
 body .research-caution strong{font-weight:800!important}
-body .research-count{color:#696460!important}
+body .research-count{color:#6A737A!important}
 
 /* Button contrast: a dark button always gets light lettering. */
 body button,
@@ -58,10 +58,10 @@ body button:hover:not(:disabled){background-color:#d85b25!important;color:#fff!i
 body button:disabled{opacity:.76!important;cursor:not-allowed}
 body :is(.darkbtn,.primary-button,.primary-cta,.button,.google-signin),
 body button.primary-button,body button.darkbtn,body button.button,
-body a.darkbtn,body a.button{background:#fff0e5!important;color:#696460!important;border:1px solid #e7d8ca!important;box-shadow:none!important;text-shadow:none!important}
+body a.darkbtn,body a.button{background:#fff0e5!important;color:#6A737A!important;border:1px solid #e7d8ca!important;box-shadow:none!important;text-shadow:none!important}
 body :is(.darkbtn,.primary-button,.primary-cta,.button,.google-signin) :is(span,b,strong,small,i,em),
-body button.primary-button :is(span,b,strong,small,i,em){color:#696460!important}
-body :is(.darkbtn,.primary-button,.primary-cta,.button,.google-signin):hover{background:#ffe4d1!important;color:#696460!important}
+body button.primary-button :is(span,b,strong,small,i,em){color:#6A737A!important}
+body :is(.darkbtn,.primary-button,.primary-cta,.button,.google-signin):hover{background:#ffe4d1!important;color:#6A737A!important}
 body .cardactions button,body .entry-actions button,body .followup-controls button,
 body .followup-item button,body .application-footer button,
 body .export-workspace,body button.outline-button{background:#fff0e5!important;color:#fffdf9!important;border-color:rgba(231,216,202,.36)!important}
@@ -69,10 +69,10 @@ body .cardactions button:hover,body .entry-actions button:hover,body .followup-c
 body .followup-item button:hover,body .application-footer button:hover{background:#ffe4d1!important;color:#fff!important}
 body .cardactions button{font-size:13px!important;font-weight:700!important;line-height:1.4!important;padding:12px 15px!important;min-height:46px;white-space:normal;max-width:100%}
 body .cardactions{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:auto;padding-top:17px}
-body .cardactions a{color:#696460!important;font-size:13px!important;text-decoration:underline;text-underline-offset:4px}
+body .cardactions a{color:#6A737A!important;font-size:13px!important;text-decoration:underline;text-underline-offset:4px}
 body .research-card{display:flex;flex-direction:column;min-width:0;padding:27px!important}
 body .research-card .research-verification{color:#f2c790!important}
-body .research-card ul,body .research-card li{color:#696460!important;line-height:1.6!important}
+body .research-card ul,body .research-card li{color:#6A737A!important;line-height:1.6!important}
 body .research-card>h3{font-size:21px!important;line-height:1.3!important}
 body .research-card>*{min-width:0}
 body .text-button,body .application-footer .text-button{background:transparent!important;color:#fffdf9!important;border:1px solid transparent!important;text-decoration:underline;text-underline-offset:4px}
@@ -98,12 +98,12 @@ body .application-card :is(button,input,textarea,select),body .profile-panel :is
 
 /* University source evidence: readable without expanding every research card. */
 body .research-evidence{margin:8px 0 0;padding:14px 16px;border:1px solid rgba(231,216,202,.27);background:#fff8f2;border-radius:11px;max-width:100%;min-width:0}
-body .research-evidence summary{cursor:pointer;color:#696460;font-size:13px;font-weight:750;line-height:1.5}
+body .research-evidence summary{cursor:pointer;color:#6A737A;font-size:13px;font-weight:750;line-height:1.5}
 body .research-evidence[open] summary{padding-bottom:12px;border-bottom:1px solid rgba(231,216,202,.24);margin-bottom:12px}
-body .research-evidence h4{font-size:13px;color:#696460;margin:15px 0 7px;line-height:1.45}
-body .research-evidence p,body .research-evidence li{font-size:13px;line-height:1.65;color:#696460;overflow-wrap:anywhere}
+body .research-evidence h4{font-size:13px;color:#6A737A;margin:15px 0 7px;line-height:1.45}
+body .research-evidence p,body .research-evidence li{font-size:13px;line-height:1.65;color:#6A737A;overflow-wrap:anywhere}
 body .research-evidence ul{padding-left:18px;margin:8px 0 0}
-body .research-evidence a{color:#696460;text-decoration:underline;text-underline-offset:3px;overflow-wrap:anywhere}
+body .research-evidence a{color:#6A737A;text-decoration:underline;text-underline-offset:3px;overflow-wrap:anywhere}
 
 /* Full-width, differentiated university lookup card. */
 body #apply .college-search.college-lookup-card{
@@ -117,42 +117,42 @@ body #apply .college-search.college-lookup-card{
 }
 body #apply .college-lookup-head{display:flex;gap:22px;align-items:center;justify-content:space-between;margin:0 0 28px;min-width:0}
 body #apply .college-lookup-head>div:first-child{flex:1 1 auto;min-width:0}
-body #apply .college-lookup-eyebrow{display:block;color:#696460!important;font-size:11px!important;font-weight:800!important;letter-spacing:.14em;line-height:1.5}
-body #apply .college-lookup-head h3{font-size:clamp(28px,3vw,42px)!important;color:#696460!important;line-height:1.15!important;letter-spacing:-.055em!important;margin:10px 0 13px!important}
-body #apply .college-lookup-head p{font-size:15px!important;color:#696460!important;line-height:1.65!important;margin:0!important;max-width:650px}
+body #apply .college-lookup-eyebrow{display:block;color:#6A737A!important;font-size:11px!important;font-weight:800!important;letter-spacing:.14em;line-height:1.5}
+body #apply .college-lookup-head h3{font-size:clamp(28px,3vw,42px)!important;color:#6A737A!important;line-height:1.15!important;letter-spacing:-.055em!important;margin:10px 0 13px!important}
+body #apply .college-lookup-head p{font-size:15px!important;color:#6A737A!important;line-height:1.65!important;margin:0!important;max-width:650px}
 body #apply .college-lookup-indicator{flex:0 0 70px;width:70px;height:70px;position:relative;border-radius:50%;border:1px solid rgba(231,216,202,.46);background:rgba(255,249,244,.13);box-shadow:inset 0 0 18px rgba(231,216,202,.1)}
 body #apply .college-lookup-indicator::before{content:'';position:absolute;left:19px;top:17px;width:24px;height:24px;border:3px solid #e7d8ca;border-radius:50%}
 body #apply .college-lookup-indicator::after{content:'';position:absolute;left:43px;top:42px;width:17px;height:3px;background:#fffcf8;transform:rotate(48deg);transform-origin:left center;border-radius:2px}
-body #apply .college-lookup-card .college-search-label{display:block;font-size:14px!important;font-weight:800!important;color:#696460!important;margin:0 0 10px!important}
+body #apply .college-lookup-card .college-search-label{display:block;font-size:14px!important;font-weight:800!important;color:#6A737A!important;margin:0 0 10px!important}
 body #apply .college-lookup-card .college-search-field{width:100%;position:relative;min-width:0}
 body #apply .college-lookup-card #college-search-input{
  display:block!important;width:100%!important;max-width:none!important;min-width:0!important;
  height:auto;min-height:68px!important;
  padding:18px 22px!important;margin:0!important;
- background:#fffdfa!important;color:#696460!important;
+ background:#fffdfa!important;color:#6A737A!important;
  border:1px solid rgba(231,216,202,.58)!important;border-radius:15px!important;
  box-shadow:inset 0 2px 8px rgba(231,216,202,.15)!important;
  font-family:'Plus Jakarta Sans','DM Sans',sans-serif!important;
  font-size:clamp(16px,1.5vw,19px)!important;font-weight:550!important;
  line-height:1.4!important;
 }
-body #apply .college-lookup-card #college-search-input::placeholder{color:#696460!important;opacity:1!important}
+body #apply .college-lookup-card #college-search-input::placeholder{color:#6A737A!important;opacity:1!important}
 body #apply .college-lookup-card #college-search-input:focus{border-color:#e7d8ca!important;outline:3px solid rgba(231,216,202,.33)!important;outline-offset:2px!important}
-body #apply .college-lookup-card #college-search-hint{font-size:13px!important;line-height:1.65!important;color:#696460!important;margin:13px 0 20px!important}
+body #apply .college-lookup-card #college-search-hint{font-size:13px!important;line-height:1.65!important;color:#6A737A!important;margin:13px 0 20px!important}
 body #apply .college-lookup-card .college-search-results{display:grid;grid-template-columns:minmax(0,1fr);gap:11px;width:100%;min-width:0}
-body #apply .college-lookup-card .college-search-results>p{color:#696460!important;font-size:14px!important}
+body #apply .college-lookup-card .college-search-results>p{color:#6A737A!important;font-size:14px!important}
 body #apply .college-lookup-card .college-search-result{
  display:flex!important;justify-content:space-between!important;align-items:center!important;
  width:100%!important;min-height:58px;padding:16px 18px!important;gap:15px!important;
  background:#fff8f3!important;border:1px solid rgba(231,216,202,.32)!important;border-radius:12px!important;
- color:#696460!important;text-align:left!important;
+ color:#6A737A!important;text-align:left!important;
 }
 body #apply .college-lookup-card .college-search-result:hover,
 body #apply .college-lookup-card .college-search-result:focus-visible{background:#ffe9dd!important;border-color:#e7d8ca!important}
-body #apply .college-lookup-card .college-search-result strong{color:#696460!important;line-height:1.35}
-body #apply .college-lookup-card .college-search-result span{color:#696460!important}
-body #apply .college-lookup-card .college-manual{background:#fff0e5!important;color:#696460!important;border-color:#e7d8ca!important;padding:14px 19px!important;border-radius:11px!important}
-body #apply .college-lookup-card .college-chosen{color:#696460!important}
+body #apply .college-lookup-card .college-search-result strong{color:#6A737A!important;line-height:1.35}
+body #apply .college-lookup-card .college-search-result span{color:#6A737A!important}
+body #apply .college-lookup-card .college-manual{background:#fff0e5!important;color:#6A737A!important;border-color:#e7d8ca!important;padding:14px 19px!important;border-radius:11px!important}
+body #apply .college-lookup-card .college-chosen{color:#6A737A!important}
 @media(max-width:620px){
  body #apply .college-search.college-lookup-card{padding:23px 19px!important;margin:21px 0 24px!important;border-radius:18px!important}
  body #apply .college-lookup-indicator{display:none}
@@ -170,41 +170,41 @@ body #discover .research-controls{
  border:1px solid rgba(231,216,202,.39)!important;border-radius:22px!important;
  box-shadow:0 17px 42px rgba(231,216,202,.17)!important;
 }
-body #discover .research-controls>label{display:flex!important;flex-direction:column!important;align-items:stretch!important;gap:10px!important;min-width:0;font-size:14px!important;font-weight:750!important;color:#696460!important}
+body #discover .research-controls>label{display:flex!important;flex-direction:column!important;align-items:stretch!important;gap:10px!important;min-width:0;font-size:14px!important;font-weight:750!important;color:#6A737A!important}
 body #discover .research-controls>label:first-child{grid-column:1/-1!important;font-size:16px!important;gap:12px!important}
 body #discover .research-controls input#research-search{
  display:block!important;width:100%!important;max-width:none!important;min-width:0!important;
  padding:17px 20px!important;min-height:66px!important;font-size:clamp(17px,1.4vw,20px)!important;
- background:#fffdfa!important;color:#696460!important;border:1px solid rgba(231,216,202,.55)!important;
+ background:#fffdfa!important;color:#6A737A!important;border:1px solid rgba(231,216,202,.55)!important;
  border-radius:14px!important;
 }
-body #discover .research-controls #research-search::placeholder{color:#696460!important;opacity:1!important}
-body #discover .research-controls select{width:100%!important;min-height:50px!important;padding:11px 15px!important;border-radius:11px!important;background:#fffdfa!important;color:#696460!important;font-size:14px!important;border:1px solid rgba(231,216,202,.36)!important}
+body #discover .research-controls #research-search::placeholder{color:#6A737A!important;opacity:1!important}
+body #discover .research-controls select{width:100%!important;min-height:50px!important;padding:11px 15px!important;border-radius:11px!important;background:#fffdfa!important;color:#6A737A!important;font-size:14px!important;border:1px solid rgba(231,216,202,.36)!important}
 @media(max-width:740px){body #discover .research-controls{grid-template-columns:minmax(0,1fr)!important;gap:14px!important;padding:21px 18px!important}body #discover .research-controls input#research-search{min-height:58px!important}}
 
 /* College evidence status: clearly distinguish an unresolved review from a completed one. */
 body .research-card .research-verification{display:block;margin:13px 0 5px!important;padding:10px 13px!important;border-radius:9px!important;font-size:12px!important;line-height:1.6!important;font-weight:750!important;letter-spacing:.005em;overflow-wrap:anywhere}
-body .research-card .research-verification[data-review-state="verified"]{background:#fff0e5!important;color:#696460!important;border:1px solid rgba(231,216,202,.36)!important}
-body .research-card .research-verification[data-review-state="partial"]{background:rgba(119,78,32,.42)!important;color:#ffdea3!important;border:1px solid rgba(238,181,98,.43)!important}
+body .research-card .research-verification[data-review-state="verified"]{background:#fff0e5!important;color:#6A737A!important;border:1px solid rgba(231,216,202,.36)!important}
+body .research-card .research-verification[data-review-state="partial"]{background:rgba(140,151,159,.42)!important;color:#ffdea3!important;border:1px solid rgba(238,181,98,.43)!important}
 body .research-card .research-verification[data-review-state="unreviewed"]{background:rgba(91,92,97,.28)!important;color:#eae1d7!important;border:1px solid rgba(237,220,205,.35)!important}
 
 /* Email authentication: legible existing-account login and clear SMTP setup notice. */
 body .auth-card .auth-email-status{
  margin:15px 0 0!important;padding:13px 15px!important;border-radius:12px!important;
- background:rgba(110,77,27,.29)!important;border:1px solid rgba(223,186,103,.39)!important;
+ background:rgba(140,151,159,.29)!important;border:1px solid rgba(223,186,103,.39)!important;
  color:#f2e6c6!important;font-size:13px!important;line-height:1.65!important;
 }
-body .auth-card .auth-divider{color:#696460!important;font-size:13px!important;margin:17px 0 9px!important}
+body .auth-card .auth-divider{color:#6A737A!important;font-size:13px!important;margin:17px 0 9px!important}
 body .auth-card #auth-form{max-width:100%;min-width:0}
 body .auth-card #auth-form input[type="email"],body .auth-card #auth-form input[type="password"]{
  width:100%!important;min-height:48px!important;border-radius:10px!important;
  border:1px solid rgba(231,216,202,.43)!important;
- background:#fff6ef!important;color:#696460!important;
+ background:#fff6ef!important;color:#6A737A!important;
  font-size:16px!important;line-height:1.4!important;padding:12px 15px!important;
 }
-body .auth-card #auth-form input::placeholder{color:#696460!important;opacity:1}
-body .auth-card #auth-form label{color:#696460!important;font-size:13px!important}
-body .auth-card .auth-message{color:#696460!important;font-size:13px!important}
+body .auth-card #auth-form input::placeholder{color:#6A737A!important;opacity:1}
+body .auth-card #auth-form label{color:#6A737A!important;font-size:13px!important}
+body .auth-card .auth-message{color:#6A737A!important;font-size:13px!important}
 body .auth-card .auth-message.error{color:#ffd1b6!important}
 body .auth-card .auth-switch[hidden],body .auth-card .auth-email-status[hidden],body .auth-card #auth-form[hidden],body .auth-card .consent-line[hidden],body .auth-card label[hidden]{display:none!important}
 body .auth-card #auth-form input:focus-visible{outline:3px solid #e7d8ca!important;outline-offset:2px!important}
@@ -306,7 +306,7 @@ body .home-flow .journey-detail a.journey-link{
   border:1px solid rgba(231,216,202,.55)!important;
   border-radius:12px!important;
   background:#fff1e7!important;
-  color:#696460!important;
+  color:#6A737A!important;
   font-size:15px!important;
   line-height:1.5!important;
   text-decoration:none!important;
