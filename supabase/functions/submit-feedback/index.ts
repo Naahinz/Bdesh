@@ -40,7 +40,14 @@ Deno.serve(async (request: Request) => {
   });
   if (request.method !== "POST") return answer(405, "method_not_allowed");
   const secret = Deno.env.get("BDESH_TURNSTILE_SECRET");
-  const serverKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
+  // Prefer a current server-only secret key; legacy service-role JWT is a fallback.
+  const availableSecrets = Deno.env.get("SUPABASE_SECRET_KEYS");
+  let modernKey = "";
+  try {
+    const parsed = JSON.parse(availableSecrets || "{}");
+    if (typeof parsed.default === "string") modernKey = parsed.default;
+  } catch { /* No modern secret key available yet. */ }
+  const serverKey = modernKey || Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
   const supabaseUrl = Deno.env.get("SUPABASE_URL");
   if (!secret || !serverKey || !supabaseUrl) {
     return answer(503, "server_not_configured");
@@ -109,7 +116,7 @@ Deno.serve(async (request: Request) => {
         method: "POST",
         headers: {
           apikey: serverKey,
-          Authorization: "Bearer " + serverKey,
+          ...(serverKey.startsWith("sb_secret_") ? {} : { Authorization: "Bearer " + serverKey }),
           "Content-Type": "application/json",
           Accept: "application/json",
         },
