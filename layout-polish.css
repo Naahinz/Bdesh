@@ -442,91 +442,174 @@ html body .reader :is(.knowledge-check,.takeaway,.application-example){
 }
 
 
-/* Final component-level palette consistency: white cards, neutral strokes,
-   orange interactive elements; no espresso or brown surfaces. */
-html body :is(.hero-copy,.home-flow-head,.journey-detail,.research-card,
-  .application-card,.learn-first,.intro,.action-plan,.deadline-center,
-  .profile-panel,.entry-card,.lesson-content,.review-card,.followup-tracker,
-  .college-lookup-card,.research-controls){
-  background-color:#FFFFFF!important;
-  border-color:#E5E9ED!important;
+
+/* Glass restoration — replace the flattening overrides instead of stacking
+   another stylesheet. Soft ambient light is visible through glass surfaces. */
+:root{
+  --ui-ink:#33424f;
+  --ui-body:#556575;
+  --ui-muted:#697784;
+  --ui-orange:#FF7134;
+  --ui-orange-hover:#ED5B22;
+  --ui-peach:rgba(255,245,240,.78);
+  --ui-cream:#FAFAF9;
+  --ui-paper:rgba(255,255,255,.78);
+  --ui-line:rgba(198,207,216,.72);
+  --ui-glass:linear-gradient(135deg,rgba(255,255,255,.88),rgba(255,255,255,.65));
+  --ui-glass-shadow:0 15px 43px rgba(57,72,88,.085),inset 0 1px 0 rgba(255,255,255,.97);
 }
-html body :is(.research-evidence,.followup-item,.date-editor,
-  .research-caution,.section-hint,.notice,.sync){
-  background:#FFFFFF!important;
-  border-color:#E5E9ED!important;
-  color:#525B63!important;
+html body{
+  background:radial-gradient(ellipse at 86% 5%,rgba(255,124,65,.17),transparent 39%),
+    radial-gradient(ellipse at 6% 65%,rgba(222,233,244,.38),transparent 43%),
+    linear-gradient(145deg,#FFFEFC 0%,#F8F9FA 70%,#FAFAF9 100%)!important;
+  background-attachment:fixed!important;
+  color:var(--ui-ink)!important;
+}
+html body :is(.hero-copy,.home-flow-head,.journey-detail,.journey-progress,
+  .research-card,.application-card,.learn-first,.intro,.action-plan,.deadline-center,
+  .profile-panel,.entry-card,.lesson-content,.review-card,.followup-tracker,
+  .college-lookup-card,.research-controls,.reading-top,.editor-form,.auth-card,.panel){
+  background:var(--ui-glass)!important;
+  border:1px solid rgba(255,255,255,.91)!important;
+  box-shadow:var(--ui-glass-shadow)!important;
+  backdrop-filter:blur(18px) saturate(118%)!important;
+  -webkit-backdrop-filter:blur(18px) saturate(118%)!important;
+}
+html body .main :is(.intro,.learn-first,.action-plan,.deadline-center,
+  .research-card,.application-card,.profile-panel),
+html body .main .action-plan .next-actions,
+html body .home-flow :is(.home-flow-head,.journey-step .journey-detail,.journey-progress),
+html body #profile-app :is(.profile-panel,.entry-card,.paper-form),
+html body #discover :is(.research-controls,.research-card),
+html body #apply :is(.college-lookup-card,.application-card){
+  background:var(--ui-glass)!important;
+  border-color:rgba(255,255,255,.91)!important;
+  box-shadow:var(--ui-glass-shadow)!important;
+  backdrop-filter:blur(18px) saturate(118%)!important;
+  -webkit-backdrop-filter:blur(18px) saturate(118%)!important;
+}
+html body .main .action-plan .next-actions{
+  border-radius:14px!important;
+  overflow:hidden;
+}
+html body .main .action-plan .next-action{
+  background:rgba(255,255,255,.22)!important;
+  box-shadow:none!important;
+  border-bottom:1px solid rgba(205,214,222,.6)!important;
+}
+html body .hero{
+  background:radial-gradient(circle at 84% 19%,rgba(255,124,65,.26),transparent 28%),
+    radial-gradient(circle at 72% 78%,rgba(255,182,128,.16),transparent 39%),
+    linear-gradient(120deg,rgba(255,253,250,.85),rgba(246,248,250,.80))!important;
+  border:1px solid rgba(255,255,255,.75)!important;
+  box-shadow:0 20px 65px rgba(96,107,119,.09)!important;
+}
+html body .hero .hero-copy{
+  background:linear-gradient(120deg,rgba(255,255,255,.83),rgba(255,255,255,.65))!important;
+  border-color:rgba(255,255,255,.95)!important;
+  box-shadow:var(--ui-glass-shadow)!important;
+}
+html body .home-flow .journey-ring{
+  background:conic-gradient(#FF7134 var(--journey-percent,0%),rgba(214,223,231,.65) 0)!important;
+}
+html body .home-flow .journey-ring-inner{
+  background:rgba(255,255,255,.94)!important;
+  color:var(--ui-ink)!important;
+}
+html body :is(.research-evidence,.followup-item,.date-editor,.research-caution,
+  .section-hint,.notice,.sync,.takeaway,.application-example){
+  background:rgba(255,248,243,.66)!important;
+  border:1px solid rgba(223,214,207,.67)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.65)!important;
+  color:var(--ui-ink)!important;
 }
 html body :is(.research-evidence,.followup-item,.date-editor,
   .research-caution,.section-hint,.notice,.sync) :is(p,span,small,li){
-  color:#6A737A!important;
+  color:var(--ui-body)!important;
 }
 html body :is(.research-evidence,.followup-item,.date-editor,
   .research-caution,.section-hint,.notice,.sync) :is(a,summary){
-  color:#D94C10!important;
+  color:#AE4113!important;
+}
+html body :is(.side,.sidebar,.curriculum){
+  background:rgba(255,255,255,.57)!important;
+  border-color:rgba(208,217,224,.66)!important;
+  backdrop-filter:blur(14px) saturate(110%)!important;
+  -webkit-backdrop-filter:blur(14px) saturate(110%)!important;
 }
 html body .home-flow .journey-node{
-  background:#FFF5F0!important;
-  border-color:#FFD9C9!important;
-  color:#D94C10!important;
+  background:rgba(255,239,229,.82)!important;
+  border:1px solid rgba(255,147,92,.46)!important;
+  color:#AE4113!important;
 }
 html body .home-flow .journey-arrow{color:#FF7134!important}
-html body :is(.side,.sidebar,.curriculum){
-  background:#FAFAF9!important;border-color:#E5E9ED!important;
-}
 html body :is(.rail a.active,.workspace-steps a.active,.lesson-link.active,
   #profile-nav button.active){
-  background:#FFF5F0!important;
-  border-color:#FFD9C9!important;
-  color:#D94C10!important;
+  background:rgba(255,237,224,.80)!important;
+  border-color:rgba(255,147,92,.50)!important;
+  color:#AE4113!important;
 }
-/* Google-only beta sign-out is a quiet utility action, not a primary CTA. */
+html body :is(.topbar,.nav,.site-header,.top){
+  background:rgba(255,255,255,.84)!important;
+  border-color:rgba(213,220,227,.74)!important;
+  backdrop-filter:blur(18px) saturate(112%)!important;
+  -webkit-backdrop-filter:blur(18px) saturate(112%)!important;
+}
+/* Quiet utility actions: no bright orange slab for sign-out. */
 html body .nav .nav-actions #account-toggle,
 html body :is(#signout,#sign-out){
-  background:#FFFFFF!important;
-  border:1px solid #E5E9ED!important;
-  color:#525B63!important;
+  background:rgba(255,255,255,.82)!important;
+  border:1px solid rgba(208,217,224,.85)!important;
+  color:#33424f!important;
   font-size:13px!important;
   padding:10px 14px!important;
   min-height:43px!important;
 }
 html body .nav .nav-actions #account-toggle:hover,
 html body :is(#signout,#sign-out):hover{
-  background:#FFF5F0!important;
-  color:#D94C10!important;
-  border-color:#FFD9C9!important;
+  background:rgba(255,237,224,.88)!important;
+  color:#AE4113!important;
+  border-color:rgba(255,147,92,.55)!important;
 }
-/* Application buttons previously inherited white lettering on pale fills. */
+/* Secondary buttons use dark text, not the white-on-pale regression. */
+html body :is(.outline-button,.journey-link,.application-toggle,.export-workspace,
+  .college-manual,.deadline-entry button),
 html body #apply .application-footer button{
-  display:inline-flex!important;
-  align-items:center!important;
-  justify-content:center!important;
-  min-height:43px!important;
-  width:auto!important;
-  max-width:100%!important;
-  padding:9px 14px!important;
-  border:1px solid #E5E9ED!important;
-  background:#FFF5F0!important;
-  color:#D94C10!important;
-  border-radius:10px!important;
-  font-size:13px!important;
-  font-weight:700!important;
-  line-height:1.4!important;
-  white-space:normal!important;
+  background:rgba(255,242,234,.85)!important;
+  border:1px solid rgba(246,169,127,.55)!important;
+  color:#33424f!important;
+  box-shadow:none!important;
 }
+html body :is(.outline-button,.journey-link,.application-toggle,.export-workspace,
+  .college-manual,.deadline-entry button) :is(span,strong,b),
+html body #apply .application-footer button :is(span,strong,b){
+  color:#33424f!important;
+}
+html body :is(.outline-button,.journey-link,.application-toggle,.export-workspace,
+  .college-manual,.deadline-entry button):hover,
 html body #apply .application-footer button:hover{
-  background:#FFEBE3!important;border-color:#FFD9C9!important;
+  background:rgba(255,227,207,.91)!important;
+  border-color:rgba(255,140,76,.65)!important;
+  color:#27343e!important;
 }
 html body #apply .application-footer button.danger{
-  background:#FFF8F7!important;
+  background:rgba(255,248,247,.92)!important;
   color:#B54742!important;
-  border-color:#F1D5D2!important;
+  border-color:rgba(221,164,161,.55)!important;
 }
-html body #apply .application-footer button.danger:hover{background:#FFF0EE!important}
 html body #discover .research-verification{
-  background:#FFF5F0!important;
-  color:#D94C10!important;
-  border-color:#FFD9C9!important;
+  background:rgba(255,242,234,.78)!important;
+  color:#AE4113!important;
+  border:1px solid rgba(255,147,92,.42)!important;
+}
+@media(prefers-reduced-transparency:reduce){
+  html body :is(.hero-copy,.home-flow-head,.journey-detail,.research-card,
+    .application-card,.intro,.learn-first,.action-plan,.deadline-center,.profile-panel,
+    .lesson-content,.research-controls,.panel){
+    background:#FFFFFF!important;
+    backdrop-filter:none!important;
+    -webkit-backdrop-filter:none!important;
+  }
 }
 
 /* Final cascade fix for the higher-specificity, outdated white labels in older sheets. */
