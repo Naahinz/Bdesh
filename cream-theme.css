@@ -1,0 +1,174 @@
+/* Bdesh — Cream Editorial Theme v1
+   Standalone palette layer; remove its <link> to revert without touching behavior.
+   Load after the existing stylesheets. */
+:root{
+  color-scheme:light;
+  --ink:#312b24;--secondary:#71675c;--cream:#f8f4ec;--paper:#fffdf8;
+  --mint:#efe9dc;--line:#ded4c4;--accent:#987a4f;
+  --forest-text:#322b23;--forest-muted:#756b5e;--forest-edge:#dfd5c7;
+  --reading-ink:#322b23;--reading-muted:#73695e;--reading-border:#ded4c4;
+  --glass:#fffdf8;--frost-bg:#fffaf3;--frost-brd:#e7dece;
+  --editorial-rule:#ded4c4;--muted:#71675c;
+}
+html,body{background:#f8f4ec!important;color:#312b24!important;color-scheme:light}
+body{
+  background:radial-gradient(ellipse at 85% 5%,rgba(214,188,145,.18),transparent 42%),
+  linear-gradient(160deg,#fbf8f1 0%,#f6f0e7 55%,#f9f5ed 100%)!important;
+  background-attachment:fixed!important;
+}
+body :is(p,li,small,label,dt,dd){color:#71675c!important}
+body :is(h1,h2,h3,h4,h5,h6,strong,b){color:#342e26!important}
+body :is(.eyebrow,.kicker,.chapter-id,.reading-time,.journey-tag,.section-label){color:#8e7756!important}
+body a{color:#655038!important}
+body :is(.nav,.topbar,.site-header,.top,.early){
+  background:rgba(251,248,240,.96)!important;color:#302b25!important;
+  border-color:#e4dacc!important;box-shadow:0 4px 22px rgba(85,66,40,.05)!important;
+  backdrop-filter:blur(15px)!important;
+}
+body :is(.nav,.topbar,.site-header,.top) :is(a,span,strong,button,#session-status,#account-name){color:#4c4134!important}
+body :is(.side,.sidebar,.curriculum){
+  background:#f2ebdf!important;border-color:#ded4c4!important;
+  color:#41382e!important;box-shadow:none!important;
+}
+body :is(.main,.reader,.profile-main,.layout,.shell,.lesson-shell){background:transparent!important;color:#342e27!important}
+body :is(.hero,.hero-copy){color:#332b24!important}
+body .hero{
+  background:radial-gradient(ellipse at 83% 16%,rgba(212,184,138,.24),transparent 42%),
+    linear-gradient(122deg,#e9ddcc 0%,#f6efe3 47%,#e7d8c1 100%)!important;
+  border:1px solid #e1d3bf!important;
+  box-shadow:0 22px 65px rgba(80,64,41,.09)!important;
+}
+body .hero-copy{background:rgba(255,252,245,.82)!important;border:1px solid #e6dacb!important;box-shadow:0 12px 35px rgba(89,69,44,.04)!important}
+body .hero :is(h1,h1 em,.hero-kicker,.eyebrow,.hero-caption,.hero-note,.hero-note span,p){color:#332c24!important}
+body .hero .hero-copy>p{color:#62574b!important}
+body .hero .primary-cta{background:#574937!important;color:#fffaf0!important;border:1px solid #574937!important}
+body .hero .primary-cta:hover{background:#3d3327!important;color:#fffaf0!important}
+body .hero .textlink{color:#69543d!important}
+body .home-flow-head{
+  background:#fffaf3!important;border:1px solid #e3d6c4!important;
+  box-shadow:0 8px 28px rgba(83,65,42,.045)!important;
+}
+body .home-flow-head :is(h2,h2 em,p,span,small,strong){color:#403428!important}
+body .journey-detail,
+body .journey-step:nth-child(3n+2) .journey-detail,
+body .journey-step:nth-child(3n) .journey-detail{
+  background:#fffaf3!important;border:1px solid #e5d9c8!important;
+  box-shadow:0 8px 28px rgba(80,62,42,.045)!important;
+}
+body .journey-detail :is(h3,p,.journey-tag,.journey-foot,span){color:#3c332a!important}
+body .journey-detail p,body .journey-detail .journey-foot{color:#726559!important}
+body .journey-node{background:#eee3d3!important;color:#544330!important;border:1px solid #cbb89b!important}
+body .journey-arrow{color:#aa8c63!important}
+body :is(.journey-ring,.journey-ring-inner){background:#efe4d3!important;color:#4b3d2e!important;border-color:#d5c5ae!important}
+body :is(.journey-progress p,.journey-progress small,.journey-progress strong){color:#574735!important}
+body .home-flow .journey-detail a.journey-link{
+  background:#f2e7d6!important;border:1px solid #ccbda6!important;
+  color:#4b3928!important;border-radius:12px!important;
+}
+body .home-flow .journey-detail a.journey-link:hover,
+body .home-flow .journey-detail a.journey-link:focus-visible{
+  background:#e9dac4!important;border-color:#9b825f!important;color:#30261c!important;
+}
+body :is(.learn-first,.intro,.action-plan,.deadline-center,.research-card,.application-card,.college-search,.auth-card,.review-card,.profile-panel,.entry-card,.knowledge-check,.reading-top,.aside-progress,.paper-form,.add-app,.profile-form,.editor-form,.editor-list,.editor-history,.editor-layout,.notice,.empty,.section-hint,.review-summary,.followup-tracker,.deadline-entry,.followup-item,.date-editor,.research-controls,.application-board-tools,.college-lookup-card,.sign-in-wall,.reading-intro,.reading-progress,.chapter-card,.lesson-content,.reading-section,.editor-notice){
+  background:#fffdf8!important;border-color:#e3d9ca!important;color:#352f28!important;
+  box-shadow:0 8px 28px rgba(95,73,42,.035)!important;
+}
+body :is(.milestone,.journey-illustration,.application-example,.example-top,.example-row,.takeaway,.reading-intro,.research-caution,.entry-head,.entry-empty,.overview-illustration,.section-hint,.followup-form,.followup-item,.date-editor,.sync,.lesson-content .takeaway,.lesson-content .example,.lesson-content .application-flow){
+  background:#f3ecdf!important;border:1px solid #e2d6c5!important;color:#3e352a!important;
+}
+body :is(.milestone,.journey-illustration,.application-example,.example-top,.example-row,.takeaway,.reading-intro,.research-caution,.entry-head,.entry-empty,.overview-illustration,.section-hint,.followup-form,.followup-item,.date-editor,.paper-form,.add-app,.sync) :is(p,span,small,strong,b,em,h2,h3,h4,label,a,li),
+body .lesson-content :is(.takeaway,.lesson-takeaway,.callout,.idea,.key-idea,.tip,.lesson-note,.highlight,.summary-box,.lesson-flow,.lesson-steps,.guide-card,blockquote,.example-row,.application-flow),
+body .lesson-content :is(.takeaway,.lesson-takeaway,.callout,.idea,.key-idea,.tip,.lesson-note,.highlight,.summary-box,.lesson-flow,.lesson-steps,.guide-card,blockquote,.example-row,.application-flow) :is(p,span,strong,b,em,h2,h3,li){
+  color:#443a2f!important;
+}
+body .lesson-content :is(.takeaway,.lesson-takeaway,.callout,.idea,.key-idea,.tip,.lesson-note,.highlight,.summary-box,.lesson-flow,.lesson-steps,.guide-card,blockquote,.example-row,.application-flow){
+  background:#f1e7d7!important;border-color:#dccdb8!important;
+}
+body .lesson-content :is(p,li){color:#685d51!important}
+body .lesson-content :is(h1,h2,h3,strong){color:#322b23!important}
+body .lesson-content .reading-section :is(h2,p){color:#4b4137!important}
+body .lesson-content .reading-section-num{color:#96774b!important}
+body .lesson-content .takeaway-label{color:#80613f!important}
+body :is(.metrics>div,.deadline-summary>div,.workspace-steps,.workspace-steps a,.profile-summary,.review-summary>div){
+  background:#f5eee4!important;border:1px solid #e4d9ca!important;
+  box-shadow:none!important;
+}
+body :is(.metrics strong,.deadline-summary strong,.review-summary strong){color:#372e25!important}
+body :is(input:not([type=checkbox]),textarea,select),
+body #discover .research-controls input#research-search,
+body #discover .research-controls select,
+body #apply .college-lookup-card #college-search-input{
+  background:#fffefa!important;color:#342c23!important;
+  border:1px solid #d8cbb9!important;box-shadow:none!important;
+}
+body :is(input,textarea)::placeholder,
+body #discover .research-controls #research-search::placeholder,
+body #apply .college-lookup-card #college-search-input::placeholder{color:#897c6d!important;opacity:1!important}
+body select option{background:#fffdf8!important;color:#332c24!important}
+body :is(.darkbtn,.primary-button,.button,.google-signin,.application-toggle,.followup-add,.export-workspace){
+  background:#5a4a37!important;color:#fffaf2!important;
+  border:1px solid #5a4a37!important;box-shadow:none!important;
+}
+body :is(.darkbtn,.primary-button,.button,.google-signin,.application-toggle,.followup-add,.export-workspace):hover{
+  background:#403426!important;color:#fffaf2!important;
+}
+body :is(.outline-button,.college-search-result,.college-manual,.deadline-entry button,.editor-list button,.rail a,.workspace-steps a,.lesson-link,.check-option){
+  background:#f5eee3!important;color:#4b3b2a!important;
+  border:1px solid #dfd2c0!important;box-shadow:none!important;
+}
+body :is(.outline-button,.college-search-result,.college-manual,.deadline-entry button,.editor-list button,.rail a,.workspace-steps a,.lesson-link,.check-option):hover{
+  background:#eadeca!important;color:#3b2c1f!important;
+}
+body :is(.rail a.active,.workspace-steps a.active,.sidebar nav button.active,.curriculum nav button.active,.editor-list button[aria-current=true],.lesson-link.active){
+  background:#e4d5bd!important;color:#3f3022!important;border-color:#c5ab85!important;
+}
+body .topbar nav a.active,body .topbar nav a[data-tab].active{color:#5d4830!important;border-bottom-color:#af8d62!important}
+body :is(.research-card,.application-card,.review-card,.milestone,.lesson-content) a:not(.button){color:#705333!important}
+body .research-card .research-verification[data-review-state="verified"]{
+  background:#e8f1e5!important;color:#335d42!important;border-color:#aac6b0!important;
+}
+body .research-card .research-verification[data-review-state="partial"]{
+  background:#fff0d6!important;color:#795322!important;border-color:#e0c28d!important;
+}
+body .research-card .research-verification[data-review-state="unreviewed"]{
+  background:#eeeae3!important;color:#615a53!important;border-color:#d1cbc2!important;
+}
+body .research-card :is(ul,li,p),body .research-evidence :is(p,li){color:#675d50!important}
+body .research-evidence{
+  background:#f5eee4!important;color:#443a30!important;border:1px solid #dfd1bc!important;
+}
+body .research-evidence :is(summary,h4,a){color:#614b35!important}
+body .research-evidence[open] summary{border-bottom-color:#d8c8af!important}
+body .cardactions button{background:#5a4a37!important;border-color:#5a4a37!important;color:#fffaf0!important}
+body #discover .research-controls{
+  background:#f2e8d8!important;border:1px solid #dacbb8!important;
+  box-shadow:0 10px 30px rgba(89,67,42,.05)!important;
+}
+body #discover .research-controls>label,
+body #apply .college-lookup-card :is(h3,label,p,span){color:#4d3e30!important}
+body #apply .college-search.college-lookup-card{
+  background:#f2e8d8!important;border:1px solid #dfceb6!important;
+}
+body #apply .college-lookup-card .college-search-result{
+  background:#fffbf4!important;color:#443527!important;border-color:#d9cab5!important;
+}
+body #apply .college-lookup-card .college-search-result :is(strong,span){color:#443527!important}
+body #apply .college-lookup-card #college-search-hint{color:#6f6152!important}
+body .check-option.correct{background:#e2eddf!important;border-color:#92bb9a!important}
+body .check-option.incorrect{background:#f6e5df!important;border-color:#dca99f!important}
+body :is(.insight,.followup-info,.followup-empty,.privacy-note,.editor-notice){color:#62584d!important}
+body :is(.priority-label,.deadline-due.is-overdue,.danger){color:#8b4b3e!important}
+body :is(.early,.trust-links,footer){
+  background:#efe6d8!important;color:#66594b!important;
+  border-color:#dcccba!important;box-shadow:none!important;
+}
+body :is(.early,.trust-links,footer) :is(a,span,p){color:#655342!important}
+body :is(.topbar,.site-header,.top) :is(#signout,#sign-out){
+  color:#594630!important;background:#f3e9da!important;border:1px solid #d7c6b0!important;
+}
+body :is(.milestone,.research-card,.journey-detail,.application-card,.profile-panel,.entry-card,.lesson-content) a{overflow-wrap:anywhere}
+@media(prefers-reduced-transparency:reduce){
+  body :is(.hero-copy,.research-card,.application-card,.profile-panel,.journey-detail,.lesson-content,.editor-form){
+    backdrop-filter:none!important;background:#fffaf3!important;
+  }
+}
