@@ -51,3 +51,12 @@ Do not collect student account passwords, SAT credentials, screenshots exposing 
 - Large-scale anonymous feedback requires server-side rate limits, not only client-side checks.
 - A database verification date is not a substitute for checking the institution's current admissions and aid pages.
 - Cloudflare production rendering and Google-account workflows were tested by the owner, not by the assistant's browser tools.
+
+
+## 4 November — feedback abuse protection staged (not yet active)
+- Deployed public Supabase Edge Function `submit-feedback` v2 with strict origin checks and server-side Turnstile Siteverify. Without a configured secret it fails closed, and does not affect existing site traffic.
+- Created restricted, atomic database rate limiter: three verified feedback messages per 15-minute bucket per best-effort hashed client address. Anonymous and authenticated roles cannot call the verified-submit RPC.
+- Added website widget and protected submission code behind `feedback-security-config.js` with `enabled: false`. The original working feedback submission continues unchanged until manual configuration.
+- **Manual blocker:** create a Turnstile widget for `bdesh.pages.dev`, set `BDESH_TURNSTILE_SECRET` inside Supabase Edge Function Secrets, put the public sitekey in frontend config, and enable/verify the protected path.
+- **Critical:** after verification, revoke direct public `INSERT` and drop its public RLS insert policy; otherwise bots can bypass the challenge. This must happen before declaring server-side abuse protection active.
+- Full safe activation/cutover instructions: [FEEDBACK_SECURITY_ACTIVATION.md](./FEEDBACK_SECURITY_ACTIVATION.md).
