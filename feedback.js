@@ -7,6 +7,41 @@
   if (!form || !status || !button) return;
 
   const endpoint = 'https://formsubmit.co/ajax/eftekhernahin@gmail.com';
+  const recipient = 'eftekhernahin@gmail.com';
+  const fallback = document.createElement('div');
+  fallback.className = 'feedback-fallback';
+  fallback.hidden = true;
+  fallback.style.cssText='display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:14px';
+  const direct = document.createElement('a');
+  direct.textContent = 'Open email app with this feedback';
+  direct.className = 'action';
+  direct.style.cssText='display:inline-flex;align-items:center;min-height:42px;padding:9px 14px;border-radius:10px;text-decoration:none';
+  const copy = document.createElement('button');
+  copy.type = 'button';
+  copy.textContent = 'Copy feedback';
+  copy.className = 'action';
+  copy.style.cssText='min-height:42px;padding:9px 14px;border-radius:10px';
+  fallback.append(direct,copy);
+  status.insertAdjacentElement('afterend',fallback);
+
+  const feedbackText=()=>{
+    const values = new FormData(form);
+    return 'Bdesh feedback — '+String(values.get('category')||'Other')+'\\n\\n'
+      +String(values.get('message')||'')+'\\n\\n'
+      +'Page: '+location.origin+location.pathname+'\\n'
+      +'Reply email (optional): '+String(values.get('email')||'Not provided');
+  };
+  const revealFallback=()=>{
+    const text=feedbackText();
+    direct.href='mailto:'+recipient+'?subject='+encodeURIComponent('Bdesh website feedback')
+      +'&body='+encodeURIComponent(text);
+    fallback.hidden=false;
+    fallback.style.display='flex';
+  };
+  copy.addEventListener('click',async()=>{
+    try { await navigator.clipboard.writeText(feedbackText()); copy.textContent='Copied ✓'; }
+    catch { const box=document.getElementById('feedback-message');box.focus();box.select();copy.textContent='Select your message to copy'; }
+  });
 
   const announce = (message, state) => {
     status.textContent = message;
@@ -30,11 +65,13 @@
     }
     // Ignore automated submissions filling the hidden honeypot field.
     if (trap) {
-      announce('Your feedback has been received.', 'success');
-      form.reset();
+      announce('Your message was not sent because the spam check was triggered. Please contact the Bdesh team if you are a real visitor.', 'error');
+      revealFallback();
       return;
     }
 
+    fallback.hidden=true;
+    fallback.style.display='none';
     button.disabled = true;
     button.textContent = 'Sending…';
     announce('Sending your feedback securely through the email service…', 'pending');
@@ -63,15 +100,18 @@
 
       const description = String(result?.message || '');
       if (/activat|confirm.*email/i.test(description)) {
-        announce('The feedback form needs one-time approval. An activation email should arrive at eftekhernahin@gmail.com. The recipient must click Activate Form before delivery can begin.', 'activation');
+        announce('The email service reports that recipient activation is required. Bdesh cannot confirm delivery until that is completed. You can copy or email your feedback directly below.', 'activation');
+        revealFallback();
       } else if (response.ok && (result?.success === true || result?.success === 'true')) {
         form.reset();
-        announce('Thank you — your feedback was successfully submitted to the Bdesh email service.', 'success');
+        announce('The email service accepted your message. Email delivery is not independently confirmed.', 'success');
       } else {
-        announce('The email service could not deliver your feedback. ' + (description || 'Please try again or use the direct email link below.'), 'error');
+        announce('The email service could not confirm your submission. ' + (description || 'Please try direct email.'), 'error');
+        revealFallback();
       }
     } catch (error) {
-      announce('Automatic delivery was unavailable. Please try again or use the direct email link below.', 'error');
+      announce('Automatic feedback submission failed. Your message is still here; use the direct email or copy option below.', 'error');
+      revealFallback();
     } finally {
       button.disabled = false;
       button.textContent = 'Send feedback';
