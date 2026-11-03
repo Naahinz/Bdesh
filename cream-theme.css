@@ -297,9 +297,6 @@ body :is(.followup-add,.application-toggle,.export-workspace,.google-signin,.pri
   background:#ED5B22!important;border-color:#525B63!important;color:#697781!important;
 }
 body .hero .primary-cta,body .hero .primary-cta :is(span,strong,b){color:#697781!important}
-body [role="button"]:not(.college-search-result){
-  background:#FF7134!important;color:#697781!important;border-color:#525B63!important;
-}
 body :is(.milestone select,.application-header select,.formgrid input,.formgrid select,.formgrid textarea,.followup-controls select,.followup-controls button){
   background:#FFFFFF!important;color:#525B63!important;border-color:#E5E9ED!important;
 }
