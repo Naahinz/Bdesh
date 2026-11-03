@@ -1,0 +1,435 @@
+/* Bdesh — layout polish v1 (Nov 2026)
+   Loaded last. Grid/flex repairs only: preserve existing application behavior.
+   Design surfaces are cream/ivory, accents sunset-orange, ink cool neutral gray. */
+:root{
+  --ui-ink:#4d5660;
+  --ui-body:#657079;
+  --ui-muted:#77818a;
+  --ui-orange:#f37336;
+  --ui-orange-hover:#df5d25;
+  --ui-peach:#fff1e7;
+  --ui-cream:#faf8f5;
+  --ui-paper:#fffdfb;
+  --ui-line:#ebe4de;
+}
+html{overflow-x:clip}
+html body{
+  color:var(--ui-ink)!important;
+  background-color:var(--ui-cream)!important;
+}
+html body :is(h1,h2,h3,h4,h5,h6){color:var(--ui-ink)!important}
+html body :is(p,li,dt,dd){color:var(--ui-body)!important}
+html body :is(.eyebrow,.kicker,.journey-tag,.chapter-id,.reading-time,.section-label){
+  color:#cc5a27!important;
+}
+html body :is(.shell,.main,.content,.reader,.layout,.section,.profile-panel,.journey-detail,
+  .research-card,.application-card,.entry-card,.lesson-content,.panel){min-width:0}
+html body :is(.main,.content,.reader,.journey-detail,.research-card,.application-card,
+  .profile-panel,.lesson-content,.entry-card) :is(h1,h2,h3,h4,p,a,label,summary){
+  overflow-wrap:anywhere;max-width:100%;
+}
+html body :is(.hero-copy,.main,.content,.reader) p{line-height:1.66!important}
+
+/* Buttons are inline-flex, consistently centered, without a narrow pill
+   clipping long labels. Icon glyphs remain with their words. */
+html body :is(a.darkbtn,.primary-cta,.button,.primary-button,.outline-button,
+  .application-toggle,.export-workspace,.google-signin,.journey-link,
+  .cardactions button,.college-manual,.deadline-entry button){
+  box-sizing:border-box!important;
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:8px!important;
+  min-width:0!important;
+  min-height:46px!important;
+  max-width:100%!important;
+  padding:11px 18px!important;
+  border-radius:11px!important;
+  font-size:clamp(13px,1vw,15px)!important;
+  line-height:1.45!important;
+  font-weight:700!important;
+  text-align:center!important;
+  white-space:normal!important;
+  overflow-wrap:anywhere!important;
+  vertical-align:middle;
+}
+html body :is(a.darkbtn,.primary-cta,.button,.primary-button,.google-signin,
+  .cardactions button){
+  background:var(--ui-orange)!important;
+  border:1px solid var(--ui-orange)!important;
+  color:#fffdfa!important;
+}
+html body :is(a.darkbtn,.primary-cta,.button,.primary-button,.google-signin,
+  .cardactions button) :is(span,strong,b,em,small){color:#fffdfa!important}
+html body :is(a.darkbtn,.primary-cta,.button,.primary-button,.google-signin,
+  .cardactions button):hover{
+  background:var(--ui-orange-hover)!important;
+  border-color:var(--ui-orange-hover)!important;
+  color:#fffdfa!important;
+}
+html body :is(.outline-button,.journey-link,.application-toggle,.export-workspace,
+ .college-manual,.deadline-entry button){
+  background:var(--ui-peach)!important;
+  border:1px solid #f2d5c4!important;
+  color:#b74e22!important;
+}
+html body :is(.outline-button,.journey-link,.application-toggle,.export-workspace,
+ .college-manual,.deadline-entry button):hover{
+  background:#ffe6d6!important;color:#a9441b!important;
+}
+html body :is(.outline-button,.journey-link,.application-toggle,.export-workspace,
+ .college-manual,.deadline-entry button) :is(span,strong,b){color:inherit!important}
+html body button:disabled,html body a[aria-disabled=true]{opacity:.55;cursor:not-allowed}
+
+/* Page headers: text and actions no longer squeeze or drift off alignment. */
+html body :is(.nav,.topbar,.site-header,.top){
+  box-sizing:border-box;
+  display:flex;
+  align-items:center!important;
+  flex-wrap:wrap;
+  gap:12px 24px;
+}
+html body :is(.nav,.topbar,.site-header,.top)>nav{
+  display:flex;align-items:center;justify-content:center;
+  flex-wrap:wrap;gap:10px 22px;min-width:0;
+  margin-inline:auto;
+}
+html body :is(.nav,.topbar,.site-header,.top) :is(.nav-actions,.headright,.header-actions){
+  display:flex;align-items:center;justify-content:flex-end;
+  flex-wrap:wrap;gap:10px;min-width:0;
+}
+html body .headright span,html body #account-name{
+  max-width:min(260px,45vw);
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+}
+html body .nav .brand,html body .topbar .wordmark,html body .site-header .logo{
+  flex-shrink:0;
+}
+
+/* Homepage */
+@media(min-width:901px){
+  html body .hero.shell{grid-template-columns:minmax(0,1fr)!important}
+  html body .hero.shell>.hero-copy{width:100%!important;max-width:none!important}
+}
+html body .hero .hero-copy{min-width:0}
+html body .hero .ctas{
+  display:flex;flex-wrap:wrap;align-items:center;
+  justify-content:flex-start;gap:14px 20px;
+}
+html body .home-flow .home-flow-head{
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr) minmax(220px,270px)!important;
+  align-items:center!important;
+  gap:clamp(20px,4vw,58px)!important;
+  padding:clamp(24px,3vw,45px)!important;
+}
+html body .home-flow .home-flow-head>div{min-width:0}
+html body .home-flow .journey-progress{
+  width:100%;max-width:270px;margin-inline:auto;
+  display:flex;flex-direction:column;align-items:center;
+  justify-content:center;gap:12px;
+}
+html body .home-flow .journey-progress p{margin:0!important;text-align:center}
+html body .home-flow .journey-ring{flex:0 0 auto}
+html body .home-flow .journey-step{
+  grid-template-columns:72px minmax(0,1fr);
+  gap:18px 24px;align-items:stretch;
+}
+html body .home-flow .journey-rail{
+  min-width:0;display:flex;flex-direction:column;
+  align-items:center;justify-content:flex-start;
+}
+html body .home-flow .journey-detail{
+  width:100%;min-width:0;
+  align-items:flex-start!important;
+  justify-content:flex-start;
+  padding:clamp(23px,3vw,40px)!important;
+}
+html body .home-flow .journey-detail :is(h3,p){margin:0 0 9px!important}
+html body .home-flow .journey-detail :is(a.darkbtn,a.journey-link){
+  align-self:flex-start!important;
+  margin:12px 0 2px!important;
+}
+html body .home-flow .journey-detail .journey-foot{margin-top:10px!important}
+
+/* Workspace: consistent grids on cards, metrics and nested controls. */
+html body .main .learn-first,
+html body .main .intro{
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr) auto!important;
+  align-items:center!important;
+  gap:clamp(18px,3vw,36px)!important;
+}
+html body .main :is(.learn-first,.intro)>div:first-child{min-width:0}
+html body .main .learn-first>a.button{justify-self:end;align-self:center}
+html body .main .intro .workspace-account-tools{
+  min-width:0;display:flex;flex-wrap:wrap;
+  gap:12px;align-items:center;justify-content:flex-end;
+}
+html body .main .intro .sync{max-width:230px;min-width:0}
+html body .main .metrics{
+  display:grid;grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:14px;
+}
+html body .main .metrics>div{
+  display:flex;flex-direction:column;
+  align-items:flex-start;justify-content:space-between;
+  gap:10px;min-width:0;padding:20px!important;
+  background:var(--ui-paper)!important;
+}
+html body .main .metrics :is(span,strong,small){
+  display:block;overflow-wrap:anywhere;max-width:100%;
+}
+html body .main .workspace-steps{
+  display:grid;grid-template-columns:repeat(4,minmax(0,1fr));
+  align-items:stretch;gap:9px;
+}
+html body .main .workspace-steps>a{
+  display:flex;align-items:center;justify-content:center;
+  gap:8px;min-width:0;height:100%;line-height:1.4;
+  padding:14px 9px!important;white-space:normal!important;
+  text-align:center;overflow-wrap:anywhere;
+}
+html body .main :is(.action-plan-heading,.deadline-heading,.section-heading){
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr) auto!important;
+  align-items:start!important;
+  gap:20px 28px!important;
+}
+html body .main :is(.action-plan-heading,.deadline-heading,.section-heading)>div:first-child{
+  min-width:0;
+}
+html body .main :is(.action-plan-heading,.deadline-heading)>a{
+  justify-self:end;align-self:center;min-width:0;
+  text-align:right;max-width:230px;white-space:normal;
+}
+html body .main .action-plan .next-actions{display:grid;grid-template-columns:minmax(0,1fr)}
+html body .main .action-plan .next-action{
+  display:grid!important;
+  grid-template-columns:38px minmax(0,1fr) minmax(125px,180px)!important;
+  gap:12px 18px!important;
+  align-items:center!important;
+  padding:18px 14px!important;
+  min-width:0;
+}
+html body .main .action-plan .next-action>div{min-width:0}
+html body .main .action-plan .next-action :is(h3,p){
+  max-width:100%;margin:0!important;
+  overflow-wrap:anywhere;
+}
+html body .main .action-plan .next-action h3{margin-bottom:5px!important}
+html body .main .action-plan .next-action>a{
+  display:inline-flex;align-items:center;justify-content:flex-start;
+  justify-self:end;max-width:100%;min-width:0;
+  text-align:right;white-space:normal;
+  line-height:1.45;overflow-wrap:anywhere;
+}
+html body .main .deadline-center .deadline-entry{
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr) minmax(90px,130px) minmax(110px,150px)!important;
+  gap:12px 18px!important;
+  align-items:center!important;
+  min-width:0;
+}
+html body .main .deadline-center .deadline-entry>div{min-width:0}
+html body .main .deadline-center .deadline-entry .deadline-due{
+  min-width:0;text-align:center;
+  overflow-wrap:anywhere;
+}
+html body .main .deadline-center .deadline-entry button{
+  justify-self:end;max-width:100%;
+}
+html body .main .deadline-center .deadline-summary{
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+}
+html body .main .milestones{display:grid;grid-template-columns:minmax(0,1fr);gap:12px}
+html body .main .milestone{
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr) minmax(145px,180px)!important;
+  align-items:center!important;gap:20px!important;
+  min-width:0;padding:21px 25px!important;
+}
+html body .main .milestone>div:first-child{min-width:0}
+html body .main .milestone select{
+  width:100%!important;min-width:0!important;
+  max-width:180px!important;min-height:46px;
+  justify-self:end;flex:auto!important;
+}
+
+/* The university list stays a single horizontal card per row. */
+html body #discover #research-list.research-grid{
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr)!important;
+  align-items:start!important;
+  gap:14px!important;
+}
+html body #discover #research-list>.research-card{
+  width:100%;min-width:0;max-width:100%;
+  height:auto!important;
+  padding:clamp(20px,2.4vw,30px)!important;
+  display:flex;flex-direction:column;
+  align-items:stretch;gap:12px;
+}
+html body #discover .research-card :is(h3,p,ul){margin-top:0;overflow-wrap:anywhere}
+html body #discover .research-card .cardactions{
+  display:flex;align-items:center;justify-content:flex-start;
+  flex-wrap:wrap;gap:12px 20px;margin-top:12px;
+}
+html body #discover .research-card .research-evidence{
+  width:100%;max-width:100%;min-width:0;
+  overflow-x:auto;box-sizing:border-box;
+}
+html body #discover .research-card .research-evidence *{
+  max-width:100%;min-width:0;overflow-wrap:anywhere;
+}
+html body #discover .research-controls{
+  display:flex;flex-wrap:wrap;align-items:end;
+  gap:12px 20px;
+}
+html body #discover .research-controls>*{min-width:0}
+html body #apply .application-list{display:grid;grid-template-columns:minmax(0,1fr);gap:16px}
+html body #apply .application-card{min-width:0;width:100%}
+html body #apply .application-header{
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr) minmax(145px,190px)!important;
+  gap:18px!important;
+  align-items:start!important;
+}
+html body #apply .application-header>div:first-child{min-width:0}
+html body #apply .application-header select{
+  width:100%;max-width:190px;min-width:0;
+  justify-self:end;
+}
+html body #apply .mini-checklist{
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:12px 18px;
+}
+html body #apply .mini-checklist label{min-width:0;overflow-wrap:anywhere}
+html body #apply .application-footer{
+  display:flex;align-items:center;justify-content:flex-start;
+  flex-wrap:wrap;gap:12px 20px;
+}
+
+/* Profile: form labels, entry headers and button rows. */
+html body #profile-app .content{min-width:0}
+html body #profile-app .profile-panel{width:100%;max-width:100%;min-width:0}
+html body #profile-app .section-intro{max-width:100%;min-width:0}
+html body #profile-app :is(.field-grid,.entry-grid,.formgrid){
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:17px 20px;
+}
+html body #profile-app :is(.field-grid,.entry-grid,.formgrid)>*{min-width:0}
+html body #profile-app :is(.field-grid,.entry-grid,.formgrid) label{min-width:0}
+html body #profile-app :is(input,textarea,select){min-width:0;max-width:100%;box-sizing:border-box}
+html body #profile-app .entry-head{
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr) auto;
+  align-items:center!important;gap:12px 20px;
+}
+html body #profile-app .entry-head>div:first-child{min-width:0}
+html body #profile-app .entry-actions{
+  display:flex;align-items:center;justify-content:flex-end;
+  flex-wrap:wrap;gap:9px;
+}
+html body #profile-app .illustration-lines>div{
+  display:grid;grid-template-columns:40px minmax(110px,.48fr) minmax(0,1fr);
+  align-items:center;gap:14px;
+}
+html body #profile-app .illustration-lines small{
+  margin:0;min-width:0;text-align:left;
+}
+html body #profile-app #profile-nav button{display:flex;align-items:center;gap:10px}
+html body #profile-app #profile-nav button span:nth-child(2){flex:1;min-width:0}
+html body #profile-app #profile-nav button .nav-mark{flex:0 0 auto}
+html body #profile-app :is(.form-bottom,.review-actions,.entries-heading){
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:12px;
+}
+
+/* Reading: chapter numbers and article text use the same baseline. */
+html body .reader .reading-top{
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:10px 20px;
+}
+html body .reader .reading-section{
+  display:grid;grid-template-columns:35px minmax(0,1fr);
+  column-gap:20px;align-items:start;min-width:0;
+}
+html body .reader .reading-section-num{grid-column:1;align-self:start}
+html body .reader .reading-section h2{grid-column:2;min-width:0}
+html body .reader .reading-section p{grid-column:2;min-width:0;max-width:100%}
+html body .reader .lesson-footer{
+  display:flex;justify-content:space-between;align-items:center;
+  flex-wrap:wrap;gap:12px 20px;
+}
+html body .reader .footer-right{
+  display:flex;flex-wrap:wrap;align-items:center;
+  justify-content:flex-end;gap:10px;
+}
+html body .reader :is(.knowledge-check,.takeaway,.application-example){
+  min-width:0;max-width:100%;
+}
+
+/* Breakpoints — avoid pseudo-desktop multi-column squeezing. */
+@media(max-width:1050px){
+  html body .topbar nav{gap:9px 15px}
+  html body .main .metrics{grid-template-columns:repeat(2,minmax(0,1fr))}
+  html body .main .intro .workspace-account-tools{justify-content:flex-start}
+  html body #apply .application-header{grid-template-columns:minmax(0,1fr) 160px!important}
+}
+@media(max-width:850px){
+  html body .main .learn-first,
+  html body .main .intro{grid-template-columns:minmax(0,1fr)!important}
+  html body .main .learn-first>a.button{justify-self:start}
+  html body .main .intro .workspace-account-tools{justify-content:flex-start}
+  html body .main :is(.action-plan-heading,.deadline-heading,.section-heading){
+    grid-template-columns:minmax(0,1fr)!important;
+  }
+  html body .main :is(.action-plan-heading,.deadline-heading)>a{
+    justify-self:start;align-self:start;text-align:left;
+  }
+  html body .home-flow .home-flow-head{grid-template-columns:minmax(0,1fr)!important}
+  html body .home-flow .journey-progress{max-width:280px;margin-inline:0}
+  html body .main .action-plan .next-action{
+    grid-template-columns:33px minmax(0,1fr)!important;
+  }
+  html body .main .action-plan .next-action>a{
+    grid-column:2;justify-self:start;text-align:left;
+  }
+  html body .main .deadline-center .deadline-entry{
+    grid-template-columns:minmax(0,1fr) minmax(105px,130px)!important;
+  }
+  html body .main .deadline-center .deadline-entry button{
+    grid-column:1/-1;justify-self:start;
+  }
+}
+@media(max-width:680px){
+  html body .home-flow .journey-step{grid-template-columns:52px minmax(0,1fr);gap:12px}
+  html body .home-flow .journey-detail{padding:20px!important}
+  html body .main .milestone{grid-template-columns:minmax(0,1fr)!important}
+  html body .main .milestone select{
+    justify-self:stretch;max-width:none!important;
+  }
+  html body .main .workspace-steps{grid-template-columns:repeat(2,minmax(0,1fr))}
+  html body .main .deadline-center .deadline-summary{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+  html body #apply .application-header{grid-template-columns:minmax(0,1fr)!important}
+  html body #apply .application-header select{justify-self:start}
+  html body #apply .mini-checklist{grid-template-columns:minmax(0,1fr)}
+  html body #profile-app :is(.field-grid,.entry-grid,.formgrid){grid-template-columns:minmax(0,1fr)}
+  html body #profile-app .entry-head{grid-template-columns:minmax(0,1fr)}
+  html body #profile-app .entry-actions{justify-content:flex-start}
+  html body #profile-app .illustration-lines>div{grid-template-columns:36px minmax(0,1fr)}
+  html body #profile-app .illustration-lines small{grid-column:2}
+  html body .reader .lesson-footer{align-items:stretch;flex-direction:column}
+  html body .reader .footer-right{justify-content:flex-start}
+}
+@media(max-width:430px){
+  html body .main .metrics{grid-template-columns:minmax(0,1fr)}
+  html body .main .deadline-center .deadline-entry{grid-template-columns:minmax(0,1fr)!important}
+  html body .main .deadline-center .deadline-entry :is(.deadline-due,button){
+    grid-column:1;justify-self:start;text-align:left;
+  }
+  html body .main .deadline-center .deadline-summary{grid-template-columns:minmax(0,1fr)}
+  html body .home-flow .journey-step{grid-template-columns:40px minmax(0,1fr)}
+  html body .home-flow .journey-detail :is(a.darkbtn,a.journey-link){width:100%}
+  html body .reader .footer-right>*{flex:1 1 100%}
+}
