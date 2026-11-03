@@ -11,7 +11,7 @@
   const fallback = document.createElement('div');
   fallback.className = 'feedback-fallback';
   fallback.hidden = true;
-  fallback.style.cssText='display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:14px';
+  fallback.style.cssText='display:none;flex-wrap:wrap;gap:10px;align-items:center;margin-top:14px';
   const direct = document.createElement('a');
   direct.textContent = 'Open email app with this feedback';
   direct.className = 'action';
