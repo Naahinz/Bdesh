@@ -50,16 +50,27 @@ async function load(){
 }
 
 async function loadInbox(){
- const output=$('feedback-inbox-list'),note=$('feedback-inbox-status');
- if(!output||!note)return;
+ const output=$('feedback-inbox-list'),note=$('feedback-inbox-status'),filter=$('feedback-status-filter');
+ if(!output||!note||!client)return;
+ const state=filter?.value||'new';
  note.textContent='Loading saved feedback…';
  output.replaceChildren();
- const {data,error}=await client.from('beta_feedback')
+ // Always count the full saved inbox, not merely the first page displayed.
+ const statuses=['new','reviewing','resolved'];
+ const counts=await Promise.all(statuses.map(st=>client.from('beta_feedback')
+   .select('id',{count:'exact',head:true}).eq('status',st)));
+ const countError=counts.find(r=>r.error)?.error;
+ if(countError){note.textContent='Could not read feedback totals: '+countError.message;return}
+ statuses.forEach((st,i)=>{$('feedback-metric-'+st).textContent=Number(counts[i].count||0).toLocaleString()});
+ let query=client.from('beta_feedback')
   .select('id,category,message,reply_email,page_path,status,created_at,reviewed_at')
-  .order('created_at',{ascending:false}).limit(50);
- if(error){note.textContent='Could not read the inbox: '+error.message;return}
- note.textContent=(data?.length||0)+' recent feedback entries · private administrator view';
- if(!data?.length){const empty=document.createElement('p');empty.textContent='No feedback has been submitted yet.';output.append(empty);return}
+  .order('created_at',{ascending:false}).limit(100);
+ if(state!=='all')query=query.eq('status',state);
+ const {data,error}=await query;
+ if(error){note.textContent='Could not read inbox: '+error.message;return}
+ const total=state==='all'?counts.reduce((sum,r)=>sum+(r.count||0),0):counts[statuses.indexOf(state)]?.count||0;
+ note.textContent=(data?.length||0)+' of '+total+' '+(state==='all'?'total':state.replace('_',' '))+' submissions shown (newest first)';
+ if(!data?.length){const empty=document.createElement('p');empty.textContent='There are no feedback entries matching this filter.';output.append(empty);return}
  for(const item of data){
   const article=document.createElement('article');
   article.style.cssText='background:rgba(255,255,255,.74);border:1px solid rgba(173,188,200,.43);border-radius:15px;padding:18px;overflow-wrap:anywhere';
@@ -69,7 +80,7 @@ async function loadInbox(){
   article.append(title,date,message);
   if(item.reply_email){
    const contact=document.createElement('p');const a=document.createElement('a');
-   a.href='mailto:'+item.reply_email;a.textContent='Reply to '+item.reply_email;
+   a.href='mailto:'+encodeURIComponent(item.reply_email);a.textContent='Reply to '+item.reply_email;
    a.rel='noopener noreferrer';contact.append(a);article.append(contact);
   }
   const row=document.createElement('div');row.style.cssText='display:flex;gap:10px;align-items:center;flex-wrap:wrap';
@@ -82,16 +93,17 @@ async function loadInbox(){
   const saved=document.createElement('small');saved.setAttribute('role','status');
   select.addEventListener('change',async()=>{
    const previous=item.status,next=select.value;select.disabled=true;saved.textContent='Saving…';
-   const {error:updateError}=await client.from('beta_feedback')
+   const {data:updated,error:updateError}=await client.from('beta_feedback')
     .update({status:next,reviewed_at:new Date().toISOString()})
-    .eq('id',item.id);
-   if(updateError){select.value=previous;saved.textContent='Update failed: '+updateError.message}
-   else{item.status=next;saved.textContent='Saved ✓'}
+    .eq('id',item.id).select('id').maybeSingle();
+   if(updateError||!updated){select.value=previous;saved.textContent='Update failed: '+(updateError?.message||'No matching record');}
+   else{item.status=next;saved.textContent='Saved ✓';await loadInbox();}
    select.disabled=false;
   });
   label.append(select);row.append(label,saved);article.append(row);output.append(article);
  }
 }
 $('refresh-feedback')?.addEventListener('click',()=>loadInbox());
+$('feedback-status-filter')?.addEventListener('change',()=>loadInbox());
 btn.addEventListener('click',load);load();
 })();
