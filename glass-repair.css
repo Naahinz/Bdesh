@@ -337,3 +337,32 @@ body .home-flow .journey-detail a.darkbtn{
     justify-content:center!important;
   }
 }
+
+
+/* Desktop homepage: let the hero's glass panel use the whole available
+   horizontal space, while keeping reading line lengths comfortable. */
+@media (min-width:901px){
+  body .hero.shell{
+    display:grid!important;
+    grid-template-columns:minmax(0,1fr)!important;
+    gap:0!important;
+  }
+  body .hero.shell>.hero-copy{
+    box-sizing:border-box!important;
+    grid-column:1/-1!important;
+    width:100%!important;
+    max-width:none!important;
+    min-width:0!important;
+    padding:clamp(32px,4vw,64px)!important;
+  }
+  body .hero.shell>.hero-copy h1{
+    max-width:1000px!important;
+  }
+  body .hero.shell>.hero-copy>p{
+    max-width:75ch!important;
+  }
+  body .hero.shell>.hero-copy .ctas{
+    max-width:100%;
+    flex-wrap:wrap;
+  }
+}
