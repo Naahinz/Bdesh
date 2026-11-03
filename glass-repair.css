@@ -208,3 +208,81 @@ body .auth-card .auth-message{color:#d6f0df!important;font-size:13px!important}
 body .auth-card .auth-message.error{color:#ffd1b6!important}
 body .auth-card .auth-switch[hidden],body .auth-card .auth-email-status[hidden],body .auth-card #auth-form[hidden],body .auth-card .consent-line[hidden],body .auth-card label[hidden]{display:none!important}
 body .auth-card #auth-form input:focus-visible{outline:3px solid #b9e3c2!important;outline-offset:2px!important}
+
+
+/* 2026-11-03: Full-width university directory and resilient text containment.
+   This deliberately overrides the earlier auto-fit three-column research grid. */
+body #discover #research-list.research-grid{
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr)!important;
+  align-items:start!important;
+  gap:16px!important;
+  width:100%;
+  max-width:100%;
+  min-width:0;
+}
+body #discover #research-list>.research-card{
+  display:flex!important;
+  flex-direction:column!important;
+  width:100%!important;
+  min-width:0!important;
+  max-width:100%!important;
+  height:auto!important;
+  align-self:start!important;
+  padding:clamp(20px,2.5vw,32px)!important;
+  gap:12px;
+}
+body #discover .research-card :is(h3,p,ul,li,summary,a,button),
+body #discover .research-evidence,
+body #discover .research-evidence>*{
+  min-width:0;
+  max-width:100%;
+  overflow-wrap:anywhere;
+  word-break:normal;
+}
+body #discover .research-card .research-evidence{
+  width:100%;
+  box-sizing:border-box;
+  overflow-x:auto;
+}
+body #discover .research-card .research-evidence :is(a,p,li){
+  overflow-wrap:anywhere;
+  word-break:break-word;
+}
+body #discover .research-card .cardactions{
+  display:flex;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:12px 20px;
+  margin-top:10px;
+}
+body #discover .research-card .cardactions>*{max-width:100%;white-space:normal}
+body #discover .research-card ul{flex:initial}
+@media(max-width:600px){
+  body #discover #research-list>.research-card{padding:20px 17px!important}
+  body #discover .research-card .cardactions{align-items:stretch}
+  body #discover .research-card .cardactions button{width:100%}
+}
+
+/* Content-safe sizing across the workspace: long institution names, IDs, email
+   addresses, linked sources and form messages must not push their panels wider. */
+body :is(.layout,.main,.section,.intro,.profile-panel,.paper-form,.entry-card,
+  .application-card,.college-search,.research-card,.research-evidence,
+  .deadline-center,.deadline-entry,.followup-tracker,.followup-item,
+  .formgrid,.metrics,.workspace-steps,.action-plan,.notice,.insight){
+  min-width:0;
+  max-width:100%;
+}
+body :is(.main,.section,.intro,.profile-panel,.paper-form,.entry-card,
+  .application-card,.college-search,.research-card,.deadline-center,
+  .followup-tracker,.action-plan,.notice,.insight)
+  :is(h1,h2,h3,h4,p,li,span,strong,small,label,a,summary){
+  overflow-wrap:anywhere;
+}
+body :is(.formgrid,.metrics,.deadline-summary,.mini-checklist,.followup-form)
+  >*{min-width:0}
+body :is(input,textarea,select){max-width:100%}
+body .application-header>*{min-width:0}
+body .application-header{flex-wrap:wrap}
+body .application-header :is(h3,p){overflow-wrap:anywhere}
+body .research-controls>*{min-width:0}
