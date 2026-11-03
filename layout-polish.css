@@ -5,12 +5,12 @@
   --ui-ink:#4d5660;
   --ui-body:#657079;
   --ui-muted:#77818a;
-  --ui-orange:#c64f1d;
-  --ui-orange-hover:#a93c13;
-  --ui-peach:#fff1e7;
-  --ui-cream:#faf8f5;
-  --ui-paper:#fffdfb;
-  --ui-line:#ebe4de;
+  --ui-orange:#C64F1D;
+  --ui-orange-hover:#A93C13;
+  --ui-peach:#FFF3EC;
+  --ui-cream:#FAF9F7;
+  --ui-paper:#FFFFFF;
+  --ui-line:#E5E9ED;
 }
 html{overflow-x:clip}
 html body{
@@ -20,7 +20,7 @@ html body{
 html body :is(h1,h2,h3,h4,h5,h6){color:var(--ui-ink)!important}
 html body :is(p,li,dt,dd){color:var(--ui-body)!important}
 html body :is(.eyebrow,.kicker,.journey-tag,.chapter-id,.reading-time,.section-label){
-  color:#cc5a27!important;
+  color:#B5471C!important;
 }
 html body :is(.shell,.main,.content,.reader,.layout,.section,.profile-panel,.journey-detail,
   .research-card,.application-card,.entry-card,.lesson-content,.panel){min-width:0}
@@ -57,25 +57,25 @@ html body :is(a.darkbtn,.primary-cta,.button,.primary-button,.google-signin,
   .cardactions button){
   background:var(--ui-orange)!important;
   border:1px solid var(--ui-orange)!important;
-  color:#fffdfa!important;
+  color:#697781!important;
 }
 html body :is(a.darkbtn,.primary-cta,.button,.primary-button,.google-signin,
-  .cardactions button) :is(span,strong,b,em,small){color:#fffdfa!important}
+  .cardactions button) :is(span,strong,b,em,small){color:#697781!important}
 html body :is(a.darkbtn,.primary-cta,.button,.primary-button,.google-signin,
   .cardactions button):hover{
   background:var(--ui-orange-hover)!important;
   border-color:var(--ui-orange-hover)!important;
-  color:#fffdfa!important;
+  color:#697781!important;
 }
 html body :is(.outline-button,.journey-link,.application-toggle,.export-workspace,
  .college-manual,.deadline-entry button){
   background:var(--ui-peach)!important;
-  border:1px solid #f2d5c4!important;
-  color:#b74e22!important;
+  border:1px solid #E5E9ED!important;
+  color:#B5471C!important;
 }
 html body :is(.outline-button,.journey-link,.application-toggle,.export-workspace,
  .college-manual,.deadline-entry button):hover{
-  background:#ffe6d6!important;color:#a9441b!important;
+  background:#FCFBF9!important;color:#B5471C!important;
 }
 html body :is(.outline-button,.journey-link,.application-toggle,.export-workspace,
  .college-manual,.deadline-entry button) :is(span,strong,b){color:inherit!important}
