@@ -1,7 +1,7 @@
 /* Bdesh glass usability repair — 2026-11.
    Loaded after retro-ui.css. Focused corrections for actual visible components.
    Deliberately independent of the old light-theme token names. */
-:root{--repair-bg:rgba(250,249,247,.88);--repair-card:rgba(255,255,255,.88);--repair-border:rgba(229,233,237,.30);--repair-text:#6A737A;--repair-muted:#6A737A;--repair-focus:#FCFBF9}
+:root{--repair-bg:rgba(250,249,247,.88);--repair-card:rgba(255,255,255,.88);--repair-border:rgba(229,233,237,.30);--repair-text:#6A737A;--repair-muted:#6A737A;--repair-focus:#FFFFFF}
 body .journey-arrow::after,
 body .journey-arrow:after{content:none!important;display:none!important;background:transparent!important;width:0!important;height:0!important}
 body .journey-arrow{background:none!important;color:#6A737A!important;isolation:auto!important}
@@ -12,13 +12,13 @@ body .journey-detail a.journey-link:hover{color:#fff!important;border-bottom-col
 body .journey-detail .journey-foot{color:#6A737A!important}
 
 /* Correct cards whose content was touching the frosted outline. */
-body .main .intro{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:24px;padding:26px clamp(22px,3vw,36px)!important;min-width:0;background:linear-gradient(120deg,#FFFFFF,#FCFBF9)!important;border:1px solid var(--repair-border)!important;border-radius:19px!important;box-shadow:0 13px 35px rgba(140,151,159,.15)!important}
+body .main .intro{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:24px;padding:26px clamp(22px,3vw,36px)!important;min-width:0;background:linear-gradient(120deg,#FFFFFF,#FFFFFF)!important;border:1px solid var(--repair-border)!important;border-radius:19px!important;box-shadow:0 13px 35px rgba(140,151,159,.15)!important}
 body .main .intro>div:first-child{flex:1 1 390px;min-width:0}
 body .main .intro h2{margin:9px 0 12px!important;line-height:1.22!important;overflow-wrap:anywhere}
 body .main .intro p{margin:0!important;line-height:1.65!important;color:var(--repair-muted)!important}
 body .main .intro .workspace-account-tools{display:flex;align-items:center;flex-wrap:wrap;gap:13px;flex:0 1 auto;min-width:0;max-width:100%}
 body .main .intro .sync{max-width:240px;min-height:48px;display:flex;align-items:center}
-body #profile-app .profile-panel{padding:clamp(24px,3.5vw,44px)!important;border:1px solid var(--repair-border)!important;border-radius:21px!important;background:linear-gradient(128deg,#FFFFFF,#FCFBF9)!important;min-width:0}
+body #profile-app .profile-panel{padding:clamp(24px,3.5vw,44px)!important;border:1px solid var(--repair-border)!important;border-radius:21px!important;background:linear-gradient(128deg,#FFFFFF,#FFFFFF)!important;min-width:0}
 body #profile-app .profile-panel>.section-intro{padding:0!important;margin:0 0 30px!important;min-width:0}
 body #profile-app .profile-panel .section-intro h2{margin:12px 0 18px!important;line-height:1.13!important;max-width:100%;overflow-wrap:anywhere}
 body #profile-app .profile-panel .section-intro p{color:var(--repair-muted)!important;line-height:1.8!important}
@@ -28,11 +28,11 @@ body #profile-app .sidebar-head :is(h1,p,.eyebrow){margin-left:0!important}
 body #profile-app .illustration-lines>div{border-bottom:1px solid rgba(229,233,237,.18)!important;gap:18px;min-width:0}
 body #profile-app .illustration-lines>div>*{min-width:0}
 body #profile-app .illustration-lines>div small{color:#6A737A!important;line-height:1.5}
-body #profile-app .line-icon{background:#FCFBF9!important;color:#6A737A!important;border:1px solid rgba(229,233,237,.28)!important;border-radius:9px;min-width:40px;text-align:center;flex:none}
-body #profile-app .illustration-top{background:#FCFBF9!important;color:#6A737A!important}
+body #profile-app .line-icon{background:#FFFFFF!important;color:#6A737A!important;border:1px solid rgba(229,233,237,.28)!important;border-radius:9px;min-width:40px;text-align:center;flex:none}
+body #profile-app .illustration-top{background:#FFFFFF!important;color:#6A737A!important}
 body #profile-app .illustration-top span{color:#6A737A!important}
 body #profile-app .advice-strip,body #profile-app .section-hint,body .research-caution,body #matching-insight{
- background:linear-gradient(115deg,#FFF3EC,#FFF3EC)!important;
+ background:linear-gradient(115deg,#FFF5F0,#FFF5F0)!important;
  border:1px solid var(--repair-border)!important;
  border-left:3px solid #E5E9ED!important;
  border-radius:13px!important;
@@ -51,22 +51,22 @@ body .research-count{color:#6A737A!important}
 
 /* Button contrast: a dark button always gets light lettering. */
 body button,
-body [role="button"]{background-color:#B5471C!important;color:#697781!important;border:1px solid rgba(229,233,237,.38)!important;border-radius:10px!important;text-shadow:none!important;min-height:42px}
+body [role="button"]{background-color:#D94C10!important;color:#697781!important;border:1px solid rgba(229,233,237,.38)!important;border-radius:10px!important;text-shadow:none!important;min-height:42px}
 body button :is(span,b,strong,small,i,em),
 body [role="button"] :is(span,b,strong,small,i,em){color:inherit!important;opacity:1!important}
-body button:hover:not(:disabled){background-color:#B5471C!important;color:#fff!important}
+body button:hover:not(:disabled){background-color:#D94C10!important;color:#fff!important}
 body button:disabled{opacity:.76!important;cursor:not-allowed}
 body :is(.darkbtn,.primary-button,.primary-cta,.button,.google-signin),
 body button.primary-button,body button.darkbtn,body button.button,
-body a.darkbtn,body a.button{background:#FCFBF9!important;color:#6A737A!important;border:1px solid #E5E9ED!important;box-shadow:none!important;text-shadow:none!important}
+body a.darkbtn,body a.button{background:#FFFFFF!important;color:#6A737A!important;border:1px solid #E5E9ED!important;box-shadow:none!important;text-shadow:none!important}
 body :is(.darkbtn,.primary-button,.primary-cta,.button,.google-signin) :is(span,b,strong,small,i,em),
 body button.primary-button :is(span,b,strong,small,i,em){color:#6A737A!important}
-body :is(.darkbtn,.primary-button,.primary-cta,.button,.google-signin):hover{background:#FCFBF9!important;color:#6A737A!important}
+body :is(.darkbtn,.primary-button,.primary-cta,.button,.google-signin):hover{background:#FFFFFF!important;color:#6A737A!important}
 body .cardactions button,body .entry-actions button,body .followup-controls button,
 body .followup-item button,body .application-footer button,
-body .export-workspace,body button.outline-button{background:#FCFBF9!important;color:#697781!important;border-color:rgba(229,233,237,.36)!important}
+body .export-workspace,body button.outline-button{background:#FFFFFF!important;color:#697781!important;border-color:rgba(229,233,237,.36)!important}
 body .cardactions button:hover,body .entry-actions button:hover,body .followup-controls button:hover,
-body .followup-item button:hover,body .application-footer button:hover{background:#FCFBF9!important;color:#fff!important}
+body .followup-item button:hover,body .application-footer button:hover{background:#FFFFFF!important;color:#fff!important}
 body .cardactions button{font-size:13px!important;font-weight:700!important;line-height:1.4!important;padding:12px 15px!important;min-height:46px;white-space:normal;max-width:100%}
 body .cardactions{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:auto;padding-top:17px}
 body .cardactions a{color:#6A737A!important;font-size:13px!important;text-decoration:underline;text-underline-offset:4px}
@@ -110,7 +110,7 @@ body #apply .college-search.college-lookup-card{
  width:100%!important;max-width:none!important;min-width:0!important;
  display:block!important;margin:30px 0 30px!important;
  padding:clamp(24px,3.5vw,44px)!important;
- background:radial-gradient(ellipse at 94% 6%,rgba(255,243,236,.12),transparent 42%),linear-gradient(123deg,#FFFFFF,#FCFBF9)!important;
+ background:radial-gradient(ellipse at 94% 6%,rgba(255,113,52,0.034),transparent 42%),linear-gradient(123deg,#FFFFFF,#FFFFFF)!important;
  border:1px solid rgba(229,233,237,.43)!important;border-radius:24px!important;
  box-shadow:inset 0 1px 0 rgba(255,255,255,.15),0 18px 42px rgba(125,139,149,.2)!important;
  backdrop-filter:blur(24px)!important;-webkit-backdrop-filter:blur(24px)!important;
@@ -148,10 +148,10 @@ body #apply .college-lookup-card .college-search-result{
  color:#6A737A!important;text-align:left!important;
 }
 body #apply .college-lookup-card .college-search-result:hover,
-body #apply .college-lookup-card .college-search-result:focus-visible{background:#FCFBF9!important;border-color:#E5E9ED!important}
+body #apply .college-lookup-card .college-search-result:focus-visible{background:#FFFFFF!important;border-color:#E5E9ED!important}
 body #apply .college-lookup-card .college-search-result strong{color:#6A737A!important;line-height:1.35}
 body #apply .college-lookup-card .college-search-result span{color:#6A737A!important}
-body #apply .college-lookup-card .college-manual{background:#FCFBF9!important;color:#6A737A!important;border-color:#E5E9ED!important;padding:14px 19px!important;border-radius:11px!important}
+body #apply .college-lookup-card .college-manual{background:#FFFFFF!important;color:#6A737A!important;border-color:#E5E9ED!important;padding:14px 19px!important;border-radius:11px!important}
 body #apply .college-lookup-card .college-chosen{color:#6A737A!important}
 @media(max-width:620px){
  body #apply .college-search.college-lookup-card{padding:23px 19px!important;margin:21px 0 24px!important;border-radius:18px!important}
@@ -166,7 +166,7 @@ body #discover .research-controls{
  display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;
  width:100%!important;max-width:none!important;gap:18px 16px!important;
  padding:clamp(23px,3vw,35px)!important;margin:26px 0 22px!important;
- background:radial-gradient(ellipse at 95% 0,rgba(255,243,236,.14),transparent 52%),linear-gradient(125deg,#FFFFFF,#FCFBF9)!important;
+ background:radial-gradient(ellipse at 95% 0,rgba(255,113,52,0.039),transparent 52%),linear-gradient(125deg,#FFFFFF,#FFFFFF)!important;
  border:1px solid rgba(229,233,237,.39)!important;border-radius:22px!important;
  box-shadow:0 17px 42px rgba(125,139,149,.17)!important;
 }
@@ -184,7 +184,7 @@ body #discover .research-controls select{width:100%!important;min-height:50px!im
 
 /* College evidence status: clearly distinguish an unresolved review from a completed one. */
 body .research-card .research-verification{display:block;margin:13px 0 5px!important;padding:10px 13px!important;border-radius:9px!important;font-size:12px!important;line-height:1.6!important;font-weight:750!important;letter-spacing:.005em;overflow-wrap:anywhere}
-body .research-card .research-verification[data-review-state="verified"]{background:#FCFBF9!important;color:#6A737A!important;border:1px solid rgba(229,233,237,.36)!important}
+body .research-card .research-verification[data-review-state="verified"]{background:#FFFFFF!important;color:#6A737A!important;border:1px solid rgba(229,233,237,.36)!important}
 body .research-card .research-verification[data-review-state="partial"]{background:rgba(140,151,159,.42)!important;color:#697781!important;border:1px solid rgba(229,233,237,.43)!important}
 body .research-card .research-verification[data-review-state="unreviewed"]{background:rgba(91,92,97,.28)!important;color:#697781!important;border:1px solid rgba(229,233,237,.35)!important}
 
@@ -305,7 +305,7 @@ body .home-flow .journey-detail a.journey-link{
   margin-top:15px!important;
   border:1px solid rgba(229,233,237,.55)!important;
   border-radius:12px!important;
-  background:#FCFBF9!important;
+  background:#FFFFFF!important;
   color:#6A737A!important;
   font-size:15px!important;
   line-height:1.5!important;
@@ -317,7 +317,7 @@ body .home-flow .journey-detail a.journey-link{
 }
 body .home-flow .journey-detail a.journey-link:hover,
 body .home-flow .journey-detail a.journey-link:focus-visible{
-  background:#FCFBF9!important;
+  background:#FFFFFF!important;
   border-color:#E5E9ED!important;
   color:#fff!important;
 }
