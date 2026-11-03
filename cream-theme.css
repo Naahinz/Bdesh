@@ -3,78 +3,78 @@
    Load after the existing stylesheets. */
 :root{
   color-scheme:light;
-  --ink:#525B63;--secondary:#6A737A;--cream:#f8f4ec;--paper:#fffdf8;
-  --mint:#efe9dc;--line:#ded4c4;--accent:#D96B38;
-  --forest-text:#525B63;--forest-muted:#6A737A;--forest-edge:#dfd5c7;
-  --reading-ink:#525B63;--reading-muted:#6A737A;--reading-border:#ded4c4;
-  --glass:#fffdf8;--frost-bg:#fffaf3;--frost-brd:#e7dece;
-  --editorial-rule:#ded4c4;--muted:#6A737A;
+  --ink:#525B63;--secondary:#6A737A;--cream:#FAF9F7;--paper:#FFFFFF;
+  --mint:#FFF3EC;--line:#E5E9ED;--accent:#C64F1D;
+  --forest-text:#525B63;--forest-muted:#6A737A;--forest-edge:#E5E9ED;
+  --reading-ink:#525B63;--reading-muted:#6A737A;--reading-border:#E5E9ED;
+  --glass:#FFFFFF;--frost-bg:#FAF9F7;--frost-brd:#FFF3EC;
+  --editorial-rule:#E5E9ED;--muted:#6A737A;
 }
-html,body{background:#f8f4ec!important;color:#525B63!important;color-scheme:light}
+html,body{background:#FCFBF9!important;color:#525B63!important;color-scheme:light}
 body{
-  background:radial-gradient(ellipse at 85% 5%,rgba(214,188,145,.18),transparent 42%),
-  linear-gradient(160deg,#fbf8f1 0%,#f6f0e7 55%,#f9f5ed 100%)!important;
+  background:radial-gradient(ellipse at 85% 5%,rgba(252,251,249,.18),transparent 42%),
+  linear-gradient(160deg,#FFFFFF 0%,#FCFBF9 55%,#FCFBF9 100%)!important;
   background-attachment:fixed!important;
 }
 body :is(p,li,small,label,dt,dd){color:#6A737A!important}
 body :is(h1,h2,h3,h4,h5,h6,strong,b){color:#525B63!important}
-body :is(.eyebrow,.kicker,.chapter-id,.reading-time,.journey-tag,.section-label){color:#D96B38!important}
+body :is(.eyebrow,.kicker,.chapter-id,.reading-time,.journey-tag,.section-label){color:#B5471C!important}
 body a{color:#525B63!important}
 body :is(.nav,.topbar,.site-header,.top,.early){
-  background:rgba(251,248,240,.96)!important;color:#525B63!important;
-  border-color:#e4dacc!important;box-shadow:0 4px 22px rgba(95,106,115,.05)!important;
+  background:rgba(255,255,255,.96)!important;color:#525B63!important;
+  border-color:#E5E9ED!important;box-shadow:0 4px 22px rgba(95,106,115,.05)!important;
   backdrop-filter:blur(15px)!important;
 }
 body :is(.nav,.topbar,.site-header,.top) :is(a,span,strong,button,#session-status,#account-name){color:#525B63!important}
 body :is(.side,.sidebar,.curriculum){
-  background:#f2ebdf!important;border-color:#ded4c4!important;
+  background:#FCFBF9!important;border-color:#E5E9ED!important;
   color:#525B63!important;box-shadow:none!important;
 }
 body :is(.main,.reader,.profile-main,.layout,.shell,.lesson-shell){background:transparent!important;color:#525B63!important}
 body :is(.hero,.hero-copy){color:#525B63!important}
 body .hero{
-  background:radial-gradient(ellipse at 83% 16%,rgba(212,184,138,.24),transparent 42%),
-    linear-gradient(122deg,#e9ddcc 0%,#f6efe3 47%,#e7d8c1 100%)!important;
-  border:1px solid #e1d3bf!important;
+  background:radial-gradient(ellipse at 83% 16%,rgba(252,251,249,.24),transparent 42%),
+    linear-gradient(122deg,#FCFBF9 0%,#FCFBF9 47%,#FCFBF9 100%)!important;
+  border:1px solid #E5E9ED!important;
   box-shadow:0 22px 65px rgba(95,106,115,.09)!important;
 }
-body .hero-copy{background:rgba(255,252,245,.82)!important;border:1px solid #e6dacb!important;box-shadow:0 12px 35px rgba(95,106,115,.04)!important}
+body .hero-copy{background:rgba(255,255,255,.82)!important;border:1px solid #E5E9ED!important;box-shadow:0 12px 35px rgba(95,106,115,.04)!important}
 body .hero :is(h1,h1 em,.hero-kicker,.eyebrow,.hero-caption,.hero-note,.hero-note span,p){color:#525B63!important}
 body .hero .hero-copy>p{color:#525B63!important}
-body .hero .primary-cta{background:#f37336!important;color:#fffaf0!important;border:1px solid #525B63!important}
-body .hero .primary-cta:hover{background:#dc602c!important;color:#fffaf0!important}
+body .hero .primary-cta{background:#C64F1D!important;color:#697781!important;border:1px solid #525B63!important}
+body .hero .primary-cta:hover{background:#A93C13!important;color:#697781!important}
 body .hero .textlink{color:#6A737A!important}
 body .home-flow-head{
-  background:#fffaf3!important;border:1px solid #e3d6c4!important;
+  background:#FFFFFF!important;border:1px solid #E5E9ED!important;
   box-shadow:0 8px 28px rgba(95,106,115,.045)!important;
 }
 body .home-flow-head :is(h2,h2 em,p,span,small,strong){color:#525B63!important}
 body .journey-detail,
 body .journey-step:nth-child(3n+2) .journey-detail,
 body .journey-step:nth-child(3n) .journey-detail{
-  background:#fffaf3!important;border:1px solid #e5d9c8!important;
+  background:#FFFFFF!important;border:1px solid #E5E9ED!important;
   box-shadow:0 8px 28px rgba(95,106,115,.045)!important;
 }
 body .journey-detail :is(h3,p,.journey-tag,.journey-foot,span){color:#525B63!important}
 body .journey-detail p,body .journey-detail .journey-foot{color:#6A737A!important}
-body .journey-node{background:#eee3d3!important;color:#525B63!important;border:1px solid #E4D8D0!important}
-body .journey-arrow{color:#D96B38!important}
-body :is(.journey-ring,.journey-ring-inner){background:#efe4d3!important;color:#525B63!important;border-color:#d5c5ae!important}
+body .journey-node{background:#FCFBF9!important;color:#525B63!important;border:1px solid #E5E9ED!important}
+body .journey-arrow{color:#B5471C!important}
+body :is(.journey-ring,.journey-ring-inner){background:#FCFBF9!important;color:#525B63!important;border-color:#E5E9ED!important}
 body :is(.journey-progress p,.journey-progress small,.journey-progress strong){color:#525B63!important}
 body .home-flow .journey-detail a.journey-link{
-  background:#f2e7d6!important;border:1px solid #E4D8D0!important;
+  background:#FCFBF9!important;border:1px solid #E5E9ED!important;
   color:#525B63!important;border-radius:12px!important;
 }
 body .home-flow .journey-detail a.journey-link:hover,
 body .home-flow .journey-detail a.journey-link:focus-visible{
-  background:#e9dac4!important;border-color:#D96B38!important;color:#525B63!important;
+  background:#FCFBF9!important;border-color:#E5E9ED!important;color:#525B63!important;
 }
 body :is(.learn-first,.intro,.action-plan,.deadline-center,.research-card,.application-card,.college-search,.auth-card,.review-card,.profile-panel,.entry-card,.knowledge-check,.reading-top,.aside-progress,.paper-form,.add-app,.profile-form,.editor-form,.editor-list,.editor-history,.editor-layout,.notice,.empty,.section-hint,.review-summary,.followup-tracker,.deadline-entry,.followup-item,.date-editor,.research-controls,.application-board-tools,.college-lookup-card,.sign-in-wall,.reading-intro,.reading-progress,.chapter-card,.lesson-content,.reading-section,.editor-notice){
-  background:#fffdf8!important;border-color:#e3d9ca!important;color:#525B63!important;
+  background:#FFF3EC!important;border-color:#E5E9ED!important;color:#525B63!important;
   box-shadow:0 8px 28px rgba(95,106,115,.035)!important;
 }
 body :is(.milestone,.journey-illustration,.application-example,.example-top,.example-row,.takeaway,.reading-intro,.research-caution,.entry-head,.entry-empty,.overview-illustration,.section-hint,.followup-form,.followup-item,.date-editor,.sync,.lesson-content .takeaway,.lesson-content .example,.lesson-content .application-flow){
-  background:#f3ecdf!important;border:1px solid #e2d6c5!important;color:#525B63!important;
+  background:#FFF3EC!important;border:1px solid #E5E9ED!important;color:#525B63!important;
 }
 body :is(.milestone,.journey-illustration,.application-example,.example-top,.example-row,.takeaway,.reading-intro,.research-caution,.entry-head,.entry-empty,.overview-illustration,.section-hint,.followup-form,.followup-item,.date-editor,.paper-form,.add-app,.sync) :is(p,span,small,strong,b,em,h2,h3,h4,label,a,li),
 body .lesson-content :is(.takeaway,.lesson-takeaway,.callout,.idea,.key-idea,.tip,.lesson-note,.highlight,.summary-box,.lesson-flow,.lesson-steps,.guide-card,blockquote,.example-row,.application-flow),
@@ -82,15 +82,15 @@ body .lesson-content :is(.takeaway,.lesson-takeaway,.callout,.idea,.key-idea,.ti
   color:#525B63!important;
 }
 body .lesson-content :is(.takeaway,.lesson-takeaway,.callout,.idea,.key-idea,.tip,.lesson-note,.highlight,.summary-box,.lesson-flow,.lesson-steps,.guide-card,blockquote,.example-row,.application-flow){
-  background:#f1e7d7!important;border-color:#dccdb8!important;
+  background:#FFF3EC!important;border-color:#E5E9ED!important;
 }
 body .lesson-content :is(p,li){color:#6A737A!important}
 body .lesson-content :is(h1,h2,h3,strong){color:#525B63!important}
 body .lesson-content .reading-section :is(h2,p){color:#525B63!important}
-body .lesson-content .reading-section-num{color:#D96B38!important}
+body .lesson-content .reading-section-num{color:#B5471C!important}
 body .lesson-content .takeaway-label{color:#6A737A!important}
 body :is(.metrics>div,.deadline-summary>div,.workspace-steps,.workspace-steps a,.profile-summary,.review-summary>div){
-  background:#f5eee4!important;border:1px solid #e4d9ca!important;
+  background:#FCFBF9!important;border:1px solid #E5E9ED!important;
   box-shadow:none!important;
 }
 body :is(.metrics strong,.deadline-summary strong,.review-summary strong){color:#525B63!important}
@@ -99,77 +99,77 @@ body #discover .research-controls input#research-search,
 body #discover .research-controls select,
 body #apply .college-lookup-card #college-search-input{
   background:#fffefa!important;color:#525B63!important;
-  border:1px solid #d8cbb9!important;box-shadow:none!important;
+  border:1px solid #E5E9ED!important;box-shadow:none!important;
 }
 body :is(input,textarea)::placeholder,
 body #discover .research-controls #research-search::placeholder,
 body #apply .college-lookup-card #college-search-input::placeholder{color:#747D83!important;opacity:1!important}
-body select option{background:#fffdf8!important;color:#525B63!important}
+body select option{background:#FFFFFF!important;color:#525B63!important}
 body :is(.darkbtn,.primary-button,.button,.google-signin,.application-toggle,.followup-add,.export-workspace){
-  background:#f37336!important;color:#fffaf2!important;
+  background:#C64F1D!important;color:#697781!important;
   border:1px solid #525B63!important;box-shadow:none!important;
 }
 body :is(.darkbtn,.primary-button,.button,.google-signin,.application-toggle,.followup-add,.export-workspace):hover{
-  background:#dc602c!important;color:#fffaf2!important;
+  background:#A93C13!important;color:#697781!important;
 }
 body :is(.outline-button,.college-search-result,.college-manual,.deadline-entry button,.editor-list button,.rail a,.workspace-steps a,.lesson-link,.check-option){
-  background:#f5eee3!important;color:#525B63!important;
-  border:1px solid #dfd2c0!important;box-shadow:none!important;
+  background:#FCFBF9!important;color:#525B63!important;
+  border:1px solid #E5E9ED!important;box-shadow:none!important;
 }
 body :is(.outline-button,.college-search-result,.college-manual,.deadline-entry button,.editor-list button,.rail a,.workspace-steps a,.lesson-link,.check-option):hover{
-  background:#eadeca!important;color:#525B63!important;
+  background:#FCFBF9!important;color:#525B63!important;
 }
 body :is(.rail a.active,.workspace-steps a.active,.sidebar nav button.active,.curriculum nav button.active,.editor-list button[aria-current=true],.lesson-link.active){
-  background:#e4d5bd!important;color:#525B63!important;border-color:#E4D8D0!important;
+  background:#FFF3EC!important;color:#525B63!important;border-color:#E5E9ED!important;
 }
-body .topbar nav a.active,body .topbar nav a[data-tab].active{color:#525B63!important;border-bottom-color:#D96B38!important}
+body .topbar nav a.active,body .topbar nav a[data-tab].active{color:#525B63!important;border-bottom-color:#F1B896!important}
 body :is(.research-card,.application-card,.review-card,.milestone,.lesson-content) a:not(.button){color:#6A737A!important}
 body .research-card .research-verification[data-review-state="verified"]{
-  background:#ede5d8!important;color:#525B63!important;border-color:#E4D8D0!important;
+  background:#FCFBF9!important;color:#525B63!important;border-color:#E5E9ED!important;
 }
 body .research-card .research-verification[data-review-state="partial"]{
-  background:#fff0d6!important;color:#795322!important;border-color:#e0c28d!important;
+  background:#FCFBF9!important;color:#697781!important;border-color:#E5E9ED!important;
 }
 body .research-card .research-verification[data-review-state="unreviewed"]{
-  background:#eeeae3!important;color:#525B63!important;border-color:#d1cbc2!important;
+  background:#FCFBF9!important;color:#525B63!important;border-color:#E5E9ED!important;
 }
 body .research-card :is(ul,li,p),body .research-evidence :is(p,li){color:#6A737A!important}
 body .research-evidence{
-  background:#f5eee4!important;color:#525B63!important;border:1px solid #dfd1bc!important;
+  background:#FCFBF9!important;color:#525B63!important;border:1px solid #E5E9ED!important;
 }
 body .research-evidence :is(summary,h4,a){color:#525B63!important}
-body .research-evidence[open] summary{border-bottom-color:#d8c8af!important}
-body .cardactions button{background:#f37336!important;border-color:#525B63!important;color:#fffaf0!important}
+body .research-evidence[open] summary{border-bottom-color:#E5E9ED!important}
+body .cardactions button{background:#C64F1D!important;border-color:#525B63!important;color:#697781!important}
 body #discover .research-controls{
-  background:#f2e8d8!important;border:1px solid #dacbb8!important;
+  background:#FCFBF9!important;border:1px solid #E5E9ED!important;
   box-shadow:0 10px 30px rgba(95,106,115,.05)!important;
 }
 body #discover .research-controls>label,
 body #apply .college-lookup-card :is(h3,label,p,span){color:#525B63!important}
 body #apply .college-search.college-lookup-card{
-  background:#f2e8d8!important;border:1px solid #dfceb6!important;
+  background:#FCFBF9!important;border:1px solid #E5E9ED!important;
 }
 body #apply .college-lookup-card .college-search-result{
-  background:#fffbf4!important;color:#525B63!important;border-color:#d9cab5!important;
+  background:#FFFFFF!important;color:#525B63!important;border-color:#E5E9ED!important;
 }
 body #apply .college-lookup-card .college-search-result :is(strong,span){color:#525B63!important}
 body #apply .college-lookup-card #college-search-hint{color:#6A737A!important}
-body .check-option.correct{background:#eee4d5!important;border-color:#E4D8D0!important}
-body .check-option.incorrect{background:#f6e5df!important;border-color:#dca99f!important}
+body .check-option.correct{background:#FCFBF9!important;border-color:#E5E9ED!important}
+body .check-option.incorrect{background:#FCFBF9!important;border-color:#E5E9ED!important}
 body :is(.insight,.followup-info,.followup-empty,.privacy-note,.editor-notice){color:#525B63!important}
-body :is(.priority-label,.deadline-due.is-overdue,.danger){color:#b94b46!important}
+body :is(.priority-label,.deadline-due.is-overdue,.danger){color:#B54742!important}
 body :is(.early,.trust-links,footer){
-  background:#efe6d8!important;color:#525B63!important;
-  border-color:#dcccba!important;box-shadow:none!important;
+  background:#FCFBF9!important;color:#525B63!important;
+  border-color:#E5E9ED!important;box-shadow:none!important;
 }
 body :is(.early,.trust-links,footer) :is(a,span,p){color:#525B63!important}
 body :is(.topbar,.site-header,.top) :is(#signout,#sign-out){
-  color:#525B63!important;background:#f3e9da!important;border:1px solid #d7c6b0!important;
+  color:#525B63!important;background:#FCFBF9!important;border:1px solid #E5E9ED!important;
 }
 body :is(.milestone,.research-card,.journey-detail,.application-card,.profile-panel,.entry-card,.lesson-content) a{overflow-wrap:anywhere}
 @media(prefers-reduced-transparency:reduce){
   body :is(.hero-copy,.research-card,.application-card,.profile-panel,.journey-detail,.lesson-content,.editor-form){
-    backdrop-filter:none!important;background:#fffaf3!important;
+    backdrop-filter:none!important;background:#FFFFFF!important;
   }
 }
 
@@ -179,35 +179,35 @@ body :is(.milestone,.research-card,.journey-detail,.application-card,.profile-pa
    champagne #d6c2a5, taupe #D96B38, espresso #525B63. */
 :root{
   --glass-forest:#525B63;--glass-ink:#525B63;--glass-muted:#6A737A;
-  --glass-accent:#d6c2a5;--sage:#e9dfd0;--forest:#525B63;
-  --green:#D96B38;--forest-bg:#f8f4ec;--forest-deep:#eee5d8;
-  --forest-mid:#e7d9c8;--forest-glass:#fffaf3;--forest-panel:#fffaf3;
-  --forest-lime:#d6c2a5;--repair-bg:#fffaf3;--repair-card:#fffdf8;
-  --repair-border:#dfd2bf;--repair-text:#525B63;--repair-muted:#6A737A;
-  --repair-focus:#E4D8D0;--editorial-ink:#525B63;--editorial-accent:#D96B38;
-  --editorial-bg:#f8f4ec;--editorial-paper:#fffdf8;--surface:#fffaf3;
-  --warm:#f2e9dc;--soft:#eee4d5;
+  --glass-accent:#C64F1D;--sage:#FCFBF9;--forest:#525B63;
+  --green:#C64F1D;--forest-bg:#FAF9F7;--forest-deep:#FCFBF9;
+  --forest-mid:#FCFBF9;--forest-glass:#FFFFFF;--forest-panel:#FFFFFF;
+  --forest-lime:#FCFBF9;--repair-bg:#FAF9F7;--repair-card:#FFFFFF;
+  --repair-border:#E5E9ED;--repair-text:#525B63;--repair-muted:#6A737A;
+  --repair-focus:#FCFBF9;--editorial-ink:#525B63;--editorial-accent:#C64F1D;
+  --editorial-bg:#FAF9F7;--editorial-paper:#FFFFFF;--surface:#FFFFFF;
+  --warm:#FFF3EC;--soft:#FFF3EC;
 }
-::selection{background:#dfcfb7!important;color:#525B63!important}
-:focus-visible{outline-color:#D96B38!important}
-body :is(input[type="checkbox"],input[type="radio"],input[type="range"]){accent-color:#D96B38!important}
+::selection{background:#FCFBF9!important;color:#525B63!important}
+:focus-visible{outline-color:#E5E9ED!important}
+body :is(input[type="checkbox"],input[type="radio"],input[type="range"]){accent-color:#B5471C!important}
 
 /* Homepage visuals, roadmap progress, and decorative art. */
 body .hero::before,body .hero::after{
-  background:radial-gradient(circle at 50% 50%,rgba(205,178,137,.25),transparent 70%)!important;
+  background:radial-gradient(circle at 50% 50%,rgba(252,251,249,.25),transparent 70%)!important;
   border-color:rgba(140,151,159,.16)!important;
 }
 body .home-flow .journey-ring{
-  background:conic-gradient(#D96B38 var(--journey-percent,0%),#e6d9c7 0)!important;
+  background:conic-gradient(#FFF3EC var(--journey-percent,0%),#FCFBF9 0)!important;
 }
-body .home-flow .journey-ring-inner{background:#fffaf2!important;color:#525B63!important}
+body .home-flow .journey-ring-inner{background:#FFFFFF!important;color:#525B63!important}
 body .home-flow .journey-progress :is(strong,small,p){color:#525B63!important}
 body .home-flow .journey-step.journey-started .journey-node{
-  background:#e8dac6!important;border-color:#D96B38!important;color:#525B63!important;
+  background:#FCFBF9!important;border-color:#E5E9ED!important;color:#525B63!important;
 }
-body .home-flow :is(.journey-rail,.journey-arrow){border-color:#E4D8D0!important;color:#D96B38!important}
-body .home-flow .journey-detail a.darkbtn{background:#f37336!important;color:#fffaf0!important;border-color:#525B63!important}
-body .home-flow .journey-detail a.darkbtn:hover{background:#dc602c!important;color:#fffaf0!important}
+body .home-flow :is(.journey-rail,.journey-arrow){border-color:#E5E9ED!important;color:#B5471C!important}
+body .home-flow .journey-detail a.darkbtn{background:#C64F1D!important;color:#697781!important;border-color:#525B63!important}
+body .home-flow .journey-detail a.darkbtn:hover{background:#A93C13!important;color:#697781!important}
 body .hero :is(.hero-caption,.hero-kicker,.hero-note,.eyebrow){color:#6A737A!important}
 
 /* Replace forest fill on high-priority panels, including profile-specific selectors. */
@@ -218,32 +218,32 @@ body .profile-panel,body .paper-form,body .entry-card,
 body .overview-illustration,body .profile-summary,body .profile-section,
 body .reading-top,body .reading-intro,body .reading-progress,
 body .journey-illustration,body .application-example{
-  background:#fffaf3!important;border-color:#dfd2c1!important;color:#525B63!important;
+  background:#FFFFFF!important;border-color:#E5E9ED!important;color:#525B63!important;
 }
 body #profile-app :is(.illustration-top,.illustration-lines,.illustration-lines>div,.line-icon),
 body :is(.overview-illustration,.journey-illustration,.application-example,.example-top,.example-row){
-  background:#eee3d3!important;border-color:#d9c8b1!important;color:#525B63!important;
+  background:#FCFBF9!important;border-color:#E5E9ED!important;color:#525B63!important;
 }
 body #profile-app :is(.illustration-top,.illustration-lines,.line-icon) :is(p,span,strong,small,i,b),
 body :is(.overview-illustration,.journey-illustration,.application-example,.example-top,.example-row) :is(p,span,strong,small,i,b){
   color:#525B63!important;
 }
-body .reading-intro{border-top-color:#E4D8D0!important}
-body :is(.action-plan,.deadline-center){border-top-color:#E4D8D0!important;border-bottom-color:#dfd2c1!important}
+body .reading-intro{border-top-color:#E5E9ED!important}
+body :is(.action-plan,.deadline-center){border-top-color:#E5E9ED!important;border-bottom-color:#E5E9ED!important}
 body :is(.priority-label,.college-chosen,.followup-portal,.lesson-link,.lesson-link.active){
   color:#525B63!important;
 }
-body :is(.deadline-link,.action-plan-link,.followup-portal){border-bottom-color:#D96B38!important}
-body .lesson-content .reading-section{border-top-color:#e3d7c8!important}
-body .lesson-content :is(.reading-section-num,.chapter-id,.reading-time){color:#D96B38!important}
+body :is(.deadline-link,.action-plan-link,.followup-portal){border-bottom-color:#E5E9ED!important}
+body .lesson-content .reading-section{border-top-color:#E5E9ED!important}
+body .lesson-content :is(.reading-section-num,.chapter-id,.reading-time){color:#B5471C!important}
 body .lesson-content :is(.check-option,.check-option.correct,.check-option.incorrect){
   color:#525B63!important;
 }
-body .lesson-content .check-option.correct{background:#e9dfd0!important;border-color:#E4D8D0!important}
-body .lesson-content .check-option.incorrect{background:#f3e2da!important;border-color:#E4D8D0!important}
+body .lesson-content .check-option.correct{background:#FCFBF9!important;border-color:#E5E9ED!important}
+body .lesson-content .check-option.incorrect{background:#FCFBF9!important;border-color:#E5E9ED!important}
 body .lesson-content .check-option :is(p,span,strong,b){color:#525B63!important}
 body .lesson-content :is(.lesson-takeaway,.takeaway,.example,.example-row,.application-flow,.idea,.key-idea,.tip,.lesson-note,.highlight,.summary-box,.lesson-flow,.lesson-steps,.guide-card,blockquote){
-  background:#f3eadc!important;border-color:#e0d2be!important;color:#525B63!important;
+  background:#FFF3EC!important;border-color:#E5E9ED!important;color:#525B63!important;
 }
 body .lesson-content :is(.lesson-takeaway,.takeaway,.example,.example-row,.application-flow,.idea,.key-idea,.tip,.lesson-note,.highlight,.summary-box,.lesson-flow,.lesson-steps,.guide-card,blockquote) :is(p,span,b,strong,em,li,h2,h3){
   color:#525B63!important;
@@ -255,57 +255,57 @@ body #apply .college-lookup-card .college-search-results,
 body #discover .research-controls,
 body .research-caution,
 body .research-evidence,body .research-evidence[open]{
-  background:#f5ebdd!important;border-color:#deceba!important;color:#525B63!important;
+  background:#FFF3EC!important;border-color:#E5E9ED!important;color:#525B63!important;
 }
-body .research-caution{border-left-color:#E4D8D0!important}
+body .research-caution{border-left-color:#E5E9ED!important}
 body .research-caution :is(strong,span,p,li){color:#525B63!important}
 body #apply .college-lookup-card .college-search-result,
 body #apply .college-lookup-card .college-search-result:hover,
 body #apply .college-lookup-card .college-search-result:focus-visible{
-  background:#fffbf4!important;border-color:#d6c4aa!important;color:#525B63!important;
+  background:#FFFFFF!important;border-color:#E5E9ED!important;color:#525B63!important;
 }
 body #apply .college-lookup-card .college-search-result :is(strong,span){color:#525B63!important}
 body #apply .college-lookup-card .college-manual{
-  background:#eee0cd!important;border-color:#E4D8D0!important;color:#525B63!important;
+  background:#FCFBF9!important;border-color:#E5E9ED!important;color:#525B63!important;
 }
 body .research-card :is(.country,.research-verification){color:#6A737A!important}
 body .research-card .research-verification[data-review-state="verified"]{
-  background:#ebe2d6!important;color:#525B63!important;border-color:#E4D8D0!important;
+  background:#FCFBF9!important;color:#525B63!important;border-color:#E5E9ED!important;
 }
 body .research-card .research-verification[data-review-state="partial"]{
-  background:#f6e9d7!important;color:#72502e!important;border-color:#d9be96!important;
+  background:#FCFBF9!important;color:#4F5B65!important;border-color:#E5E9ED!important;
 }
 body .research-card .research-verification[data-review-state="unreviewed"]{
-  background:#eeebe5!important;color:#525B63!important;border-color:#d7cfc2!important;
+  background:#FCFBF9!important;color:#525B63!important;border-color:#E5E9ED!important;
 }
 body .research-card :is(.research-evidence,.research-evidence summary,.research-evidence h4,.research-evidence a){
   color:#525B63!important;
 }
 body .cardactions button,body .research-card .cardactions button{
-  background:#f37336!important;border-color:#525B63!important;color:#fffaf1!important;
+  background:#C64F1D!important;border-color:#525B63!important;color:#697781!important;
 }
-body .cardactions button:hover{background:#dc602c!important}
+body .cardactions button:hover{background:#A93C13!important}
 
 /* Remaining common dark-forest buttons and forms. */
 body :is(.followup-add,.application-toggle,.export-workspace,.google-signin,.primary-button,.primary-cta,.button,.darkbtn,button.primary-button){
-  background:#f37336!important;border-color:#525B63!important;color:#fffaf0!important;
+  background:#C64F1D!important;border-color:#525B63!important;color:#697781!important;
 }
 body :is(.followup-add,.application-toggle,.export-workspace,.google-signin,.primary-button,.primary-cta,.button,.darkbtn,button.primary-button) :is(span,strong,b,small,i,em){
-  color:#fffaf0!important;
+  color:#697781!important;
 }
 body :is(.followup-add,.application-toggle,.export-workspace,.google-signin,.primary-button,.primary-cta,.button,.darkbtn):hover{
-  background:#dc602c!important;border-color:#525B63!important;color:#fffaf0!important;
+  background:#A93C13!important;border-color:#525B63!important;color:#697781!important;
 }
-body .hero .primary-cta,body .hero .primary-cta :is(span,strong,b){color:#fffaf0!important}
+body .hero .primary-cta,body .hero .primary-cta :is(span,strong,b){color:#697781!important}
 body [role="button"]:not(.college-search-result){
-  background:#f37336!important;color:#fffaf0!important;border-color:#525B63!important;
+  background:#C64F1D!important;color:#697781!important;border-color:#525B63!important;
 }
 body :is(.milestone select,.application-header select,.formgrid input,.formgrid select,.formgrid textarea,.followup-controls select,.followup-controls button){
-  background:#fffdf8!important;color:#525B63!important;border-color:#d9cbb8!important;
+  background:#FFFFFF!important;color:#525B63!important;border-color:#E5E9ED!important;
 }
-body .milestone select option{background:#fffdf8!important;color:#525B63!important}
+body .milestone select option{background:#FFFFFF!important;color:#525B63!important}
 body :is(.workspace-steps a.active,.rail a.active,.lesson-link.active){
-  background:#e9dcc9!important;border-color:#E4D8D0!important;color:#525B63!important;
+  background:#FFF3EC!important;border-color:#E5E9ED!important;color:#525B63!important;
 }
 body :is(.topbar nav a,.topbar nav a.active,.sidebar nav button,.curriculum nav button){
   color:#525B63!important;
@@ -313,25 +313,25 @@ body :is(.topbar nav a,.topbar nav a.active,.sidebar nav button,.curriculum nav 
 
 /* Editorial color in consent UI; preserve existing opt-out behavior. */
 body .bdesh-analytics-consent{
-  background:#fffaf3!important;border:1px solid #d6c5ac!important;color:#525B63!important;
+  background:#FFFFFF!important;border:1px solid #E5E9ED!important;color:#525B63!important;
   box-shadow:0 18px 50px rgba(95,106,115,.13)!important;
 }
 body .bdesh-analytics-consent p{color:#525B63!important}
 body .bdesh-analytics-consent button{
-  background:#f3e8d8!important;color:#525B63!important;border-color:#E4D8D0!important;
+  background:#FCFBF9!important;color:#525B63!important;border-color:#E5E9ED!important;
 }
 body .bdesh-analytics-consent button:last-child{
-  background:#f37336!important;color:#fffaf0!important;border-color:#525B63!important;
+  background:#C64F1D!important;color:#697781!important;border-color:#525B63!important;
 }
-body .bdesh-analytics-consent button:focus-visible{outline-color:#D96B38!important}
+body .bdesh-analytics-consent button:focus-visible{outline-color:#F1B896!important}
 
 
 /* V3 — cream-first correction of high-specificity forest panel rules.
    The earlier theme was loaded correctly, but selectors like body .main .intro
    and body .action-plan .next-action still won the cascade. */
 html body{
-  --forest-glass:#fffdf9;--forest-panel:#fffdf9;--forest-bg:#faf7f1;
-  --repair-card:#fffdf9;--repair-bg:#faf6ee;
+  --forest-glass:#FFFFFF;--forest-panel:#FFFFFF;--forest-bg:#FAF9F7;
+  --repair-card:#FFFFFF;--repair-bg:#FAF9F7;
 }
 html body :is(.home-flow-head,.home-flow-head .journey-progress,
   .journey-detail,.journey-step:nth-child(3n+2) .journey-detail,
@@ -346,9 +346,9 @@ html body :is(.home-flow-head,.home-flow-head .journey-progress,
   .application-board-tools,.workspace-steps,.metrics>div,
   .deadline-summary>div,.journey-progress,.review-summary,
   .next-action,.research-controls,.sign-in-wall){
-  background:#fffdf9!important;
+  background:#FFF3EC!important;
   background-image:none!important;
-  border-color:#e9e0d3!important;
+  border-color:#E5E9ED!important;
   box-shadow:0 8px 28px rgba(95,106,115,.035)!important;
   color:#525B63!important;
 }
@@ -364,20 +364,20 @@ html body #apply .college-search.college-lookup-card,
 html body .home-flow .home-flow-head,
 html body .home-flow .journey-step .journey-detail,
 html body .home-flow .journey-progress{
-  background:#fffdf9!important;
+  background:#FFFFFF!important;
   background-image:none!important;
-  border:1px solid #e9dfd1!important;
+  border:1px solid #E5E9ED!important;
   box-shadow:0 7px 24px rgba(95,106,115,.03)!important;
 }
 html body .main .action-plan .next-actions,
 html body .main .action-plan .next-action{
-  background:#fffdf9!important;
+  background:#FFFFFF!important;
   background-image:none!important;
-  border-color:#e9e0d3!important;
+  border-color:#E5E9ED!important;
 }
 html body .main .action-plan .next-action{
   border-left:0!important;border-right:0!important;border-top:0!important;
-  border-bottom:1px solid #eae0d4!important;border-radius:0!important;
+  border-bottom:1px solid #E5E9ED!important;border-radius:0!important;
   box-shadow:none!important;
 }
 html body .main .action-plan .next-action :is(h3,p,span,strong,small,a),
@@ -397,29 +397,29 @@ html body .home-flow .journey-step .journey-detail p{
   color:#6A737A!important;
 }
 html body .home-flow .journey-progress{
-  border:1px solid #e9dfd1!important;border-radius:20px!important;
+  border:1px solid #E5E9ED!important;border-radius:20px!important;
 }
 html body .home-flow .journey-ring{
-  background:conic-gradient(#E4D8D0 var(--journey-percent,0%),#f1eadf 0)!important;
+  background:conic-gradient(#FCFBF9 var(--journey-percent,0%),#FCFBF9 0)!important;
 }
 html body .home-flow .journey-ring-inner{
-  background:#fffdf9!important;border:0!important;
+  background:#FFFFFF!important;border:0!important;
 }
 html body .home-flow .journey-progress p{color:#6A737A!important}
 html body .main .intro .sync,
 html body .main .action-plan .next-action-number,
 html body .main .deadline-summary>div{
-  background:#f7f1e7!important;background-image:none!important;
-  border-color:#e9dfd1!important;color:#525B63!important;
+  background:#FCFBF9!important;background-image:none!important;
+  border-color:#E5E9ED!important;color:#525B63!important;
 }
 html body .main .intro .sync :is(span,strong,p){color:#525B63!important}
-html body .home-flow .journey-node{background:#f2e9dc!important;color:#6A737A!important}
-html body .home-flow .journey-arrow{color:#E4D8D0!important}
-html body .main .metrics>div{background:#fffdf9!important;border-color:#e9dfd1!important}
+html body .home-flow .journey-node{background:#FCFBF9!important;color:#6A737A!important}
+html body .home-flow .journey-arrow{color:#697781!important}
+html body .main .metrics>div{background:#FFFFFF!important;border-color:#E5E9ED!important}
 html body .main .metrics :is(strong,span,small){color:#525B63!important}
-html body .workspace-steps{background:#f7f2ea!important;box-shadow:none!important}
-html body .workspace-steps a{background:#fffdf9!important;color:#525B63!important;border-color:#e9dfd1!important}
-html body .workspace-steps a.active{background:#efe4d4!important;color:#525B63!important;border-color:#d7c4ab!important}
+html body .workspace-steps{background:#FCFBF9!important;box-shadow:none!important}
+html body .workspace-steps a{background:#FFFFFF!important;color:#525B63!important;border-color:#E5E9ED!important}
+html body .workspace-steps a.active{background:#FFF3EC!important;color:#525B63!important;border-color:#E5E9ED!important}
 html body .main .section-heading h2,html body .main .intro h2,
 html body .main .learn-first h2,html body .main .action-plan h2,
 html body .main .deadline-center h2{color:#525B63!important}
@@ -432,9 +432,9 @@ html body .main .research-card,
 html body .main .application-card,
 html body .lesson-content :is(.takeaway,.example,.example-row,.application-flow),
 html body #profile-app :is(.profile-panel,.entry-card,.paper-form){
-  background:#fffdf9!important;
+  background:#FFF3EC!important;
   background-image:none!important;
-  border-color:#e8ded0!important;
+  border-color:#E5E9ED!important;
   box-shadow:0 5px 20px rgba(95,106,115,.025)!important;
 }
 html body .main .milestone :is(h3,p,span,strong,small,label){
@@ -442,7 +442,7 @@ html body .main .milestone :is(h3,p,span,strong,small,label){
 }
 html body .main .milestone p{color:#6A737A!important}
 html body .main .milestone select{
-  background:#f8f3ea!important;color:#525B63!important;border:1px solid #dfd2c2!important;
+  background:#FCFBF9!important;color:#525B63!important;border:1px solid #E5E9ED!important;
 }
 html body #profile-app .profile-panel :is(h1,h2,h3,p,span,label,small,strong){
   color:#525B63!important;
@@ -465,13 +465,13 @@ html body .main .deadline-center::before{
 /* Non-green neutrals for controls and understated actions. */
 html body .main :is(.button,.export-workspace,.application-toggle),
 html body .home-flow .journey-detail a.darkbtn{
-  background:#eee4d6!important;color:#525B63!important;
-  border:1px solid #ded0bd!important;
+  background:#FCFBF9!important;color:#525B63!important;
+  border:1px solid #E5E9ED!important;
   box-shadow:none!important;
 }
 html body .main :is(.button,.export-workspace,.application-toggle):hover,
 html body .home-flow .journey-detail a.darkbtn:hover{
-  background:#e5d7c4!important;color:#525B63!important;
+  background:#FCFBF9!important;color:#525B63!important;
 }
 html body .main :is(.button,.export-workspace,.application-toggle) :is(span,strong,b){
   color:#525B63!important;
@@ -479,18 +479,18 @@ html body .main :is(.button,.export-workspace,.application-toggle) :is(span,stro
 html body .main .next-action a,
 html body .main .deadline-link,
 html body .main .action-plan-link{
-  color:#6A737A!important;border-color:#E4D8D0!important;
+  color:#6A737A!important;border-color:#E5E9ED!important;
 }
 
 /* Keep buttons readable while avoiding visually dominant espresso fills. */
 html body .hero .primary-cta,
 html body .home-flow .journey-detail a.journey-link{
-  background:#eee4d6!important;color:#525B63!important;
-  border:1px solid #dacbb5!important;
+  background:#FCFBF9!important;color:#525B63!important;
+  border:1px solid #E5E9ED!important;
 }
 html body .hero .primary-cta:hover,
 html body .home-flow .journey-detail a.journey-link:hover{
-  background:#e5d7c4!important;color:#525B63!important;
+  background:#FCFBF9!important;color:#525B63!important;
 }
 html body .hero .primary-cta :is(span,strong,b){color:#525B63!important}
 
@@ -500,53 +500,53 @@ html body .hero .primary-cta :is(span,strong,b){color:#525B63!important}
    Backgrounds stay predominantly ivory. Orange is reserved for actions and small highlights. */
 :root{
   color-scheme:light;
-  --ink:#525B63;--secondary:#6A737A;--cream:#faf7f2;--paper:#fffdfa;
-  --mint:#fff2e8;--line:#eae1d8;--accent:#f36d30;
-  --forest-text:#525B63;--forest-muted:#6A737A;--forest-edge:#eadfd5;
-  --glass:#fffdfa;--frost-bg:#fffaf6;--frost-brd:#eaded4;
-  --reading-ink:#525B63;--reading-muted:#6A737A;--reading-border:#e7dcd2;
-  --repair-bg:#fffaf5;--repair-card:#fffdfa;--repair-border:#e7dad0;
-  --repair-text:#525B63;--repair-muted:#6A737A;--repair-focus:#ee793f;
-  --editorial-accent:#e66a32;--editorial-ink:#525B63;--editorial-bg:#faf7f2;
-  --editorial-paper:#fffdfa;--surface:#fffaf6;
-  --green:#ed7a43;--forest:#f5e4d6;--forest-bg:#faf7f2;
-  --forest-deep:#fff4ea;--forest-mid:#ffe6d5;
-  --forest-glass:#fffdfa;--forest-panel:#fffdfa;
+  --ink:#525B63;--secondary:#6A737A;--cream:#FAF9F7;--paper:#FFFFFF;
+  --mint:#FFF3EC;--line:#E5E9ED;--accent:#C64F1D;
+  --forest-text:#525B63;--forest-muted:#6A737A;--forest-edge:#E5E9ED;
+  --glass:#FFFFFF;--frost-bg:#FAF9F7;--frost-brd:#FFF3EC;
+  --reading-ink:#525B63;--reading-muted:#6A737A;--reading-border:#E5E9ED;
+  --repair-bg:#FAF9F7;--repair-card:#FFFFFF;--repair-border:#E5E9ED;
+  --repair-text:#525B63;--repair-muted:#6A737A;--repair-focus:#C64F1D;
+  --editorial-accent:#C64F1D;--editorial-ink:#525B63;--editorial-bg:#FAF9F7;
+  --editorial-paper:#FFFFFF;--surface:#FFFFFF;
+  --green:#C64F1D;--forest:#FCFBF9;--forest-bg:#FAF9F7;
+  --forest-deep:#FCFBF9;--forest-mid:#FCFBF9;
+  --forest-glass:#FFFFFF;--forest-panel:#FFFFFF;
 }
 html body,html body:is(.home,.workspace){
-  background:#faf7f2!important;
-  background-image:radial-gradient(ellipse 30% 21% at 93% 0,rgba(255,143,77,.07),transparent 100%),
-    linear-gradient(180deg,#fdfaf6,#faf7f2)!important;
+  background:#FFFFFF!important;
+  background-image:radial-gradient(ellipse 30% 21% at 93% 0,rgba(255,243,236,.07),transparent 100%),
+    linear-gradient(180deg,#FFFFFF,#FFFFFF)!important;
   color:#525B63!important;
 }
 html body :is(h1,h2,h3,h4,h5,h6,strong,b){color:#525B63!important}
 html body :is(p,li,small,label,dt,dd){color:#6A737A!important}
 html body :is(.eyebrow,.kicker,.journey-tag,.section-label,.chapter-id,.reading-time){
-  color:#db6b36!important;
+  color:#B5471C!important;
 }
-html body a{color:#bf5423!important}
-html body a:hover{color:#ab441c!important}
+html body a{color:#B5471C!important}
+html body a:hover{color:#B5471C!important}
 html body :is(.topbar,.nav,.site-header,.top,.early){
-  background:rgba(255,253,249,.96)!important;border-color:#ebe2d8!important;
+  background:rgba(255,255,255,.96)!important;border-color:#E5E9ED!important;
   color:#525B63!important;box-shadow:0 6px 24px rgba(95,106,115,.035)!important;
 }
 html body :is(.nav,.topbar,.site-header,.top) :is(a,span,strong,#session-status,#account-name){
   color:#525B63!important;
 }
 html body :is(.side,.sidebar,.curriculum){
-  background:#f8f3ec!important;
+  background:#FCFBF9!important;
   background-image:none!important;
-  border-color:#e8ded4!important;color:#525B63!important;
+  border-color:#E5E9ED!important;color:#525B63!important;
   box-shadow:none!important;
 }
 html body :is(.side,.sidebar,.curriculum) :is(h1,h2,h3,p,span,a,em,strong){
   color:#525B63!important;
 }
 html body :is(.rail a.active,.workspace-steps a.active,.lesson-link.active,.curriculum nav button.active){
-  background:#fff0e3!important;border-color:#f6c6a9!important;color:#ba5121!important;
+  background:#FFF3EC!important;border-color:#F1B896!important;color:#B5471C!important;
 }
 html body :is(.rail a,.workspace-steps a,.lesson-link){
-  background:#fffdfa!important;border-color:#e8ddd3!important;color:#525B63!important;
+  background:#FFFFFF!important;border-color:#E5E9ED!important;color:#525B63!important;
 }
 
 /* Light cards only: no dark container, tint, overlay or forest gradient. */
@@ -560,9 +560,9 @@ html body :is(.home-flow-head,.journey-detail,.journey-progress,.learn-first,
   .application-board-tools,.workspace-steps,.metrics>div,
   .deadline-summary>div,.review-summary,.next-action,.research-controls,
   .sign-in-wall,.milestone,.takeaway,.example,.application-flow){
-  background:#fffdfa!important;
+  background:#FFF3EC!important;
   background-image:none!important;
-  border-color:#e9e0d7!important;
+  border-color:#E5E9ED!important;
   color:#525B63!important;
 }
 html body :is(.home-flow-head,.journey-detail,.journey-progress,.learn-first,
@@ -583,12 +583,12 @@ html body #apply .college-search.college-lookup-card,
 html body .home-flow .home-flow-head,
 html body .home-flow .journey-step .journey-detail,
 html body .home-flow .journey-progress{
-  background:#fffdfa!important;
+  background:#FFFFFF!important;
   background-image:none!important;
-  border-color:#e9e0d7!important;
+  border-color:#E5E9ED!important;
 }
 html body .main .action-plan .next-action{
-  border-bottom-color:#ede2d8!important;
+  border-bottom-color:#E5E9ED!important;
 }
 html body .main .action-plan .next-action :is(h3,strong),
 html body .main :is(.intro,.learn-first,.deadline-center,.action-plan,.milestone) :is(h2,h3,strong),
@@ -602,53 +602,53 @@ html body .home-flow :is(.home-flow-head,.journey-detail,.journey-progress) p{
 
 /* Atmospheric peach lighting: no dark gradient panels. */
 html body .hero{
-  background:radial-gradient(circle at 86% 14%,rgba(255,119,52,.23),transparent 33%),
-    radial-gradient(circle at 73% 78%,rgba(255,183,125,.13),transparent 34%),
-    linear-gradient(120deg,#fffaf5,#f8eee5)!important;
-  border:1px solid #f0e0d3!important;
-  box-shadow:0 22px 55px rgba(209,120,56,.085)!important;
+  background:radial-gradient(circle at 86% 14%,rgba(255,243,236,.23),transparent 33%),
+    radial-gradient(circle at 73% 78%,rgba(255,243,236,.13),transparent 34%),
+    linear-gradient(120deg,#FFFFFF,#FCFBF9)!important;
+  border:1px solid #E5E9ED!important;
+  box-shadow:0 22px 55px rgba(125,139,149,.085)!important;
 }
 html body .hero .hero-copy{
-  background:rgba(255,253,249,.8)!important;
+  background:rgba(255,255,255,.8)!important;
   background-image:none!important;
-  border-color:rgba(239,210,190,.88)!important;
+  border-color:rgba(229,233,237,.88)!important;
   box-shadow:0 10px 35px rgba(140,151,159,.055)!important;
 }
 html body .hero .hero-copy :is(h1,h1 em,h2,p,.hero-kicker,.hero-caption,.hero-note,.eyebrow){
   color:#525B63!important;
 }
-html body .hero .hero-copy .eyebrow{color:#df6d35!important}
+html body .hero .hero-copy .eyebrow{color:#B5471C!important}
 html body .hero::before,html body .hero::after{
-  background:radial-gradient(circle,rgba(255,141,69,.29),rgba(255,182,120,.06) 60%,transparent 72%)!important;
-  border-color:rgba(255,160,99,.15)!important;
+  background:radial-gradient(circle,rgba(255,243,236,.29),rgba(255,243,236,.06) 60%,transparent 72%)!important;
+  border-color:rgba(229,233,237,.15)!important;
 }
 html body .home-flow .home-flow-head,
 html body .home-flow .journey-detail{
-  background:#fffdfa!important;
+  background:#FFFFFF!important;
 }
 html body .home-flow .journey-progress{
-  background:#fff7f1!important;
-  border:1px solid #f3dbca!important;
+  background:#FFFFFF!important;
+  border:1px solid #E5E9ED!important;
 }
 html body .home-flow .journey-ring{
-  background:conic-gradient(#f47739 var(--journey-percent,0%),#f4e8df 0)!important;
+  background:conic-gradient(#FFF3EC var(--journey-percent,0%),#FCFBF9 0)!important;
 }
 html body .home-flow .journey-ring-inner{
-  background:#fffdfa!important;color:#525B63!important;
+  background:#FFFFFF!important;color:#525B63!important;
 }
 html body .home-flow .journey-node{
-  background:#fff0e5!important;border:1px solid #f3c4a6!important;color:#d4612e!important;
+  background:#FCFBF9!important;border:1px solid #E5E9ED!important;color:#B5471C!important;
 }
-html body .home-flow .journey-arrow{color:#e8a27b!important}
+html body .home-flow .journey-arrow{color:#B5471C!important}
 
 /* Buttons: coral-orange primary, peach secondary. Avoid espresso fills. */
 html body :is(.darkbtn,.primary-button,.primary-cta,.button,.google-signin,button.primary-button){
-  background:#f37336!important;color:#fffefa!important;
-  border:1px solid #ee7137!important;
+  background:#C64F1D!important;color:#fffefa!important;
+  border:1px solid #F1B896!important;
   box-shadow:none!important;
 }
 html body :is(.darkbtn,.primary-button,.primary-cta,.button,.google-signin,button.primary-button):hover{
-  background:#d85b25!important;border-color:#d85b25!important;color:#fffefa!important;
+  background:#A93C13!important;border-color:#F1B896!important;color:#fffefa!important;
 }
 html body :is(.darkbtn,.primary-button,.primary-cta,.button,.google-signin,button.primary-button) :is(span,strong,b,i,em,small){
   color:#fffefa!important;
@@ -656,14 +656,14 @@ html body :is(.darkbtn,.primary-button,.primary-cta,.button,.google-signin,butto
 html body .hero .primary-cta,
 html body .home-flow .journey-detail a.darkbtn,
 html body .main :is(.button,.export-workspace,.application-toggle){
-  background:#f37336!important;color:#fffefa!important;
-  border:1px solid #ee7137!important;
+  background:#C64F1D!important;color:#fffefa!important;
+  border:1px solid #F1B896!important;
   box-shadow:none!important;
 }
 html body .hero .primary-cta:hover,
 html body .home-flow .journey-detail a.darkbtn:hover,
 html body .main :is(.button,.export-workspace,.application-toggle):hover{
-  background:#d85b25!important;color:#fffefa!important;
+  background:#A93C13!important;color:#fffefa!important;
 }
 html body .hero .primary-cta :is(span,strong,b),
 html body .main :is(.button,.export-workspace,.application-toggle) :is(span,strong,b){
@@ -672,21 +672,21 @@ html body .main :is(.button,.export-workspace,.application-toggle) :is(span,stro
 html body :is(.outline-button,.college-search-result,.college-manual,
   .deadline-entry button,.editor-list button,.workspace-steps a,
   .lesson-link,.check-option,.followup-add){
-  background:#fff1e6!important;border:1px solid #f0d8c6!important;
-  color:#bd5729!important;
+  background:#FCFBF9!important;border:1px solid #E5E9ED!important;
+  color:#B5471C!important;
 }
 html body :is(.outline-button,.college-search-result,.college-manual,
   .deadline-entry button,.editor-list button,.workspace-steps a,
   .lesson-link,.check-option,.followup-add):hover{
-  background:#ffe5d2!important;color:#ae4b21!important;
+  background:#FCFBF9!important;color:#B5471C!important;
 }
 html body .home-flow .journey-detail a.journey-link{
-  background:#fff0e5!important;
-  border-color:#efcbb5!important;
-  color:#be5425!important;
+  background:#FCFBF9!important;
+  border-color:#E5E9ED!important;
+  color:#B5471C!important;
 }
 html body .home-flow .journey-detail a.journey-link:hover{
-  background:#ffe3d0!important;color:#aa451f!important;
+  background:#FCFBF9!important;color:#B5471C!important;
 }
 
 /* All controls and highlighted bits use subtle orange, not forest. */
@@ -695,52 +695,52 @@ html body #discover .research-controls #research-search,
 html body #discover .research-controls select,
 html body #apply .college-lookup-card #college-search-input,
 html body .milestone select{
-  background:#fffdfa!important;color:#525B63!important;
-  border:1px solid #e4d8ce!important;
+  background:#FFF3EC!important;color:#525B63!important;
+  border:1px solid #E5E9ED!important;
 }
 html body :is(input,textarea)::placeholder,
 html body #discover #research-search::placeholder{
   color:#747D83!important;
 }
-html body :is(input[type=checkbox],input[type=radio],input[type=range]){accent-color:#f37336!important}
+html body :is(input[type=checkbox],input[type=radio],input[type=range]){accent-color:#B5471C!important}
 html body :is(.metrics strong,.deadline-summary strong,.journey-progress strong){color:#525B63!important}
 html body :is(.research-caution,.research-evidence,.research-controls,
   .date-editor,.sync,.followup-form,.reading-intro,.takeaway){
-  background:#fff9f4!important;
-  border-color:#f0e1d4!important;
+  background:#FFF3EC!important;
+  border-color:#E5E9ED!important;
 }
-html body .main .intro .sync{background:#fff6ee!important;color:#6A737A!important}
+html body .main .intro .sync{background:#FFFFFF!important;color:#6A737A!important}
 html body :is(.research-card .research-verification[data-review-state="verified"],
   .research-card .research-verification[data-review-state="partial"]){
-  background:#fff0e5!important;border-color:#efceb9!important;
-  color:#a94a24!important;
+  background:#FCFBF9!important;border-color:#E5E9ED!important;
+  color:#B5471C!important;
 }
 html body :is(.research-card,.application-card,.lesson-content,.milestone) a:not(.button){
-  color:#c15a28!important;
+  color:#B5471C!important;
 }
 html body :is(.eyebrow,.journey-tag,.priority-label,.next-action-number,
   .reading-section-num,.chapter-id,.reading-time,.deadline-link,.action-plan-link){
-  color:#d36a38!important;
+  color:#B5471C!important;
 }
-html body .main .next-action a{color:#c35d2f!important;border-bottom-color:#f0ad89!important}
+html body .main .next-action a{color:#B5471C!important;border-bottom-color:#E5E9ED!important}
 html body :is(.sidebar nav button.active,.curriculum nav button.active,
   .rail a.active,.workspace-steps a.active,.lesson-link.active){
-  background:#fff0e4!important;color:#bb5629!important;border-color:#f1c6ac!important;
+  background:#FFF3EC!important;color:#B5471C!important;border-color:#E5E9ED!important;
 }
 html body .bdesh-analytics-consent{
-  background:#fffaf6!important;border-color:#f1d4c0!important;
+  background:#FFFFFF!important;border-color:#E5E9ED!important;
   color:#525B63!important;
 }
 html body .bdesh-analytics-consent button:last-child{
-  background:#f37336!important;border-color:#f37336!important;color:#fffefa!important;
+  background:#C64F1D!important;border-color:#F1B896!important;color:#fffefa!important;
 }
 html body .trust-links,html body footer{
-  background:#fcf5ef!important;border-color:#eee2d8!important;color:#6A737A!important;
+  background:#FCFBF9!important;border-color:#E5E9ED!important;color:#6A737A!important;
 }
 html body .trust-links :is(a,span),html body footer :is(a,span){color:#6A737A!important}
 @media(prefers-reduced-transparency:reduce){
   html body :is(.hero-copy,.journey-detail,.research-card,.application-card,.lesson-content){
-    background:#fffdfa!important;backdrop-filter:none!important;
+    background:#FFFFFF!important;backdrop-filter:none!important;
   }
 }
 
@@ -754,7 +754,7 @@ html body{
   --reading-muted:#6A737A;
   --forest-text:#525B63;
   --forest-muted:#6A737A;
-  --accent:#f37336;
+  --accent:#C64F1D;
 }
 html body :is(.main,.hero-copy,.journey-detail,.home-flow-head,.learn-first,
   .action-plan,.deadline-center,.application-card,.research-card,.profile-panel,
@@ -908,35 +908,35 @@ html body .home-flow .journey-progress{text-align:center}
 html body .home-flow .journey-progress>*{min-width:0;max-width:100%}
 html body .home-flow .journey-ring{margin-inline:auto}
 html body .research-card .research-verification[data-review-state="verified"]{
-  background:#fff1e7!important;
-  border:1px solid #f1ceb8!important;
-  color:#bd5729!important;
+  background:#FCFBF9!important;
+  border:1px solid #E5E9ED!important;
+  color:#B5471C!important;
 }
 html body #profile-app #profile-nav button.active,
 html body #profile-app .completion-track span,
 html body .curriculum :is(.bar span,.reading-progress span),
 html body .reader .reading-progress span{
-  background:#f37336!important;
+  background:#C64F1D!important;
 }
 html body #profile-app #profile-nav button.active{
-  background:#fff1e7!important;
-  color:#bd5729!important;
+  background:#FFF3EC!important;
+  color:#B5471C!important;
 }
 html body .main .insight{
-  background:#fff7f1!important;
+  background:#FFFFFF!important;
   color:#6A737A!important;
-  border-left:3px solid #f6ba94!important;
+  border-left:3px solid #E5E9ED!important;
 }
 html body .main .insight :is(p,span,strong){color:#6A737A!important}
 html body .sidebar-head,html body .curriculum .aside-progress{
-  background:#fffaf5!important;
-  border-color:#e9e0d7!important;
+  background:#FFFFFF!important;
+  border-color:#E5E9ED!important;
 }
 html body :is(.reading-section,.lesson-content) :is(.takeaway,.example,.example-row,.application-flow){
-  background:#fffaf5!important;
+  background:#FFF3EC!important;
   background-image:none!important;
   color:#6A737A!important;
-  border-color:#eaded3!important;
+  border-color:#E5E9ED!important;
 }
 @media(max-width:760px){
   html body .main :is(.intro,.learn-first){align-items:stretch}
