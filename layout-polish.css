@@ -1058,3 +1058,71 @@ html body :is(a,button,input,select,textarea):focus-visible{
   .research-controls,.panel){background:#FFFFFF!important;backdrop-filter:none!important;
   -webkit-backdrop-filter:none!important}
 }
+
+
+/* Explicit component priorities to avoid class/ID mismatches. */
+html body :is(button.button,#workspace-google-signin,
+  #profile-app button.primary-button,#profile-google-login){
+  background:var(--bd-orange)!important;
+  border:1px solid var(--bd-orange)!important;
+  color:#17232E!important;
+  box-shadow:0 6px 17px rgba(255,113,52,.12)!important;
+}
+html body :is(button.button,#workspace-google-signin,
+  #profile-app button.primary-button,#profile-google-login):hover{
+  background:var(--bd-orange-hover)!important;
+  border-color:var(--bd-orange-hover)!important;
+  color:#17232E!important;
+}
+html body :is(button.button,#workspace-google-signin,
+  #profile-app button.primary-button,#profile-google-login) :is(span,b,strong,small){
+  color:#17232E!important;
+}
+html body .home-flow .journey-detail a.journey-link,
+html body .reader .lesson-footer button.outline-button,
+html body #profile-app button.text-button,
+html body .main #export-workspace,
+html body .main .application-footer button{
+  background:rgba(255,255,255,.82)!important;
+  border:1px solid var(--bd-line)!important;
+  color:var(--bd-ink)!important;
+  box-shadow:none!important;
+}
+html body .home-flow .journey-detail a.journey-link:hover,
+html body .reader .lesson-footer button.outline-button:hover,
+html body #profile-app button.text-button:hover,
+html body .main #export-workspace:hover,
+html body .main .application-footer button:hover{
+  background:rgba(255,239,227,.87)!important;
+  border-color:rgba(255,140,76,.55)!important;
+  color:var(--bd-ink)!important;
+}
+html body .home-flow .journey-detail a.journey-link :is(span,b,strong,small){
+  color:var(--bd-ink)!important;
+}
+html body .auth-close{
+  background:rgba(255,255,255,.82)!important;
+  color:var(--bd-ink)!important;
+  border:1px solid var(--bd-line)!important;
+  box-shadow:none!important;
+}
+html body .home-flow a.darkbtn,
+html body .hero a.primary-cta,
+html body .callout a.lightbtn,
+html body #discover .research-card .cardactions button{
+  background:var(--bd-orange)!important;
+  border-color:var(--bd-orange)!important;
+  color:#17232E!important;
+}
+html body :is(.home-flow a.darkbtn,.hero a.primary-cta,
+  .callout a.lightbtn,#discover .research-card .cardactions button) :is(span,small,b,strong){
+  color:#17232E!important;
+}
+html body .home-flow a.darkbtn:hover,
+html body .hero a.primary-cta:hover,
+html body .callout a.lightbtn:hover,
+html body #discover .research-card .cardactions button:hover{
+  background:var(--bd-orange-hover)!important;
+  border-color:var(--bd-orange-hover)!important;
+  color:#17232E!important;
+}
