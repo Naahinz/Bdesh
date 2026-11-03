@@ -12,7 +12,7 @@ body .journey-detail a.journey-link:hover{color:#fff!important;border-bottom-col
 body .journey-detail .journey-foot{color:#696460!important}
 
 /* Correct cards whose content was touching the frosted outline. */
-body .main .intro{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:24px;padding:26px clamp(22px,3vw,36px)!important;min-width:0;background:linear-gradient(120deg,#fffaf5,#fff5ed)!important;border:1px solid var(--repair-border)!important;border-radius:19px!important;box-shadow:0 13px 35px rgba(0,10,7,.15)!important}
+body .main .intro{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:24px;padding:26px clamp(22px,3vw,36px)!important;min-width:0;background:linear-gradient(120deg,#fffaf5,#fff5ed)!important;border:1px solid var(--repair-border)!important;border-radius:19px!important;box-shadow:0 13px 35px rgba(128,108,94,.15)!important}
 body .main .intro>div:first-child{flex:1 1 390px;min-width:0}
 body .main .intro h2{margin:9px 0 12px!important;line-height:1.22!important;overflow-wrap:anywhere}
 body .main .intro p{margin:0!important;line-height:1.65!important;color:var(--repair-muted)!important}
@@ -186,7 +186,7 @@ body #discover .research-controls select{width:100%!important;min-height:50px!im
 body .research-card .research-verification{display:block;margin:13px 0 5px!important;padding:10px 13px!important;border-radius:9px!important;font-size:12px!important;line-height:1.6!important;font-weight:750!important;letter-spacing:.005em;overflow-wrap:anywhere}
 body .research-card .research-verification[data-review-state="verified"]{background:#fff0e5!important;color:#696460!important;border:1px solid rgba(231,216,202,.36)!important}
 body .research-card .research-verification[data-review-state="partial"]{background:rgba(119,78,32,.42)!important;color:#ffdea3!important;border:1px solid rgba(238,181,98,.43)!important}
-body .research-card .research-verification[data-review-state="unreviewed"]{background:rgba(91,92,97,.28)!important;color:#e0e4e1!important;border:1px solid rgba(192,198,195,.35)!important}
+body .research-card .research-verification[data-review-state="unreviewed"]{background:rgba(91,92,97,.28)!important;color:#eae1d7!important;border:1px solid rgba(237,220,205,.35)!important}
 
 /* Email authentication: legible existing-account login and clear SMTP setup notice. */
 body .auth-card .auth-email-status{
