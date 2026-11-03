@@ -9,7 +9,8 @@ const validEvents=new Set(['bdesh_page_viewed','bdesh_section_viewed','bdesh_les
 const validSections=new Set(['prepare','discover','apply','overview','academics','activities','honors','writing','brag','review']);
 const pages={'/':'home','/index.html':'home','/learn.html':'learn','/workspace.html':'workspace','/profile.html':'profile'};
 const page=pages[location.pathname]||null;
-let active=false,queue=[];
+let active=false,queue=[],sdkLoaded=false,sdkError='';
+window.bdeshAnalyticsDiagnostics=()=>({configured,consent:consent()||'not chosen',sdkRequested:active,sdkLoaded,sdkError});
 function consent(){try{return localStorage.getItem(storageKey)}catch{return null}}
 function remember(value){try{localStorage.setItem(storageKey,value)}catch{}}
 function sanitize(name,props){
@@ -31,9 +32,10 @@ function boot(){
  if(!configured||active)return;
  active=true;
  // Official PostHog async bootstrap. SDK initializes only after affirmative opt-in.
- !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],Object.defineProperty(u,"toString",{configurable:!0,enumerable:!0,writable:!0,value:function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e}}),Object.defineProperty(u.people,"toString",{configurable:!0,enumerable:!0,writable:!0,value:function(){return u.toString(1)+".people (stub)"}}),o="init capture opt_out_capturing opt_in_capturing".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+ !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",p.onerror=function(){sdkError='PostHog SDK script blocked or failed to load';console.warn('Bdesh analytics: PostHog SDK load failed. Check browser Shields or network policy.')},(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],Object.defineProperty(u,"toString",{configurable:!0,enumerable:!0,writable:!0,value:function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e}}),Object.defineProperty(u.people,"toString",{configurable:!0,enumerable:!0,writable:!0,value:function(){return u.toString(1)+".people (stub)"}}),o="init capture opt_out_capturing opt_in_capturing".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
  window.posthog.init(key,{
   api_host:host,
+  loaded:()=>{sdkLoaded=true;sdkError=''},
   autocapture:false,
   capture_pageview:false,
   capture_pageleave:false,
