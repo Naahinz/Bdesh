@@ -157,7 +157,7 @@ body #apply .college-lookup-card #college-search-hint{color:#6A737A!important}
 body .check-option.correct{background:#eee4d5!important;border-color:#E4D8D0!important}
 body .check-option.incorrect{background:#f6e5df!important;border-color:#dca99f!important}
 body :is(.insight,.followup-info,.followup-empty,.privacy-note,.editor-notice){color:#525B63!important}
-body :is(.priority-label,.deadline-due.is-overdue,.danger){color:#8b4b3e!important}
+body :is(.priority-label,.deadline-due.is-overdue,.danger){color:#b94b46!important}
 body :is(.early,.trust-links,footer){
   background:#efe6d8!important;color:#525B63!important;
   border-color:#dcccba!important;box-shadow:none!important;
