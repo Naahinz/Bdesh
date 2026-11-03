@@ -5,8 +5,8 @@
   --ui-ink:#4d5660;
   --ui-body:#657079;
   --ui-muted:#77818a;
-  --ui-orange:#f37336;
-  --ui-orange-hover:#df5d25;
+  --ui-orange:#c64f1d;
+  --ui-orange-hover:#a93c13;
   --ui-peach:#fff1e7;
   --ui-cream:#faf8f5;
   --ui-paper:#fffdfb;
@@ -87,6 +87,9 @@ html body :is(.nav,.topbar,.site-header,.top){
   display:flex;
   align-items:center!important;
   flex-wrap:wrap;
+  height:auto!important;
+  min-height:76px;
+  padding-block:14px;
   gap:12px 24px;
 }
 html body :is(.nav,.topbar,.site-header,.top)>nav{
