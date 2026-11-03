@@ -41,8 +41,8 @@ body .hero{
 body .hero-copy{background:rgba(255,252,245,.82)!important;border:1px solid #e6dacb!important;box-shadow:0 12px 35px rgba(89,69,44,.04)!important}
 body .hero :is(h1,h1 em,.hero-kicker,.eyebrow,.hero-caption,.hero-note,.hero-note span,p){color:#332c24!important}
 body .hero .hero-copy>p{color:#62574b!important}
-body .hero .primary-cta{background:#574937!important;color:#fffaf0!important;border:1px solid #574937!important}
-body .hero .primary-cta:hover{background:#3d3327!important;color:#fffaf0!important}
+body .hero .primary-cta{background:#f37336!important;color:#fffaf0!important;border:1px solid #574937!important}
+body .hero .primary-cta:hover{background:#dc602c!important;color:#fffaf0!important}
 body .hero .textlink{color:#69543d!important}
 body .home-flow-head{
   background:#fffaf3!important;border:1px solid #e3d6c4!important;
@@ -106,11 +106,11 @@ body #discover .research-controls #research-search::placeholder,
 body #apply .college-lookup-card #college-search-input::placeholder{color:#897c6d!important;opacity:1!important}
 body select option{background:#fffdf8!important;color:#332c24!important}
 body :is(.darkbtn,.primary-button,.button,.google-signin,.application-toggle,.followup-add,.export-workspace){
-  background:#5a4a37!important;color:#fffaf2!important;
+  background:#f37336!important;color:#fffaf2!important;
   border:1px solid #5a4a37!important;box-shadow:none!important;
 }
 body :is(.darkbtn,.primary-button,.button,.google-signin,.application-toggle,.followup-add,.export-workspace):hover{
-  background:#403426!important;color:#fffaf2!important;
+  background:#dc602c!important;color:#fffaf2!important;
 }
 body :is(.outline-button,.college-search-result,.college-manual,.deadline-entry button,.editor-list button,.rail a,.workspace-steps a,.lesson-link,.check-option){
   background:#f5eee3!important;color:#4b3b2a!important;
@@ -139,7 +139,7 @@ body .research-evidence{
 }
 body .research-evidence :is(summary,h4,a){color:#614b35!important}
 body .research-evidence[open] summary{border-bottom-color:#d8c8af!important}
-body .cardactions button{background:#5a4a37!important;border-color:#5a4a37!important;color:#fffaf0!important}
+body .cardactions button{background:#f37336!important;border-color:#5a4a37!important;color:#fffaf0!important}
 body #discover .research-controls{
   background:#f2e8d8!important;border:1px solid #dacbb8!important;
   box-shadow:0 10px 30px rgba(89,67,42,.05)!important;
@@ -206,8 +206,8 @@ body .home-flow .journey-step.journey-started .journey-node{
   background:#e8dac6!important;border-color:#ae906c!important;color:#49392a!important;
 }
 body .home-flow :is(.journey-rail,.journey-arrow){border-color:#c7b39b!important;color:#9b805f!important}
-body .home-flow .journey-detail a.darkbtn{background:#5a4734!important;color:#fffaf0!important;border-color:#5a4734!important}
-body .home-flow .journey-detail a.darkbtn:hover{background:#3e3023!important;color:#fffaf0!important}
+body .home-flow .journey-detail a.darkbtn{background:#f37336!important;color:#fffaf0!important;border-color:#5a4734!important}
+body .home-flow .journey-detail a.darkbtn:hover{background:#dc602c!important;color:#fffaf0!important}
 body .hero :is(.hero-caption,.hero-kicker,.hero-note,.eyebrow){color:#685546!important}
 
 /* Replace forest fill on high-priority panels, including profile-specific selectors. */
@@ -282,23 +282,23 @@ body .research-card :is(.research-evidence,.research-evidence summary,.research-
   color:#5b4835!important;
 }
 body .cardactions button,body .research-card .cardactions button{
-  background:#5a4734!important;border-color:#5a4734!important;color:#fffaf1!important;
+  background:#f37336!important;border-color:#5a4734!important;color:#fffaf1!important;
 }
-body .cardactions button:hover{background:#413225!important}
+body .cardactions button:hover{background:#dc602c!important}
 
 /* Remaining common dark-forest buttons and forms. */
 body :is(.followup-add,.application-toggle,.export-workspace,.google-signin,.primary-button,.primary-cta,.button,.darkbtn,button.primary-button){
-  background:#574634!important;border-color:#574634!important;color:#fffaf0!important;
+  background:#f37336!important;border-color:#574634!important;color:#fffaf0!important;
 }
 body :is(.followup-add,.application-toggle,.export-workspace,.google-signin,.primary-button,.primary-cta,.button,.darkbtn,button.primary-button) :is(span,strong,b,small,i,em){
   color:#fffaf0!important;
 }
 body :is(.followup-add,.application-toggle,.export-workspace,.google-signin,.primary-button,.primary-cta,.button,.darkbtn):hover{
-  background:#403225!important;border-color:#403225!important;color:#fffaf0!important;
+  background:#dc602c!important;border-color:#403225!important;color:#fffaf0!important;
 }
 body .hero .primary-cta,body .hero .primary-cta :is(span,strong,b){color:#fffaf0!important}
 body [role="button"]:not(.college-search-result){
-  background:#594836!important;color:#fffaf0!important;border-color:#594836!important;
+  background:#f37336!important;color:#fffaf0!important;border-color:#594836!important;
 }
 body :is(.milestone select,.application-header select,.formgrid input,.formgrid select,.formgrid textarea,.followup-controls select,.followup-controls button){
   background:#fffdf8!important;color:#423529!important;border-color:#d9cbb8!important;
@@ -321,7 +321,7 @@ body .bdesh-analytics-consent button{
   background:#f3e8d8!important;color:#4e3b2a!important;border-color:#ccb699!important;
 }
 body .bdesh-analytics-consent button:last-child{
-  background:#584634!important;color:#fffaf0!important;border-color:#584634!important;
+  background:#f37336!important;color:#fffaf0!important;border-color:#584634!important;
 }
 body .bdesh-analytics-consent button:focus-visible{outline-color:#aa865d!important}
 
@@ -742,4 +742,231 @@ html body .trust-links :is(a,span),html body footer :is(a,span){color:#776d65!im
   html body :is(.hero-copy,.journey-detail,.research-card,.application-card,.lesson-content){
     background:#fffdfa!important;backdrop-filter:none!important;
   }
+}
+
+
+/* V5: shared typography, alignment and overflow corrections.
+   Keep this section after theme color rules. No markup or JS behavior changes. */
+html body{
+  --ink:#5c5854;
+  --secondary:#77716c;
+  --reading-ink:#5b5652;
+  --reading-muted:#77716c;
+  --forest-text:#5b5652;
+  --forest-muted:#77716c;
+  --accent:#f37336;
+}
+html body :is(.main,.hero-copy,.journey-detail,.home-flow-head,.learn-first,
+  .action-plan,.deadline-center,.application-card,.research-card,.profile-panel,
+  .lesson-content,.entry-card,.college-search,.editor-form){
+  min-width:0;
+  max-width:100%;
+}
+html body :is(.main,.hero-copy,.journey-detail,.home-flow-head,.learn-first,
+  .action-plan,.deadline-center,.application-card,.research-card,.profile-panel,
+  .lesson-content,.entry-card,.college-search,.editor-form)
+  :is(h1,h2,h3,h4,p,li,span,strong,label,small,a,summary){
+  max-width:100%;
+  overflow-wrap:anywhere;
+}
+html body :is(.main,.hero-copy,.journey-detail,.lesson-content,.research-card,.profile-panel)
+  :is(h1,h2,h3,h4){line-height:1.17}
+html body :is(.main,.hero-copy,.journey-detail,.lesson-content,.research-card,.profile-panel)
+  :is(p,li){line-height:1.65}
+html body :is(.section-heading,.section-intro,.research-card,.entry-card,
+  .application-card,.journey-detail) :is(h2,h3,h4,p){text-align:left}
+html body .main .intro,
+html body .main .learn-first{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:space-between;
+  align-items:center;
+  gap:clamp(18px,2.5vw,30px);
+}
+html body .main :is(.intro,.learn-first)>div:first-child{
+  flex:1 1 390px;
+  min-width:0;
+}
+html body .main .intro .workspace-account-tools{
+  display:flex;
+  align-items:center;
+  justify-content:flex-start;
+  gap:12px;
+  flex-wrap:wrap;
+  margin-left:auto;
+  min-width:0;
+}
+html body .main .intro .sync{
+  flex:0 1 230px;
+  min-width:0;
+  max-width:260px;
+  display:flex;
+  align-items:center;
+  overflow-wrap:anywhere;
+}
+html body .main :is(.action-plan-heading,.deadline-heading,.application-header,
+  .section-heading,.application-board-tools,.college-lookup-head){
+  display:flex;
+  align-items:flex-start;
+  flex-wrap:wrap;
+  gap:clamp(13px,2vw,25px);
+  justify-content:space-between;
+}
+html body .main :is(.action-plan-heading,.deadline-heading,.application-header,
+  .section-heading,.college-lookup-head)>div:first-child{
+  min-width:0;
+  flex:1 1 350px;
+}
+html body .main .action-plan .next-action{
+  display:grid;
+  grid-template-columns:34px minmax(0,1fr) auto;
+  align-items:center;
+  gap:12px 18px;
+  min-width:0;
+  padding:19px 18px!important;
+}
+html body .main .action-plan .next-action>div{
+  min-width:0;
+}
+html body .main .action-plan .next-action :is(h3,p){
+  margin:0;
+  max-width:100%;
+  line-height:1.5;
+}
+html body .main .action-plan .next-action h3{margin-bottom:5px}
+html body .main .action-plan .next-action>a{
+  display:inline-flex;
+  justify-self:end;
+  align-items:center;
+  text-align:center;
+  white-space:normal;
+  line-height:1.4;
+  max-width:100%;
+  min-width:0;
+}
+html body .main .deadline-center .deadline-entry{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto auto;
+  gap:12px 18px;
+  align-items:center;
+}
+html body .main .deadline-center .deadline-entry>div{min-width:0}
+html body .main .deadline-center .deadline-entry button{
+  justify-self:end;
+  max-width:100%;
+}
+html body :is(.research-card .cardactions,.application-header,.application-footer,
+  .entry-head,.entry-actions,.formactions,.editor-actions,.review-actions){
+  display:flex;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:12px;
+}
+html body .research-card .cardactions{margin-top:12px}
+html body .research-card .research-evidence{
+  min-width:0;
+  width:100%;
+  max-width:100%;
+  overflow-x:auto;
+}
+html body .research-card .research-evidence :is(a,p,li,summary){
+  overflow-wrap:anywhere;
+  word-break:break-word;
+}
+html body :is(.metrics,.formgrid,.field-grid,.entry-grid,
+  .deadline-summary,.mini-checklist,.review-summary)>*{min-width:0}
+html body :is(.profile-form,.paper-form,.add-app,.editor-form,.formgrid,.field-grid,.entry-grid)
+  :is(input,textarea,select){min-width:0;max-width:100%;box-sizing:border-box}
+html body :is(.profile-form,.paper-form,.add-app,.editor-form,.formgrid,.field-grid,.entry-grid)
+  label{min-width:0;line-height:1.5;overflow-wrap:anywhere}
+html body :is(.darkbtn,.primary-cta,.primary-button,.button,.outline-button,
+  .google-signin,.application-toggle,.export-workspace,.journey-link,
+  .college-search-result,.college-manual,.cardactions button){
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  box-sizing:border-box;
+  max-width:100%;
+  min-width:0;
+  min-height:44px;
+  padding:11px 16px;
+  line-height:1.4;
+  white-space:normal;
+  text-align:center;
+  overflow-wrap:anywhere;
+}
+html body .main .milestone{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+}
+html body .main .milestone>div:first-child{min-width:0;flex:1 1 350px}
+html body .main .milestone select{flex:0 1 180px;max-width:100%}
+html body .home-flow .journey-progress{text-align:center}
+html body .home-flow .journey-progress>*{min-width:0;max-width:100%}
+html body .home-flow .journey-ring{margin-inline:auto}
+html body .research-card .research-verification[data-review-state="verified"]{
+  background:#fff1e7!important;
+  border:1px solid #f1ceb8!important;
+  color:#bd5729!important;
+}
+html body #profile-app #profile-nav button.active,
+html body #profile-app .completion-track span,
+html body .curriculum :is(.bar span,.reading-progress span),
+html body .reader .reading-progress span{
+  background:#f37336!important;
+}
+html body #profile-app #profile-nav button.active{
+  background:#fff1e7!important;
+  color:#bd5729!important;
+}
+html body .main .insight{
+  background:#fff7f1!important;
+  color:#716a65!important;
+  border-left:3px solid #f6ba94!important;
+}
+html body .main .insight :is(p,span,strong){color:#716a65!important}
+html body .sidebar-head,html body .curriculum .aside-progress{
+  background:#fffaf5!important;
+  border-color:#e9e0d7!important;
+}
+html body :is(.reading-section,.lesson-content) :is(.takeaway,.example,.example-row,.application-flow){
+  background:#fffaf5!important;
+  background-image:none!important;
+  color:#68615c!important;
+  border-color:#eaded3!important;
+}
+@media(max-width:760px){
+  html body .main :is(.intro,.learn-first){align-items:stretch}
+  html body .main .intro .workspace-account-tools{width:100%;margin-left:0}
+  html body .main .intro .sync{max-width:100%;flex:1 1 180px}
+  html body .main .action-plan .next-action{
+    grid-template-columns:30px minmax(0,1fr);
+    padding:16px 12px!important;
+    gap:7px 12px;
+  }
+  html body .main .action-plan .next-action>a{
+    grid-column:2;
+    justify-self:start;
+    margin-top:6px;
+  }
+  html body .main .deadline-center .deadline-entry{
+    grid-template-columns:minmax(0,1fr) auto;
+  }
+  html body .main .deadline-center .deadline-entry button{
+    grid-column:1/-1;
+    justify-self:start;
+  }
+  html body .main .milestone{flex-wrap:wrap;align-items:stretch}
+  html body .main .milestone select{flex:1 1 100%;width:100%}
+  html body .home-flow .journey-detail a.journey-link{max-width:100%}
+  html body .entry-head{align-items:flex-start}
+}
+@media(max-width:420px){
+  html body .main :is(.intro,.learn-first){padding:18px!important}
+  html body .main .action-plan .next-action{grid-template-columns:25px minmax(0,1fr)}
+  html body .research-card .cardactions{align-items:stretch}
+  html body .research-card .cardactions button{width:100%}
 }
