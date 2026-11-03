@@ -1,6 +1,6 @@
 /* Bdesh editorial readability pass — 2026-11. Shared non-destructive overrides.
    Keep brand palette and existing app logic; improve reading comfort and hierarchy. */
-:root{--reading-ink:#696460;--reading-muted:#696460;--reading-border:#e7d8ca}
+:root{--reading-ink:#6A737A;--reading-muted:#6A737A;--reading-border:#e7d8ca}
 html{font-size:16px;-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility}
 body{font-size:16px;line-height:1.65;letter-spacing:0}
 p,li{overflow-wrap:break-word}
@@ -8,7 +8,7 @@ button,input,select,textarea{font-size:inherit}
 button,a,input,select,textarea{touch-action:manipulation}
 :where(button,a,input,select,textarea):focus-visible{outline:3px solid #bd824f;outline-offset:3px}
 :where(input,select,textarea){min-height:42px}
-:where(input,select,textarea)::placeholder{color:#696460;opacity:1}
+:where(input,select,textarea)::placeholder{color:#6A737A;opacity:1}
 :where(.eyebrow,.course-label,.kicker,.chapter-id,.lesson-eyebrow,.section-serial,.reading-time,.header-center,.top-middle){font-size:12px;line-height:1.5;letter-spacing:.075em}
 :where(.lesson-content,.reader,.content,.main,.hero-copy,.section){color:var(--reading-ink)}
 :where(.section-head p,.hero-copy>p,.journey-heading>p,.journey-card p,.learn-first p,.reading-section p,.lesson-lead,.section-heading p,.side p,.sidebar-head p,.profile-panel p,.milestone p,.opportunity p,.guide-bottom,.privacy-note,.advice-strip p){font-size:clamp(15px,1.1vw,17px);line-height:1.75;color:var(--reading-muted)}
@@ -44,7 +44,7 @@ body :is(.check-option,.check-feedback,.check-top,.copy-field){font-size:14px!im
 @media(max-width:600px){body :is(.nav-actions .darkbtn,.nav-actions .outline){font-size:12px!important;padding:10px 12px}}
 
 /* Keyboard users can bypass repeating navigation without affecting the visual layout. */
-.skip-link{position:fixed;z-index:9999;left:16px;top:12px;padding:12px 18px;border:2px solid #e7d8ca;border-radius:3px;background:#fffefa;color:#696460;font-weight:700;font-size:15px;transform:translateY(-180%);transition:transform .15s ease}
+.skip-link{position:fixed;z-index:9999;left:16px;top:12px;padding:12px 18px;border:2px solid #e7d8ca;border-radius:3px;background:#fffefa;color:#6A737A;font-weight:700;font-size:15px;transform:translateY(-180%);transition:transform .15s ease}
 .skip-link:focus{transform:translateY(0)}
 /* Keep nav usable on narrow screens instead of hiding every primary destination. */
 @media(min-width:601px) and (max-width:880px){
@@ -59,7 +59,7 @@ body .nav.shell nav a{white-space:nowrap}
 }
 
 /* Bdesh 2 — visible editorial redesign. Hierarchy over ornamental UI. */
-:root{--editorial-bg:#f5f3e9;--editorial-paper:#fffdf6;--editorial-ink:#696460;--editorial-accent:#ae744d;--editorial-rule:#e7d8ca}
+:root{--editorial-bg:#f5f3e9;--editorial-paper:#fffdf6;--editorial-ink:#6A737A;--editorial-accent:#ae744d;--editorial-rule:#e7d8ca}
 body{background:var(--editorial-bg);color:var(--editorial-ink)}
 body :is(.hero h1,.journey-heading h2,.section-head h2,.section-intro h2,.section-heading h2,.lesson-content h1,.sidebar-head h1,.side h1){font-family:'Playfair Display',Georgia,serif;letter-spacing:-.04em;line-height:1.12}
 body .hero h1{font-size:clamp(53px,6.3vw,96px);max-width:760px}
@@ -73,7 +73,7 @@ body .journey-card{border:0;border-right:1px solid var(--editorial-rule);border-
 body .journey-card:last-child{border-right:0}
 body .journey-card:hover{background:#fffcf8}
 body .journey-card h3{font-size:clamp(25px,2vw,32px);line-height:1.24}
-body .journey-card p{font-size:16px!important;color:#696460!important}
+body .journey-card p{font-size:16px!important;color:#6A737A!important}
 body .journey-num{font-size:15px}
 body .journey-num span{font-size:12px}
 body .section{padding-top:clamp(68px,7vw,108px);padding-bottom:clamp(68px,7vw,108px)}
@@ -107,34 +107,34 @@ body .section-intro h2{font-size:clamp(39px,4vw,61px)}
 .action-plan{margin:32px 0 45px;border-top:2px solid #e7d8ca;padding-top:23px}
 .action-plan-heading{display:flex;justify-content:space-between;gap:25px;align-items:end;margin-bottom:22px}
 .action-plan-heading h2{font:500 clamp(29px,3vw,43px)/1.16 'Playfair Display',Georgia,serif;letter-spacing:-.035em;margin:9px 0}
-.action-plan-heading p{font-size:15px;line-height:1.65;color:#696460;max-width:62ch;margin:0}
+.action-plan-heading p{font-size:15px;line-height:1.65;color:#6A737A;max-width:62ch;margin:0}
 .action-plan-link{font-size:14px;font-weight:700;text-decoration:underline;white-space:nowrap}
 .next-actions{border-top:1px solid #e7d8ca}
 .next-action{display:grid;grid-template-columns:40px minmax(0,1fr) auto;gap:16px;align-items:center;border-bottom:1px solid #e7d8ca;padding:20px 7px}
-.next-action-number{font:500 20px 'Playfair Display',Georgia,serif;color:#af8058}
+.next-action-number{font:500 20px 'Playfair Display',Georgia,serif;color:#D96B38}
 .next-action h3{font-size:18px;font-weight:650;margin:0 0 5px;line-height:1.35}
-.next-action p{font-size:15px!important;line-height:1.6;margin:0;color:#696460}
+.next-action p{font-size:15px!important;line-height:1.6;margin:0;color:#6A737A}
 .next-action a{font-size:14px;font-weight:700;border-bottom:1px solid currentColor;white-space:nowrap}
 @media(max-width:680px){.action-plan-heading{display:block}.action-plan-link{display:inline-block;margin-top:14px}.next-action{grid-template-columns:30px minmax(0,1fr);gap:8px 12px}.next-action a{grid-column:2;justify-self:start;margin-top:5px}.next-action h3{font-size:17px}}
 
 /* University funding explorer: intentionally transparent research filters. */
 .research-controls{display:flex;gap:18px;flex-wrap:wrap;align-items:end}
 .research-controls label{display:grid;gap:6px;font-size:14px;font-weight:700}
-.research-controls select{min-width:185px;padding:11px 12px;border:1px solid #e7d8ca;background:#fffdf8;color:#696460;border-radius:3px;font-size:15px}
-.research-caution{margin:18px 0 8px;padding:19px 22px;border:1px solid rgba(231,216,202,.26);border-left:3px solid #e7d8ca;border-radius:12px;background:rgba(255,244,235,.87);font-size:15px;line-height:1.65;color:#696460}
-.research-count{font-size:14px;font-weight:700;color:#696460;margin:15px 0}
+.research-controls select{min-width:185px;padding:11px 12px;border:1px solid #e7d8ca;background:#fffdf8;color:#6A737A;border-radius:3px;font-size:15px}
+.research-caution{margin:18px 0 8px;padding:19px 22px;border:1px solid rgba(231,216,202,.26);border-left:3px solid #e7d8ca;border-radius:12px;background:rgba(255,244,235,.87);font-size:15px;line-height:1.65;color:#6A737A}
+.research-count{font-size:14px;font-weight:700;color:#6A737A;margin:15px 0}
 
 /* Homepage journey: one clear primary action, then sequenced next steps. */
 .homepage-reading{padding-top:70px;padding-bottom:80px}
 .reading-intro{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(270px,.65fr);gap:clamp(28px,6vw,105px);align-items:center;background:#fffcf8;border-top:3px solid #e7d8ca;padding:clamp(28px,5vw,70px)}
 .reading-intro h2{font:500 clamp(38px,4.2vw,64px)/1.12 'Playfair Display',Georgia,serif;letter-spacing:-.04em;margin:17px 0 22px;text-wrap:balance}
-.reading-intro h2 em{color:#a77957}
-.reading-intro-copy>p{font-size:18px!important;line-height:1.72!important;max-width:59ch;color:#696460}
+.reading-intro h2 em{color:#D96B38}
+.reading-intro-copy>p{font-size:18px!important;line-height:1.72!important;max-width:59ch;color:#6A737A}
 .reading-cta{display:inline-flex!important;font-size:16px!important;min-height:52px!important;margin:18px 0 12px;padding:15px 25px!important}
-.reading-meta{display:block;color:#696460;font-size:13px;font-weight:600}
+.reading-meta{display:block;color:#6A737A;font-size:13px;font-weight:600}
 .reading-intro-note{padding:28px 0 28px 32px;border-left:1px solid #e7d8ca}
-.reading-intro-note>span{font-size:12px;letter-spacing:.12em;font-weight:700;color:#696460}
-.reading-intro-note p{border-bottom:1px solid #e7d8ca;padding:12px 0;font-size:15px!important;margin:0;line-height:1.5;color:#696460}
+.reading-intro-note>span{font-size:12px;letter-spacing:.12em;font-weight:700;color:#6A737A}
+.reading-intro-note p{border-bottom:1px solid #e7d8ca;padding:12px 0;font-size:15px!important;margin:0;line-height:1.5;color:#6A737A}
 body .journey-grid{grid-template-columns:repeat(5,minmax(0,1fr))}
 body .journey-card{padding:26px 15px 30px;min-height:325px}
 body .journey-card h3{font-size:clamp(22px,1.65vw,29px)}
@@ -154,20 +154,20 @@ body .hero-copy>p{max-width:67ch}
 .home-flow{padding-top:clamp(42px,6vw,90px);padding-bottom:clamp(65px,8vw,120px);border-top:1px solid #e7d8ca}
 .home-flow-head{display:grid;grid-template-columns:minmax(0,1fr) 215px;gap:40px;align-items:center;margin-bottom:55px}
 .home-flow-head h2{font:500 clamp(42px,4.5vw,72px)/1.1 'Playfair Display',Georgia,serif;letter-spacing:-.045em;margin:15px 0 19px}
-.home-flow-head h2 em{color:#a57954}
-.home-flow-head>div>p{font-size:18px;line-height:1.7;color:#696460;max-width:64ch}
+.home-flow-head h2 em{color:#D96B38}
+.home-flow-head>div>p{font-size:18px;line-height:1.7;color:#6A737A;max-width:64ch}
 .journey-progress{text-align:center}
 .journey-ring{--journey-percent:0%;width:170px;height:170px;border-radius:50%;background:conic-gradient(#fff4eb var(--journey-percent),#fff9f4 0);padding:12px;display:grid;place-items:center;margin:0 auto}
 .journey-ring-inner{width:100%;height:100%;border-radius:50%;background:#f5f3e9;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px}
-.journey-ring-inner strong{font:500 48px/1 'Playfair Display',Georgia,serif;color:#696460}
-.journey-ring-inner strong span{font:500 21px 'DM Sans',sans-serif;color:#696460}
-.journey-ring-inner small{font-size:12px;color:#696460;font-weight:700;letter-spacing:.02em}
-.journey-progress>p{font-size:13px;line-height:1.55;color:#696460;margin:15px auto 0;max-width:210px}
+.journey-ring-inner strong{font:500 48px/1 'Playfair Display',Georgia,serif;color:#6A737A}
+.journey-ring-inner strong span{font:500 21px 'DM Sans',sans-serif;color:#6A737A}
+.journey-ring-inner small{font-size:12px;color:#6A737A;font-weight:700;letter-spacing:.02em}
+.journey-progress>p{font-size:13px;line-height:1.55;color:#6A737A;margin:15px auto 0;max-width:210px}
 .vertical-journey{max-width:990px;margin:0 auto}
 .journey-step{display:grid;grid-template-columns:90px minmax(0,1fr);gap:28px;min-height:220px}
 .journey-rail{display:flex;flex-direction:column;align-items:center}
-.journey-node{border:2px solid #e7d8ca;border-radius:50%;width:64px;height:64px;display:grid;place-items:center;background:#f5f3e9;font:600 21px 'Playfair Display',Georgia,serif;color:#696460;flex-shrink:0}
-.journey-arrow{color:#696460;display:flex;align-items:center;justify-content:center;flex:1;min-height:72px;font-size:37px;font-weight:300;line-height:1;position:relative}
+.journey-node{border:2px solid #e7d8ca;border-radius:50%;width:64px;height:64px;display:grid;place-items:center;background:#f5f3e9;font:600 21px 'Playfair Display',Georgia,serif;color:#6A737A;flex-shrink:0}
+.journey-arrow{color:#6A737A;display:flex;align-items:center;justify-content:center;flex:1;min-height:72px;font-size:37px;font-weight:300;line-height:1;position:relative}
 .journey-arrow:before{content:"";position:absolute;top:0;bottom:4px;border-left:1px solid #e7d8ca;z-index:0}
 .journey-arrow{isolation:isolate}
 .journey-arrow:after{content:none;display:none}
@@ -176,11 +176,11 @@ body .hero-copy>p{max-width:67ch}
 .journey-step:last-child .journey-detail{border:0}
 .journey-tag{display:block;font-size:12px;font-weight:700;letter-spacing:.1em;color:#d56430;margin-bottom:11px}
 .journey-detail h3{font:500 clamp(27px,2.8vw,40px)/1.22 'Playfair Display',Georgia,serif;letter-spacing:-.025em;margin:0 0 12px}
-.journey-detail p{font-size:17px!important;line-height:1.75!important;max-width:68ch;color:#696460}
+.journey-detail p{font-size:17px!important;line-height:1.75!important;max-width:68ch;color:#6A737A}
 .journey-detail .darkbtn{font-size:16px!important;min-height:52px;margin-top:10px}
 .journey-foot{font-size:13px!important;margin:13px 0 0}
-.journey-link{display:inline-flex;font-size:16px;font-weight:700;border-bottom:1px solid #e7d8ca;padding-bottom:5px;margin-top:10px;color:#696460}
-.flow-disclaimer{max-width:780px;margin:0 auto;font-size:13px;line-height:1.7;color:#696460}
+.journey-link{display:inline-flex;font-size:16px;font-weight:700;border-bottom:1px solid #e7d8ca;padding-bottom:5px;margin-top:10px;color:#6A737A}
+.flow-disclaimer{max-width:780px;margin:0 auto;font-size:13px;line-height:1.7;color:#6A737A}
 body .nav.shell nav{gap:20px}
 @media(max-width:720px){.home-flow-head{grid-template-columns:1fr;gap:20px;margin-bottom:38px}.journey-progress{display:flex;align-items:center;text-align:left;gap:20px}.journey-ring{width:122px;height:122px;padding:9px;margin:0;flex-shrink:0}.journey-ring-inner strong{font-size:34px}.journey-ring-inner strong span{font-size:16px}.journey-progress>p{margin:0;max-width:260px}.journey-step{grid-template-columns:56px minmax(0,1fr);gap:16px;min-height:180px}.journey-node{width:48px;height:48px;font-size:17px}.journey-detail{padding-bottom:36px}.journey-detail h3{font-size:28px}.journey-detail p{font-size:16px!important}.home-flow-head h2{font-size:44px}}
 @media(max-width:440px){.journey-progress{flex-direction:column;align-items:flex-start;gap:12px}.journey-progress>p{max-width:none}.home-flow-head h2{font-size:39px}.journey-tag{letter-spacing:.05em}}
@@ -194,18 +194,18 @@ body .footer b{font-size:36px}
 .followup-tracker{margin-top:22px;padding-top:21px;border-top:1px solid #e7d8ca}
 .followup-heading{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap}
 .followup-heading h4{font:500 clamp(21px,2vw,27px)/1.25 'Playfair Display',Georgia,serif;margin:0}
-.followup-heading span{font-size:13px;font-weight:700;color:#696460}
-.followup-info{font-size:14px!important;line-height:1.65;color:#696460;margin:8px 0 15px}
+.followup-heading span{font-size:13px;font-weight:700;color:#6A737A}
+.followup-info{font-size:14px!important;line-height:1.65;color:#6A737A;margin:8px 0 15px}
 .followup-items{border-top:1px solid #e7d8ca}
 .followup-item{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:15px;padding:15px 0;border-bottom:1px solid #e7d8ca;align-items:center}
 .followup-item strong{display:block;font-size:16px;line-height:1.4}
-.followup-item p{font-size:13px;margin:3px 0 0;color:#696460}
+.followup-item p{font-size:13px;margin:3px 0 0;color:#6A737A}
 .followup-controls{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
-.followup-controls select,.followup-controls button{font-size:13px;padding:9px 10px;border:1px solid #e7d8ca;border-radius:3px;background:#fffefa;color:#696460}
+.followup-controls select,.followup-controls button{font-size:13px;padding:9px 10px;border:1px solid #e7d8ca;border-radius:3px;background:#fffefa;color:#6A737A}
 .followup-controls button{cursor:pointer}
 .followup-controls .danger{color:#9d473d}
-.followup-add{margin-top:15px;padding:11px 14px;border:1px solid #e7d8ca;border-radius:3px;background:transparent;color:#696460;font-size:14px;font-weight:700;cursor:pointer}
-.followup-empty{font-size:14px!important;padding:15px 0;color:#696460}
+.followup-add{margin-top:15px;padding:11px 14px;border:1px solid #e7d8ca;border-radius:3px;background:transparent;color:#6A737A;font-size:14px;font-weight:700;cursor:pointer}
+.followup-empty{font-size:14px!important;padding:15px 0;color:#6A737A}
 .followup-form{margin-top:16px;padding:19px;background:#fffcf8;border:1px solid #e7d8ca;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}
 .followup-form[hidden]{display:none!important}
 .followup-form label{display:flex;flex-direction:column;gap:5px;font-size:14px;font-weight:600}
@@ -218,15 +218,15 @@ body .footer b{font-size:36px}
 .college-search{margin:22px 0;padding:22px;background:#fffcf8;border:1px solid #e7d8ca;border-radius:3px}
 .college-search>label{display:block;font-weight:700;font-size:16px;margin-bottom:9px}
 .college-search>input{display:block;width:100%;padding:14px 15px;border:1px solid #e7d8ca;border-radius:3px;background:#fffdf7;font-size:17px;min-height:52px}
-.college-search>p{margin:9px 0 14px;color:#696460;font-size:14px;line-height:1.6}
+.college-search>p{margin:9px 0 14px;color:#6A737A;font-size:14px;line-height:1.6}
 .college-search-results{display:grid;gap:7px}
-.college-search-results>p{font-size:14px;margin:6px 0;color:#696460}
-.college-search-result{display:flex;justify-content:space-between;align-items:center;gap:14px;text-align:left;background:#fffef8;border:1px solid #e7d8ca;border-radius:3px;padding:13px 16px;cursor:pointer;color:#696460;min-height:52px}
+.college-search-results>p{font-size:14px;margin:6px 0;color:#6A737A}
+.college-search-result{display:flex;justify-content:space-between;align-items:center;gap:14px;text-align:left;background:#fffef8;border:1px solid #e7d8ca;border-radius:3px;padding:13px 16px;cursor:pointer;color:#6A737A;min-height:52px}
 .college-search-result:hover,.college-search-result:focus-visible{background:#fffcf8;border-color:#e7d8ca}
 .college-search-result strong{font-size:16px;font-weight:700}
-.college-search-result span{font-size:13px;color:#696460}
+.college-search-result span{font-size:13px;color:#6A737A}
 .college-manual{width:max-content;max-width:100%;background:#fff4eb;color:white;font-size:15px;padding:12px 17px;border:0;border-radius:3px;cursor:pointer}
-.college-chosen{font-weight:700!important;color:#696460!important}
+.college-chosen{font-weight:700!important;color:#6A737A!important}
 #cancel-college-selection{padding:10px 14px;border:1px solid #e7d8ca;border-radius:3px;background:transparent;font-size:14px;cursor:pointer;margin-left:10px}
 #application-form[hidden]{display:none!important}
 @media(max-width:620px){.college-search{padding:16px}.college-search-result{align-items:flex-start;flex-direction:column;gap:2px}#cancel-college-selection{margin-left:0;margin-top:8px}}
@@ -252,7 +252,7 @@ body .footer b{font-size:36px}
 /* Compact collapsible university applications */
 #apply .application-header{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
 #apply .application-header>div:first-child{flex:1 1 270px;min-width:0}
-#apply .application-header .application-toggle{border:1px solid #e7d8ca;background:#fffdfa;color:#696460;font-size:15px;font-weight:700;min-height:45px;padding:10px 15px;border-radius:3px;cursor:pointer;white-space:nowrap}
+#apply .application-header .application-toggle{border:1px solid #e7d8ca;background:#fffdfa;color:#6A737A;font-size:15px;font-weight:700;min-height:45px;padding:10px 15px;border-radius:3px;cursor:pointer;white-space:nowrap}
 #apply .application-header .application-toggle:hover{background:#fffcf8}
 #apply .application-details[hidden]{display:none!important}
 #apply .application-details{padding-top:18px}
@@ -263,12 +263,12 @@ body .footer b{font-size:36px}
 .deadline-center{margin:35px 0 52px;padding:30px 0;border-top:2px solid #e7d8ca;border-bottom:1px solid #e7d8ca}
 .deadline-heading{display:flex;justify-content:space-between;align-items:end;gap:22px}
 .deadline-heading h2{font:500 clamp(30px,3vw,44px)/1.18 'Playfair Display',Georgia,serif;letter-spacing:-.025em;margin:8px 0 12px}
-.deadline-heading p{font-size:16px;line-height:1.65;color:#696460;max-width:65ch;margin:0}
+.deadline-heading p{font-size:16px;line-height:1.65;color:#6A737A;max-width:65ch;margin:0}
 .deadline-link{font-size:14px;font-weight:700;white-space:nowrap;border-bottom:1px solid currentColor}
 .deadline-summary{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:23px 0}
 .deadline-summary>div{display:flex;flex-direction:column;gap:4px;padding:21px;background:#fffcf8;border:1px solid #e7d8ca}
-.deadline-summary strong{font:500 clamp(31px,3vw,42px)/1.2 'Playfair Display',Georgia,serif;color:#696460}
-.deadline-summary span{font-size:14px;color:#696460;font-weight:600}
+.deadline-summary strong{font:500 clamp(31px,3vw,42px)/1.2 'Playfair Display',Georgia,serif;color:#6A737A}
+.deadline-summary span{font-size:14px;color:#6A737A;font-weight:600}
 .deadline-filters{margin:20px 0}
 .deadline-filters label{display:flex;align-items:center;gap:13px;flex-wrap:wrap;font-size:15px;font-weight:700}
 .deadline-filters select{font-size:15px;border:1px solid #e7d8ca;border-radius:3px;background:#fffdf6;padding:11px 13px;min-height:44px}
@@ -276,19 +276,19 @@ body .footer b{font-size:36px}
 .deadline-entry{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:19px;align-items:center;padding:18px 8px;border-bottom:1px solid #e7d8ca}
 .deadline-entry>div{display:flex;flex-direction:column;gap:5px}
 .deadline-entry strong{font-size:17px;line-height:1.45}
-.deadline-entry>div>span{font-size:14px;color:#696460}
-.deadline-due{font-size:14px;font-weight:700;color:#696460}
+.deadline-entry>div>span{font-size:14px;color:#6A737A}
+.deadline-due{font-size:14px;font-weight:700;color:#6A737A}
 .deadline-due.is-overdue{color:#a44740}
-.deadline-entry button{font-size:14px;font-weight:700;border:1px solid #e7d8ca;border-radius:3px;background:#fffdf8;padding:10px 13px;color:#696460;cursor:pointer}
+.deadline-entry button{font-size:14px;font-weight:700;border:1px solid #e7d8ca;border-radius:3px;background:#fffdf8;padding:10px 13px;color:#6A737A;cursor:pointer}
 .deadline-entry button:hover{background:#f37336}
-.deadline-empty{padding:18px 4px;color:#696460;font-size:15px}
+.deadline-empty{padding:18px 4px;color:#6A737A;font-size:15px}
 @media(max-width:700px){.deadline-heading{display:block}.deadline-link{display:inline-block;margin-top:15px}.deadline-entry{grid-template-columns:minmax(0,1fr) auto;gap:9px}.deadline-entry button{grid-column:1/-1;justify-self:start}.deadline-summary>div{padding:13px}.deadline-summary span{font-size:12px}}
 
 /* Student data access and college portal links. */
 .workspace-account-tools{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
-.export-workspace{font-size:14px;font-weight:700;background:transparent;border:1px solid #e7d8ca;color:#696460;border-radius:3px;min-height:42px;padding:9px 13px;cursor:pointer}
+.export-workspace{font-size:14px;font-weight:700;background:transparent;border:1px solid #e7d8ca;color:#6A737A;border-radius:3px;min-height:42px;padding:9px 13px;cursor:pointer}
 .export-workspace:hover{background:#fffcf8}
-.followup-portal{display:inline-block;font-size:14px;font-weight:700;color:#696460;text-decoration:underline;margin-top:7px}
+.followup-portal{display:inline-block;font-size:14px;font-weight:700;color:#6A737A;text-decoration:underline;margin-top:7px}
 .followup-form label:nth-of-type(3){grid-column:auto}
 .followup-form label:nth-of-type(4){grid-column:1/-1}
 @media(max-width:700px){.followup-form label:nth-of-type(4){grid-column:auto}}
@@ -298,15 +298,15 @@ body .footer b{font-size:36px}
 /* Compact and searchable college application board. */
 .application-board-tools{display:flex;align-items:end;gap:16px;flex-wrap:wrap;margin:28px 0 17px;padding:18px;background:#fffcf8;border:1px solid #e7d8ca}
 .application-board-tools label{display:grid;gap:7px;font-size:14px;font-weight:700;flex:1 1 190px}
-.application-board-tools input,.application-board-tools select{width:100%;min-height:46px;background:#fffefa;color:#696460;border:1px solid #e7d8ca;border-radius:3px;padding:10px 12px;font-size:16px}
-#application-board-count{font-size:14px;font-weight:700;color:#696460;align-self:center}
-.application-compact-summary{font-size:14px!important;line-height:1.5!important;font-weight:600;color:#696460!important;margin-top:7px}
+.application-board-tools input,.application-board-tools select{width:100%;min-height:46px;background:#fffefa;color:#6A737A;border:1px solid #e7d8ca;border-radius:3px;padding:10px 12px;font-size:16px}
+#application-board-count{font-size:14px;font-weight:700;color:#6A737A;align-self:center}
+.application-compact-summary{font-size:14px!important;line-height:1.5!important;font-weight:600;color:#6A737A!important;margin-top:7px}
 @media(max-width:700px){.application-board-tools{padding:14px;gap:11px}.application-board-tools label{flex-basis:100%}}
 
 /* Keyboard and mobile accessibility pass across the admissions workspace. */
 html{scroll-padding-top:110px}
 #apply,#prepare,#discover{scroll-margin-top:100px}
-.application-help{font-size:15px;line-height:1.7;color:#696460;margin:22px 0 5px}
+.application-help{font-size:15px;line-height:1.7;color:#6A737A;margin:22px 0 5px}
 :where(.application-board-tools,.college-search,.deadline-filters,.followup-form) :is(input,select,button):focus-visible{outline:3px solid #bd824f;outline-offset:3px}
 :where(.application-toggle,.followup-add,.college-search-result,.college-manual,.deadline-entry button){min-height:44px}
 @media(max-width:920px){
