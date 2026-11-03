@@ -5,12 +5,22 @@ const key=String(config.projectKey||'');
 const host=String(config.apiHost||'');
 const configured=/^phc_[A-Za-z0-9_-]+$/.test(key)&&/^https:\/\/(?:us|eu)\.i\.posthog\.com$/.test(host);
 const storageKey='bdesh_analytics_consent_v1';
-const validEvents=new Set(['bdesh_page_viewed','bdesh_section_viewed','bdesh_lesson_viewed','bdesh_lesson_completed','bdesh_application_added','bdesh_profile_saved']);
+const validEvents=new Set(['bdesh_diagnostic_ping','bdesh_page_viewed','bdesh_section_viewed','bdesh_lesson_viewed','bdesh_lesson_completed','bdesh_application_added','bdesh_profile_saved']);
 const validSections=new Set(['prepare','discover','apply','overview','academics','activities','honors','writing','brag','review']);
 const pages={'/':'home','/index.html':'home','/learn.html':'learn','/workspace.html':'workspace','/profile.html':'profile'};
 const page=pages[location.pathname]||null;
-let active=false,queue=[],sdkLoaded=false,sdkError='';
-window.bdeshAnalyticsDiagnostics=()=>({configured,consent:consent()||'not chosen',sdkRequested:active,sdkLoaded,sdkError});
+let active=false,queue=[],sdkLoaded=false,sdkError='',lastCapture=null,lastTransportError='';
+window.bdeshAnalyticsDiagnostics=()=>({configured,consent:consent()||'not chosen',sdkRequested:active,sdkLoaded,sdkError,lastCapture,lastTransportError});
+window.bdeshAnalyticsTestEvent=()=>{
+ if(!configured||consent()!=='yes'||!active||!sdkLoaded||!window.posthog?.capture)return {ok:false,reason:'Analytics SDK must load after explicit consent.'};
+ try{
+  window.posthog.capture('bdesh_diagnostic_ping',{});
+  return {ok:true,reason:'Browser SDK accepted the diagnostic capture call. Server ingestion still needs verification in PostHog.'};
+ }catch(error){
+  lastTransportError=String(error?.message||'capture failed');
+  return {ok:false,reason:lastTransportError};
+ }
+};
 function consent(){try{return localStorage.getItem(storageKey)}catch{return null}}
 function remember(value){try{localStorage.setItem(storageKey,value)}catch{}}
 function sanitize(name,props){
@@ -25,7 +35,7 @@ function sanitize(name,props){
 window.bdeshTrack=(name,props={})=>{
  const safe=sanitize(name,props);
  if(!safe||!configured||!active)return;
- if(window.posthog?.capture)window.posthog.capture(name,safe);
+ if(window.posthog?.capture){window.posthog.capture(name,safe);lastCapture=name;}
  else queue.push([name,safe]);
 };
 function boot(){
@@ -49,6 +59,7 @@ function boot(){
   // Do not allow any SDK-added page URL or referrer into PostHog.
   before_send:(event)=>{
    if(!validEvents.has(event?.event))return null;
+   lastCapture=event.event;
    for(const prop of ['$current_url','$referrer','$initial_referrer','$initial_current_url','$pathname','$host','$url','$referring_domain']){
     if(event.properties)delete event.properties[prop];
    }
