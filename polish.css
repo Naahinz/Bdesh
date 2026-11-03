@@ -252,7 +252,7 @@ body .footer b{font-size:36px}
 /* Compact collapsible university applications */
 #apply .application-header{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
 #apply .application-header>div:first-child{flex:1 1 270px;min-width:0}
-#apply .application-header .application-toggle{border:1px solid #e7d8ca;background:#f4f7f0;color:#696460;font-size:15px;font-weight:700;min-height:45px;padding:10px 15px;border-radius:3px;cursor:pointer;white-space:nowrap}
+#apply .application-header .application-toggle{border:1px solid #e7d8ca;background:#fffdfa;color:#696460;font-size:15px;font-weight:700;min-height:45px;padding:10px 15px;border-radius:3px;cursor:pointer;white-space:nowrap}
 #apply .application-header .application-toggle:hover{background:#fffcf8}
 #apply .application-details[hidden]{display:none!important}
 #apply .application-details{padding-top:18px}
