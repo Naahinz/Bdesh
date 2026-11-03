@@ -53,19 +53,23 @@ html body :is(a.darkbtn,.primary-cta,.button,.primary-button,.outline-button,
   overflow-wrap:anywhere!important;
   vertical-align:middle;
 }
+/* Bright tangerine CTA, high-contrast deep-slate labels (not coffee or burnt orange).
+   Dark lettering meets AA against both standard and hover orange. */
 html body :is(a.darkbtn,.primary-cta,.button,.primary-button,.google-signin,
   .cardactions button){
   background:var(--ui-orange)!important;
   border:1px solid var(--ui-orange)!important;
-  color:#697781!important;
+  color:#19242D!important;
 }
 html body :is(a.darkbtn,.primary-cta,.button,.primary-button,.google-signin,
-  .cardactions button) :is(span,strong,b,em,small){color:#697781!important}
+  .cardactions button) :is(span,strong,b,em,small,i){color:#19242D!important}
 html body :is(a.darkbtn,.primary-cta,.button,.primary-button,.google-signin,
-  .cardactions button):hover{
+  .cardactions button):hover,
+html body :is(a.darkbtn,.primary-cta,.button,.primary-button,.google-signin,
+  .cardactions button):focus-visible{
   background:var(--ui-orange-hover)!important;
   border-color:var(--ui-orange-hover)!important;
-  color:#697781!important;
+  color:#19242D!important;
 }
 html body :is(.outline-button,.journey-link,.application-toggle,.export-workspace,
  .college-manual,.deadline-entry button){
@@ -523,4 +527,29 @@ html body #discover .research-verification{
   background:#FFF5F0!important;
   color:#D94C10!important;
   border-color:#FFD9C9!important;
+}
+
+/* Final cascade fix for the higher-specificity, outdated white labels in older sheets. */
+html body .hero .primary-cta,
+html body .home-flow .journey-detail a.darkbtn,
+html body .main :is(.button,.primary-button),
+html body #discover .research-card .cardactions button,
+html body :is(.google-signin,.primary-button,.primary-cta) :is(span,strong,b,em,small,i),
+html body .hero .primary-cta :is(span,strong,b),
+html body .main :is(.button,.primary-button) :is(span,strong,b){
+  color:#19242D!important;
+}
+html body .hero .primary-cta,
+html body .home-flow .journey-detail a.darkbtn,
+html body .main :is(.button,.primary-button),
+html body #discover .research-card .cardactions button{
+  background:#FF7134!important;
+  border-color:#FF7134!important;
+}
+html body .hero .primary-cta:hover,
+html body .home-flow .journey-detail a.darkbtn:hover,
+html body .main :is(.button,.primary-button):hover,
+html body #discover .research-card .cardactions button:hover{
+  background:#ED5B22!important;
+  border-color:#ED5B22!important;
 }
