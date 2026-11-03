@@ -84,12 +84,16 @@ const us=window.BDESH_US_COURSE;
 if(us){lessons[0]=us.welcome;lessons.splice(3,0,us.platform,us.holistic,us.sat);for(const lesson of lessons){if(!['welcome','platform','holistic','sat101'].includes(lesson.id))lesson.lead+=' This chapter explains U.S. undergraduate admissions; specific colleges set their own rules.';}}
 if(window.BDESH_US_DETAILS){for(const lesson of lessons){const details=window.BDESH_US_DETAILS[lesson.id];if(details)lesson.sections.push(...details);}}
 const $=id=>document.getElementById(id);
-const storageKey='bdesh-learning-v1',state=(()=>{
- try{const raw=JSON.parse(localStorage.getItem(storageKey)||'{}');return {done:new Set(Array.isArray(raw.done)?raw.done.filter(x=>lessons.some(l=>l.id===x)):[]),current:lessons.some(l=>l.id===raw.current)?raw.current:lessons[0].id}}catch{return {done:new Set(),current:lessons[0].id}}
-})();
+// Anonymous reading data is retained separately from authenticated students.
+// No anonymous/previous-account progress is copied to a new account.
+const storageKeyFor=id=>id?'bdesh-learning-v1-user-'+id:'bdesh-learning-v1';
+const readState=id=>{
+ try{const raw=JSON.parse(localStorage.getItem(storageKeyFor(id))||'{}');return {done:new Set(Array.isArray(raw.done)?raw.done.filter(x=>lessons.some(l=>l.id===x)):[]),current:lessons.some(l=>l.id===raw.current)?raw.current:lessons[0].id}}catch{return {done:new Set(),current:lessons[0].id}}
+};
+const state=readState(null);
 let current=lessons.findIndex(l=>l.id===state.current),answered=false,cloudUser=null;
 const sb=window.supabase?.createClient('https://xeqixwmulwonvhifcmvn.supabase.co','sb_publishable_2Jp14PFt4_mLDT4cpqLfUw_d-tDSnwj');
-function persist(){localStorage.setItem(storageKey,JSON.stringify({done:[...state.done],current:lessons[current].id}));}
+function persist(){localStorage.setItem(storageKeyFor(cloudUser?.id||null),JSON.stringify({done:[...state.done],current:lessons[current].id}));}
 function create(tag,className,text){const node=document.createElement(tag);if(className)node.className=className;if(text!==undefined)node.textContent=text;return node}
 function updateProgress(){const count=state.done.size;$('overall-progress').textContent=count+' / '+lessons.length;$('overall-bar').style.width=count/lessons.length*100+'%';$('reading-progress-bar').style.width=(current+1)/lessons.length*100+'%';}
 function renderNav(){
@@ -142,7 +146,19 @@ async function completeAndContinue(){
 $('mark-read').addEventListener('click',()=>{if(current===lessons.length-1){completeAndContinue();return}setDone()});
 $('prev-lesson').addEventListener('click',()=>go(current-1));
 $('next-lesson').addEventListener('click',()=>{if(current===lessons.length-1){completeAndContinue();return}go(current+1)});
-async function cloudSync(){if(!sb)return;const {data,error}=await sb.auth.getSession();if(error||!data?.session?.user)return;cloudUser=data.session.user;
+async function cloudSync(){
+ if(!sb)return;
+ const {data,error}=await sb.auth.getUser();
+ if(error||!data?.user)return;
+ const incoming=data.user;
+ if(cloudUser?.id!==incoming.id){
+  cloudUser=incoming;
+  const scoped=readState(incoming.id);
+  state.done=scoped.done;
+  state.current=scoped.current;
+  current=lessons.findIndex(l=>l.id===scoped.current);
+  render();
+ }
  const {data:rows, error:fetchError}=await sb.from('student_readiness').select('milestone_id,state').eq('user_id',cloudUser.id).like('milestone_id','lesson-%');
  if(fetchError)return;let changed=false;
  for(const row of rows||[]){const id=row.milestone_id.slice(7);if(row.state==='done'&&!state.done.has(id)&&lessons.some(l=>l.id===id)){state.done.add(id);changed=true}}
@@ -151,4 +167,17 @@ async function cloudSync(){if(!sb)return;const {data,error}=await sb.auth.getSes
  if(missing.length)await sb.from('student_readiness').upsert(missing.map(id=>({user_id:cloudUser.id,milestone_id:'lesson-'+id,state:'done',updated_at:new Date().toISOString()})),{onConflict:'user_id,milestone_id'});
 }
 render();cloudSync().catch(()=>{});
+// Signing out on another tab returns to anonymous reading data without
+// displaying the previous student's locally cached lesson completion.
+if(sb)sb.auth.onAuthStateChange((event,session)=>{
+ if(event==='SIGNED_OUT'){
+  cloudUser=null;
+  const anonymous=readState(null);
+  state.done=anonymous.done;state.current=anonymous.current;
+  current=lessons.findIndex(l=>l.id===state.current);
+  render();
+ }else if(event==='SIGNED_IN'&&session?.user?.id!==cloudUser?.id){
+  setTimeout(()=>cloudSync().catch(()=>{}),0);
+ }
+});
 })();
