@@ -5,10 +5,27 @@ const plans={
 'gap':{title:'Make your applications count',desc:'For HSC graduates and gap-year students: turn preparation into complete applications.',steps:[['Organize academic records','Collect SSC/HSC records and check whether translations are required.'],['Verify all funding conditions','Confirm international policies and any remaining family contribution.'],['Finalize essays and recommendations','Explain genuine interests, experiences, and your time after HSC.'],['Submit and confirm receipt','Track both application and financial-aid materials.']]},
 };
 const sources=[['Berea College','United States','Review undergraduate admissions, funding policies and eligibility at the source.','https://www.berea.edu/admissions'],['Sewanee: The University of the South','United States','Explore undergraduate admissions and international aid information.','https://new.sewanee.edu/admission-aid/'],['Soka University of America','United States','Explore international student admissions and financial aid.','https://www.soka.edu/admission'],['University of Chicago','United States','Read undergraduate admissions and financial-aid information.','https://collegeadmissions.uchicago.edu/'],['University of Hong Kong','Hong Kong','Read non-local undergraduate admission and entrance scholarship details.','https://admissions.hku.hk/'],['Türkiye Scholarships','Türkiye','Explore the government scholarship programme and check current undergraduate eligibility.','https://www.turkiyeburslari.gov.tr/']];
-const $=id=>document.getElementById(id),stage=$('stage');stage.value=localStorage.getItem('bdesh-stage')||'11';['group','intake'].forEach(id=>{const item=localStorage.getItem('bdesh-'+id);if(item&&[...$(id).options].some(o=>o.value===item))$(id).value=item;$(id).addEventListener('change',e=>(localStorage.setItem('bdesh-'+id,e.target.value),document.dispatchEvent(new CustomEvent('bdesh:profile-change'))))});
-function redraw(){const p=plans[stage.value],list=$('task-list');$('task-title').textContent=p.title;$('task-desc').textContent=p.desc;list.replaceChildren();p.steps.forEach(([name,desc],i)=>{const row=document.createElement('label');row.className='taskrow';const cb=document.createElement('input');cb.type='checkbox';cb.checked=localStorage.getItem('bdesh-'+stage.value+'-'+i)==='1';cb.addEventListener('change',()=>{localStorage.setItem('bdesh-'+stage.value+'-'+i,cb.checked?'1':'0');progress();document.dispatchEvent(new CustomEvent('bdesh:task-change',{detail:{task_id:stage.value+'-'+i,is_complete:cb.checked}}))});const div=document.createElement('div'),b=document.createElement('strong'),small=document.createElement('p');b.textContent=name;small.textContent=desc;div.append(b,small);row.append(cb,div);list.append(row)});progress()}
+const $=id=>document.getElementById(id),stage=$('stage');
+/* Keep anonymous progress and each authenticated student's browser cache separate.
+   The database remains the authoritative source for signed-in accounts. */
+const scopedKey=name=>window.bdeshCurrentUserId
+  ? 'bdesh-user-'+window.bdeshCurrentUserId+'-'+name
+  : 'bdesh-'+name;
+const getLocal=name=>localStorage.getItem(scopedKey(name));
+const setLocal=(name,value)=>localStorage.setItem(scopedKey(name),value);
+const removeLocal=name=>localStorage.removeItem(scopedKey(name));
+const restoreLocal=()=>{
+ stage.value=getLocal('stage')||'11';
+ for(const id of ['group','intake']){
+  const saved=getLocal(id),field=$(id);
+  field.value=saved&&[...field.options].some(o=>o.value===saved)?saved:field.options[0].value;
+ }
+ redraw();
+};
+stage.value=getLocal('stage')||'11';['group','intake'].forEach(id=>{const item=getLocal(id);if(item&&[...$(id).options].some(o=>o.value===item))$(id).value=item;$(id).addEventListener('change',e=>(setLocal(id,e.target.value),document.dispatchEvent(new CustomEvent('bdesh:profile-change'))))});
+function redraw(){const p=plans[stage.value],list=$('task-list');$('task-title').textContent=p.title;$('task-desc').textContent=p.desc;list.replaceChildren();p.steps.forEach(([name,desc],i)=>{const row=document.createElement('label');row.className='taskrow';const cb=document.createElement('input');cb.type='checkbox';cb.checked=getLocal(stage.value+'-'+i)==='1';cb.addEventListener('change',()=>{setLocal(stage.value+'-'+i,cb.checked?'1':'0');progress();document.dispatchEvent(new CustomEvent('bdesh:task-change',{detail:{task_id:stage.value+'-'+i,is_complete:cb.checked}}))});const div=document.createElement('div'),b=document.createElement('strong'),small=document.createElement('p');b.textContent=name;small.textContent=desc;div.append(b,small);row.append(cb,div);list.append(row)});progress()}
 function progress(){let done=$('task-list').querySelectorAll('input:checked').length;$('step-count').textContent=done+' / 4';$('track-fill').style.width=done*25+'%'}
-stage.addEventListener('change',()=>{localStorage.setItem('bdesh-stage',stage.value);redraw();document.dispatchEvent(new CustomEvent('bdesh:profile-change'))});$('reset').addEventListener('click',()=>{for(let i=0;i<4;i++)localStorage.removeItem('bdesh-'+stage.value+'-'+i);redraw();document.dispatchEvent(new CustomEvent('bdesh:reset',{detail:{stage:stage.value}}))});
+stage.addEventListener('change',()=>{setLocal('stage',stage.value);redraw();document.dispatchEvent(new CustomEvent('bdesh:profile-change'))});$('reset').addEventListener('click',()=>{for(let i=0;i<4;i++)removeLocal(stage.value+'-'+i);redraw();document.dispatchEvent(new CustomEvent('bdesh:reset',{detail:{stage:stage.value}}))});
 function show(q=''){const wrap=$('opportunities');wrap.replaceChildren();sources.filter(x=>x.join(' ').toLowerCase().includes(q.toLowerCase())).forEach(([name,country,description,url])=>{let card=document.createElement('article');card.className='opportunity';const location=document.createElement('span');location.className='country';location.textContent=country.toUpperCase();const title=document.createElement('h3');title.textContent=name;const p=document.createElement('p');p.textContent=description;const a=document.createElement('a');a.href=url;a.target='_blank';a.rel='noopener noreferrer';a.textContent='Visit official website ↗';card.append(location,title,p,a);wrap.append(card)});if(!wrap.children.length)wrap.textContent='Nothing matched your search.'}$('search').addEventListener('input',e=>show(e.target.value));show();redraw();
 let bangla=false;
 const copy={
@@ -25,3 +42,6 @@ $('language').addEventListener('click',()=>{
   }
   document.documentElement.lang=bangla?'bn':'en';
 });
+
+// Refresh the visible stage, group and tasks after Google account transitions.
+document.addEventListener('bdesh:auth-change',restoreLocal);
