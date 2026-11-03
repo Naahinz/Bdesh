@@ -14,13 +14,11 @@
 }
 html{overflow-x:clip}
 html body{
-  color:var(--ui-ink)!important;
-  background-color:var(--ui-cream)!important;
+
 }
-html body :is(h1,h2,h3,h4,h5,h6){color:var(--ui-ink)!important}
-html body :is(p,li,dt,dd){color:var(--ui-body)!important}
+html body :is(h1,h2,h3,h4,h5,h6){}
+html body :is(p,li,dt,dd){}
 html body :is(.eyebrow,.kicker,.journey-tag,.chapter-id,.reading-time,.section-label){
-  color:#D94C10!important;
 }
 html body :is(.shell,.main,.content,.reader,.layout,.section,.profile-panel,.journey-detail,
   .research-card,.application-card,.entry-card,.lesson-content,.panel){min-width:0}
@@ -57,32 +55,28 @@ html body :is(a.darkbtn,.primary-cta,.button,.primary-button,.outline-button,
    Dark lettering meets AA against both standard and hover orange. */
 html body :is(a.darkbtn,.primary-cta,.button,.primary-button,.google-signin,
   .cardactions button){
-  background:var(--ui-orange)!important;
-  border:1px solid var(--ui-orange)!important;
-  color:#19242D!important;
+
+
 }
 html body :is(a.darkbtn,.primary-cta,.button,.primary-button,.google-signin,
-  .cardactions button) :is(span,strong,b,em,small,i){color:#19242D!important}
+  .cardactions button) :is(span,strong,b,em,small,i){}
 html body :is(a.darkbtn,.primary-cta,.button,.primary-button,.google-signin,
   .cardactions button):hover,
 html body :is(a.darkbtn,.primary-cta,.button,.primary-button,.google-signin,
   .cardactions button):focus-visible{
-  background:var(--ui-orange-hover)!important;
-  border-color:var(--ui-orange-hover)!important;
-  color:#19242D!important;
+
+
 }
 html body :is(.outline-button,.journey-link,.application-toggle,.export-workspace,
  .college-manual,.deadline-entry button){
-  background:var(--ui-peach)!important;
-  border:1px solid #E5E9ED!important;
-  color:#D94C10!important;
+
+
 }
 html body :is(.outline-button,.journey-link,.application-toggle,.export-workspace,
- .college-manual,.deadline-entry button):hover{
-  background:#FFFFFF!important;color:#D94C10!important;
+ .college-manual,.deadline-entry button):hover{color:#D94C10!important;
 }
 html body :is(.outline-button,.journey-link,.application-toggle,.export-workspace,
- .college-manual,.deadline-entry button) :is(span,strong,b){color:inherit!important}
+ .college-manual,.deadline-entry button) :is(span,strong,b){}
 html body button:disabled,html body a[aria-disabled=true]{opacity:.55;cursor:not-allowed}
 
 /* Page headers: text and actions no longer squeeze or drift off alignment. */
@@ -182,7 +176,6 @@ html body .main .metrics>div{
   display:flex;flex-direction:column;
   align-items:flex-start;justify-content:space-between;
   gap:10px;min-width:0;padding:20px!important;
-  background:var(--ui-paper)!important;
 }
 html body .main .metrics :is(span,strong,small){
   display:block;overflow-wrap:anywhere;max-width:100%;
@@ -459,19 +452,15 @@ html body .reader :is(.knowledge-check,.takeaway,.application-example){
   --ui-glass-shadow:0 15px 43px rgba(57,72,88,.085),inset 0 1px 0 rgba(255,255,255,.97);
 }
 html body{
-  background:radial-gradient(ellipse at 86% 5%,rgba(255,124,65,.17),transparent 39%),
-    radial-gradient(ellipse at 6% 65%,rgba(222,233,244,.38),transparent 43%),
-    linear-gradient(145deg,#FFFEFC 0%,#F8F9FA 70%,#FAFAF9 100%)!important;
-  background-attachment:fixed!important;
-  color:var(--ui-ink)!important;
+
+
 }
 html body :is(.hero-copy,.home-flow-head,.journey-detail,.journey-progress,
   .research-card,.application-card,.learn-first,.intro,.action-plan,.deadline-center,
   .profile-panel,.entry-card,.lesson-content,.review-card,.followup-tracker,
   .college-lookup-card,.research-controls,.reading-top,.editor-form,.auth-card,.panel){
-  background:var(--ui-glass)!important;
-  border:1px solid rgba(255,255,255,.91)!important;
-  box-shadow:var(--ui-glass-shadow)!important;
+
+
   backdrop-filter:blur(18px) saturate(118%)!important;
   -webkit-backdrop-filter:blur(18px) saturate(118%)!important;
 }
@@ -482,9 +471,8 @@ html body .home-flow :is(.home-flow-head,.journey-step .journey-detail,.journey-
 html body #profile-app :is(.profile-panel,.entry-card,.paper-form),
 html body #discover :is(.research-controls,.research-card),
 html body #apply :is(.college-lookup-card,.application-card){
-  background:var(--ui-glass)!important;
-  border-color:rgba(255,255,255,.91)!important;
-  box-shadow:var(--ui-glass-shadow)!important;
+
+
   backdrop-filter:blur(18px) saturate(118%)!important;
   -webkit-backdrop-filter:blur(18px) saturate(118%)!important;
 }
@@ -493,120 +481,98 @@ html body .main .action-plan .next-actions{
   overflow:hidden;
 }
 html body .main .action-plan .next-action{
-  background:rgba(255,255,255,.22)!important;
-  box-shadow:none!important;
-  border-bottom:1px solid rgba(205,214,222,.6)!important;
+
+
 }
 html body .hero{
-  background:radial-gradient(circle at 84% 19%,rgba(255,124,65,.26),transparent 28%),
-    radial-gradient(circle at 72% 78%,rgba(255,182,128,.16),transparent 39%),
-    linear-gradient(120deg,rgba(255,253,250,.85),rgba(246,248,250,.80))!important;
-  border:1px solid rgba(255,255,255,.75)!important;
-  box-shadow:0 20px 65px rgba(96,107,119,.09)!important;
+
+
 }
 html body .hero .hero-copy{
-  background:linear-gradient(120deg,rgba(255,255,255,.83),rgba(255,255,255,.65))!important;
-  border-color:rgba(255,255,255,.95)!important;
-  box-shadow:var(--ui-glass-shadow)!important;
+
+
 }
 html body .home-flow .journey-ring{
-  background:conic-gradient(#FF7134 var(--journey-percent,0%),rgba(214,223,231,.65) 0)!important;
 }
 html body .home-flow .journey-ring-inner{
-  background:rgba(255,255,255,.94)!important;
-  color:var(--ui-ink)!important;
+
 }
 html body :is(.research-evidence,.followup-item,.date-editor,.research-caution,
   .section-hint,.notice,.sync,.takeaway,.application-example){
-  background:rgba(255,248,243,.66)!important;
-  border:1px solid rgba(223,214,207,.67)!important;
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.65)!important;
-  color:var(--ui-ink)!important;
+
+
+
 }
 html body :is(.research-evidence,.followup-item,.date-editor,
   .research-caution,.section-hint,.notice,.sync) :is(p,span,small,li){
-  color:var(--ui-body)!important;
 }
 html body :is(.research-evidence,.followup-item,.date-editor,
   .research-caution,.section-hint,.notice,.sync) :is(a,summary){
-  color:#AE4113!important;
 }
 html body :is(.side,.sidebar,.curriculum){
-  background:rgba(255,255,255,.57)!important;
-  border-color:rgba(208,217,224,.66)!important;
+
   backdrop-filter:blur(14px) saturate(110%)!important;
   -webkit-backdrop-filter:blur(14px) saturate(110%)!important;
 }
 html body .home-flow .journey-node{
-  background:rgba(255,239,229,.82)!important;
-  border:1px solid rgba(255,147,92,.46)!important;
-  color:#AE4113!important;
+
+
 }
-html body .home-flow .journey-arrow{color:#FF7134!important}
+html body .home-flow .journey-arrow{}
 html body :is(.rail a.active,.workspace-steps a.active,.lesson-link.active,
   #profile-nav button.active){
-  background:rgba(255,237,224,.80)!important;
-  border-color:rgba(255,147,92,.50)!important;
-  color:#AE4113!important;
+
+
 }
 html body :is(.topbar,.nav,.site-header,.top){
-  background:rgba(255,255,255,.84)!important;
-  border-color:rgba(213,220,227,.74)!important;
+
   backdrop-filter:blur(18px) saturate(112%)!important;
   -webkit-backdrop-filter:blur(18px) saturate(112%)!important;
 }
 /* Quiet utility actions: no bright orange slab for sign-out. */
 html body .nav .nav-actions #account-toggle,
 html body :is(#signout,#sign-out){
-  background:rgba(255,255,255,.82)!important;
-  border:1px solid rgba(208,217,224,.85)!important;
-  color:#33424f!important;
+
+
   font-size:13px!important;
   padding:10px 14px!important;
   min-height:43px!important;
 }
 html body .nav .nav-actions #account-toggle:hover,
 html body :is(#signout,#sign-out):hover{
-  background:rgba(255,237,224,.88)!important;
-  color:#AE4113!important;
-  border-color:rgba(255,147,92,.55)!important;
+
+
 }
 /* Secondary buttons use dark text, not the white-on-pale regression. */
 html body :is(.outline-button,.journey-link,.application-toggle,.export-workspace,
   .college-manual,.deadline-entry button),
 html body #apply .application-footer button{
-  background:rgba(255,242,234,.85)!important;
-  border:1px solid rgba(246,169,127,.55)!important;
-  color:#33424f!important;
-  box-shadow:none!important;
+
+
+
 }
 html body :is(.outline-button,.journey-link,.application-toggle,.export-workspace,
   .college-manual,.deadline-entry button) :is(span,strong,b),
 html body #apply .application-footer button :is(span,strong,b){
-  color:#33424f!important;
 }
 html body :is(.outline-button,.journey-link,.application-toggle,.export-workspace,
   .college-manual,.deadline-entry button):hover,
 html body #apply .application-footer button:hover{
-  background:rgba(255,227,207,.91)!important;
-  border-color:rgba(255,140,76,.65)!important;
-  color:#27343e!important;
+
+
 }
 html body #apply .application-footer button.danger{
-  background:rgba(255,248,247,.92)!important;
-  color:#B54742!important;
-  border-color:rgba(221,164,161,.55)!important;
+
+
 }
 html body #discover .research-verification{
-  background:rgba(255,242,234,.78)!important;
-  color:#AE4113!important;
-  border:1px solid rgba(255,147,92,.42)!important;
+
+
 }
 @media(prefers-reduced-transparency:reduce){
   html body :is(.hero-copy,.home-flow-head,.journey-detail,.research-card,
     .application-card,.intro,.learn-first,.action-plan,.deadline-center,.profile-panel,
     .lesson-content,.research-controls,.panel){
-    background:#FFFFFF!important;
     backdrop-filter:none!important;
     -webkit-backdrop-filter:none!important;
   }
@@ -620,30 +586,24 @@ html body #discover .research-card .cardactions button,
 html body :is(.google-signin,.primary-button,.primary-cta) :is(span,strong,b,em,small,i),
 html body .hero .primary-cta :is(span,strong,b),
 html body .main :is(.button,.primary-button) :is(span,strong,b){
-  color:#19242D!important;
 }
 html body .hero .primary-cta,
 html body .home-flow .journey-detail a.darkbtn,
 html body .main :is(.button,.primary-button),
 html body #discover .research-card .cardactions button{
-  background:#FF7134!important;
-  border-color:#FF7134!important;
+
 }
 html body .hero .primary-cta:hover,
 html body .home-flow .journey-detail a.darkbtn:hover,
 html body .main :is(.button,.primary-button):hover,
 html body #discover .research-card .cardactions button:hover{
-  background:#ED5B22!important;
-  border-color:#ED5B22!important;
+
 }
 
 
 /* 2026-11-03 screenshot regression fixes: component-scoped, not global button rules.
    A translucent card needs illuminated content behind it to look like glass. */
 html body :is(.main,.reader,#profile-app .content,.home-flow){
-  background:
-    radial-gradient(ellipse 45% 38% at 92% 13%,rgba(255,142,78,.16),transparent 92%),
-    radial-gradient(ellipse 52% 43% at 7% 72%,rgba(209,226,242,.33),transparent 88%)!important;
 }
 html body #discover #research-list>.research-card,
 html body #apply .application-card,
@@ -651,9 +611,8 @@ html body #profile-app .profile-panel,
 html body .reader #knowledge-check.knowledge-check,
 html body .home-flow .journey-detail,
 html body .home-flow .home-flow-head{
-  background:linear-gradient(133deg,rgba(255,255,255,.84),rgba(255,249,245,.58))!important;
-  border:1px solid rgba(255,255,255,.92)!important;
-  box-shadow:0 18px 45px rgba(74,89,106,.11),inset 0 1px 0 rgba(255,255,255,.96)!important;
+
+
   backdrop-filter:blur(19px) saturate(123%)!important;
   -webkit-backdrop-filter:blur(19px) saturate(123%)!important;
 }
@@ -662,8 +621,7 @@ html body #discover #research-list>.research-card{
   border-radius:22px!important;
 }
 html body #discover .research-evidence{
-  background:rgba(255,255,255,.72)!important;
-  border:1px solid rgba(204,215,226,.83)!important;
+
   border-radius:14px!important;
 }
 /* Knowledge check is a genuine content panel; its feedback is NOT another
@@ -679,10 +637,8 @@ html body .reader #knowledge-check .check-top{
   align-items:center;
   justify-content:space-between;
   gap:8px 18px;
-  color:#526170!important;
 }
 html body .reader #check-question{
-  color:#33424F!important;
   font-size:clamp(20px,2.3vw,26px)!important;
   line-height:1.4!important;
 }
@@ -697,11 +653,9 @@ html body .reader #check-options button.check-option{
   min-height:55px!important;
   padding:15px 19px!important;
   margin:0!important;
-  background:rgba(255,255,255,.86)!important;
-  border:1px solid rgba(203,215,225,.86)!important;
+
   border-radius:14px!important;
-  box-shadow:none!important;
-  color:#33424F!important;
+
   opacity:1!important;
   font-size:15px!important;
   font-weight:500!important;
@@ -711,24 +665,21 @@ html body .reader #check-options button.check-option{
   overflow-wrap:anywhere;
 }
 html body .reader #check-options button.check-option:not(:disabled):hover{
-  background:rgba(255,240,230,.92)!important;
-  border-color:rgba(238,132,72,.62)!important;
-  color:#273641!important;
+
+
 }
 html body .reader #check-options button.check-option:disabled{
   opacity:1!important;
   cursor:default!important;
 }
 html body .reader #check-options button.check-option.correct{
-  background:rgba(255,233,218,.91)!important;
-  border-color:#F18F54!important;
-  color:#273641!important;
+
+
   font-weight:700!important;
 }
 html body .reader #check-options button.check-option.incorrect{
-  background:rgba(255,238,236,.94)!important;
-  border-color:#DFA6A3!important;
-  color:#783936!important;
+
+
 }
 html body .reader #check-feedback.check-feedback{
   display:block!important;
@@ -739,14 +690,11 @@ html body .reader #check-feedback.check-feedback{
   height:auto!important;
   margin:18px 0 0!important;
   padding:14px 18px!important;
-  background:rgba(255,255,255,.78)!important;
-  border:1px solid rgba(205,216,224,.76)!important;
-  border-left:3px solid #FF7134!important;
+
+
   border-radius:12px!important;
-  box-shadow:none!important;
   backdrop-filter:none!important;
   -webkit-backdrop-filter:none!important;
-  color:#33424F!important;
   opacity:1!important;
   line-height:1.6!important;
   font-size:14px!important;
@@ -769,49 +717,41 @@ html body #profile-app #profile-nav button{
   min-height:52px!important;
   padding:12px 14px!important;
   border-radius:12px!important;
-  border:1px solid transparent!important;
-  box-shadow:none!important;
-  background:rgba(255,255,255,.37)!important;
-  color:#41515e!important;
+
+
+
   text-align:left!important;
   white-space:normal!important;
   opacity:1!important;
   line-height:1.45!important;
 }
 html body #profile-app #profile-nav button:not(.active):hover{
-  background:rgba(255,243,235,.85)!important;
-  border-color:rgba(244,175,135,.48)!important;
+
 }
 html body #profile-app #profile-nav button.active{
-  background:rgba(255,235,221,.88)!important;
-  color:#A43D12!important;
-  border-color:rgba(244,153,98,.65)!important;
-  box-shadow:0 4px 14px rgba(177,104,61,.06)!important;
+
+
+
 }
 html body #profile-app #profile-nav button :is(span,small){
-  color:inherit!important;
   opacity:1!important;
 }
 html body #profile-app #profile-nav button .nav-n,
 html body #profile-app #profile-nav button .nav-mark{
   flex:0 0 auto;
-  color:inherit!important;
 }
 /* The lesson side navigation follows the same selected/inactive distinction. */
 html body #lesson-nav button.lesson-link{
-  background:rgba(255,255,255,.38)!important;
-  border:1px solid transparent!important;
-  color:#41515e!important;
+
+
   opacity:1!important;
   text-align:left!important;
 }
 html body #lesson-nav button.lesson-link.active{
-  background:rgba(255,235,221,.86)!important;
-  border-color:rgba(244,153,98,.58)!important;
-  color:#A43D12!important;
+
+
 }
 html body #lesson-nav button.lesson-link:not(.active):hover{
-  background:rgba(255,244,236,.86)!important;
 }
 /* Primary controls: clear deep-slate text on vivid orange. */
 html body :is(#next-lesson,#profile-app .primary-button,
@@ -824,12 +764,10 @@ html body :is(#next-lesson,#profile-app .primary-button,
   max-width:100%!important;
   min-height:46px!important;
   padding:12px 19px!important;
-  border:1px solid #FF7134!important;
   border-radius:11px!important;
-  background:#FF7134!important;
-  box-shadow:0 7px 19px rgba(255,113,52,.13)!important;
-  color:#19242D!important;
-  text-shadow:none!important;
+
+
+
   opacity:1!important;
   font-weight:750!important;
   line-height:1.45!important;
@@ -840,15 +778,13 @@ html body :is(#next-lesson,#profile-app .primary-button,
   #profile-google-login,#discover .cardactions button,
   .home-flow a.darkbtn,.hero a.primary-cta,
   .callout a.lightbtn):hover{
-  background:#ED5B22!important;
-  border-color:#ED5B22!important;
-  color:#19242D!important;
+
+
 }
 html body :is(#next-lesson,#profile-app .primary-button,
   #profile-google-login,#discover .cardactions button,
   .home-flow a.darkbtn,.hero a.primary-cta,
   .callout a.lightbtn) :is(span,b,strong,small,i){
-  color:#19242D!important;
 }
 html body .callout a.lightbtn{width:fit-content!important}
 @media(max-width:680px){
@@ -861,8 +797,264 @@ html body .callout a.lightbtn{width:fit-content!important}
   html body #apply .application-card,
   html body #profile-app .profile-panel,
   html body .reader #knowledge-check.knowledge-check{
-    background:#FFFFFF!important;
     backdrop-filter:none!important;
     -webkit-backdrop-filter:none!important;
   }
+}
+
+
+/* ------------------------------------------------------------------
+   Bdesh unified visual system — Nov 2026.
+   The preceding rules in this file are structural/layout rules only.
+   This final section owns all visible paints and interactions.
+   Orange = action, peach = selected, slate = information,
+   translucent white = glass. Do not style all <button> elements.
+   ------------------------------------------------------------------ */
+:root{
+  color-scheme:light;
+  --bd-bg:#FAFAF8;
+  --bd-glass:linear-gradient(135deg,rgba(255,255,255,.84),rgba(255,255,255,.62));
+  --bd-glass-soft:rgba(255,255,255,.67);
+  --bd-line:rgba(173,188,200,.38);
+  --bd-ink:#263744;
+  --bd-body:#526270;
+  --bd-muted:#697986;
+  --bd-orange:#FF7134;
+  --bd-orange-hover:#F15F26;
+  --bd-link:#B84312;
+  --bd-peach:rgba(255,113,52,.105);
+  --bd-focus:rgba(255,113,52,.48);
+  --bd-shadow:0 16px 42px rgba(62,78,93,.085),inset 0 1px 0 rgba(255,255,255,.94);
+}
+html body{
+  background:radial-gradient(ellipse 52% 48% at 86% 13%,rgba(255,135,75,.115),transparent 75%),
+             radial-gradient(ellipse 47% 42% at 9% 78%,rgba(208,224,240,.33),transparent 78%),
+             linear-gradient(145deg,#FFFEFC,#F8FAFB 76%,#FAFAF8)!important;
+  background-attachment:fixed!important;
+  color:var(--bd-body)!important;
+}
+html body :is(h1,h2,h3,h4,h5,h6){color:var(--bd-ink)!important}
+html body :is(p,li,dt,dd,label,small){color:var(--bd-body)!important}
+html body :is(.eyebrow,.kicker,.journey-tag,.chapter-id,.reading-time,.section-label){
+  color:var(--bd-link)!important;
+}
+html body a:not(.button):not(.primary-button):not(.darkbtn):not(.primary-cta):not(.journey-link){
+  color:var(--bd-link);
+}
+html body :is(.nav,.topbar,.site-header,.top,.early){
+  background:rgba(255,255,255,.83)!important;
+  border-color:var(--bd-line)!important;
+  box-shadow:0 6px 24px rgba(50,66,83,.045)!important;
+  backdrop-filter:blur(16px) saturate(116%)!important;
+  -webkit-backdrop-filter:blur(16px) saturate(116%)!important;
+}
+html body :is(.nav,.topbar,.site-header,.top) :is(nav a,.header-link,.wordmark,.brand,.logo,#account-name,#session-status){
+  color:var(--bd-ink)!important;
+}
+html body :is(.side,.sidebar,.curriculum){
+  background:rgba(249,250,251,.71)!important;
+  border-color:var(--bd-line)!important;
+  backdrop-filter:blur(14px)!important;
+  -webkit-backdrop-filter:blur(14px)!important;
+}
+/* Main glass surfaces: identical translucency and visual depth. */
+html body :is(.hero-copy,.home-flow-head,.journey-detail,.journey-progress,
+ .intro,.learn-first,.action-plan,.deadline-center,.research-card,.application-card,
+ .profile-panel,.entry-card,.paper-form,.lesson-content,.knowledge-check,
+ .reading-top,.auth-card,.college-search,.college-lookup-card,.research-controls,
+ .review-card,.followup-tracker,.editor-form,.panel,.sign-in-wall){
+  background:var(--bd-glass)!important;
+  border:1px solid rgba(255,255,255,.88)!important;
+  box-shadow:var(--bd-shadow)!important;
+  backdrop-filter:blur(18px) saturate(116%)!important;
+  -webkit-backdrop-filter:blur(18px) saturate(116%)!important;
+}
+html body .main :is(.intro,.learn-first,.action-plan,.deadline-center,
+ .research-card,.application-card,.profile-panel),
+html body #discover #research-list>.research-card,
+html body #apply .application-card,
+html body #profile-app .profile-panel,
+html body .home-flow :is(.home-flow-head,.journey-step .journey-detail,.journey-progress),
+html body .reader #knowledge-check.knowledge-check{
+  background:var(--bd-glass)!important;
+  border:1px solid rgba(255,255,255,.88)!important;
+  box-shadow:var(--bd-shadow)!important;
+  backdrop-filter:blur(18px) saturate(116%)!important;
+  -webkit-backdrop-filter:blur(18px) saturate(116%)!important;
+}
+html body .hero{
+  background:radial-gradient(circle at 86% 18%,rgba(255,123,52,.20),transparent 30%),
+             linear-gradient(123deg,rgba(255,255,255,.71),rgba(247,248,250,.73))!important;
+  border:1px solid rgba(255,255,255,.83)!important;
+  box-shadow:0 19px 62px rgba(70,85,100,.09)!important;
+}
+/* Subpanels feel subordinate to their glass parent, not orange slabs. */
+html body :is(.research-evidence,.followup-item,.date-editor,.research-caution,
+ .section-hint,.notice,.sync,.takeaway,.example,.example-row,.application-example,
+ .followup-form,.entry-head,.mini-checklist,.knowledge-note,.reading-intro){
+  background:rgba(255,255,255,.72)!important;
+  border:1px solid var(--bd-line)!important;
+  box-shadow:none!important;
+  color:var(--bd-ink)!important;
+}
+html body :is(.research-evidence,.followup-item,.date-editor,.research-caution,
+ .section-hint,.notice,.sync,.takeaway,.example,.example-row,.application-example) :is(p,small,li,span){
+  color:var(--bd-body)!important;
+}
+html body :is(.home-flow,.reader,.main,#profile-app) :is(h1,h2,h3,h4,strong){
+  color:var(--bd-ink)!important;
+}
+html body :is(.home-flow,.reader,.main,#profile-app) :is(p,li,small){
+  color:var(--bd-body)!important;
+}
+/* Inputs / tables / ordinary inactive controls. */
+html body :is(input:not([type=checkbox]):not([type=radio]),textarea,select){
+  background:rgba(255,255,255,.91)!important;
+  border:1px solid rgba(170,184,196,.62)!important;
+  color:var(--bd-ink)!important;
+  box-shadow:none!important;
+}
+html body :is(input,textarea)::placeholder{color:#75818B!important;opacity:1}
+html body :is(input[type=checkbox],input[type=radio],input[type=range]){
+  accent-color:var(--bd-orange)!important;
+}
+html body :is(.metrics>div,.deadline-summary>div,.review-summary>div){
+  background:var(--bd-glass-soft)!important;
+  border:1px solid var(--bd-line)!important;
+  box-shadow:none!important;
+}
+html body .main .action-plan .next-action{
+  background:transparent!important;
+  border-bottom:1px solid var(--bd-line)!important;
+  box-shadow:none!important;
+}
+/* Actions: only genuine primary actions get filled orange.
+   Dark ink on vivid orange is 5.82:1; orange itself is NOT body-text color. */
+html body :is(a.darkbtn,a.primary-cta,a.button,button.primary-button,
+  button.google-signin,.google-signin,.cardactions button,#next-lesson,
+  #profile-google-login,.callout a.lightbtn){
+  background:var(--bd-orange)!important;
+  border:1px solid var(--bd-orange)!important;
+  color:#17232E!important;
+  box-shadow:0 6px 17px rgba(255,113,52,.12)!important;
+  text-shadow:none!important;
+}
+html body :is(a.darkbtn,a.primary-cta,a.button,button.primary-button,
+  button.google-signin,.google-signin,.cardactions button,#next-lesson,
+  #profile-google-login,.callout a.lightbtn):hover{
+  background:var(--bd-orange-hover)!important;
+  border-color:var(--bd-orange-hover)!important;
+  color:#17232E!important;
+}
+html body :is(a.darkbtn,a.primary-cta,a.button,button.primary-button,
+  button.google-signin,.google-signin,.cardactions button,#next-lesson,
+  #profile-google-login,.callout a.lightbtn) :is(span,small,strong,b,em,i){
+  color:#17232E!important;
+}
+/* Secondary buttons: translucent white, neutral dark text, orange on hover. */
+html body :is(.outline-button,.journey-link,.application-toggle,.export-workspace,
+  .college-manual,.deadline-entry button,.application-footer button,
+  #signout,#sign-out,.nav .nav-actions #account-toggle){
+  background:rgba(255,255,255,.82)!important;
+  border:1px solid var(--bd-line)!important;
+  color:var(--bd-ink)!important;
+  box-shadow:none!important;
+  text-shadow:none!important;
+}
+html body :is(.outline-button,.journey-link,.application-toggle,.export-workspace,
+  .college-manual,.deadline-entry button,.application-footer button,
+  #signout,#sign-out,.nav .nav-actions #account-toggle):hover{
+  background:rgba(255,239,227,.87)!important;
+  border-color:rgba(255,140,76,.55)!important;
+  color:var(--bd-ink)!important;
+}
+html body :is(.outline-button,.journey-link,.application-toggle,.export-workspace,
+  .college-manual,.deadline-entry button,.application-footer button,
+  #signout,#sign-out,.nav .nav-actions #account-toggle) :is(span,strong,b,small){
+  color:inherit!important;
+}
+html body .application-footer button.danger{
+  color:#A84442!important;
+  border-color:rgba(207,112,109,.47)!important;
+  background:rgba(255,247,246,.85)!important;
+}
+/* Active navigation is peach, not an all-orange button. */
+html body :is(.rail a.active,.workspace-steps a.active,.lesson-link.active,
+  #profile-app #profile-nav button.active,.topbar nav a.active){
+  background:var(--bd-peach)!important;
+  border-color:rgba(255,140,76,.43)!important;
+  color:var(--bd-ink)!important;
+}
+html body #profile-app #profile-nav button:not(.active),
+html body #lesson-nav button.lesson-link:not(.active){
+  background:rgba(255,255,255,.36)!important;
+  border-color:transparent!important;
+  color:var(--bd-ink)!important;
+}
+html body #profile-app #profile-nav button :is(span,small),
+html body #lesson-nav button.lesson-link :is(span,small){
+  color:inherit!important;
+}
+html body :is(.rail a.active,.workspace-steps a.active,.lesson-link.active,
+ #profile-app #profile-nav button.active):hover{
+  background:rgba(255,113,52,.15)!important;
+}
+/* Directory tags indicate status without coloring entire cards. */
+html body #discover .research-verification{
+  background:rgba(255,113,52,.08)!important;
+  color:var(--bd-link)!important;
+  border:1px solid rgba(255,113,52,.34)!important;
+}
+html body #discover .research-evidence{
+  background:rgba(255,255,255,.72)!important;
+  border-color:var(--bd-line)!important;
+}
+html body .home-flow .journey-ring{
+  background:conic-gradient(var(--bd-orange) var(--journey-percent,0%),rgba(210,221,230,.63) 0)!important;
+}
+html body .home-flow .journey-ring-inner{
+  background:rgba(255,255,255,.95)!important;
+  color:var(--bd-ink)!important;
+}
+html body .home-flow .journey-node{
+  background:rgba(255,113,52,.08)!important;
+  border-color:rgba(255,113,52,.40)!important;
+  color:var(--bd-ink)!important;
+}
+html body .home-flow .journey-arrow{color:var(--bd-orange)!important}
+/* Quiz feedback is a line of content; do not tint entire options orange. */
+html body .reader #check-options button.check-option{
+  background:rgba(255,255,255,.91)!important;
+  border:1px solid var(--bd-line)!important;
+  color:var(--bd-ink)!important;
+  box-shadow:none!important;
+  opacity:1!important;
+}
+html body .reader #check-options button.check-option.correct{
+  background:rgba(255,113,52,.10)!important;
+  border-color:rgba(255,113,52,.65)!important;
+  color:var(--bd-ink)!important;
+}
+html body .reader #check-options button.check-option.incorrect{
+  background:rgba(184,73,66,.065)!important;
+  border-color:rgba(184,73,66,.35)!important;
+  color:#873735!important;
+}
+html body .reader #check-feedback.check-feedback{
+  background:rgba(255,255,255,.79)!important;
+  border:1px solid var(--bd-line)!important;
+  border-left:3px solid var(--bd-orange)!important;
+  color:var(--bd-ink)!important;
+  box-shadow:none!important;
+  opacity:1!important;
+}
+html body :is(a,button,input,select,textarea):focus-visible{
+  outline:3px solid var(--bd-focus)!important;
+  outline-offset:2px!important;
+}
+@media(prefers-reduced-transparency:reduce){
+  html body :is(.hero-copy,.home-flow-head,.journey-detail,.research-card,.application-card,
+  .intro,.learn-first,.action-plan,.deadline-center,.profile-panel,.lesson-content,
+  .research-controls,.panel){background:#FFFFFF!important;backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important}
 }
