@@ -26,9 +26,9 @@
 
   const feedbackText=()=>{
     const values = new FormData(form);
-    return 'Bdesh feedback — '+String(values.get('category')||'Other')+'\\n\\n'
-      +String(values.get('message')||'')+'\\n\\n'
-      +'Page: '+location.origin+location.pathname+'\\n'
+    return 'Bdesh feedback — '+String(values.get('category')||'Other')+'\n\n'
+      +String(values.get('message')||'')+'\n\n'
+      +'Page: '+location.origin+location.pathname+'\n'
       +'Reply email (optional): '+String(values.get('email')||'Not provided');
   };
   const revealFallback=()=>{
