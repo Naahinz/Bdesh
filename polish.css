@@ -6,7 +6,7 @@ body{font-size:16px;line-height:1.65;letter-spacing:0}
 p,li{overflow-wrap:break-word}
 button,input,select,textarea{font-size:inherit}
 button,a,input,select,textarea{touch-action:manipulation}
-:where(button,a,input,select,textarea):focus-visible{outline:3px solid #F1B896;outline-offset:3px}
+:where(button,a,input,select,textarea):focus-visible{outline:3px solid #FFD9C9;outline-offset:3px}
 :where(input,select,textarea){min-height:42px}
 :where(input,select,textarea)::placeholder{color:#6A737A;opacity:1}
 :where(.eyebrow,.course-label,.kicker,.chapter-id,.lesson-eyebrow,.section-serial,.reading-time,.header-center,.top-middle){font-size:12px;line-height:1.5;letter-spacing:.075em}
@@ -59,7 +59,7 @@ body .nav.shell nav a{white-space:nowrap}
 }
 
 /* Bdesh 2 — visible editorial redesign. Hierarchy over ornamental UI. */
-:root{--editorial-bg:#FAF9F7;--editorial-paper:#FFFFFF;--editorial-ink:#6A737A;--editorial-accent:#C64F1D;--editorial-rule:#E5E9ED}
+:root{--editorial-bg:#FAFAF9;--editorial-paper:#FFFFFF;--editorial-ink:#6A737A;--editorial-accent:#FF7134;--editorial-rule:#E5E9ED}
 body{background:var(--editorial-bg);color:var(--editorial-ink)}
 body :is(.hero h1,.journey-heading h2,.section-head h2,.section-intro h2,.section-heading h2,.lesson-content h1,.sidebar-head h1,.side h1){font-family:'Playfair Display',Georgia,serif;letter-spacing:-.04em;line-height:1.12}
 body .hero h1{font-size:clamp(53px,6.3vw,96px);max-width:760px}
@@ -111,7 +111,7 @@ body .section-intro h2{font-size:clamp(39px,4vw,61px)}
 .action-plan-link{font-size:14px;font-weight:700;text-decoration:underline;white-space:nowrap}
 .next-actions{border-top:1px solid #E5E9ED}
 .next-action{display:grid;grid-template-columns:40px minmax(0,1fr) auto;gap:16px;align-items:center;border-bottom:1px solid #E5E9ED;padding:20px 7px}
-.next-action-number{font:500 20px 'Playfair Display',Georgia,serif;color:#B5471C}
+.next-action-number{font:500 20px 'Playfair Display',Georgia,serif;color:#D94C10}
 .next-action h3{font-size:18px;font-weight:650;margin:0 0 5px;line-height:1.35}
 .next-action p{font-size:15px!important;line-height:1.6;margin:0;color:#6A737A}
 .next-action a{font-size:14px;font-weight:700;border-bottom:1px solid currentColor;white-space:nowrap}
@@ -121,14 +121,14 @@ body .section-intro h2{font-size:clamp(39px,4vw,61px)}
 .research-controls{display:flex;gap:18px;flex-wrap:wrap;align-items:end}
 .research-controls label{display:grid;gap:6px;font-size:14px;font-weight:700}
 .research-controls select{min-width:185px;padding:11px 12px;border:1px solid #E5E9ED;background:#FFFFFF;color:#6A737A;border-radius:3px;font-size:15px}
-.research-caution{margin:18px 0 8px;padding:19px 22px;border:1px solid rgba(229,233,237,.26);border-left:3px solid #E5E9ED;border-radius:12px;background:rgba(255,243,236,.87);font-size:15px;line-height:1.65;color:#6A737A}
+.research-caution{margin:18px 0 8px;padding:19px 22px;border:1px solid rgba(229,233,237,.26);border-left:3px solid #E5E9ED;border-radius:12px;background:rgba(255,255,255,.87);font-size:15px;line-height:1.65;color:#6A737A}
 .research-count{font-size:14px;font-weight:700;color:#6A737A;margin:15px 0}
 
 /* Homepage journey: one clear primary action, then sequenced next steps. */
 .homepage-reading{padding-top:70px;padding-bottom:80px}
 .reading-intro{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(270px,.65fr);gap:clamp(28px,6vw,105px);align-items:center;background:#FFFFFF;border-top:3px solid #E5E9ED;padding:clamp(28px,5vw,70px)}
 .reading-intro h2{font:500 clamp(38px,4.2vw,64px)/1.12 'Playfair Display',Georgia,serif;letter-spacing:-.04em;margin:17px 0 22px;text-wrap:balance}
-.reading-intro h2 em{color:#B5471C}
+.reading-intro h2 em{color:#D94C10}
 .reading-intro-copy>p{font-size:18px!important;line-height:1.72!important;max-width:59ch;color:#6A737A}
 .reading-cta{display:inline-flex!important;font-size:16px!important;min-height:52px!important;margin:18px 0 12px;padding:15px 25px!important}
 .reading-meta{display:block;color:#6A737A;font-size:13px;font-weight:600}
@@ -154,11 +154,11 @@ body .hero-copy>p{max-width:67ch}
 .home-flow{padding-top:clamp(42px,6vw,90px);padding-bottom:clamp(65px,8vw,120px);border-top:1px solid #E5E9ED}
 .home-flow-head{display:grid;grid-template-columns:minmax(0,1fr) 215px;gap:40px;align-items:center;margin-bottom:55px}
 .home-flow-head h2{font:500 clamp(42px,4.5vw,72px)/1.1 'Playfair Display',Georgia,serif;letter-spacing:-.045em;margin:15px 0 19px}
-.home-flow-head h2 em{color:#B5471C}
+.home-flow-head h2 em{color:#D94C10}
 .home-flow-head>div>p{font-size:18px;line-height:1.7;color:#6A737A;max-width:64ch}
 .journey-progress{text-align:center}
-.journey-ring{--journey-percent:0%;width:170px;height:170px;border-radius:50%;background:conic-gradient(#FCFBF9 var(--journey-percent),#FFFFFF 0);padding:12px;display:grid;place-items:center;margin:0 auto}
-.journey-ring-inner{width:100%;height:100%;border-radius:50%;background:#FCFBF9;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px}
+.journey-ring{--journey-percent:0%;width:170px;height:170px;border-radius:50%;background:conic-gradient(#FFFFFF var(--journey-percent),#FFFFFF 0);padding:12px;display:grid;place-items:center;margin:0 auto}
+.journey-ring-inner{width:100%;height:100%;border-radius:50%;background:#FFFFFF;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px}
 .journey-ring-inner strong{font:500 48px/1 'Playfair Display',Georgia,serif;color:#6A737A}
 .journey-ring-inner strong span{font:500 21px 'DM Sans',sans-serif;color:#6A737A}
 .journey-ring-inner small{font-size:12px;color:#6A737A;font-weight:700;letter-spacing:.02em}
@@ -166,7 +166,7 @@ body .hero-copy>p{max-width:67ch}
 .vertical-journey{max-width:990px;margin:0 auto}
 .journey-step{display:grid;grid-template-columns:90px minmax(0,1fr);gap:28px;min-height:220px}
 .journey-rail{display:flex;flex-direction:column;align-items:center}
-.journey-node{border:2px solid #E5E9ED;border-radius:50%;width:64px;height:64px;display:grid;place-items:center;background:#FCFBF9;font:600 21px 'Playfair Display',Georgia,serif;color:#6A737A;flex-shrink:0}
+.journey-node{border:2px solid #E5E9ED;border-radius:50%;width:64px;height:64px;display:grid;place-items:center;background:#FFFFFF;font:600 21px 'Playfair Display',Georgia,serif;color:#6A737A;flex-shrink:0}
 .journey-arrow{color:#6A737A;display:flex;align-items:center;justify-content:center;flex:1;min-height:72px;font-size:37px;font-weight:300;line-height:1;position:relative}
 .journey-arrow:before{content:"";position:absolute;top:0;bottom:4px;border-left:1px solid #E5E9ED;z-index:0}
 .journey-arrow{isolation:isolate}
@@ -174,7 +174,7 @@ body .hero-copy>p{max-width:67ch}
 .journey-step.journey-started .journey-node{border-color:#E5E9ED;background:#FFFFFF}
 .journey-detail{padding:8px 0 55px;border-bottom:1px solid #E5E9ED;margin-bottom:30px}
 .journey-step:last-child .journey-detail{border:0}
-.journey-tag{display:block;font-size:12px;font-weight:700;letter-spacing:.1em;color:#B5471C;margin-bottom:11px}
+.journey-tag{display:block;font-size:12px;font-weight:700;letter-spacing:.1em;color:#D94C10;margin-bottom:11px}
 .journey-detail h3{font:500 clamp(27px,2.8vw,40px)/1.22 'Playfair Display',Georgia,serif;letter-spacing:-.025em;margin:0 0 12px}
 .journey-detail p{font-size:17px!important;line-height:1.75!important;max-width:68ch;color:#6A737A}
 .journey-detail .darkbtn{font-size:16px!important;min-height:52px;margin-top:10px}
@@ -225,7 +225,7 @@ body .footer b{font-size:36px}
 .college-search-result:hover,.college-search-result:focus-visible{background:#FFFFFF;border-color:#E5E9ED}
 .college-search-result strong{font-size:16px;font-weight:700}
 .college-search-result span{font-size:13px;color:#6A737A}
-.college-manual{width:max-content;max-width:100%;background:#FCFBF9;color:white;font-size:15px;padding:12px 17px;border:0;border-radius:3px;cursor:pointer}
+.college-manual{width:max-content;max-width:100%;background:#FFFFFF;color:white;font-size:15px;padding:12px 17px;border:0;border-radius:3px;cursor:pointer}
 .college-chosen{font-weight:700!important;color:#6A737A!important}
 #cancel-college-selection{padding:10px 14px;border:1px solid #E5E9ED;border-radius:3px;background:transparent;font-size:14px;cursor:pointer;margin-left:10px}
 #application-form[hidden]{display:none!important}
@@ -237,7 +237,7 @@ body .footer b{font-size:36px}
 #apply .application-header select{font-size:16px!important;min-height:48px;padding:10px 15px}
 #apply .mini-checklist{gap:20px 32px;margin:20px 0}
 #apply .mini-checklist label{display:flex;align-items:center;gap:14px;font-size:18px!important;line-height:1.5;min-height:45px;cursor:pointer}
-#apply .mini-checklist input[type=checkbox]{appearance:auto;flex:0 0 24px;width:24px;height:24px;min-width:24px;min-height:24px;margin:0;accent-color:#B5471C;cursor:pointer}
+#apply .mini-checklist input[type=checkbox]{appearance:auto;flex:0 0 24px;width:24px;height:24px;min-width:24px;min-height:24px;margin:0;accent-color:#D94C10;cursor:pointer}
 #apply .application-footer button{font-size:16px!important;min-height:42px}
 #apply .followup-heading h4{font-size:clamp(26px,2.5vw,36px)!important}
 #apply .followup-heading span{font-size:16px!important}
@@ -280,7 +280,7 @@ body .footer b{font-size:36px}
 .deadline-due{font-size:14px;font-weight:700;color:#6A737A}
 .deadline-due.is-overdue{color:#B54742}
 .deadline-entry button{font-size:14px;font-weight:700;border:1px solid #E5E9ED;border-radius:3px;background:#FFFFFF;padding:10px 13px;color:#6A737A;cursor:pointer}
-.deadline-entry button:hover{background:#A93C13}
+.deadline-entry button:hover{background:#ED5B22}
 .deadline-empty{padding:18px 4px;color:#6A737A;font-size:15px}
 @media(max-width:700px){.deadline-heading{display:block}.deadline-link{display:inline-block;margin-top:15px}.deadline-entry{grid-template-columns:minmax(0,1fr) auto;gap:9px}.deadline-entry button{grid-column:1/-1;justify-self:start}.deadline-summary>div{padding:13px}.deadline-summary span{font-size:12px}}
 
@@ -293,7 +293,7 @@ body .footer b{font-size:36px}
 .followup-form label:nth-of-type(4){grid-column:1/-1}
 @media(max-width:700px){.followup-form label:nth-of-type(4){grid-column:auto}}
 
-.research-verification{font-size:13px!important;color:#B5471C!important;font-weight:700;margin:9px 0 12px;line-height:1.5}
+.research-verification{font-size:13px!important;color:#D94C10!important;font-weight:700;margin:9px 0 12px;line-height:1.5}
 
 /* Compact and searchable college application board. */
 .application-board-tools{display:flex;align-items:end;gap:16px;flex-wrap:wrap;margin:28px 0 17px;padding:18px;background:#FFFFFF;border:1px solid #E5E9ED}
@@ -307,7 +307,7 @@ body .footer b{font-size:36px}
 html{scroll-padding-top:110px}
 #apply,#prepare,#discover{scroll-margin-top:100px}
 .application-help{font-size:15px;line-height:1.7;color:#6A737A;margin:22px 0 5px}
-:where(.application-board-tools,.college-search,.deadline-filters,.followup-form) :is(input,select,button):focus-visible{outline:3px solid #F1B896;outline-offset:3px}
+:where(.application-board-tools,.college-search,.deadline-filters,.followup-form) :is(input,select,button):focus-visible{outline:3px solid #FFD9C9;outline-offset:3px}
 :where(.application-toggle,.followup-add,.college-search-result,.college-manual,.deadline-entry button){min-height:44px}
 @media(max-width:920px){
  .topbar{min-height:75px;height:auto;flex-wrap:wrap;padding-top:12px;padding-bottom:12px;gap:12px}
