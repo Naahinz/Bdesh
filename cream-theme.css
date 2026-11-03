@@ -176,7 +176,7 @@ body :is(.milestone,.research-card,.journey-detail,.application-card,.profile-pa
 
 /* Cream Editorial v2: remove all visible green leftovers from legacy layers.
    Palette: ivory #fffdf8, cream #f8f4ec, sand #e9dfd0,
-   champagne #d6c2a5, taupe #D96B38, espresso #525B63. */
+   ivory surfaces, orange highlights, neutral slate typography. */
 :root{
   --glass-forest:#525B63;--glass-ink:#525B63;--glass-muted:#6A737A;
   --glass-accent:#C64F1D;--sage:#FCFBF9;--forest:#525B63;
