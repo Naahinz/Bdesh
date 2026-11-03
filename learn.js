@@ -143,7 +143,7 @@ async function completeAndContinue(){
   $('check-feedback').append(document.createElement('br'),fallback);
  }
 }
-$('mark-read').addEventListener('click',()=>{if(current===lessons.length-1){completeAndContinue();return}setDone()});
+$('mark-read').addEventListener('click',()=>{if(current===lessons.length-1){completeAndContinue();return}setDone().catch(error=>{console.warn('Bdesh lesson progress sync:',error);$('check-feedback').textContent='This lesson was marked understood in this browser, but could not sync to your account. Check your connection and try again.';})});
 $('prev-lesson').addEventListener('click',()=>go(current-1));
 $('next-lesson').addEventListener('click',()=>{if(current===lessons.length-1){completeAndContinue();return}go(current+1)});
 async function cloudSync(){
