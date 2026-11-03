@@ -636,3 +636,233 @@ html body #discover .research-card .cardactions button:hover{
   background:#ED5B22!important;
   border-color:#ED5B22!important;
 }
+
+
+/* 2026-11-03 screenshot regression fixes: component-scoped, not global button rules.
+   A translucent card needs illuminated content behind it to look like glass. */
+html body :is(.main,.reader,#profile-app .content,.home-flow){
+  background:
+    radial-gradient(ellipse 45% 38% at 92% 13%,rgba(255,142,78,.16),transparent 92%),
+    radial-gradient(ellipse 52% 43% at 7% 72%,rgba(209,226,242,.33),transparent 88%)!important;
+}
+html body #discover #research-list>.research-card,
+html body #apply .application-card,
+html body #profile-app .profile-panel,
+html body .reader #knowledge-check.knowledge-check,
+html body .home-flow .journey-detail,
+html body .home-flow .home-flow-head{
+  background:linear-gradient(133deg,rgba(255,255,255,.84),rgba(255,249,245,.58))!important;
+  border:1px solid rgba(255,255,255,.92)!important;
+  box-shadow:0 18px 45px rgba(74,89,106,.11),inset 0 1px 0 rgba(255,255,255,.96)!important;
+  backdrop-filter:blur(19px) saturate(123%)!important;
+  -webkit-backdrop-filter:blur(19px) saturate(123%)!important;
+}
+html body #discover #research-list>.research-card{
+  margin-bottom:0;
+  border-radius:22px!important;
+}
+html body #discover .research-evidence{
+  background:rgba(255,255,255,.72)!important;
+  border:1px solid rgba(204,215,226,.83)!important;
+  border-radius:14px!important;
+}
+/* Knowledge check is a genuine content panel; its feedback is NOT another
+   tiny glass chip. Keep all response text fully readable and unconstrained. */
+html body .reader #knowledge-check.knowledge-check{
+  padding:clamp(23px,3vw,34px)!important;
+  border-radius:22px!important;
+  min-width:0;
+}
+html body .reader #knowledge-check .check-top{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px 18px;
+  color:#526170!important;
+}
+html body .reader #check-question{
+  color:#33424F!important;
+  font-size:clamp(20px,2.3vw,26px)!important;
+  line-height:1.4!important;
+}
+html body .reader #check-options{
+  display:grid;
+  grid-template-columns:minmax(0,1fr);
+  gap:10px;
+}
+html body .reader #check-options button.check-option{
+  display:block!important;
+  width:100%!important;
+  min-height:55px!important;
+  padding:15px 19px!important;
+  margin:0!important;
+  background:rgba(255,255,255,.86)!important;
+  border:1px solid rgba(203,215,225,.86)!important;
+  border-radius:14px!important;
+  box-shadow:none!important;
+  color:#33424F!important;
+  opacity:1!important;
+  font-size:15px!important;
+  font-weight:500!important;
+  line-height:1.5!important;
+  text-align:left!important;
+  white-space:normal!important;
+  overflow-wrap:anywhere;
+}
+html body .reader #check-options button.check-option:not(:disabled):hover{
+  background:rgba(255,240,230,.92)!important;
+  border-color:rgba(238,132,72,.62)!important;
+  color:#273641!important;
+}
+html body .reader #check-options button.check-option:disabled{
+  opacity:1!important;
+  cursor:default!important;
+}
+html body .reader #check-options button.check-option.correct{
+  background:rgba(255,233,218,.91)!important;
+  border-color:#F18F54!important;
+  color:#273641!important;
+  font-weight:700!important;
+}
+html body .reader #check-options button.check-option.incorrect{
+  background:rgba(255,238,236,.94)!important;
+  border-color:#DFA6A3!important;
+  color:#783936!important;
+}
+html body .reader #check-feedback.check-feedback{
+  display:block!important;
+  box-sizing:border-box!important;
+  width:100%!important;
+  max-width:100%!important;
+  min-height:0!important;
+  height:auto!important;
+  margin:18px 0 0!important;
+  padding:14px 18px!important;
+  background:rgba(255,255,255,.78)!important;
+  border:1px solid rgba(205,216,224,.76)!important;
+  border-left:3px solid #FF7134!important;
+  border-radius:12px!important;
+  box-shadow:none!important;
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+  color:#33424F!important;
+  opacity:1!important;
+  line-height:1.6!important;
+  font-size:14px!important;
+  white-space:normal!important;
+  overflow-wrap:anywhere;
+}
+html body .reader #check-feedback.check-feedback:empty{display:none!important}
+
+/* Profile section navigation: only the current section is highlighted. */
+html body #profile-app #profile-nav{
+  display:grid;
+  gap:7px;
+}
+html body #profile-app #profile-nav button{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:flex-start!important;
+  gap:12px!important;
+  width:100%!important;
+  min-height:52px!important;
+  padding:12px 14px!important;
+  border-radius:12px!important;
+  border:1px solid transparent!important;
+  box-shadow:none!important;
+  background:rgba(255,255,255,.37)!important;
+  color:#41515e!important;
+  text-align:left!important;
+  white-space:normal!important;
+  opacity:1!important;
+  line-height:1.45!important;
+}
+html body #profile-app #profile-nav button:not(.active):hover{
+  background:rgba(255,243,235,.85)!important;
+  border-color:rgba(244,175,135,.48)!important;
+}
+html body #profile-app #profile-nav button.active{
+  background:rgba(255,235,221,.88)!important;
+  color:#A43D12!important;
+  border-color:rgba(244,153,98,.65)!important;
+  box-shadow:0 4px 14px rgba(177,104,61,.06)!important;
+}
+html body #profile-app #profile-nav button :is(span,small){
+  color:inherit!important;
+  opacity:1!important;
+}
+html body #profile-app #profile-nav button .nav-n,
+html body #profile-app #profile-nav button .nav-mark{
+  flex:0 0 auto;
+  color:inherit!important;
+}
+/* The lesson side navigation follows the same selected/inactive distinction. */
+html body #lesson-nav button.lesson-link{
+  background:rgba(255,255,255,.38)!important;
+  border:1px solid transparent!important;
+  color:#41515e!important;
+  opacity:1!important;
+  text-align:left!important;
+}
+html body #lesson-nav button.lesson-link.active{
+  background:rgba(255,235,221,.86)!important;
+  border-color:rgba(244,153,98,.58)!important;
+  color:#A43D12!important;
+}
+html body #lesson-nav button.lesson-link:not(.active):hover{
+  background:rgba(255,244,236,.86)!important;
+}
+/* Primary controls: clear deep-slate text on vivid orange. */
+html body :is(#next-lesson,#profile-app .primary-button,
+  #profile-google-login,#discover .cardactions button,
+  .home-flow a.darkbtn,.hero a.primary-cta,
+  .callout a.lightbtn){
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  max-width:100%!important;
+  min-height:46px!important;
+  padding:12px 19px!important;
+  border:1px solid #FF7134!important;
+  border-radius:11px!important;
+  background:#FF7134!important;
+  box-shadow:0 7px 19px rgba(255,113,52,.13)!important;
+  color:#19242D!important;
+  text-shadow:none!important;
+  opacity:1!important;
+  font-weight:750!important;
+  line-height:1.45!important;
+  white-space:normal!important;
+  text-align:center!important;
+}
+html body :is(#next-lesson,#profile-app .primary-button,
+  #profile-google-login,#discover .cardactions button,
+  .home-flow a.darkbtn,.hero a.primary-cta,
+  .callout a.lightbtn):hover{
+  background:#ED5B22!important;
+  border-color:#ED5B22!important;
+  color:#19242D!important;
+}
+html body :is(#next-lesson,#profile-app .primary-button,
+  #profile-google-login,#discover .cardactions button,
+  .home-flow a.darkbtn,.hero a.primary-cta,
+  .callout a.lightbtn) :is(span,b,strong,small,i){
+  color:#19242D!important;
+}
+html body .callout a.lightbtn{width:fit-content!important}
+@media(max-width:680px){
+  html body #profile-app #profile-nav button{min-height:47px!important}
+  html body .reader #knowledge-check.knowledge-check{padding:20px 17px!important}
+  html body .reader #check-feedback.check-feedback{padding:13px 15px!important}
+}
+@media(prefers-reduced-transparency:reduce){
+  html body #discover #research-list>.research-card,
+  html body #apply .application-card,
+  html body #profile-app .profile-panel,
+  html body .reader #knowledge-check.knowledge-check{
+    background:#FFFFFF!important;
+    backdrop-filter:none!important;
+    -webkit-backdrop-filter:none!important;
+  }
+}
