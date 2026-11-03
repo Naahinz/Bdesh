@@ -49,24 +49,17 @@ body .research-caution{font-size:14px!important;line-height:1.7!important}
 body .research-caution strong{font-weight:800!important}
 body .research-count{color:#6A737A!important}
 
-/* Button contrast: a dark button always gets light lettering. */
-body button,
-body [role="button"]{background-color:#D94C10!important;color:#697781!important;border:1px solid rgba(229,233,237,.38)!important;border-radius:10px!important;text-shadow:none!important;min-height:42px}
-body button :is(span,b,strong,small,i,em),
-body [role="button"] :is(span,b,strong,small,i,em){color:inherit!important;opacity:1!important}
-body button:hover:not(:disabled){background-color:#D94C10!important;color:#fff!important}
-body button:disabled{opacity:.76!important;cursor:not-allowed}
-body :is(.darkbtn,.primary-button,.primary-cta,.button,.google-signin),
-body button.primary-button,body button.darkbtn,body button.button,
-body a.darkbtn,body a.button{background:#FFFFFF!important;color:#6A737A!important;border:1px solid #E5E9ED!important;box-shadow:none!important;text-shadow:none!important}
-body :is(.darkbtn,.primary-button,.primary-cta,.button,.google-signin) :is(span,b,strong,small,i,em),
-body button.primary-button :is(span,b,strong,small,i,em){color:#6A737A!important}
-body :is(.darkbtn,.primary-button,.primary-cta,.button,.google-signin):hover{background:#FFFFFF!important;color:#6A737A!important}
+/* Reset the former global 'body button' styling.
+   Buttons obtain their colors from their own component class. Keeping this
+   narrow prevents profile navigation and lesson choices becoming orange. */
+body button{font:inherit;cursor:pointer}
+body button:disabled{cursor:default}
 body .cardactions button,body .entry-actions button,body .followup-controls button,
 body .followup-item button,body .application-footer button,
-body .export-workspace,body button.outline-button{background:#FFFFFF!important;color:#697781!important;border-color:rgba(229,233,237,.36)!important}
-body .cardactions button:hover,body .entry-actions button:hover,body .followup-controls button:hover,
-body .followup-item button:hover,body .application-footer button:hover{background:#FFFFFF!important;color:#fff!important}
+body .export-workspace,body button.outline-button{
+  border-radius:10px!important;
+  text-shadow:none!important;
+}
 body .cardactions button{font-size:13px!important;font-weight:700!important;line-height:1.4!important;padding:12px 15px!important;min-height:46px;white-space:normal;max-width:100%}
 body .cardactions{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:auto;padding-top:17px}
 body .cardactions a{color:#6A737A!important;font-size:13px!important;text-decoration:underline;text-underline-offset:4px}
