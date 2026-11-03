@@ -1,5 +1,5 @@
 /* Bdesh legal, privacy and feedback pages — cream / sunset orange. */
-:root{color-scheme:light;--page:#faf7f2;--surface:#fffdfa;--stroke:#e9e0d7;--ink:#59534f;--muted:#77716c;--orange:#f37336;--peach:#fff0e5}
+:root{color-scheme:light;--page:#faf7f2;--surface:#fffdfa;--stroke:#e9e0d7;--ink:#55616a;--muted:#737d85;--orange:#f37336;--peach:#fff0e5}
 *{box-sizing:border-box}
 html{font-family:system-ui,-apple-system,Segoe UI,sans-serif}
 body{margin:0;min-height:100vh;line-height:1.75;color:var(--ink);background:radial-gradient(ellipse at 84% 0%,rgba(255,157,94,.08),transparent 48%),var(--page)}
@@ -27,10 +27,10 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 .feedback-panel>p{margin:0 0 23px;color:var(--muted)}
 .feedback-panel form{display:grid;gap:21px}
 .feedback-panel .form-row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
-.feedback-panel label{display:flex;flex-direction:column;gap:9px;min-width:0;font-size:14px;color:#625b55;font-weight:700;line-height:1.5}
+.feedback-panel label{display:flex;flex-direction:column;gap:9px;min-width:0;font-size:14px;color:#5d686f;font-weight:700;line-height:1.5}
 .feedback-panel input:not(.feedback-honeypot),.feedback-panel select,.feedback-panel textarea{display:block;width:100%;max-width:100%;min-width:0;padding:14px 16px;min-height:51px;border:1px solid #e6d9cd;border-radius:11px;background:#fffdfa;color:var(--ink);font:500 15px/1.55 system-ui,-apple-system,Segoe UI,sans-serif;box-sizing:border-box}
 .feedback-panel textarea{min-height:185px;resize:vertical;overflow-wrap:anywhere}
-.feedback-panel textarea::placeholder,.feedback-panel input::placeholder{color:#9d9189;opacity:1}
+.feedback-panel textarea::placeholder,.feedback-panel input::placeholder{color:#919ba2;opacity:1}
 .feedback-panel select option{background:#fffdfa;color:var(--ink)}
 .feedback-panel button.action{cursor:pointer;min-height:49px;font:800 14px system-ui,-apple-system,Segoe UI,sans-serif}
 .feedback-panel button.action:disabled{cursor:progress;opacity:.74}
