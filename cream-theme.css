@@ -324,3 +324,172 @@ body .bdesh-analytics-consent button:last-child{
   background:#584634!important;color:#fffaf0!important;border-color:#584634!important;
 }
 body .bdesh-analytics-consent button:focus-visible{outline-color:#aa865d!important}
+
+
+/* V3 — cream-first correction of high-specificity forest panel rules.
+   The earlier theme was loaded correctly, but selectors like body .main .intro
+   and body .action-plan .next-action still won the cascade. */
+html body{
+  --forest-glass:#fffdf9;--forest-panel:#fffdf9;--forest-bg:#faf7f1;
+  --repair-card:#fffdf9;--repair-bg:#faf6ee;
+}
+html body :is(.home-flow-head,.home-flow-head .journey-progress,
+  .journey-detail,.journey-step:nth-child(3n+2) .journey-detail,
+  .journey-step:nth-child(3n) .journey-detail,
+  .learn-first,.action-plan,.deadline-center,.intro,
+  .research-card,.application-card,.review-card,.profile-panel,
+  .entry-card,.profile-form,.paper-form,.add-app,.reading-intro,
+  .lesson-content,.knowledge-check,.reading-top,.chapter-card,
+  .overview-illustration,.sync,.date-editor,.followup-form,
+  .followup-item,.section-hint,.editor-form,.editor-history,
+  .research-caution,.college-search,.college-lookup-card,
+  .application-board-tools,.workspace-steps,.metrics>div,
+  .deadline-summary>div,.journey-progress,.review-summary,
+  .next-action,.research-controls,.sign-in-wall){
+  background:#fffdf9!important;
+  background-image:none!important;
+  border-color:#e9e0d3!important;
+  box-shadow:0 8px 28px rgba(77,57,31,.035)!important;
+  color:#42392f!important;
+}
+html body .main .intro,
+html body .main .learn-first,
+html body .main .action-plan,
+html body .main .deadline-center,
+html body .main .action-plan .next-action,
+html body .main .deadline-center .deadline-entry,
+html body #profile-app .profile-panel,
+html body #discover .research-controls,
+html body #apply .college-search.college-lookup-card,
+html body .home-flow .home-flow-head,
+html body .home-flow .journey-step .journey-detail,
+html body .home-flow .journey-progress{
+  background:#fffdf9!important;
+  background-image:none!important;
+  border:1px solid #e9dfd1!important;
+  box-shadow:0 7px 24px rgba(77,57,31,.03)!important;
+}
+html body .main .action-plan .next-actions,
+html body .main .action-plan .next-action{
+  background:#fffdf9!important;
+  background-image:none!important;
+  border-color:#e9e0d3!important;
+}
+html body .main .action-plan .next-action{
+  border-left:0!important;border-right:0!important;border-top:0!important;
+  border-bottom:1px solid #eae0d4!important;border-radius:0!important;
+  box-shadow:none!important;
+}
+html body .main .action-plan .next-action :is(h3,p,span,strong,small,a),
+html body .main .deadline-center :is(h2,h3,p,span,strong,small,a),
+html body .main .intro :is(h2,h3,p,strong,span),
+html body .main .learn-first :is(h2,h3,p,strong,span),
+html body .home-flow .home-flow-head :is(h2,h3,p,span,strong,small,em),
+html body .home-flow .journey-step .journey-detail :is(h3,p,.journey-foot,.journey-tag,small,em),
+html body .home-flow .journey-progress :is(p,span,strong,small){
+  color:#4c4237!important;
+}
+html body .main .action-plan .next-action p,
+html body .main .learn-first p,
+html body .main .intro p,
+html body .main .deadline-center p,
+html body .home-flow .journey-step .journey-detail p{
+  color:#746c60!important;
+}
+html body .home-flow .journey-progress{
+  border:1px solid #e9dfd1!important;border-radius:20px!important;
+}
+html body .home-flow .journey-ring{
+  background:conic-gradient(#c9ad85 var(--journey-percent,0%),#f1eadf 0)!important;
+}
+html body .home-flow .journey-ring-inner{
+  background:#fffdf9!important;border:0!important;
+}
+html body .home-flow .journey-progress p{color:#746a5d!important}
+html body .main .intro .sync,
+html body .main .action-plan .next-action-number,
+html body .main .deadline-summary>div{
+  background:#f7f1e7!important;background-image:none!important;
+  border-color:#e9dfd1!important;color:#51463a!important;
+}
+html body .main .intro .sync :is(span,strong,p){color:#51463a!important}
+html body .home-flow .journey-node{background:#f2e9dc!important;color:#6c5439!important}
+html body .home-flow .journey-arrow{color:#c6ae8b!important}
+html body .main .metrics>div{background:#fffdf9!important;border-color:#e9dfd1!important}
+html body .main .metrics :is(strong,span,small){color:#4c4236!important}
+html body .workspace-steps{background:#f7f2ea!important;box-shadow:none!important}
+html body .workspace-steps a{background:#fffdf9!important;color:#65594b!important;border-color:#e9dfd1!important}
+html body .workspace-steps a.active{background:#efe4d4!important;color:#493b2a!important;border-color:#d7c4ab!important}
+html body .main .section-heading h2,html body .main .intro h2,
+html body .main .learn-first h2,html body .main .action-plan h2,
+html body .main .deadline-center h2{color:#3e352b!important}
+html body .main .section-heading p{color:#716659!important}
+
+/* Panels found in the screenshots and their nested content. */
+html body .milestones .milestone,
+html body .main .milestone,
+html body .main .research-card,
+html body .main .application-card,
+html body .lesson-content :is(.takeaway,.example,.example-row,.application-flow),
+html body #profile-app :is(.profile-panel,.entry-card,.paper-form){
+  background:#fffdf9!important;
+  background-image:none!important;
+  border-color:#e8ded0!important;
+  box-shadow:0 5px 20px rgba(77,57,31,.025)!important;
+}
+html body .main .milestone :is(h3,p,span,strong,small,label){
+  color:#4e4338!important;
+}
+html body .main .milestone p{color:#766b5e!important}
+html body .main .milestone select{
+  background:#f8f3ea!important;color:#493d30!important;border:1px solid #dfd2c2!important;
+}
+html body #profile-app .profile-panel :is(h1,h2,h3,p,span,label,small,strong){
+  color:#4d4237!important;
+}
+html body #profile-app .profile-panel p{color:#74695e!important}
+
+/* Don't let graphic overlays recreate a green tint. */
+html body .home-flow-head::before,
+html body .home-flow-head::after,
+html body .journey-detail::before,
+html body .journey-detail::after,
+html body .main .intro::before,
+html body .main .intro::after,
+html body .main .action-plan::before,
+html body .main .deadline-center::before{
+  background:none!important;
+  background-image:none!important;
+}
+
+/* Non-green neutrals for controls and understated actions. */
+html body .main :is(.button,.export-workspace,.application-toggle),
+html body .home-flow .journey-detail a.darkbtn{
+  background:#eee4d6!important;color:#41372b!important;
+  border:1px solid #ded0bd!important;
+  box-shadow:none!important;
+}
+html body .main :is(.button,.export-workspace,.application-toggle):hover,
+html body .home-flow .journey-detail a.darkbtn:hover{
+  background:#e5d7c4!important;color:#372f26!important;
+}
+html body .main :is(.button,.export-workspace,.application-toggle) :is(span,strong,b){
+  color:#41372b!important;
+}
+html body .main .next-action a,
+html body .main .deadline-link,
+html body .main .action-plan-link{
+  color:#695842!important;border-color:#c9b79f!important;
+}
+
+/* Keep buttons readable while avoiding visually dominant espresso fills. */
+html body .hero .primary-cta,
+html body .home-flow .journey-detail a.journey-link{
+  background:#eee4d6!important;color:#3d3329!important;
+  border:1px solid #dacbb5!important;
+}
+html body .hero .primary-cta:hover,
+html body .home-flow .journey-detail a.journey-link:hover{
+  background:#e5d7c4!important;color:#3d3329!important;
+}
+html body .hero .primary-cta :is(span,strong,b){color:#3d3329!important}
