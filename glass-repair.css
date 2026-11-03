@@ -23,13 +23,13 @@ body #profile-app .profile-panel>.section-intro{padding:0!important;margin:0 0 3
 body #profile-app .profile-panel .section-intro h2{margin:12px 0 18px!important;line-height:1.13!important;max-width:100%;overflow-wrap:anywhere}
 body #profile-app .profile-panel .section-intro p{color:var(--repair-muted)!important;line-height:1.8!important}
 body #profile-app .profile-panel>.primary-button.next{margin-top:26px!important}
-body #profile-app .sidebar-head{padding:20px 21px!important;border:1px solid rgba(179,219,189,.2);border-radius:17px!important;background:rgba(15,53,40,.53)!important}
+body #profile-app .sidebar-head{padding:20px 21px!important;border:1px solid rgba(179,219,189,.2);border-radius:17px!important;background:#fffaf5!important}
 body #profile-app .sidebar-head :is(h1,p,.eyebrow){margin-left:0!important}
 body #profile-app .illustration-lines>div{border-bottom:1px solid rgba(182,223,194,.18)!important;gap:18px;min-width:0}
 body #profile-app .illustration-lines>div>*{min-width:0}
 body #profile-app .illustration-lines>div small{color:#c2d7c7!important;line-height:1.5}
-body #profile-app .line-icon{background:rgba(45,104,75,.78)!important;color:#ecf8ed!important;border:1px solid rgba(173,218,186,.28)!important;border-radius:9px;min-width:40px;text-align:center;flex:none}
-body #profile-app .illustration-top{background:rgba(31,79,59,.85)!important;color:#ecf7ec!important}
+body #profile-app .line-icon{background:#fff0e5!important;color:#ecf8ed!important;border:1px solid rgba(173,218,186,.28)!important;border-radius:9px;min-width:40px;text-align:center;flex:none}
+body #profile-app .illustration-top{background:#fff0e5!important;color:#ecf7ec!important}
 body #profile-app .illustration-top span{color:#e4f1e6!important}
 body #profile-app .advice-strip,body #profile-app .section-hint,body .research-caution,body #matching-insight{
  background:linear-gradient(115deg,#fffaf5,#ffefe4)!important;
@@ -51,22 +51,22 @@ body .research-count{color:#d6ebdc!important}
 
 /* Button contrast: a dark button always gets light lettering. */
 body button,
-body [role="button"]{background-color:#235a44!important;color:#eff9ed!important;border:1px solid rgba(175,218,187,.38)!important;border-radius:10px!important;text-shadow:none!important;min-height:42px}
+body [role="button"]{background-color:#f37336!important;color:#eff9ed!important;border:1px solid rgba(175,218,187,.38)!important;border-radius:10px!important;text-shadow:none!important;min-height:42px}
 body button :is(span,b,strong,small,i,em),
 body [role="button"] :is(span,b,strong,small,i,em){color:inherit!important;opacity:1!important}
-body button:hover:not(:disabled){background-color:#367455!important;color:#fff!important}
+body button:hover:not(:disabled){background-color:#d85b25!important;color:#fff!important}
 body button:disabled{opacity:.76!important;cursor:not-allowed}
 body :is(.darkbtn,.primary-button,.primary-cta,.button,.google-signin),
 body button.primary-button,body button.darkbtn,body button.button,
-body a.darkbtn,body a.button{background:#dcefdc!important;color:#163f2f!important;border:1px solid #d6ebd5!important;box-shadow:none!important;text-shadow:none!important}
+body a.darkbtn,body a.button{background:#fff0e5!important;color:#163f2f!important;border:1px solid #d6ebd5!important;box-shadow:none!important;text-shadow:none!important}
 body :is(.darkbtn,.primary-button,.primary-cta,.button,.google-signin) :is(span,b,strong,small,i,em),
 body button.primary-button :is(span,b,strong,small,i,em){color:#163f2f!important}
-body :is(.darkbtn,.primary-button,.primary-cta,.button,.google-signin):hover{background:#f3faf0!important;color:#123b2d!important}
+body :is(.darkbtn,.primary-button,.primary-cta,.button,.google-signin):hover{background:#ffe4d1!important;color:#123b2d!important}
 body .cardactions button,body .entry-actions button,body .followup-controls button,
 body .followup-item button,body .application-footer button,
-body .export-workspace,body button.outline-button{background:#245c46!important;color:#f0f9ef!important;border-color:rgba(191,226,198,.36)!important}
+body .export-workspace,body button.outline-button{background:#fff0e5!important;color:#f0f9ef!important;border-color:rgba(191,226,198,.36)!important}
 body .cardactions button:hover,body .entry-actions button:hover,body .followup-controls button:hover,
-body .followup-item button:hover,body .application-footer button:hover{background:#327855!important;color:#fff!important}
+body .followup-item button:hover,body .application-footer button:hover{background:#ffe4d1!important;color:#fff!important}
 body .cardactions button{font-size:13px!important;font-weight:700!important;line-height:1.4!important;padding:12px 15px!important;min-height:46px;white-space:normal;max-width:100%}
 body .cardactions{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:auto;padding-top:17px}
 body .cardactions a{color:#dcf3e1!important;font-size:13px!important;text-decoration:underline;text-underline-offset:4px}
@@ -97,7 +97,7 @@ body .application-card :is(button,input,textarea,select),body .profile-panel :is
 }
 
 /* University source evidence: readable without expanding every research card. */
-body .research-evidence{margin:8px 0 0;padding:14px 16px;border:1px solid rgba(181,224,193,.27);background:rgba(11,49,36,.58);border-radius:11px;max-width:100%;min-width:0}
+body .research-evidence{margin:8px 0 0;padding:14px 16px;border:1px solid rgba(181,224,193,.27);background:#fff8f2;border-radius:11px;max-width:100%;min-width:0}
 body .research-evidence summary{cursor:pointer;color:#e0f3e3;font-size:13px;font-weight:750;line-height:1.5}
 body .research-evidence[open] summary{padding-bottom:12px;border-bottom:1px solid rgba(173,222,187,.24);margin-bottom:12px}
 body .research-evidence h4{font-size:13px;color:#ecfaed;margin:15px 0 7px;line-height:1.45}
@@ -129,7 +129,7 @@ body #apply .college-lookup-card #college-search-input{
  display:block!important;width:100%!important;max-width:none!important;min-width:0!important;
  height:auto;min-height:68px!important;
  padding:18px 22px!important;margin:0!important;
- background:rgba(7,35,26,.78)!important;color:#fbfffa!important;
+ background:#fffdfa!important;color:#fbfffa!important;
  border:1px solid rgba(203,240,207,.58)!important;border-radius:15px!important;
  box-shadow:inset 0 2px 8px rgba(0,12,8,.15)!important;
  font-family:'Plus Jakarta Sans','DM Sans',sans-serif!important;
@@ -151,7 +151,7 @@ body #apply .college-lookup-card .college-search-result:hover,
 body #apply .college-lookup-card .college-search-result:focus-visible{background:#ffe9dd!important;border-color:#b4d8ad!important}
 body #apply .college-lookup-card .college-search-result strong{color:#f1faf0!important;line-height:1.35}
 body #apply .college-lookup-card .college-search-result span{color:#c1ddc7!important}
-body #apply .college-lookup-card .college-manual{background:#dcefdc!important;color:#143c2b!important;border-color:#d6e9d5!important;padding:14px 19px!important;border-radius:11px!important}
+body #apply .college-lookup-card .college-manual{background:#fff0e5!important;color:#143c2b!important;border-color:#d6e9d5!important;padding:14px 19px!important;border-radius:11px!important}
 body #apply .college-lookup-card .college-chosen{color:#d7f5dd!important}
 @media(max-width:620px){
  body #apply .college-search.college-lookup-card{padding:23px 19px!important;margin:21px 0 24px!important;border-radius:18px!important}
@@ -175,16 +175,16 @@ body #discover .research-controls>label:first-child{grid-column:1/-1!important;f
 body #discover .research-controls input#research-search{
  display:block!important;width:100%!important;max-width:none!important;min-width:0!important;
  padding:17px 20px!important;min-height:66px!important;font-size:clamp(17px,1.4vw,20px)!important;
- background:rgba(6,35,26,.79)!important;color:#f4fcf4!important;border:1px solid rgba(206,236,209,.55)!important;
+ background:#fffdfa!important;color:#f4fcf4!important;border:1px solid rgba(206,236,209,.55)!important;
  border-radius:14px!important;
 }
 body #discover .research-controls #research-search::placeholder{color:#b2cbbb!important;opacity:1!important}
-body #discover .research-controls select{width:100%!important;min-height:50px!important;padding:11px 15px!important;border-radius:11px!important;background:rgba(9,43,32,.78)!important;color:#f0faf0!important;font-size:14px!important;border:1px solid rgba(189,228,195,.36)!important}
+body #discover .research-controls select{width:100%!important;min-height:50px!important;padding:11px 15px!important;border-radius:11px!important;background:#fffdfa!important;color:#f0faf0!important;font-size:14px!important;border:1px solid rgba(189,228,195,.36)!important}
 @media(max-width:740px){body #discover .research-controls{grid-template-columns:minmax(0,1fr)!important;gap:14px!important;padding:21px 18px!important}body #discover .research-controls input#research-search{min-height:58px!important}}
 
 /* College evidence status: clearly distinguish an unresolved review from a completed one. */
 body .research-card .research-verification{display:block;margin:13px 0 5px!important;padding:10px 13px!important;border-radius:9px!important;font-size:12px!important;line-height:1.6!important;font-weight:750!important;letter-spacing:.005em;overflow-wrap:anywhere}
-body .research-card .research-verification[data-review-state="verified"]{background:rgba(45,112,68,.4)!important;color:#daf6df!important;border:1px solid rgba(141,216,154,.36)!important}
+body .research-card .research-verification[data-review-state="verified"]{background:#fff0e5!important;color:#daf6df!important;border:1px solid rgba(141,216,154,.36)!important}
 body .research-card .research-verification[data-review-state="partial"]{background:rgba(119,78,32,.42)!important;color:#ffdea3!important;border:1px solid rgba(238,181,98,.43)!important}
 body .research-card .research-verification[data-review-state="unreviewed"]{background:rgba(91,92,97,.28)!important;color:#e0e4e1!important;border:1px solid rgba(192,198,195,.35)!important}
 
@@ -199,7 +199,7 @@ body .auth-card #auth-form{max-width:100%;min-width:0}
 body .auth-card #auth-form input[type="email"],body .auth-card #auth-form input[type="password"]{
  width:100%!important;min-height:48px!important;border-radius:10px!important;
  border:1px solid rgba(194,228,198,.43)!important;
- background:rgba(8,39,29,.82)!important;color:#f4fbf3!important;
+ background:#fff6ef!important;color:#f4fbf3!important;
  font-size:16px!important;line-height:1.4!important;padding:12px 15px!important;
 }
 body .auth-card #auth-form input::placeholder{color:#accbb5!important;opacity:1}
