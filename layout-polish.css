@@ -2,9 +2,9 @@
    Loaded last. Grid/flex repairs only: preserve existing application behavior.
    Design surfaces are cream/ivory, accents sunset-orange, ink cool neutral gray. */
 :root{
-  --ui-ink:#4d5660;
-  --ui-body:#657079;
-  --ui-muted:#77818a;
+  --ui-ink:#525B63;
+  --ui-body:#6A737A;
+  --ui-muted:#77818A;
   --ui-orange:#C64F1D;
   --ui-orange-hover:#A93C13;
   --ui-peach:#FFF3EC;
