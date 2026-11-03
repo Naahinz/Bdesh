@@ -1,25 +1,25 @@
 /* Bdesh legal, privacy and feedback pages — cream / sunset orange. */
-:root{color-scheme:light;--page:#FAF9F7;--surface:#FFFFFF;--stroke:#E5E9ED;--ink:#55616a;--muted:#737d85;--orange:#C64F1D;--peach:#FFF3EC}
+:root{color-scheme:light;--page:#FAFAF9;--surface:#FFFFFF;--stroke:#E5E9ED;--ink:#55616a;--muted:#737d85;--orange:#FF7134;--peach:#FFF5F0}
 *{box-sizing:border-box}
 html{font-family:system-ui,-apple-system,Segoe UI,sans-serif}
-body{margin:0;min-height:100vh;line-height:1.75;color:var(--ink);background:radial-gradient(ellipse at 84% 0%,rgba(255,243,236,.08),transparent 48%),var(--page)}
+body{margin:0;min-height:100vh;line-height:1.75;color:var(--ink);background:radial-gradient(ellipse at 84% 0%,rgba(255,113,52,0.022),transparent 48%),var(--page)}
 header{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:21px clamp(20px,5vw,70px);border-bottom:1px solid var(--stroke);background:rgba(255,255,255,.96)}
 header .brand{font-size:27px;font-weight:800;letter-spacing:-.06em;text-decoration:none;color:var(--ink)}
 header nav{display:flex;gap:16px;flex-wrap:wrap}
-a{color:#B5471C;text-underline-offset:4px}
+a{color:#D94C10;text-underline-offset:4px}
 header a{text-decoration:none}header nav a:hover{text-decoration:underline}
 main{width:min(100% - 30px,880px);margin:44px auto 65px;padding:clamp(24px,5vw,55px);background:var(--surface);border:1px solid var(--stroke);border-radius:22px;box-shadow:0 18px 50px rgba(125,139,149,.05);min-width:0}
 h1,h2{color:var(--ink);overflow-wrap:anywhere}
 h1{font-size:clamp(34px,5vw,54px);letter-spacing:-.05em;line-height:1.13;margin:8px 0 24px}
 h2{font-size:clamp(21px,3vw,27px);margin:34px 0 10px;letter-spacing:-.035em;line-height:1.3}
 p,li{color:var(--muted);font-size:16px;overflow-wrap:anywhere}ul{padding-left:24px}
-.eyebrow{font-size:12px;letter-spacing:.17em;color:#B5471C;font-weight:800}
+.eyebrow{font-size:12px;letter-spacing:.17em;color:#D94C10;font-weight:800}
 .fine{font-size:13px;color:var(--muted)}
 footer{padding:24px;text-align:center;color:var(--muted);font-size:13px;border-top:1px solid var(--stroke);background:#FFFFFF}
 .action{display:inline-flex;align-items:center;justify-content:center;gap:8px;max-width:100%;min-height:47px;padding:12px 21px;border-radius:11px;background:var(--orange);color:#697781;text-decoration:none;font-weight:800;border:1px solid var(--orange);white-space:normal;text-align:center;line-height:1.45}
-.action:hover{background:#FFF3EC;color:#697781}
-.notice{background:#FFF3EC;border:1px solid #E5E9ED;border-radius:12px;padding:17px 20px;color:var(--muted)}
-a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid #F1B896;outline-offset:3px}
+.action:hover{background:#FFF5F0;color:#697781}
+.notice{background:#FFF5F0;border:1px solid #E5E9ED;border-radius:12px;padding:17px 20px;color:var(--muted)}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid #FFD9C9;outline-offset:3px}
 @media(max-width:600px){header{flex-direction:column;align-items:flex-start}main{margin:17px auto 38px}}
 /* Dedicated feedback form — same neutral surfaces and orange accents. */
 .feedback-panel{margin:30px 0 20px;padding:clamp(23px,4vw,37px);background:#FFFFFF;border:1px solid var(--stroke);border-radius:20px;box-shadow:0 12px 35px rgba(125,139,149,.04);min-width:0}
@@ -36,9 +36,9 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 .feedback-panel button.action:disabled{cursor:progress;opacity:.74}
 .feedback-panel .feedback-actions{display:flex;gap:17px;flex-wrap:wrap;align-items:center}
 .feedback-panel #feedback-status{flex:1 1 235px;min-width:0;color:var(--muted);font-size:13px;line-height:1.65;overflow-wrap:anywhere}
-.feedback-panel #feedback-status[data-state="success"]{color:#B5471C}
+.feedback-panel #feedback-status[data-state="success"]{color:#D94C10}
 .feedback-panel #feedback-status[data-state="error"]{color:#B54742}
-.feedback-panel #feedback-status[data-state="activation"]{color:#B5471C}
+.feedback-panel #feedback-status[data-state="activation"]{color:#D94C10}
 .feedback-panel .feedback-honeypot{position:absolute!important;left:-10000px!important;top:auto!important;width:1px!important;height:1px!important;opacity:0!important;pointer-events:none!important}
 .feedback-panel .fine{font-size:13px;color:var(--muted);line-height:1.7;margin:0}
 @media(max-width:640px){.feedback-panel{padding:22px 18px}.feedback-panel .form-row{grid-template-columns:1fr}.feedback-panel .feedback-actions{align-items:stretch}.feedback-panel .feedback-actions button{width:100%}}
