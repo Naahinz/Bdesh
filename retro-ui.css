@@ -68,7 +68,7 @@ p,li,label,small{font-family:var(--sans)}
 :where(input:not([type=checkbox]),textarea,select){min-height:44px;border-radius:10px!important;border:1px solid rgba(231,216,202,.27)!important;background:rgba(255,255,255,.9)!important;color:#696460!important;box-shadow:none!important}
 :where(input,textarea,select)::placeholder{color:#696460;opacity:1}
 :where(.rail a,.workspace-steps a,.sidebar nav button,.curriculum nav button){box-shadow:none!important;font-weight:600!important;transition:background .15s,border-color .15s}
-:where(.rail a,.workspace-steps a,.sidebar nav button,.curriculum nav button):hover{background:rgba(243,115,54,.7)!important}
+:where(.rail a,.workspace-steps a,.sidebar nav button,.curriculum nav button):hover{background:rgba(255,230,212,.84)!important}
 :where(.rail a.active,.workspace-steps a.active,.sidebar nav button.active,.curriculum nav button.active){background:#ffecdf!important;color:#d56430!important}
 .hero{border:1px solid rgba(255,255,255,.67)!important;box-shadow:0 18px 50px rgba(231,216,202,.14)!important}
 .hero-copy{border:1px solid rgba(255,255,255,.22)!important;box-shadow:none!important}
