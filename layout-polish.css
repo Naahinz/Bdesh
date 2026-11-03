@@ -436,3 +436,91 @@ html body .reader :is(.knowledge-check,.takeaway,.application-example){
   html body .home-flow .journey-detail :is(a.darkbtn,a.journey-link){width:100%}
   html body .reader .footer-right>*{flex:1 1 100%}
 }
+
+
+/* Final component-level palette consistency: white cards, neutral strokes,
+   orange interactive elements; no espresso or brown surfaces. */
+html body :is(.hero-copy,.home-flow-head,.journey-detail,.research-card,
+  .application-card,.learn-first,.intro,.action-plan,.deadline-center,
+  .profile-panel,.entry-card,.lesson-content,.review-card,.followup-tracker,
+  .college-lookup-card,.research-controls){
+  background-color:#FFFFFF!important;
+  border-color:#E5E9ED!important;
+}
+html body :is(.research-evidence,.followup-item,.date-editor,
+  .research-caution,.section-hint,.notice,.sync){
+  background:#FCFBF9!important;
+  border-color:#E5E9ED!important;
+  color:#525B63!important;
+}
+html body :is(.research-evidence,.followup-item,.date-editor,
+  .research-caution,.section-hint,.notice,.sync) :is(p,span,small,li){
+  color:#6A737A!important;
+}
+html body :is(.research-evidence,.followup-item,.date-editor,
+  .research-caution,.section-hint,.notice,.sync) :is(a,summary){
+  color:#B5471C!important;
+}
+html body .home-flow .journey-node{
+  background:#FFF3EC!important;
+  border-color:#F1B896!important;
+  color:#B5471C!important;
+}
+html body .home-flow .journey-arrow{color:#C64F1D!important}
+html body :is(.side,.sidebar,.curriculum){
+  background:#FAF9F7!important;border-color:#E5E9ED!important;
+}
+html body :is(.rail a.active,.workspace-steps a.active,.lesson-link.active,
+  #profile-nav button.active){
+  background:#FFF3EC!important;
+  border-color:#F1B896!important;
+  color:#B5471C!important;
+}
+/* Google-only beta sign-out is a quiet utility action, not a primary CTA. */
+html body .nav .nav-actions #account-toggle,
+html body :is(#signout,#sign-out){
+  background:#FFFFFF!important;
+  border:1px solid #E5E9ED!important;
+  color:#525B63!important;
+  font-size:13px!important;
+  padding:10px 14px!important;
+  min-height:43px!important;
+}
+html body .nav .nav-actions #account-toggle:hover,
+html body :is(#signout,#sign-out):hover{
+  background:#FFF3EC!important;
+  color:#B5471C!important;
+  border-color:#F1B896!important;
+}
+/* Application buttons previously inherited white lettering on pale fills. */
+html body #apply .application-footer button{
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  min-height:43px!important;
+  width:auto!important;
+  max-width:100%!important;
+  padding:9px 14px!important;
+  border:1px solid #E5E9ED!important;
+  background:#FFF3EC!important;
+  color:#B5471C!important;
+  border-radius:10px!important;
+  font-size:13px!important;
+  font-weight:700!important;
+  line-height:1.4!important;
+  white-space:normal!important;
+}
+html body #apply .application-footer button:hover{
+  background:#FFE7DA!important;border-color:#F1B896!important;
+}
+html body #apply .application-footer button.danger{
+  background:#FFF8F7!important;
+  color:#B54742!important;
+  border-color:#F1D5D2!important;
+}
+html body #apply .application-footer button.danger:hover{background:#FFF0EE!important}
+html body #discover .research-verification{
+  background:#FFF3EC!important;
+  color:#B5471C!important;
+  border-color:#F1B896!important;
+}
