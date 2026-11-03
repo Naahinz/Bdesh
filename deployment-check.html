@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bdesh deployment check</title>
+<style>
+:root{font-family:system-ui,-apple-system,Segoe UI,Arial,sans-serif;color:#283541;background:#f9fafb}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(circle at 90% 10%,rgba(255,124,60,.14),transparent 40%),#f9fafb;padding:clamp(20px,5vw,60px)}
+main{max-width:720px;margin:auto;background:rgba(255,255,255,.82);border:1px solid #fff;border-radius:22px;padding:clamp(22px,5vw,48px);box-shadow:0 16px 55px rgba(30,55,75,.09);backdrop-filter:blur(14px)}
+small{color:#d05a2b;letter-spacing:.11em;font-weight:750;text-transform:uppercase}h1{margin:10px 0 12px;font-size:clamp(28px,5vw,42px);line-height:1.12}p{color:#566575;line-height:1.7}ul{list-style:none;margin:25px 0;padding:0;display:grid;gap:11px}li{padding:13px 15px;border:1px solid #e0e6ea;border-radius:12px;background:rgba(255,255,255,.8);line-height:1.5}b{font-size:13px;text-transform:uppercase;letter-spacing:.035em;color:#284c3d}.fail b{color:#a13b27}.pending b{color:#637180}code{font-size:12px;background:#f3f5f6;border-radius:5px;padding:2px 5px;overflow-wrap:anywhere}.hint{margin-top:18px;padding-top:20px;border-top:1px solid #e2e7eb}a{color:#b74918;font-weight:700}button{font:inherit;cursor:pointer;border:0;background:#ff7134;color:#172631;font-weight:700;padding:12px 18px;border-radius:10px}
+</style></head>
+<body><main>
+<small>Version check • 03 Nov 2026</small><h1>Bdesh deployment diagnostics</h1>
+<p>This page is self-contained and does not rely on Bdesh's shared stylesheets. If you can see it at <code>/deployment-check.html</code>, your live deployment includes this diagnostic file.</p>
+<ul>
+<li><b>Deployment probe:</b> present (build marker <code>glass-fix-2026-11-03-a</code>)</li>
+<li id="css" class="pending"><b>CSS:</b> checking published files…</li>
+<li id="html" class="pending"><b>HTML:</b> checking published pages…</li>
+<li id="repair" class="pending"><b>Button reset:</b> checking published repair rules…</li>
+</ul>
+<button id="retry" type="button">Check again</button>
+<p class="hint" id="advice">If this diagnostic page returns 404 while it exists in GitHub's <code>main</code> branch, verify the Cloudflare Pages production deployment, connected repository, production branch, and output directory.</p>
+<p><a href="/">Go to homepage</a></p>
+</main>
+<script>
+const tag=(id,pass,message)=>{const el=document.getElementById(id);el.className=pass?'pass':'fail';el.innerHTML='<b>'+(pass?'PASS':'NOT UPDATED')+':</b> '+message;};
+async function fetchText(path){const r=await fetch(path+(path.includes('?')?'&':'?')+'test='+Date.now(),{cache:'no-store'});if(!r.ok)throw new Error('HTTP '+r.status+' for '+path);return await r.text();}
+async function check(){
+for(const id of ['css','html','repair']){document.getElementById(id).className='pending';document.getElementById(id).textContent='Checking…';}
+try{const css=await fetchText('/layout-polish.css');tag('css',css.includes('#check-feedback.check-feedback')&&css.includes('#profile-app #profile-nav button:not(.active):hover'),'Lesson feedback, profile navigation, and glass-card repairs'+(css.includes('#check-feedback.check-feedback')?' are present.':' are not in live CSS.'));}catch(e){tag('css',false,e.message);}
+try{const html=await fetchText('/learn.html');tag('html',html.includes('layout-polish.css?v=7'),'Learning page '+(html.includes('layout-polish.css?v=7')?'references the updated stylesheet.':'still references an older stylesheet.'));}catch(e){tag('html',false,e.message);}
+try{const css=await fetchText('/glass-repair.css');tag('repair',!css.includes('body button,\nbody [role="button"]'),'Legacy universal orange button rule '+(!css.includes('body button,\nbody [role="button"]')?'has been removed.':'is still served.'));}catch(e){tag('repair',false,e.message);}
+}
+document.getElementById('retry').addEventListener('click',check);check();
+</script></body></html>
