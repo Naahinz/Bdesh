@@ -7,6 +7,7 @@ if(!form||!status||!submit)return;
 const url='https://xeqixwmulwonvhifcmvn.supabase.co';
 const key='sb_publishable_2Jp14PFt4_mLDT4cpqLfUw_d-tDSnwj';
 const client=window.supabase?.createClient(url,key,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});
+const protectedMode=window.BDESH_FEEDBACK_SECURITY?.enabled===true;
 const emailAddress='eftekhernahin@gmail.com';
 const startedAt=Date.now();
 let lastSentAt=0;
@@ -55,11 +56,19 @@ form.addEventListener('submit',async event=>{
  submit.disabled=true;submit.textContent='Saving feedback…';
  announce('Saving your feedback to Bdesh…','pending');
  try{
-  // Do not call .select(): anonymous users have INSERT but no SELECT privileges.
-  const {error}=await client.from('beta_feedback').insert({
-   category,message,reply_email,page_path:location.pathname
-  });
-  if(error)throw error;
+  if(protectedMode){
+   // Never fall back to direct inserts after a failed security challenge.
+   if(!window.bdeshProtectedFeedbackSubmit)throw {code:'challenge_not_ready'};
+   const result=await window.bdeshProtectedFeedbackSubmit({category,message,reply_email});
+   if(!result.ok)throw {code:result.code||'verification_failed'};
+  }else{
+   // Legacy path preserved until the protected Edge Function and secret are verified.
+   // Do not call .select(): anonymous users have INSERT but no SELECT privileges.
+   const {error}=await client.from('beta_feedback').insert({
+    category,message,reply_email,page_path:location.pathname
+   });
+   if(error)throw error;
+  }
   lastSentAt=Date.now();
   form.reset();
   announce('Feedback saved successfully to the Bdesh inbox. Thank you!','success');
