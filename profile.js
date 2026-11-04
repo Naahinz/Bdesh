@@ -45,7 +45,7 @@ async function goToSection(section,button=null){
 }
 for(const button of document.querySelectorAll('[data-section]'))button.addEventListener('click',()=>goToSection(button.dataset.section,button));
 for(const button of document.querySelectorAll('[data-go]'))button.addEventListener('click',()=>goToSection(button.dataset.go,button));
-window.addEventListener('hashchange',()=>{const section=location.hash.slice(1);if(section&&section!==active)showSection(section)});
+window.addEventListener('hashchange',()=>{const section=location.hash.slice(1);if(section&&section!==active)goToSection(section)});
 function academicPayload(){const f=$('academics-form');return{user_id:user.id,display_name:val(f,'display_name').trim()||null,school_name:val(f,'school_name').trim()||null,graduation_year:number(val(f,'graduation_year')),ssc_gpa:number(val(f,'ssc_gpa')),hsc_gpa:number(val(f,'hsc_gpa')),sat_total:number(val(f,'sat_total')),english_test:val(f,'english_test'),english_score:val(f,'english_score').trim()||null,intended_majors:val(f,'intended_majors').trim()||null,countries:val(f,'countries').split(',').map(v=>v.trim()).filter(Boolean).slice(0,15),funding_need:val(f,'funding_need'),updated_at:new Date().toISOString()}}
 async function saveBasic(explicit=true){
  if(!user||hydrating)return false;
