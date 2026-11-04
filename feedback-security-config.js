@@ -3,5 +3,5 @@
 // Site key is public. NEVER put the Turnstile secret in a browser file.
 window.BDESH_FEEDBACK_SECURITY=Object.freeze({
  enabled: false,
- siteKey: ''
+ siteKey: '0x4AAAAAAFzeGjyc20pKy81K'
 });
