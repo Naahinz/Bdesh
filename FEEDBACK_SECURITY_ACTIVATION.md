@@ -3,7 +3,7 @@
 Updated: 4 November 2026
 
 ## State as of this document
-**STAGED, NOT YET ACTIVE FOR SITE VISITORS.** The existing working feedback form continues using the original Supabase `beta_feedback` INSERT route. The feature flag in `feedback-security-config.js` is deliberately `enabled: false`.
+**ACTIVATED IN THE FRONTEND, FINAL SECURITY CUTOVER PENDING.** The owner confirmed the Turnstile secret was saved in Supabase. `feedback-security-config.js` is now `enabled: true`, and new page loads use the protected Edge Function. The legacy database INSERT permission is still available as a bypass until a successful real Turnstile submission is verified and the old grant/policy are revoked.
 
 Already implemented:
 - Public Supabase Edge Function `submit-feedback` version 2 (intentionally `verify_jwt=false` because unauthenticated visitors can submit).
@@ -12,13 +12,13 @@ Already implemented:
 - Fail-closed behavior: without `BDESH_TURNSTILE_SECRET`, the endpoint returns `server_not_configured` and does not write feedback.
 - Privacy-minded best-effort rate limiting: per server-derived visitor IP hash, at most **3 verified submissions in a 15-minute fixed window**, using an atomic Postgres conflict update. Only the HMAC hash is stored in `bdesh_private.feedback_rate_buckets`; raw IPs are not stored by this feature. Gateway address headers are not a perfect abuse identity; Turnstile is the primary defense.
 - `public.submit_verified_beta_feedback(text,text,text,text,text)` callable only by `service_role`. Anonymous and authenticated accounts cannot call the verified insert function. Sensitive credentials remain exclusively in Supabase secrets.
-- Frontend Turnstile widget and secure submit flow, **disabled by the feature flag** to preserve existing working submissions. No fallback to the direct database insert once protected mode is enabled.
+- Frontend Turnstile widget and secure submit flow, **enabled in the frontend** after the owner confirmed the secret. No fallback to the direct database insert once protected mode is enabled.
 
 ## Manual setup — credentials must never be shared in chat or GitHub
 
 1. **Public site key configured in GitHub on 4 November 2026.** Turnstile widget creation was performed by the user. In [Cloudflare Turnstile](https://dash.cloudflare.com/?to=/:account/turnstile), create a widget for **bdesh.pages.dev** using Managed mode. Copy its **public sitekey**. Keep its **secret key** private.
 2. In the [Supabase Edge Functions secrets](https://supabase.com/dashboard/project/xeqixwmulwonvhifcmvn/functions/secrets) for this project, add secret name **`BDESH_TURNSTILE_SECRET`** with the secret value. Save it in Supabase, not as a GitHub file or chat message. No function redeploy is needed after adding the secret.
-3. The **public sitekey is already in** `feedback-security-config.js`. Once the backend secret is saved and confirmed, set `enabled: true`. `feedback-protected.js` will then load and render the Turnstile widget explicitly. It must send the action `bdesh_feedback`. Wait for the Cloudflare deployment.
+3. **DONE:** The public sitekey is installed; the owner confirmed the secret was saved; `enabled: true` is committed and the feedback HTML asset URL was refreshed. `feedback-protected.js` will then load and render the Turnstile widget explicitly. It must send the action `bdesh_feedback`. Wait for the Cloudflare deployment.
 4. **Validate before locking down the old route:** Submit one harmless message at https://bdesh.pages.dev/feedback.html, confirm `Feedback saved successfully`, and confirm it appears in the authorized admin feedback inbox. Also attempt a second submission to check the widget resets properly. Confirm a failed or missing challenge cannot submit through the protected route. Validate again on a private/incognito browser.
 5. **Important mandatory cutover, before large public access:** Direct anonymous INSERT into `public.beta_feedback` still bypasses Turnstile. After step 4 passes, run the following in Supabase SQL Editor. This closes that bypass. Do **not** do this before successfully testing the new protected path.
 
