@@ -4,7 +4,7 @@
 const URL='https://xeqixwmulwonvhifcmvn.supabase.co',KEY='sb_publishable_2Jp14PFt4_mLDT4cpqLfUw_d-tDSnwj';
 const $=id=>document.getElementById(id),sb=window.supabase?.createClient(URL,KEY,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});
 const sections=['overview','academics','activities','honors','writing','brag','review'];
-let user=null,basic={},portfolio={},active='',saving=false,queued=false,saveTimer=null,hydrating=false;
+let user=null,basic={},portfolio={},active='',saving=false,queued=false,saveTimer=null,hydrating=false,navSaving=false;
 const blank=()=>({activities:[],honors:[],essays:[],academic_context:'',brag_sheet:'',future_goals:'',additional_notes:''});
 function message(text,bad=false){const el=$('save-status');el.textContent=text;el.style.color=bad?'#b0564c':'#c65a2e'}
 function showError(text){$('signin-error').textContent=text;$('account-name').textContent='Sign in required'}
@@ -21,25 +21,83 @@ function field(label,name,type='text',opts={}){const wrap=el('label',{class:opts
  return wrap
 }
 function optionList(list){return list.map(([v,t])=>[v,t])}
+function nextSection(section){const i=sections.indexOf(section);return sections[Math.min(i+1,sections.length-1)]}
 function showSection(section){if(!sections.includes(section))section='overview';if(section===active&&document.getElementById('panel-'+section)?.hidden===false)return;
- if(user&&active==='academics')saveBasic(false);
- if(user&&['activities','honors','writing','brag'].includes(active))queueSave();
  active=section;for(const id of sections)$('panel-'+id).hidden=id!==section;
  for(const button of document.querySelectorAll('[data-section]')){button.classList.toggle('active',button.dataset.section===section);button.setAttribute('aria-current',button.dataset.section===section?'step':'false')}
  $('section-serial').textContent='YOUR STUDENT FILE / '+String(sections.indexOf(section)+1).padStart(2,'0');
  if(section==='review')renderReview();location.hash=section;window.scrollTo({top:0,behavior:'instant'});$('profile-main').focus({preventScroll:true});
 }
-for(const button of document.querySelectorAll('[data-section]'))button.addEventListener('click',()=>showSection(button.dataset.section));
-for(const button of document.querySelectorAll('[data-go]'))button.addEventListener('click',()=>showSection(button.dataset.go));
+async function goToSection(section,button=null){
+ if(navSaving||!user)return;
+ if(section===active)return;
+ navSaving=true;if(button)button.disabled=true;
+ try{
+  if(active==='academics'){
+   const ok=await saveBasic(false);
+   if(!ok)return;
+  }else if(['activities','honors','writing','brag'].includes(active)){
+   const ok=await persistPortfolio();
+   if(!ok)return;
+  }
+  showSection(section);
+ }finally{navSaving=false;if(button)button.disabled=false}
+}
+for(const button of document.querySelectorAll('[data-section]'))button.addEventListener('click',()=>goToSection(button.dataset.section,button));
+for(const button of document.querySelectorAll('[data-go]'))button.addEventListener('click',()=>goToSection(button.dataset.go,button));
 window.addEventListener('hashchange',()=>{const section=location.hash.slice(1);if(section&&section!==active)showSection(section)});
 function academicPayload(){const f=$('academics-form');return{user_id:user.id,display_name:val(f,'display_name').trim()||null,school_name:val(f,'school_name').trim()||null,graduation_year:number(val(f,'graduation_year')),ssc_gpa:number(val(f,'ssc_gpa')),hsc_gpa:number(val(f,'hsc_gpa')),sat_total:number(val(f,'sat_total')),english_test:val(f,'english_test'),english_score:val(f,'english_score').trim()||null,intended_majors:val(f,'intended_majors').trim()||null,countries:val(f,'countries').split(',').map(v=>v.trim()).filter(Boolean).slice(0,15),funding_need:val(f,'funding_need'),updated_at:new Date().toISOString()}}
-async function saveBasic(explicit=true){if(!user||hydrating)return;let payload=academicPayload();const {data,error}=await sb.from('student_admissions_profiles').upsert(payload,{onConflict:'user_id'}).select().single();if(error){message('Education save failed: '+error.message,true);return}basic=data;message(explicit?'Education saved ✓':'Education updated');if(explicit)window.bdeshTrack?.('bdesh_profile_saved');await persistPortfolio();progress()}
+async function saveBasic(explicit=true){
+ if(!user||hydrating)return false;
+ const button=explicit?$('academics-form').querySelector('button[type="submit"]'):null;
+ if(button){button.disabled=true;button.textContent='Saving…'}
+ try{
+  const payload=academicPayload();
+  const {data,error}=await sb.from('student_admissions_profiles').upsert(payload,{onConflict:'user_id'}).select().single();
+  if(error)throw error;
+  basic=data;
+  const ok=await persistPortfolio();
+  if(!ok)throw Error('Your additional profile information could not be saved.');
+  message('Education saved ✓');progress();
+  if(button){button.textContent='Saved ✓';button.dataset.saved='true'}
+  if(explicit){window.bdeshTrack?.('bdesh_profile_saved');await goToSection(nextSection('academics'))}
+  return true;
+ }catch(error){
+  message('Education save failed: '+(error?.message||String(error)),true);
+  if(button){button.textContent='Retry saving';button.dataset.saved='false'}
+  return false;
+ }finally{if(button)button.disabled=false}
+}
 function fillBasic(){const f=$('academics-form');for(const name of ['display_name','school_name','graduation_year','ssc_gpa','hsc_gpa','sat_total','english_test','english_score','intended_majors','funding_need']){const v=basic[name];if(v!==undefined&&v!==null&&f.elements.namedItem(name))f.elements.namedItem(name).value=String(v)}f.elements.namedItem('countries').value=(basic.countries||[]).join(', ');f.elements.namedItem('academic_context').value=portfolio.academic_context||''}
 function collectCards(section){return [...document.querySelectorAll('#'+section+'-list .entry-card')].map(card=>{const output={};for(const input of card.querySelectorAll('[name]')){if(input.type==='checkbox'){if(!output[input.name])output[input.name]=[];if(input.checked)output[input.name].push(input.value)}else if(input.type==='number'){output[input.name]=input.value===''?null:Number(input.value)}else{output[input.name]=input.value}}return output})}
 function harvest(){portfolio.activities=collectCards('activity');portfolio.honors=collectCards('honor');portfolio.essays=collectCards('essay');portfolio.academic_context=val($('academics-form'),'academic_context');for(const k of ['brag_sheet','future_goals','additional_notes'])portfolio[k]=val($('brag-form'),k)}
 function queueSave(){if(!user||hydrating)return;clearTimeout(saveTimer);saveTimer=setTimeout(()=>persistPortfolio(),850);message('Unsaved changes…')}
-async function persistPortfolio(){if(!user||hydrating)return;clearTimeout(saveTimer);harvest();if(saving){queued=true;return}saving=true;message('Saving your profile…');const payload={user_id:user.id,activities:portfolio.activities,honors:portfolio.honors,essays:portfolio.essays,academic_context:portfolio.academic_context,brag_sheet:portfolio.brag_sheet,future_goals:portfolio.future_goals,additional_notes:portfolio.additional_notes,updated_at:new Date().toISOString()};
-const {error}=await sb.from('student_profile_portfolios').upsert(payload,{onConflict:'user_id'});saving=false;if(error)message('Save failed: '+error.message,true);else message('Saved to your private account ✓');progress();if(queued){queued=false;queueSave()}}
+let portfolioWrite=Promise.resolve();
+async function persistPortfolio(button=null){
+ if(!user||hydrating)return false;
+ clearTimeout(saveTimer);
+ if(button){button.disabled=true;button.textContent='Saving…'}
+ harvest();
+ const payload={user_id:user.id,activities:structuredClone(portfolio.activities),honors:structuredClone(portfolio.honors),essays:structuredClone(portfolio.essays),academic_context:portfolio.academic_context,brag_sheet:portfolio.brag_sheet,future_goals:portfolio.future_goals,additional_notes:portfolio.additional_notes,updated_at:new Date().toISOString()};
+ message('Saving your profile…');
+ const run=portfolioWrite.catch(()=>{}).then(async()=>{
+  const {error}=await sb.from('student_profile_portfolios').upsert(payload,{onConflict:'user_id'});
+  if(error)throw error;
+  progress();
+  message('Saved to your private account ✓');
+  return true;
+ });
+ portfolioWrite=run;
+ try{
+  await run;
+  if(button){button.textContent='Saved ✓';button.dataset.saved='true'}
+  return true;
+ }catch(error){
+  message('Save failed: '+(error?.message||String(error)),true);
+  if(button){button.textContent='Retry saving';button.dataset.saved='false'}
+  return false;
+ }finally{if(button)button.disabled=false}
+}
 function activityForm(entry,index){const card=el('article',{class:'entry-card'});card.dataset.activityIndex=index;const head=el('div',{class:'entry-head'});const info=el('div');info.append(el('h4',{},'Activity '+(index+1)),el('p',{},'A concise Common App-ready entry and your fuller personal notes.'));head.append(info);
 const actions=el('div',{class:'entry-actions'});const copy=el('button',{type:'button'},'Copy entry');copy.addEventListener('click',()=>copyText(formatActivity(index)));const remove=el('button',{type:'button',class:'remove'},'Remove');remove.onclick=()=>{if(!confirm('Remove this activity from your Bdesh profile?'))return;const cards=collectCards('activity');cards.splice(index,1);portfolio.activities=cards;renderActivities();queueSave()};actions.append(copy,remove);head.append(actions);card.append(head);
 const body=el('div',{class:'entry-body'}),grid=el('div',{class:'entry-grid'});
