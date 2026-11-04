@@ -56,3 +56,12 @@ If the widget fails during configuration **before** step 5, switch `enabled: fal
 - `https://bdesh.pages.dev` and hostname `bdesh.pages.dev` are currently fixed in the Edge Function. Any future custom domain requires a reviewed allowlist update, new Turnstile hostname authorization and re-test.
 - Client-side honeypot/browser throttling still exist, but only server challenge verification and backend rate limiting count as meaningful bot protection.
 - Do not add analytics to the feedback payload. Keep private messages out of PostHog.
+
+
+## 4 November 2026 — final protected-feedback cutover verified
+- The owner successfully submitted a Turnstile-verified test feedback item through the live website and observed it in the private admin inbox.
+- Applied migration `close_direct_public_feedback_inserts_after_turnstile_verification`: revoked table-level and column-level INSERT from `anon` and `authenticated` on `public.beta_feedback`; dropped `Public feedback submission` RLS INSERT policy.
+- Independently verified that anonymous and authenticated table/column INSERT privileges are **false**, there are **zero** public feedback INSERT policies, and anonymous execution of `submit_verified_beta_feedback` is **false**.
+- Ran a rolled-back anonymous insert attempt, which raised an insufficient-privilege error as expected; ran a rolled-back `service_role` verified-RPC insert, which returned `saved`.
+- Both existing feedback items were preserved. No live student records were modified by security cutover.
+- The secure path remains the only intended feedback insertion route. Do not restore public insert grants for troubleshooting. The server-side challenge and quota should remain mandatory.
