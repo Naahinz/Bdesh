@@ -47,9 +47,11 @@
         detail: { user: user ? { id: user.id, email: user.email || "" } : null },
       }),
     );
+  let currentId; // undefined until the first auth event, so a signed-out start still updates the button
   function setUser(next) {
     toggle.disabled = false;
-    if ((next?.id || null) === (user?.id || null)) return;
+    if ((next?.id ?? null) === currentId) return;
+    currentId = next?.id ?? null;
     user = next || null;
     toggle.textContent = user ? "Sign out (" + (user.email || "account") + ")" : "Beta sign in";
     announce();
