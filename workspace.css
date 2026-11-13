@@ -34,3 +34,5 @@ a{color:inherit;text-decoration:none}button,input,select,textarea{font:inherit}b
 .milestone select{flex:0 0 155px;min-width:155px;background:#FFFFFF;color:#6A737A;border:1px solid rgba(229,233,237,.35);font-size:14px;border-radius:10px;min-height:47px}
 .milestone h3,.milestone p,.milestone .priority-label{opacity:1}
 @media(max-width:700px){.milestone{flex-wrap:wrap;align-items:stretch;padding:21px}.milestone select{flex:1 1 100%;width:100%}}
+
+.stage-picker{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:0 0 18px;font-weight:600}

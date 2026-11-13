@@ -1,3 +1,4 @@
+-- Copied verbatim from the live migration history (supabase_migrations.schema_migrations).
 -- Bdesh initial schema. Review before applying to Nahin's Supabase project.
 -- All student data remains private to its owner. Public opportunity data is read-only.
 create table if not exists public.student_profiles (

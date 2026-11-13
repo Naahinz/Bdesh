@@ -2,19 +2,18 @@
 // Public invocation is intentional: Turnstile Siteverify, strict origin, and
 // server-only service-role RPC enforce submission. Without a configured secret
 // it fails closed. Never put the Turnstile secret in GitHub or browser assets.
-const allowedOrigin = "https://bdesh.pages.dev";
-const responseHeaders = {
+// Comma-separated list, e.g. "https://bdesh.pages.dev,https://bdesh.fyi". Set with `supabase secrets set`.
+const allowedOrigins = (Deno.env.get("BDESH_ALLOWED_ORIGINS") || "https://bdesh.pages.dev")
+  .split(",").map((o) => o.trim()).filter(Boolean);
+const allowedHostnames = new Set(allowedOrigins.map((o) => new URL(o).hostname));
+const headersFor = (origin: string) => ({
   "Content-Type": "application/json; charset=utf-8",
-  "Access-Control-Allow-Origin": allowedOrigin,
+  "Access-Control-Allow-Origin": allowedOrigins.includes(origin) ? origin : allowedOrigins[0],
   "Access-Control-Allow-Methods": "POST, OPTIONS",
   "Access-Control-Allow-Headers": "content-type",
   "Cache-Control": "no-store",
   "Vary": "Origin",
-};
-const answer = (status: number, code: string) =>
-  new Response(JSON.stringify({ ok: status === 200, code }), {
-    status, headers: responseHeaders,
-  });
+});
 const categories = new Set([
   "Bug or broken feature",
   "Incorrect university information",
@@ -33,8 +32,13 @@ async function hashVisitor(ip: string, secret: string): Promise<string> {
   return Array.from(digest, (n) => n.toString(16).padStart(2, "0")).join("");
 }
 Deno.serve(async (request: Request) => {
-  const origin = request.headers.get("origin");
-  if (origin !== allowedOrigin) return answer(403, "invalid_origin");
+  const origin = request.headers.get("origin") || "";
+  const responseHeaders = headersFor(origin);
+  const answer = (status: number, code: string) =>
+    new Response(JSON.stringify({ ok: status === 200, code }), {
+      status, headers: responseHeaders,
+    });
+  if (!allowedOrigins.includes(origin)) return answer(403, "invalid_origin");
   if (request.method === "OPTIONS") return new Response(null, {
     status: 204, headers: responseHeaders,
   });
@@ -103,7 +107,7 @@ Deno.serve(async (request: Request) => {
     const check = await siteverify.json();
     if (
       check?.success !== true ||
-      check?.hostname !== "bdesh.pages.dev" ||
+      !allowedHostnames.has(check?.hostname) ||
       check?.action !== "bdesh_feedback"
     ) return answer(400, "verification_failed");
     // No raw IP stored. HMAC is stable only for the configured secret.
