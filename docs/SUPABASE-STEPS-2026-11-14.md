@@ -1,5 +1,14 @@
 # Supabase steps for the 2026-11-14 fixes
 
+> **Status (2026-11-14): steps 1–4 are DONE**, run with the Supabase CLI.
+> - Step 1: limits are live (120000 / 40000 / 200000) and recorded in the migration history.
+> - Step 2: the privacy test passes on production.
+> - Step 3: the repo's `supabase/migrations/` now matches production. A rebuild from the files gives the identical schema.
+> - Step 4: `submit-feedback` v4 (JWT off) and `admin-metrics` v5 (JWT on) are deployed and smoke-tested.
+> - Security advisor: no security issues. Leaked-password protection is off, which is irrelevant with Google-only sign-in. 6 policies get a per-row performance warning, which is fine at current size.
+>
+> Remaining: step 5 (only for a new domain), step 6 (the code push is waiting on GitHub write access), and step 7.
+
 Do these in order, all in one sitting. Project: `xeqixwmulwonvhifcmvn`.
 SQL Editor: Supabase dashboard → your project → **SQL Editor** → **New query**.
 Steps 1–4 work with both the old and the new website code, so they are safe to do before the new code goes live.
