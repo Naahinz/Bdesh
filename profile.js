@@ -72,6 +72,21 @@ function fillBasic(){const f=$('academics-form');for(const name of ['display_nam
 function collectCards(section){return [...document.querySelectorAll('#'+section+'-list .entry-card')].map(card=>{const output={};for(const input of card.querySelectorAll('[name]')){if(input.type==='checkbox'){if(!output[input.name])output[input.name]=[];if(input.checked)output[input.name].push(input.value)}else if(input.type==='number'){output[input.name]=input.value===''?null:Number(input.value)}else{output[input.name]=input.value}}return output})}
 function harvest(){portfolio.activities=collectCards('activity');portfolio.honors=collectCards('honor');portfolio.essays=collectCards('essay');portfolio.academic_context=val($('academics-form'),'academic_context');for(const k of ['brag_sheet','future_goals','additional_notes'])portfolio[k]=val($('brag-form'),k)}
 function queueSave(){if(!user||hydrating)return;clearTimeout(saveTimer);saveTimer=setTimeout(()=>persistPortfolio(),850);message('Unsaved changes…')}
+const portfolioByteLimits = [
+  ['activities', 120000, 'Your activities are too long to save — shorten an activity.'],
+  ['honors', 40000, 'Your honors are too long to save — shorten an honor.'],
+  ['essays', 200000, 'Your essays are too long to save — shorten one draft.']
+];
+const portfolioEncoder = new TextEncoder();
+
+function portfolioSizeError(data) {
+  for (const [field, limit, errorMessage] of portfolioByteLimits) {
+    const bytes = portfolioEncoder.encode(JSON.stringify(data[field])).length;
+    if (bytes > limit) return errorMessage;
+  }
+  return null;
+}
+
 let portfolioWrite=Promise.resolve();
 async function persistPortfolio(button=null){
  if(!user||hydrating)return false;
@@ -79,6 +94,16 @@ async function persistPortfolio(button=null){
  if(button){button.disabled=true;button.textContent='Saving…'}
  harvest();
  const payload={user_id:user.id,activities:structuredClone(portfolio.activities),honors:structuredClone(portfolio.honors),essays:structuredClone(portfolio.essays),academic_context:portfolio.academic_context,brag_sheet:portfolio.brag_sheet,future_goals:portfolio.future_goals,additional_notes:portfolio.additional_notes,updated_at:new Date().toISOString()};
+ const sizeError = portfolioSizeError(payload);
+ if (sizeError) {
+  message(sizeError + ' Your unsaved text is still here.', true);
+  if (button) {
+   button.textContent = 'Retry saving';
+   button.dataset.saved = 'false';
+   button.disabled = false;
+  }
+  return false;
+ }
  message('Saving your profile…');
  const run=portfolioWrite.catch(()=>{}).then(async()=>{
   const {error}=await sb.from('student_profile_portfolios').upsert(payload,{onConflict:'user_id'});
