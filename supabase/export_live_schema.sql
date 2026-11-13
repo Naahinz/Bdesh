@@ -30,12 +30,13 @@ select section, ord, statement from (
       coalesce(' using (' || p.qual || ')', ''), coalesce(' with check (' || p.with_check || ')', ''))
   from pg_policies p where p.schemaname in ('public', 'bdesh_private')
   union all
-  select 5, g.table_schema || '.' || g.table_name || '.' || g.grantee,
-    format('grant %s on %I.%I to %I;', string_agg(g.privilege_type, ', ' order by g.privilege_type),
-      g.table_schema, g.table_name, g.grantee)
-  from information_schema.role_table_grants g
-  where g.table_schema in ('public', 'bdesh_private') and g.grantee in ('anon', 'authenticated', 'service_role')
-  group by g.table_schema, g.table_name, g.grantee
+  select 5, t.schema || '.' || t.name || '.' || r.rolname,
+    format('grant %s on %I.%I to %I;', string_agg(pr.p, ', ' order by pr.p), t.schema, t.name, r.rolname)
+  from tables t
+  cross join (values ('anon'), ('authenticated'), ('service_role')) as r(rolname)
+  cross join (values ('SELECT'), ('INSERT'), ('UPDATE'), ('DELETE')) as pr(p)
+  where has_table_privilege(r.rolname, t.oid, pr.p)
+  group by t.schema, t.name, r.rolname
   union all
   select 6, n.nspname || '.' || p.proname, pg_get_functiondef(p.oid) || ';'
   from pg_proc p join pg_namespace n on n.oid = p.pronamespace
