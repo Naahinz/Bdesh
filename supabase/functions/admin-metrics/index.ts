@@ -7,7 +7,9 @@ import { createClient } from "npm:@supabase/supabase-js@2.75.0";
 
 const projectUrl = Deno.env.get("SUPABASE_URL") ?? "";
 const secretKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
-const allowedOrigin = "https://bdesh.pages.dev";
+// Comma-separated list, e.g. "https://bdesh.pages.dev,https://bdesh.fyi". Set with `supabase secrets set`.
+const allowedOrigins = (Deno.env.get("BDESH_ALLOWED_ORIGINS") || "https://bdesh.pages.dev")
+  .split(",").map((o) => o.trim()).filter(Boolean);
 
 function response(req: Request, payload: unknown, status = 200) {
   const origin = req.headers.get("origin");
@@ -17,8 +19,8 @@ function response(req: Request, payload: unknown, status = 200) {
     "X-Content-Type-Options": "nosniff",
     "Vary": "Origin",
   };
-  if (origin === allowedOrigin) {
-    headers["Access-Control-Allow-Origin"] = allowedOrigin;
+  if (origin && allowedOrigins.includes(origin)) {
+    headers["Access-Control-Allow-Origin"] = origin;
     headers["Access-Control-Allow-Headers"] = "authorization,apikey,content-type,x-client-info";
     headers["Access-Control-Allow-Methods"] = "GET,OPTIONS";
   }
@@ -51,6 +53,8 @@ Deno.serve(async (req: Request) => {
     const now = Date.now();
     const weekAgo = now - 7 * 86400000;
     const monthAgo = now - 30 * 86400000;
+    // Compare whole UTC days so the oldest chart bar counts its full day.
+    const firstChartDay = new Date(now - 13 * 86400000).toISOString().slice(0, 10);
     for (; page <= 40; page++) {
       const { data, error } = await admin.auth.admin.listUsers({ page, perPage: 500 });
       if (error) throw error;
@@ -62,7 +66,7 @@ Deno.serve(async (req: Request) => {
         const created = Date.parse(u.created_at);
         if (created >= monthAgo) last30++;
         const day = new Date(created).toISOString().slice(0,10);
-        if (created >= now - 13 * 86400000) signupDays[day] = (signupDays[day] || 0) + 1;
+        if (day >= firstChartDay) signupDays[day] = (signupDays[day] || 0) + 1;
       }
       if (users.length < 500) break;
     }

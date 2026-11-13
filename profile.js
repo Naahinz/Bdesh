@@ -1,10 +1,9 @@
 /* Bdesh student-owned U.S. application preparation profile. Not affiliated with Common App. */
 (() => {
   "use strict";
-  const URL = "https://xeqixwmulwonvhifcmvn.supabase.co",
-    KEY = "sb_publishable_2Jp14PFt4_mLDT4cpqLfUw_d-tDSnwj";
+  const config = window.BDESH_SUPABASE || {};
   const $ = (id) => document.getElementById(id),
-    sb = window.supabase?.createClient(URL, KEY, {
+    sb = window.supabase?.createClient(config.url, config.key, {
       auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true },
     });
   const sections = ["overview", "academics", "activities", "honors", "writing", "brag", "review"];
@@ -172,7 +171,14 @@
       if (error) throw error;
       basic = data;
       const ok = await persistPortfolio();
-      if (!ok) return false;
+      if (!ok) {
+        // persistPortfolio already showed the specific reason; just reset this button.
+        if (button) {
+          button.textContent = "Retry saving";
+          button.dataset.saved = "false";
+        }
+        return false;
+      }
       message("Education saved ✓");
       progress();
       if (button) {

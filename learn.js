@@ -488,8 +488,8 @@
     answered = false,
     cloudUser = null;
   const sb = window.supabase?.createClient(
-    "https://xeqixwmulwonvhifcmvn.supabase.co",
-    "sb_publishable_2Jp14PFt4_mLDT4cpqLfUw_d-tDSnwj",
+    window.BDESH_SUPABASE?.url,
+    window.BDESH_SUPABASE?.key,
   );
   function persist() {
     localStorage.setItem(

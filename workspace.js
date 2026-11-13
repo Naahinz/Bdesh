@@ -1,9 +1,8 @@
 /* Bdesh admissions workspace — student-owned data and zero-cost rule-based guidance. */
 (() => {
   "use strict";
-  const URL = "https://xeqixwmulwonvhifcmvn.supabase.co",
-    KEY = "sb_publishable_2Jp14PFt4_mLDT4cpqLfUw_d-tDSnwj";
-  const sb = window.supabase?.createClient(URL, KEY, {
+  const config = window.BDESH_SUPABASE || {};
+  const sb = window.supabase?.createClient(config.url, config.key, {
     auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true },
   });
   const $ = (id) => document.getElementById(id);
@@ -174,55 +173,28 @@
     }),
   );
   window.addEventListener("hashchange", () => setTab(location.hash.slice(1)));
-  function num(value) {
-    return value == null ? "" : String(value);
-  }
-  function formPayload() {
-    const f = new FormData($("profile-form"));
-    const lines = (k) =>
-      String(f.get(k) || "")
-        .split("\n")
-        .map((x) => x.trim())
-        .filter(Boolean)
-        .slice(0, 35);
-    const number = (k) => {
-      const v = String(f.get(k) || "").trim();
-      return v === "" ? null : Number(v);
-    };
-    return {
-      user_id: user.id,
-      display_name: String(f.get("display_name") || "").trim() || null,
-      school_name: String(f.get("school_name") || "").trim() || null,
-      graduation_year: number("graduation_year"),
-      ssc_gpa: number("ssc_gpa"),
-      hsc_gpa: number("hsc_gpa"),
-      sat_total: number("sat_total"),
-      english_test: String(f.get("english_test") || "none"),
-      english_score: String(f.get("english_score") || "").trim() || null,
-      intended_majors: String(f.get("intended_majors") || "").trim() || null,
-      countries: String(f.get("countries") || "")
-        .split(",")
-        .map((s) => s.trim())
-        .filter(Boolean)
-        .slice(0, 15),
-      funding_need: String(f.get("funding_need") || "full_ride"),
-      activities: lines("activities"),
-      awards: lines("awards"),
-      updated_at: new Date().toISOString(),
-    };
-  }
-  function fillProfile() {
-    const p = profile || {},
-      form = $("profile-form");
-    for (const [k, v] of Object.entries(p)) {
-      const el = form.elements.namedItem(k);
-      if (!el || ["activities", "awards", "countries"].includes(k)) continue;
-      el.value = num(v);
+  // Local YYYY-MM-DD (en-CA formats dates that way); toISOString() would give the UTC day.
+  const localToday = () => new Date().toLocaleDateString("en-CA");
+  $("academic-stage").addEventListener("change", async (e) => {
+    const select = e.currentTarget,
+      previous = academicStage;
+    if (!user) return;
+    select.disabled = true;
+    const { error } = await sb
+      .from("student_profiles")
+      .upsert(
+        { user_id: user.id, academic_stage: select.value, updated_at: new Date().toISOString() },
+        { onConflict: "user_id" },
+      );
+    select.disabled = false;
+    if (error) {
+      select.value = previous;
+      return fail(error);
     }
-    form.elements.namedItem("activities").value = (p.activities || []).join("\n");
-    form.elements.namedItem("awards").value = (p.awards || []).join("\n");
-    form.elements.namedItem("countries").value = (p.countries || []).join(", ");
-  }
+    academicStage = select.value;
+    renderReadiness();
+    note("Class saved");
+  });
   function renderDeadlineCenter() {
     const list = $("deadline-list");
     if (!list) return;
@@ -474,7 +446,7 @@
     $("stat-shortlist").textContent = String(applications.length);
     const dates = applications
       .flatMap((a) => [a.application_deadline, a.aid_deadline])
-      .filter((d) => d && d >= new Date().toISOString().slice(0, 10))
+      .filter((d) => d && d >= localToday())
       .sort();
     $("stat-deadline").textContent = dates.length
       ? new Date(dates[0] + "T12:00:00").toLocaleDateString("en-GB", { day: "numeric", month: "short" })
@@ -559,7 +531,7 @@
           select.value = rec.state;
           return;
         }
-        readiness.set(id, { state });
+        readiness.set(id, { ...rec, state });
         stats();
         renderNextActions();
         note("Preparation saved");
@@ -968,7 +940,7 @@
                 status: status.value,
                 submitted_at:
                   status.value === "submitted" && !x.submitted_at
-                    ? new Date().toISOString().slice(0, 10)
+                    ? localToday()
                     : x.submitted_at,
               }
             : x,
@@ -1278,38 +1250,6 @@
         holder.append(article);
       });
   }
-  $("profile-form").addEventListener("submit", async (e) => {
-    e.preventDefault();
-    if (!user) return;
-    const button = e.currentTarget.querySelector('button[type="submit"]');
-    button.disabled = true;
-    let payload;
-    try {
-      payload = formPayload();
-    } catch (err) {
-      fail(err);
-      button.disabled = false;
-      return;
-    }
-    const { data, error } = await sb
-      .from("student_admissions_profiles")
-      .upsert(payload, { onConflict: "user_id" })
-      .select()
-      .single();
-    button.disabled = false;
-    if (error) {
-      fail(error);
-      $("profile-message").textContent = error.message;
-      return;
-    }
-    profile = data;
-    stats();
-    renderNextActions();
-    renderResearch();
-    note("Profile saved");
-    window.bdeshTrack?.("bdesh_profile_saved");
-    $("profile-message").textContent = "Saved to your private account.";
-  });
   let selectedCollege = null;
   const collegeSearch = $("college-search-input"),
     collegeResults = $("college-search-results"),
@@ -1424,7 +1364,7 @@
     const url = window.URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = "bdesh-admissions-backup-" + new Date().toISOString().slice(0, 10) + ".json";
+    a.download = "bdesh-admissions-backup-" + localToday() + ".json";
     document.body.append(a);
     a.click();
     a.remove();
@@ -1468,7 +1408,7 @@
     readiness = new Map((responses[2].data || []).map((x) => [x.milestone_id, x]));
     applications = responses[3].data || [];
     opportunities = responses[4].data || [];
-    fillProfile();
+    $("academic-stage").value = academicStage;
     renderReadiness();
     renderResearch();
     renderCollegeSearch();

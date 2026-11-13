@@ -4,8 +4,7 @@
   const status = $("admin-status"),
     area = $("admin-content"),
     btn = $("refresh-metrics");
-  const projectUrl = "https://xeqixwmulwonvhifcmvn.supabase.co";
-  const key = "sb_publishable_2Jp14PFt4_mLDT4cpqLfUw_d-tDSnwj";
+  const { url: projectUrl, key } = window.BDESH_SUPABASE || {};
   const client = window.supabase?.createClient(projectUrl, key, {
     auth: { persistSession: true, autoRefreshToken: true },
   });

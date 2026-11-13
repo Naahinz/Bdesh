@@ -3,8 +3,8 @@
   const $ = (id) => document.getElementById(id);
   const status = $("editor-status");
   const client = window.supabase?.createClient(
-    "https://xeqixwmulwonvhifcmvn.supabase.co",
-    "sb_publishable_2Jp14PFt4_mLDT4cpqLfUw_d-tDSnwj",
+    window.BDESH_SUPABASE?.url,
+    window.BDESH_SUPABASE?.key,
   );
   let rows = [],
     selected = null;

@@ -16,7 +16,7 @@
     const token = window.turnstile.getResponse(widgetId);
     if (!token) return { ok: false, code: "complete_security_check" };
     try {
-      const response = await fetch("https://xeqixwmulwonvhifcmvn.supabase.co/functions/v1/submit-feedback", {
+      const response = await fetch(window.BDESH_SUPABASE.url + "/functions/v1/submit-feedback", {
         method: "POST",
         mode: "cors",
         headers: { "Content-Type": "application/json" },

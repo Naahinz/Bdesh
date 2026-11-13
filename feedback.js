@@ -5,8 +5,7 @@
   const status = document.getElementById("feedback-status");
   const submit = document.getElementById("feedback-submit");
   if (!form || !status || !submit) return;
-  const url = "https://xeqixwmulwonvhifcmvn.supabase.co";
-  const key = "sb_publishable_2Jp14PFt4_mLDT4cpqLfUw_d-tDSnwj";
+  const { url, key } = window.BDESH_SUPABASE || {};
   const client = window.supabase?.createClient(url, key, {
     auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true },
   });
