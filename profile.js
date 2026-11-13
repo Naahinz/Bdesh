@@ -57,7 +57,7 @@ async function saveBasic(explicit=true){
   if(error)throw error;
   basic=data;
   const ok=await persistPortfolio();
-  if(!ok)throw Error('Your additional profile information could not be saved.');
+  if(!ok)return false;
   message('Education saved ✓');progress();
   if(button){button.textContent='Saved ✓';button.dataset.saved='true'}
   if(explicit){window.bdeshTrack?.('bdesh_profile_saved');showSection(nextSection('academics'))}
@@ -82,7 +82,7 @@ const portfolioEncoder = new TextEncoder();
 function portfolioSizeError(data) {
   for (const [field, limit, errorMessage] of portfolioByteLimits) {
     const bytes = portfolioEncoder.encode(JSON.stringify(data[field])).length;
-    if (bytes > limit) return errorMessage;
+    if (bytes > limit * 0.95) return errorMessage;
   }
   return null;
 }
