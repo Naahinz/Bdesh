@@ -1,50 +1,295 @@
-(function(){
-'use strict';
-window.BDESH_US_COURSE={
-welcome:{id:'welcome',label:'Start from zero',time:10,title:'What does applying to a U.S. university actually mean?',lead:'Imagine you are a Bangladeshi student. Someone tells you they got a full ride to America. What did they actually do? This guide starts with zero assumed knowledge and covers United States undergraduate applications only.',sections:[
-['First: what is a university application?','An application is a formal request to a university asking it to consider you for a bachelor’s degree. You usually fill out an online form, answer questions and provide supporting material. Submitting the form does NOT mean the university has accepted you.'],
-['Who receives it?','The university’s admissions office receives your materials and decides whether to offer you admission. A separate financial aid office or scholarship selection process may determine whether you can afford to attend. Getting accepted does not automatically mean getting a full ride.'],
-['Imagine a fictional Example University','You visit Example University’s official admissions page, check that you can apply from Bangladesh, create an account on the application system it accepts, add the college, enter your information, request teacher and school documents, finish required essays, and submit. You then monitor the university’s applicant portal.'],
-['What is the entire process?','Learn the terms → prepare your academics, testing and meaningful activities → research universities and full funding → complete forms, essays and recommendations → submit admissions and aid requirements → follow up → compare admission and funding decisions.'],
-['Important: U.S. only','This course discusses U.S. colleges, the Common Application, SAT, U.S. holistic review and the U.S. financial aid process. Other countries have different systems.'],
-['You are not behind because you are new','You do not need to know what an SAT or recommendation letter is yet. Start here and learn each part one at a time.']
-],takeaway:'A college application asks for admission. A full ride is a separate offer that helps cover costs.',quiz:{q:'What does submitting a U.S. college application mean?',options:['The university must accept me.','I am asking the university to consider admitting me.','I have already received a full ride.'],correct:1,why:'Exactly. Submitting begins the review process. Admission and scholarship decisions come later.'}},
-platform:{id:'platform',label:'How the form works',time:11,title:'Let us walk through an actual application.',lead:'Imagine a website with sections, buttons and questions. Here is what a first-time U.S. applicant usually does, using Common App as one example.',sections:[
-['1. Find the university and its official instructions','You first choose a U.S. university to research. On its admissions page you learn its requirements, application system, deadlines, accepted qualifications and possible international funding. Some colleges use Common App; others have their own portals.'],
-['2. Create your application account','You register on the correct platform. Common App is a service that lets you apply to many participating colleges from one account. Opening an account is not submitting an application.'],
-['3. Fill in your profile','Typical questions concern your name, citizenship, home and family context, school history, courses, grades, tests if applicable, activities and writing. You do not have to invent awards or achievements.'],
-['4. Add a particular college','You select the college inside the platform, choose an application round where applicable and answer its extra questions. Each college can ask for additional essays or documents.'],
-['5. Invite people who know your work','A teacher or counselor may upload recommendations, transcripts and school reports through a separate recommender process. They do not just write a private message to you.'],
-['6. Review, pay or seek a waiver, and submit','You check every required section, submit to that specific university and follow its instructions for fees or eligible fee waivers. Some applications charge a fee; some institutions offer waivers.'],
-['7. Check the applicant portal and funding paperwork','After submission, the college may provide a portal showing received and missing documents. The financial aid application may require CSS Profile, ISFAA or another form, with a DIFFERENT deadline.'],
-['What happens after that?','The university reviews the file and may request more information, an interview or a portfolio for some programs. You eventually receive an admission decision. Separately, you review any scholarship or financial aid offer.']
-],takeaway:'A Common App account is just the place you work. A completed submission to each university is an actual application.',quiz:{q:'You created a Common App account and entered your name. Have you applied to Yale or another college yet?',options:['Yes, the account is enough.','No. I must add each college, complete its requirements and submit.','Yes, if my GPA is 5.00.'],correct:1,why:'Correct. You must submit an application to each institution according to its rules.'}},
-holistic:{id:'holistic',label:'What is holistic review?',time:9,title:'What does “holistic admissions” really mean?',lead:'Holistic is a word you may hear often in U.S. admissions. It does not mean “easy” or “random.” It means a college may look at more than one number when reviewing an applicant.',sections:[
-['A simple picture','If a college uses holistic review, it may read your grades, activities, essays, recommendations and context together. Instead of asking only “What is the SAT score?”, it might also ask “How did this student learn, contribute and use the opportunities available?”'],
-['Consider two students','Two students may both earn strong grades. One regularly helps younger students with mathematics. Another builds software for a local problem. Holistic review can help colleges understand these different strengths. It does not guarantee either student admission.'],
-['What the reviewers may see','They might see your academic preparation, your school environment, your time commitments, how teachers describe you, your interests, and how thoughtfully you respond to essays. Each university decides what factors matter.'],
-['Holistic does not mean grades are unimportant','Many competitive U.S. universities place great importance on academics. Activities, awards or a moving essay cannot be assumed to compensate for any academic performance. Different institutions and scholarships use different rules.'],
-['Do not turn yourself into a collection of titles','You do not need to become president of five clubs. Honest, sustained work with specific contributions is often easier to explain than a long list of inflated positions.']
-],takeaway:'Holistic review considers a wider picture of an applicant; it is not a universal admissions formula.',quiz:{q:'Which is the best definition of holistic admissions?',options:['Only SAT scores decide admission.','A college may consider academics and other evidence about you in context.','Any student with ECAs is guaranteed a full ride.'],correct:1,why:'Exactly. Academic and other evidence can be considered together, depending on college policy.'}},
-sat:{id:'sat101',label:'What is the SAT?',time:9,title:'SAT explained from the beginning.',lead:'You may have heard someone say “I got a 1500 SAT.” What exam is that, who takes it and why?',sections:[
-['What SAT stands for today','The SAT is a standardized college admissions test managed by College Board. It is used by some U.S. colleges to understand academic skills alongside other application information. It is NOT a scholarship application and it is NOT the same as IELTS.'],
-['What do you do in the exam?','The digital SAT has a Reading and Writing section and a Math section. You answer questions testing reading, language, data interpretation and mathematical reasoning. It is administered under test conditions at authorized test centers.'],
-['What is a score out of?','The SAT total score ranges from 400 to 1600. Reading and Writing contributes 200–800 points and Math contributes 200–800 points. Those two scores add together. A 1500 is not a GPA and not a percentage mark.'],
-['Do all U.S. colleges require it?','No. Some require SAT/ACT scores, some are test-optional and some do not consider scores. Policies and scholarship conditions can change, so check the admissions page for your actual cycle.'],
-['What does test-optional mean?','Generally you may choose whether to submit an eligible SAT or ACT score. It does NOT automatically mean that the institution will waive English-proficiency tests or other requirements.'],
-['What should a complete beginner do now?','Learn the exam basics first. When you build a college list, check whether each university requires SAT or ACT. Then decide whether preparing and paying for the exam makes sense for your own route.']
-],takeaway:'The SAT is a Reading and Writing plus Math admissions test scored from 400 to 1600. There is no universal SAT score that guarantees a full ride.',quiz:{q:'Which statement about the SAT is correct?',options:['It is a 400–1600 standardized U.S. admissions test that some colleges use.','It is the same as IELTS.','A 1500 automatically wins a full ride.'],correct:0,why:'Correct. SAT is an academic admissions test, with different requirements across colleges.'}}
-};
-window.BDESH_US_DETAILS={
-funding:[['A realistic example','Suppose Example University costs $78,000 per year in total. It offers $78,000 in grants: there may be no major direct-cost gap, but you still need to check travel, visa costs and personal expenses. If the award is only $60,000, you could still face an $18,000 gap. Both numbers are fictional and only illustrate how to calculate the remainder.'],['Which U.S. funding do international students use?','Many international undergraduates seek university-funded institutional grants or scholarships, not U.S. federal aid. Eligibility for federal aid is restricted and usually does not extend to students who are simply international applicants. Always check each university’s international student aid policy.']],
-application:[['Picture the application screen','You might see tabs labeled Profile, Family, Education, Testing, Activities and Writing, followed by My Colleges. Each college may also show Questions, Recommenders and FERPA, Writing Supplement and Review and Submit. This is an illustration; actual layouts and terminology change.'],['Who submits what?','You complete your student sections. A teacher or counselor may submit recommendations or school records using their own account or a school system. Financial aid forms can have a completely separate submission process.']],
-academics:[['How do SSC and HSC fit into a U.S. file?','A U.S. institution may examine the grades and school documents you have available, understand the Bangladesh grading scale and request current/predicted HSC results if you have not graduated. Procedures vary, so ask your school how official records are issued.'],['A beginner’s next action','Gather the names and dates of your schools, understand where official marksheets come from, and ask who handles school reports. Do not edit school documents yourself.']],
-tests:[['SAT versus IELTS in one sentence','SAT tests academic Reading and Writing and Math. IELTS or DET is normally used to provide evidence of English proficiency. A college may ask for either, both, or neither depending on its published rules.'],['Do not guess a universal target','A score people celebrate online is not automatically a required minimum or a full-ride threshold. Look at the official admissions and scholarship requirements for your specific target school.']],
-activities:[['A simple activity example','“Helped three classmates with mathematics each weekend for a school year” is an activity if it is true. Explain what you actually did, how long and what you learned; the entry does not need to be an impressive-sounding organization name.'],['What if I have no awards?','Awards can help communicate achievement, but not every college or admitted student has the same background. Record honest responsibilities, work, caregiving, art, sports, personal projects or school participation without inventing accomplishments.']],
-writing:[['What is an essay prompt?','A prompt is a question or instruction asking you to write about a topic. You might be asked about a meaningful experience, why you want to study a subject or why a college appeals to you. Answer the actual question.'],['What happens after the first draft?','Write honestly, revise for clarity, ask for appropriate feedback, then ensure the final essay represents your own experiences and voice. Colleges may have rules about outside assistance and AI-generated writing.']],
-recs:[['What is the counselor in a U.S. application?','In the U.S. application process, a school counselor or designated school official may handle school-wide records and reports. A Bangladeshi school may not have a U.S.-style counselor, so check the college or application platform’s instructions for appointing an appropriate school official.'],['An actual request','You could politely ask a teacher whether they would be comfortable recommending you, then share the institutions and submission deadlines. Never invent a teacher account or write a letter pretending to be your teacher.']],
-aid:[['Why this matters for a full-ride seeker','Your admission application can be complete while your financial aid application is missing. That could prevent the institution from evaluating you for its need-based funding, depending on its rules.'],['What is CSS Profile?','CSS Profile is a financial aid application operated by College Board and used by certain institutions for institutional aid. It is not a scholarship you win simply by opening an account. Some colleges use their own forms instead.'],['Why you should keep family details off this guide','This reading course does not need your family’s salary documents, identity numbers, tax returns or bank statements. Supply sensitive documents only through a university’s authorized process when required.']],
-research:[['What is a reach school?','A reach school is an institution where admission may be difficult given its competition and selection process, even for strong applicants. Calling a college a “safety” does not make it affordable if it provides inadequate funding.'],['Read two official pages','For every U.S. institution, find both International Undergraduate Admissions and International Financial Aid (or Scholarships). Verify eligibility and the total amount that might remain unpaid.']],
-timeline:[['Common U.S. application language','EA means Early Action, ED means Early Decision and RD means Regular Decision at institutions that offer them. Early Decision is usually binding with specific terms. Not all colleges offer these rounds; do not assume the same dates or rules everywhere.'],['A sample deadline checklist','Record the admission form deadline, financial aid form deadline, recommendation timing, test reporting rules and portal status for each university. Use actual dates from official pages, not generic internet lists.']]
-};
+(function () {
+  "use strict";
+  window.BDESH_US_COURSE = {
+    welcome: {
+      id: "welcome",
+      label: "Start from zero",
+      time: 10,
+      title: "What does applying to a U.S. university actually mean?",
+      lead: "Imagine you are a Bangladeshi student. Someone tells you they got a full ride to America. What did they actually do? This guide starts with zero assumed knowledge and covers United States undergraduate applications only.",
+      sections: [
+        [
+          "First: what is a university application?",
+          "An application is a formal request to a university asking it to consider you for a bachelor’s degree. You usually fill out an online form, answer questions and provide supporting material. Submitting the form does NOT mean the university has accepted you.",
+        ],
+        [
+          "Who receives it?",
+          "The university’s admissions office receives your materials and decides whether to offer you admission. A separate financial aid office or scholarship selection process may determine whether you can afford to attend. Getting accepted does not automatically mean getting a full ride.",
+        ],
+        [
+          "Imagine a fictional Example University",
+          "You visit Example University’s official admissions page, check that you can apply from Bangladesh, create an account on the application system it accepts, add the college, enter your information, request teacher and school documents, finish required essays, and submit. You then monitor the university’s applicant portal.",
+        ],
+        [
+          "What is the entire process?",
+          "Learn the terms → prepare your academics, testing and meaningful activities → research universities and full funding → complete forms, essays and recommendations → submit admissions and aid requirements → follow up → compare admission and funding decisions.",
+        ],
+        [
+          "Important: U.S. only",
+          "This course discusses U.S. colleges, the Common Application, SAT, U.S. holistic review and the U.S. financial aid process. Other countries have different systems.",
+        ],
+        [
+          "You are not behind because you are new",
+          "You do not need to know what an SAT or recommendation letter is yet. Start here and learn each part one at a time.",
+        ],
+      ],
+      takeaway:
+        "A college application asks for admission. A full ride is a separate offer that helps cover costs.",
+      quiz: {
+        q: "What does submitting a U.S. college application mean?",
+        options: [
+          "The university must accept me.",
+          "I am asking the university to consider admitting me.",
+          "I have already received a full ride.",
+        ],
+        correct: 1,
+        why: "Exactly. Submitting begins the review process. Admission and scholarship decisions come later.",
+      },
+    },
+    platform: {
+      id: "platform",
+      label: "How the form works",
+      time: 11,
+      title: "Let us walk through an actual application.",
+      lead: "Imagine a website with sections, buttons and questions. Here is what a first-time U.S. applicant usually does, using Common App as one example.",
+      sections: [
+        [
+          "1. Find the university and its official instructions",
+          "You first choose a U.S. university to research. On its admissions page you learn its requirements, application system, deadlines, accepted qualifications and possible international funding. Some colleges use Common App; others have their own portals.",
+        ],
+        [
+          "2. Create your application account",
+          "You register on the correct platform. Common App is a service that lets you apply to many participating colleges from one account. Opening an account is not submitting an application.",
+        ],
+        [
+          "3. Fill in your profile",
+          "Typical questions concern your name, citizenship, home and family context, school history, courses, grades, tests if applicable, activities and writing. You do not have to invent awards or achievements.",
+        ],
+        [
+          "4. Add a particular college",
+          "You select the college inside the platform, choose an application round where applicable and answer its extra questions. Each college can ask for additional essays or documents.",
+        ],
+        [
+          "5. Invite people who know your work",
+          "A teacher or counselor may upload recommendations, transcripts and school reports through a separate recommender process. They do not just write a private message to you.",
+        ],
+        [
+          "6. Review, pay or seek a waiver, and submit",
+          "You check every required section, submit to that specific university and follow its instructions for fees or eligible fee waivers. Some applications charge a fee; some institutions offer waivers.",
+        ],
+        [
+          "7. Check the applicant portal and funding paperwork",
+          "After submission, the college may provide a portal showing received and missing documents. The financial aid application may require CSS Profile, ISFAA or another form, with a DIFFERENT deadline.",
+        ],
+        [
+          "What happens after that?",
+          "The university reviews the file and may request more information, an interview or a portfolio for some programs. You eventually receive an admission decision. Separately, you review any scholarship or financial aid offer.",
+        ],
+      ],
+      takeaway:
+        "A Common App account is just the place you work. A completed submission to each university is an actual application.",
+      quiz: {
+        q: "You created a Common App account and entered your name. Have you applied to Yale or another college yet?",
+        options: [
+          "Yes, the account is enough.",
+          "No. I must add each college, complete its requirements and submit.",
+          "Yes, if my GPA is 5.00.",
+        ],
+        correct: 1,
+        why: "Correct. You must submit an application to each institution according to its rules.",
+      },
+    },
+    holistic: {
+      id: "holistic",
+      label: "What is holistic review?",
+      time: 9,
+      title: "What does “holistic admissions” really mean?",
+      lead: "Holistic is a word you may hear often in U.S. admissions. It does not mean “easy” or “random.” It means a college may look at more than one number when reviewing an applicant.",
+      sections: [
+        [
+          "A simple picture",
+          "If a college uses holistic review, it may read your grades, activities, essays, recommendations and context together. Instead of asking only “What is the SAT score?”, it might also ask “How did this student learn, contribute and use the opportunities available?”",
+        ],
+        [
+          "Consider two students",
+          "Two students may both earn strong grades. One regularly helps younger students with mathematics. Another builds software for a local problem. Holistic review can help colleges understand these different strengths. It does not guarantee either student admission.",
+        ],
+        [
+          "What the reviewers may see",
+          "They might see your academic preparation, your school environment, your time commitments, how teachers describe you, your interests, and how thoughtfully you respond to essays. Each university decides what factors matter.",
+        ],
+        [
+          "Holistic does not mean grades are unimportant",
+          "Many competitive U.S. universities place great importance on academics. Activities, awards or a moving essay cannot be assumed to compensate for any academic performance. Different institutions and scholarships use different rules.",
+        ],
+        [
+          "Do not turn yourself into a collection of titles",
+          "You do not need to become president of five clubs. Honest, sustained work with specific contributions is often easier to explain than a long list of inflated positions.",
+        ],
+      ],
+      takeaway:
+        "Holistic review considers a wider picture of an applicant; it is not a universal admissions formula.",
+      quiz: {
+        q: "Which is the best definition of holistic admissions?",
+        options: [
+          "Only SAT scores decide admission.",
+          "A college may consider academics and other evidence about you in context.",
+          "Any student with ECAs is guaranteed a full ride.",
+        ],
+        correct: 1,
+        why: "Exactly. Academic and other evidence can be considered together, depending on college policy.",
+      },
+    },
+    sat: {
+      id: "sat101",
+      label: "What is the SAT?",
+      time: 9,
+      title: "SAT explained from the beginning.",
+      lead: "You may have heard someone say “I got a 1500 SAT.” What exam is that, who takes it and why?",
+      sections: [
+        [
+          "What SAT stands for today",
+          "The SAT is a standardized college admissions test managed by College Board. It is used by some U.S. colleges to understand academic skills alongside other application information. It is NOT a scholarship application and it is NOT the same as IELTS.",
+        ],
+        [
+          "What do you do in the exam?",
+          "The digital SAT has a Reading and Writing section and a Math section. You answer questions testing reading, language, data interpretation and mathematical reasoning. It is administered under test conditions at authorized test centers.",
+        ],
+        [
+          "What is a score out of?",
+          "The SAT total score ranges from 400 to 1600. Reading and Writing contributes 200–800 points and Math contributes 200–800 points. Those two scores add together. A 1500 is not a GPA and not a percentage mark.",
+        ],
+        [
+          "Do all U.S. colleges require it?",
+          "No. Some require SAT/ACT scores, some are test-optional and some do not consider scores. Policies and scholarship conditions can change, so check the admissions page for your actual cycle.",
+        ],
+        [
+          "What does test-optional mean?",
+          "Generally you may choose whether to submit an eligible SAT or ACT score. It does NOT automatically mean that the institution will waive English-proficiency tests or other requirements.",
+        ],
+        [
+          "What should a complete beginner do now?",
+          "Learn the exam basics first. When you build a college list, check whether each university requires SAT or ACT. Then decide whether preparing and paying for the exam makes sense for your own route.",
+        ],
+      ],
+      takeaway:
+        "The SAT is a Reading and Writing plus Math admissions test scored from 400 to 1600. There is no universal SAT score that guarantees a full ride.",
+      quiz: {
+        q: "Which statement about the SAT is correct?",
+        options: [
+          "It is a 400–1600 standardized U.S. admissions test that some colleges use.",
+          "It is the same as IELTS.",
+          "A 1500 automatically wins a full ride.",
+        ],
+        correct: 0,
+        why: "Correct. SAT is an academic admissions test, with different requirements across colleges.",
+      },
+    },
+  };
+  window.BDESH_US_DETAILS = {
+    funding: [
+      [
+        "A realistic example",
+        "Suppose Example University costs $78,000 per year in total. It offers $78,000 in grants: there may be no major direct-cost gap, but you still need to check travel, visa costs and personal expenses. If the award is only $60,000, you could still face an $18,000 gap. Both numbers are fictional and only illustrate how to calculate the remainder.",
+      ],
+      [
+        "Which U.S. funding do international students use?",
+        "Many international undergraduates seek university-funded institutional grants or scholarships, not U.S. federal aid. Eligibility for federal aid is restricted and usually does not extend to students who are simply international applicants. Always check each university’s international student aid policy.",
+      ],
+    ],
+    application: [
+      [
+        "Picture the application screen",
+        "You might see tabs labeled Profile, Family, Education, Testing, Activities and Writing, followed by My Colleges. Each college may also show Questions, Recommenders and FERPA, Writing Supplement and Review and Submit. This is an illustration; actual layouts and terminology change.",
+      ],
+      [
+        "Who submits what?",
+        "You complete your student sections. A teacher or counselor may submit recommendations or school records using their own account or a school system. Financial aid forms can have a completely separate submission process.",
+      ],
+    ],
+    academics: [
+      [
+        "How do SSC and HSC fit into a U.S. file?",
+        "A U.S. institution may examine the grades and school documents you have available, understand the Bangladesh grading scale and request current/predicted HSC results if you have not graduated. Procedures vary, so ask your school how official records are issued.",
+      ],
+      [
+        "A beginner’s next action",
+        "Gather the names and dates of your schools, understand where official marksheets come from, and ask who handles school reports. Do not edit school documents yourself.",
+      ],
+    ],
+    tests: [
+      [
+        "SAT versus IELTS in one sentence",
+        "SAT tests academic Reading and Writing and Math. IELTS or DET is normally used to provide evidence of English proficiency. A college may ask for either, both, or neither depending on its published rules.",
+      ],
+      [
+        "Do not guess a universal target",
+        "A score people celebrate online is not automatically a required minimum or a full-ride threshold. Look at the official admissions and scholarship requirements for your specific target school.",
+      ],
+    ],
+    activities: [
+      [
+        "A simple activity example",
+        "“Helped three classmates with mathematics each weekend for a school year” is an activity if it is true. Explain what you actually did, how long and what you learned; the entry does not need to be an impressive-sounding organization name.",
+      ],
+      [
+        "What if I have no awards?",
+        "Awards can help communicate achievement, but not every college or admitted student has the same background. Record honest responsibilities, work, caregiving, art, sports, personal projects or school participation without inventing accomplishments.",
+      ],
+    ],
+    writing: [
+      [
+        "What is an essay prompt?",
+        "A prompt is a question or instruction asking you to write about a topic. You might be asked about a meaningful experience, why you want to study a subject or why a college appeals to you. Answer the actual question.",
+      ],
+      [
+        "What happens after the first draft?",
+        "Write honestly, revise for clarity, ask for appropriate feedback, then ensure the final essay represents your own experiences and voice. Colleges may have rules about outside assistance and AI-generated writing.",
+      ],
+    ],
+    recs: [
+      [
+        "What is the counselor in a U.S. application?",
+        "In the U.S. application process, a school counselor or designated school official may handle school-wide records and reports. A Bangladeshi school may not have a U.S.-style counselor, so check the college or application platform’s instructions for appointing an appropriate school official.",
+      ],
+      [
+        "An actual request",
+        "You could politely ask a teacher whether they would be comfortable recommending you, then share the institutions and submission deadlines. Never invent a teacher account or write a letter pretending to be your teacher.",
+      ],
+    ],
+    aid: [
+      [
+        "Why this matters for a full-ride seeker",
+        "Your admission application can be complete while your financial aid application is missing. That could prevent the institution from evaluating you for its need-based funding, depending on its rules.",
+      ],
+      [
+        "What is CSS Profile?",
+        "CSS Profile is a financial aid application operated by College Board and used by certain institutions for institutional aid. It is not a scholarship you win simply by opening an account. Some colleges use their own forms instead.",
+      ],
+      [
+        "Why you should keep family details off this guide",
+        "This reading course does not need your family’s salary documents, identity numbers, tax returns or bank statements. Supply sensitive documents only through a university’s authorized process when required.",
+      ],
+    ],
+    research: [
+      [
+        "What is a reach school?",
+        "A reach school is an institution where admission may be difficult given its competition and selection process, even for strong applicants. Calling a college a “safety” does not make it affordable if it provides inadequate funding.",
+      ],
+      [
+        "Read two official pages",
+        "For every U.S. institution, find both International Undergraduate Admissions and International Financial Aid (or Scholarships). Verify eligibility and the total amount that might remain unpaid.",
+      ],
+    ],
+    timeline: [
+      [
+        "Common U.S. application language",
+        "EA means Early Action, ED means Early Decision and RD means Regular Decision at institutions that offer them. Early Decision is usually binding with specific terms. Not all colleges offer these rounds; do not assume the same dates or rules everywhere.",
+      ],
+      [
+        "A sample deadline checklist",
+        "Record the admission form deadline, financial aid form deadline, recommendation timing, test reporting rules and portal status for each university. Use actual dates from official pages, not generic internet lists.",
+      ],
+    ],
+  };
 })();
